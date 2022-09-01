@@ -44,12 +44,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val button = findViewById<Button>(R.id.button3)
-        button.setOnClickListener {
-            val intent = Intent(this, SearchResult::class.java)
-            startActivity(intent)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,18 +1,18 @@
 package com.hackerini.discoticket
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.RatingBar
+import android.widget.TextView
+import com.hackerini.discoticket.objects.Club
+import java.io.Serializable
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -21,14 +21,12 @@ private const val ARG_PARAM2 = "param2"
  */
 class DiscoElement : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var club: Club? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            club = it.getSerializable(ARG_PARAM1) as Club
         }
 
     }
@@ -47,17 +45,26 @@ class DiscoElement : Fragment() {
          * this fragment using the provided parameters.
          *
          * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment DiscoElement.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: Serializable) =
             DiscoElement().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
                 }
             }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val discoName = view.findViewById<TextView>(R.id.discoName)
+        val discoAddress = view.findViewById<TextView>(R.id.discoAddress)
+        val discoRating = view.findViewById<RatingBar>(R.id.discoRating)
+
+        discoName.setText(club?.name)
+        discoAddress.setText(club?.address)
+        discoRating.rating = club?.rating!!
     }
 }

@@ -1,12 +1,17 @@
 package com.hackerini.discoticket.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.hackerini.discoticket.R
+import com.hackerini.discoticket.SearchResult
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -33,6 +38,15 @@ class HomeFragment : Fragment() {
             textView.text = it
         }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val button = view.findViewById<Button>(R.id.button3)
+        button?.setOnClickListener {
+            val intent = Intent(activity, SearchResult::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
