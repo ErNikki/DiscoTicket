@@ -14,7 +14,10 @@
         android:theme="@style/Theme.DiscoTicket"
         tools:targetApi="31">
         <activity
-            android:name=".SearchResult"
+            android:name=".activities.ClubDetails"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SearchResult"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

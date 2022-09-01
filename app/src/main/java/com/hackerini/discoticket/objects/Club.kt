@@ -6,5 +6,5 @@ class Club : Serializable {
     var name: String = ""
     var address: String = ""
     var rating: Float = 0.0F
-    var imgUrl: String = ""
+    var imgUrl: String = "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg"
 }

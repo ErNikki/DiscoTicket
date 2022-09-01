@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.SearchResult
+import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

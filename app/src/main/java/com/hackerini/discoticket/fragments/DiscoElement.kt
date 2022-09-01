@@ -1,12 +1,19 @@
-package com.hackerini.discoticket
+package com.hackerini.discoticket.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import com.hackerini.discoticket.R
+import com.hackerini.discoticket.activities.ClubDetails
+import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.objects.Club
 import java.io.Serializable
 
@@ -62,9 +69,16 @@ class DiscoElement : Fragment() {
         val discoName = view.findViewById<TextView>(R.id.discoName)
         val discoAddress = view.findViewById<TextView>(R.id.discoAddress)
         val discoRating = view.findViewById<RatingBar>(R.id.discoRating)
+        val card = view.findViewById<CardView>(R.id.DiscoElementCard)
 
         discoName.setText(club?.name)
         discoAddress.setText(club?.address)
         discoRating.rating = club?.rating!!
+
+        card.setOnClickListener {
+            val intent = Intent(activity, ClubDetails::class.java)
+            intent.putExtra("club",club)
+            startActivity(intent)
+        }
     }
 }
