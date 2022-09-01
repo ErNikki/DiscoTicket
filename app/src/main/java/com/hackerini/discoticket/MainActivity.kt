@@ -2,7 +2,6 @@ package com.hackerini.discoticket
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.widget.Button
 import com.google.android.material.snackbar.Snackbar
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         val button = findViewById<Button>(R.id.button3)
         button.setOnClickListener {
-            val intent = Intent(this, search_result::class.java)
+            val intent = Intent(this, SearchResult::class.java)
             startActivity(intent)
         }
     }
