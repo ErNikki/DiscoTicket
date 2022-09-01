@@ -11,8 +11,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.activities.DrinkMenu
+import com.hackerini.discoticket.activities.Payment
 import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
+import com.hackerini.discoticket.objects.OrderPreview
 
 class HomeFragment : Fragment() {
 
@@ -43,8 +46,20 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val button = view.findViewById<Button>(R.id.button3)
+        val buttonDrink = view.findViewById<Button>(R.id.buttonDrinkMenu)
+        val buttonPayment = view.findViewById<Button>(R.id.buttonPayment)
+
         button?.setOnClickListener {
             val intent = Intent(activity, SearchResult::class.java)
+            startActivity(intent)
+        }
+        buttonDrink?.setOnClickListener {
+            val intent = Intent(activity, DrinkMenu::class.java)
+            startActivity(intent)
+        }
+        buttonPayment?.setOnClickListener {
+            val intent = Intent(activity, Payment::class.java)
+            intent.putExtra("OrderPreview", OrderPreview())
             startActivity(intent)
         }
     }

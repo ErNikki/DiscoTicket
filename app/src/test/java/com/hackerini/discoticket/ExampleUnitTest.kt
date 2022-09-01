@@ -1,5 +1,6 @@
 package com.hackerini.discoticket
 
+import com.hackerini.discoticket.objects.OrderPreview
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -11,7 +12,8 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun OrderPreviewIsCorrect() {
+        val orderPreview = OrderPreview()
+        assertEquals(orderPreview.getTotalAmount(), 65.5F)
     }
 }

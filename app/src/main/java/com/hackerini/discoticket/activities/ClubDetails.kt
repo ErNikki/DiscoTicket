@@ -13,6 +13,17 @@ class ClubDetails : AppCompatActivity() {
         setContentView(R.layout.activity_club_details)
 
         val club = intent.getSerializableExtra("club") as Club
-        Log.d("TAG",club.name)
+        Log.d("TAG", club.name)
+
+        /*
+        Inside the object club you have the attributes needed to build the UI
+
+        club.name
+        club.rating
+        club.address
+         */
+
+
     }
+
 }
