@@ -2,7 +2,6 @@ package com.hackerini.discoticket.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
-import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.objects.Club
+import com.squareup.picasso.Picasso
 import java.io.Serializable
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,7 +41,7 @@ class DiscoElement : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-            // Inflate the layout for this fragment
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_disco_element, container, false)
     }
 
@@ -66,18 +65,22 @@ class DiscoElement : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val discoName = view.findViewById<TextView>(R.id.discoName)
-        val discoAddress = view.findViewById<TextView>(R.id.discoAddress)
-        val discoRating = view.findViewById<RatingBar>(R.id.discoRating)
+        val discoName = view.findViewById<TextView>(R.id.discoElementName)
+        val discoAddress = view.findViewById<TextView>(R.id.discoElementAddress)
+        val discoRating = view.findViewById<RatingBar>(R.id.discoElementRating)
+        val discoRatingAvg = view.findViewById<TextView>(R.id.discoElementReviewAvg)
+        val image = view.findViewById<ImageView>(R.id.discoElementImage)
         val card = view.findViewById<CardView>(R.id.DiscoElementCard)
 
         discoName.setText(club?.name)
         discoAddress.setText(club?.address)
         discoRating.rating = club?.rating!!
+        discoRatingAvg.setText(club?.rating.toString())
+        Picasso.get().load(club?.imgUrl).resize(300, 300).into(image)
 
         card.setOnClickListener {
             val intent = Intent(activity, ClubDetails::class.java)
-            intent.putExtra("club",club)
+            intent.putExtra("club", club)
             startActivity(intent)
         }
     }
