@@ -6,7 +6,7 @@ import java.io.Serializable
 class Club : Serializable {
     var name: String = ""
     var address: String = ""
-    var rating: Float = 0.0F
+    var rating: Float = (10..50).random()/10F
     var reviewAmount = (10..100).random()
     var imgUrl: String = "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg"
     var reviews = arrayOf(Review(), Review())
@@ -27,6 +27,8 @@ class Club : Serializable {
                 "Outdoor" -> Color.argb(180, 128, 255, 128)
                 "Techno" -> Color.argb(180, 80, 80, 160)
                 "Reggaeton" -> Color.argb(180, 200, 80, 200)
+                "Free entry" -> Color.argb(180, 200, 255, 200)
+                "Rock" -> Color.argb(120, 255, 255, 255)
                 else -> Color.argb(180, 255, 255, 255)
             }
         }

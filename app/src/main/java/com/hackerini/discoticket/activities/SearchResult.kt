@@ -2,36 +2,33 @@ package com.hackerini.discoticket.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.fragments.DiscoElement
-import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.adapters.SearchResultAdapter
+
+val tabsElement = arrayOf(
+    "Tutto",
+    "Discoteche",
+    "Eventi"
+)
 
 class SearchResult : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
 
-        val clubList = ArrayList<Club>()
-        val club0 = Club()
-        val club1 = Club()
-        val club2 = Club()
-        club0.name = "DISCO 1"
-        club0.rating = 4.3F
-        club0.address = "Via della prova"
-        club1.name = "DISCO 2"
-        club1.rating = 4.0F
-        club1.address = "Via della vigna"
-        club2.name = "DISCO 3"
-        club2.rating = 3.3F
-        club2.address = "Via della roma"
-        clubList.add(club0)
-        clubList.add(club1)
-        clubList.add(club2)
+        val tabLayout = findViewById<TabLayout>(R.id.searchResultTabLayout)
+        val viewerPage2 = findViewById<ViewPager2>(R.id.searchResultViewPager)
+        val adapter = SearchResultAdapter(supportFragmentManager, lifecycle)
 
-        val ft = supportFragmentManager.beginTransaction()
-        for (e in clubList) {
-            ft.add(R.id.SearchResultLinearLayout, DiscoElement.newInstance(e))
-        }
-        ft.commit()
+        viewerPage2.adapter = adapter
+
+        TabLayoutMediator(tabLayout, viewerPage2) { tab, position ->
+            tab.text = tabsElement[position]
+        }.attach()
     }
+
+
 }
