@@ -1,15 +1,20 @@
 package com.hackerini.discoticket.activities
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.DiscoElement
 import com.hackerini.discoticket.fragments.EventElement
+import com.hackerini.discoticket.fragments.Filter
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Event
 import java.util.*
+
 
 enum class ElementToShow {
     ALL,
@@ -22,6 +27,12 @@ class SearchResult : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
+
+        val filterButton = findViewById<Button>(R.id.SearchResultFilterButton)
+        filterButton.setOnClickListener {
+            val filterFragment = Filter.newInstance("ciao","")
+            filterFragment.show(supportFragmentManager,"prova")
+        }
 
         val discoChip = findViewById<Chip>(R.id.searchResultClubChip)
         val eventChip = findViewById<Chip>(R.id.searchResultEventChip)

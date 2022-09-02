@@ -1,0 +1,19 @@
+<resources>
+    <array name="initial_slider_values">
+        <item>0</item>
+        <item>1000</item>
+    </array>
+
+    <string-array name="LocationType">
+        <item>Tutto</item>
+        <item>Interno</item>
+        <item>Esterno</item>
+    </string-array>
+
+    <string-array name="genres">
+        <item>EDM</item>
+        <item>Techno</item>
+        <item>Rock</item>
+        <item>90s</item>
+    </string-array>
+</resources>
