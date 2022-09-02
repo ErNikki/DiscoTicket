@@ -81,8 +81,6 @@ class SearchResult : AppCompatActivity() {
             ft.remove(fragment)
         }
 
-        Log.d("FT", "BEGIN FOR " + elementToShow.name)
-
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
             for (e in clubList.shuffled()) {
                 ft.add(R.id.searchResultLinearLayout, DiscoElement.newInstance(e))
@@ -96,7 +94,6 @@ class SearchResult : AppCompatActivity() {
             ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(event0))
             ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(event1))
         }
-        Log.d("FT", "COMMIT FOR " + elementToShow.name)
         ft.commitNow()
     }
 
