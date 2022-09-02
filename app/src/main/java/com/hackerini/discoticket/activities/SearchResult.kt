@@ -1,10 +1,9 @@
 package com.hackerini.discoticket.activities
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import android.view.WindowManager
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
@@ -29,9 +28,17 @@ class SearchResult : AppCompatActivity() {
         setContentView(R.layout.activity_search_result)
 
         val filterButton = findViewById<Button>(R.id.SearchResultFilterButton)
+
+        //Update the search text with the one from the previous activity
+        val searchText = findViewById<EditText>(R.id.SearchResultSearchText)
+        val queryString = intent.getStringExtra("query")
+        searchText.setText(queryString)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         filterButton.setOnClickListener {
-            val filterFragment = Filter.newInstance("ciao","")
-            filterFragment.show(supportFragmentManager,"prova")
+            //Instead to pass the String ciao, you will pass and object with the current search criteria
+            val filterFragment = Filter.newInstance("ciao")
+            filterFragment.show(supportFragmentManager, "prova")
         }
 
         val discoChip = findViewById<Chip>(R.id.searchResultClubChip)
@@ -61,6 +68,8 @@ class SearchResult : AppCompatActivity() {
 
     private fun loadContent(elementToShow: ElementToShow) {
         val clubList = ArrayList<Club>()
+
+        //Create some clubs
         val club0 = Club()
         val club1 = Club()
         val club2 = Club()

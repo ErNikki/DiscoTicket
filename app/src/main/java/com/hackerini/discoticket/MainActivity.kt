@@ -2,17 +2,18 @@ package com.hackerini.discoticket
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
-import android.widget.Button
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
+import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +41,23 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val searchView = findViewById<SearchView>(R.id.homeSearchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val intent = Intent(applicationContext, SearchResult::class.java)
+                intent.putExtra("query", query)
+                startActivity(intent)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                if (searchView.query.length == 0) {
+                }
+                return false
+            }
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
