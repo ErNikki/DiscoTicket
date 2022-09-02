@@ -1,33 +1,92 @@
 package com.hackerini.discoticket.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.adapters.SearchResultAdapter
+import com.hackerini.discoticket.fragments.DiscoElement
+import com.hackerini.discoticket.fragments.EventElement
+import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Event
+import java.util.*
 
-val tabsElement = arrayOf(
-    "Tutto",
-    "Discoteche",
-    "Eventi"
-)
+enum class ElementToShow {
+    ALL,
+    CLUBS,
+    EVENTS,
+    NONE
+}
 
 class SearchResult : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
 
-        val tabLayout = findViewById<TabLayout>(R.id.searchResultTabLayout)
-        val viewerPage2 = findViewById<ViewPager2>(R.id.searchResultViewPager)
-        val adapter = SearchResultAdapter(supportFragmentManager, lifecycle)
+        val discoChip = findViewById<Chip>(R.id.searchResultClubChip)
+        val eventChip = findViewById<Chip>(R.id.searchResultEventChip)
 
-        viewerPage2.adapter = adapter
+        discoChip.setOnCheckedChangeListener { _, _ ->
+            val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
+            loadContent(elementToShow)
+        }
+        eventChip.setOnCheckedChangeListener { _, _ ->
+            val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
+            loadContent(elementToShow)
+        }
+        loadContent(ElementToShow.ALL)
+    }
 
-        TabLayoutMediator(tabLayout, viewerPage2) { tab, position ->
-            tab.text = tabsElement[position]
-        }.attach()
+    private fun getElementToShow(discoChip: Boolean, eventChip: Boolean): ElementToShow {
+        return if (discoChip && eventChip)
+            ElementToShow.ALL
+        else if (discoChip)
+            ElementToShow.CLUBS
+        else if (eventChip)
+            ElementToShow.EVENTS
+        else
+            ElementToShow.NONE
+    }
+
+    private fun loadContent(elementToShow: ElementToShow) {
+        val clubList = ArrayList<Club>()
+        val club0 = Club()
+        val club1 = Club()
+        val club2 = Club()
+        club0.name = "DISCO 1"
+        club0.address = "Via della prova"
+        club1.name = "DISCO 2"
+        club1.address = "Via della vigna"
+        club2.name = "DISCO 3"
+        club2.address = "Via della roma"
+        clubList.add(club0)
+        clubList.add(club1)
+        clubList.add(club2)
+
+        val fragments = supportFragmentManager.fragments
+        val ft = supportFragmentManager.beginTransaction()
+
+        for (fragment in fragments) {
+            ft.remove(fragment)
+        }
+
+        Log.d("FT", "BEGIN FOR " + elementToShow.name)
+
+        if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
+            for (e in clubList.shuffled()) {
+                ft.add(R.id.searchResultLinearLayout, DiscoElement.newInstance(e))
+            }
+        }
+
+        val event0 = Event("Evento prova", Calendar.getInstance().time, club0)
+        val event1 = Event("Evento bello", Calendar.getInstance().time, club1)
+
+        if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
+            ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(event0))
+            ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(event1))
+        }
+        Log.d("FT", "COMMIT FOR " + elementToShow.name)
+        ft.commitNow()
     }
 
 
