@@ -1,0 +1,1 @@
+Put here the fragments that usually will be instantiates only one time
