@@ -17,7 +17,7 @@ import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
 import com.hackerini.discoticket.objects.OrderPreview
 
-class HomeFragment : Fragment() {
+class   HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
