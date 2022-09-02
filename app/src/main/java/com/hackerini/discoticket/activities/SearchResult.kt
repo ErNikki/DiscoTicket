@@ -7,9 +7,9 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.fragments.DiscoElement
-import com.hackerini.discoticket.fragments.EventElement
-import com.hackerini.discoticket.fragments.Filter
+import com.hackerini.discoticket.fragments.elements.DiscoElement
+import com.hackerini.discoticket.fragments.elements.EventElement
+import com.hackerini.discoticket.fragments.views.Filter
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Event
 import java.util.*

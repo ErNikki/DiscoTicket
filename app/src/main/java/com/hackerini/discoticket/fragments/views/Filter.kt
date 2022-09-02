@@ -1,4 +1,4 @@
-package com.hackerini.discoticket.fragments
+package com.hackerini.discoticket.fragments.views
 
 import android.os.Bundle
 import android.view.LayoutInflater

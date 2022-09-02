@@ -1,4 +1,4 @@
-package com.hackerini.discoticket.fragments
+package com.hackerini.discoticket.fragments.elements
 
 import android.app.ActionBar
 import android.content.Intent

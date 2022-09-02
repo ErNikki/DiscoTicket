@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Filtra"
+        app:icon="@drawable/ic_baseline_filter_alt_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SearchResultSearchText" />
 

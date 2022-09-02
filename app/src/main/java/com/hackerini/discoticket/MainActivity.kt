@@ -2,8 +2,7 @@ package com.hackerini.discoticket
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
+import android.widget.ImageButton
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -13,6 +12,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.hackerini.discoticket.activities.Login
 import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.databinding.ActivityMainBinding
 
@@ -36,12 +36,13 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_favorite, R.id.nav_history
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        //Setup search element
         val searchView = findViewById<SearchView>(R.id.homeSearchView)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -52,18 +53,17 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                if (searchView.query.length == 0) {
-                }
                 return false
             }
         })
 
-    }
+        //Setup profile button
+        val profileButton = findViewById<ImageButton>(R.id.homeProfileButton)
+        profileButton.setOnClickListener {
+            val i = Intent(this, Login::class.java)
+            startActivity(i)
+        }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {
