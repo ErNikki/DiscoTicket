@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/DiscoElementFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/DiscoElementFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DiscoElement">
@@ -11,8 +11,9 @@
         android:id="@+id/DiscoElementCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="#D1D1D1">
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="#EFEFEF"
+        app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/DiscoElementLayout"
@@ -23,7 +24,6 @@
                 android:id="@+id/discoElementImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +65,25 @@
                 app:layout_constraintBottom_toBottomOf="@+id/discoElementRating"
                 app:layout_constraintStart_toEndOf="@+id/discoElementRating"
                 app:layout_constraintTop_toTopOf="@+id/discoElementRating" />
+
+            <TextView
+                android:id="@+id/discoElementReviewAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="(450 Recensioni)"
+                app:layout_constraintBottom_toBottomOf="@+id/discoElementReviewAvg"
+                app:layout_constraintStart_toEndOf="@+id/discoElementReviewAvg"
+                app:layout_constraintTop_toTopOf="@+id/discoElementReviewAvg" />
+
+            <LinearLayout
+                android:id="@+id/discoElementLabelsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@+id/discoElementRating"
+                app:layout_constraintTop_toBottomOf="@+id/discoElementRating"></LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

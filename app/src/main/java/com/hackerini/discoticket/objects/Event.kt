@@ -1,27 +1,13 @@
 package com.hackerini.discoticket.objects
 
-import android.graphics.Color
 import java.io.Serializable
+import java.util.*
 
-class Club : Serializable {
-    var name: String = ""
-    var address: String = ""
-    var rating: Float = (10..50).random() / 10F
-    var reviewAmount = (10..100).random()
-    var imgUrl: String = "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg"
-    var reviews = arrayOf(Review(), Review())
-    var description =
+class Event(var name: String, var date: Date, var club: Club) : Serializable {
+    var imgUrl: String =
+        "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grand-opening-event-club-bar-disco-party-ad-design-template-ee7e062b37aaa286789fc2ca1ec89db9_screen.jpg"
+    var description: String =
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    var avgPrice = (10..60).random()
-    var distanceFromYou = (5..100).random()
-    var locationType = ""
-        get() {
-            if (field.isBlank()) {
-                field = arrayOf("Aperto", "Chiuso", "Entrambi").random()
-            }
-            return field
-
-        }
 
     var musicGenres = arrayOf("")
         get() {
@@ -37,7 +23,7 @@ class Club : Serializable {
 
     var labels = arrayOf("")
         get() {
-            return if (locationType != "Chiuso")
+            return if (club.locationType != "Chiuso")
                 musicGenres + arrayOf("Aperto")
             else
                 musicGenres
@@ -46,17 +32,7 @@ class Club : Serializable {
 
     companion object {
         fun getLabelColorFromName(labelName: String): Int {
-            return when (labelName) {
-                "EDM" -> Color.argb(180, 255, 128, 128)
-                "Outdoor" -> Color.argb(180, 128, 255, 128)
-                "Techno" -> Color.argb(180, 80, 80, 160)
-                "Reggaeton" -> Color.argb(180, 200, 80, 200)
-                "Free entry" -> Color.argb(180, 200, 255, 200)
-                "Rock" -> Color.argb(120, 30, 255, 255)
-                else -> Color.argb(180, 255, 255, 255)
-            }
+            return Club.getLabelColorFromName(labelName)
         }
     }
-
-
 }
