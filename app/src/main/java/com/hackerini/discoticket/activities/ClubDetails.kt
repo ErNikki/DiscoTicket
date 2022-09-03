@@ -1,10 +1,16 @@
 package com.hackerini.discoticket.activities
 
+import android.app.ActionBar
+import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.*
+import androidx.core.view.setPadding
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.Club
+import com.squareup.picasso.Picasso
 
 class ClubDetails : AppCompatActivity() {
 
@@ -14,6 +20,74 @@ class ClubDetails : AppCompatActivity() {
 
         val club = intent.getSerializableExtra("club") as Club
         Log.d("TAG", club.name)
+
+        val clubImage = findViewById<ImageView>(R.id.clubDetailClubImage)
+        val clubName = findViewById<TextView>(R.id.clubDetailsClubName)
+        val address= findViewById<TextView>(R.id.clubDetailsAddress)
+        val ratingBar = findViewById<RatingBar>(R.id.clubDeatilsRatingBar)
+        val totalReview = findViewById<TextView>(R.id.clubDetailsTotalReviews)
+        val clubDescription= findViewById<TextView>(R.id.clubDeatilsClubDescription)
+        val tagLayout = findViewById<LinearLayout>(R.id.clubDetailsTagLayout)
+
+
+        clubName.setText(club.name)
+        address.setText(club.address)
+        ratingBar.rating = club.rating
+        totalReview.text=club.reviewAmount.toString()+" "+"Recensioni"
+        clubDescription.setText(club.description)
+
+
+        val imageSize = 250
+        Picasso.get().load(club.imgUrl).resize(imageSize, imageSize).into(clubImage)
+
+        val drinkMenuButton = findViewById<Button>(R.id.clubDetailsDrinkMenuButton) as Button
+        drinkMenuButton.setOnClickListener {
+            val intent = Intent(this, DrinkMenu::class.java)
+            startActivity(intent)
+        }
+
+        val buyTicketsButton = findViewById<Button>(R.id.clubDetailsBuyTicketsButton) as Button
+        buyTicketsButton.setOnClickListener {
+
+            //val intent = Intent(this, BuyTickets::class.java)
+            //startActivity(intent)
+        }
+
+        val params =
+            LinearLayout.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT
+            )
+        params.setMargins(0, 0, 10, 0)
+
+
+
+
+        club.labels.forEach { e ->
+            val shape = GradientDrawable()
+            shape.cornerRadius = 10f
+            shape.setColor(Club.getLabelColorFromName(e))
+
+            val textview = TextView(this)
+            textview.setText(e)
+            textview.background = shape
+            textview.setPadding(8)
+
+
+            textview.layoutParams = params
+
+
+            tagLayout.addView(textview)
+        }
+
+
+
+
+
+
+
+
+
 
         /*
         Inside the object club you have the attributes needed to build the UI
