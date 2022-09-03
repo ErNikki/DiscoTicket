@@ -1,13 +1,13 @@
 package com.hackerini.discoticket.activities
 
+import android.app.ActionBar
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
+import androidx.core.view.setPadding
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.Club
 import com.squareup.picasso.Picasso
@@ -27,6 +27,7 @@ class ClubDetails : AppCompatActivity() {
         val ratingBar = findViewById<RatingBar>(R.id.clubDeatilsRatingBar)
         val totalReview = findViewById<TextView>(R.id.clubDetailsTotalReviews)
         val clubDescription= findViewById<TextView>(R.id.clubDeatilsClubDescription)
+        val tagLayout = findViewById<LinearLayout>(R.id.clubDetailsTagLayout)
 
 
         clubName.setText(club.name)
@@ -50,6 +51,33 @@ class ClubDetails : AppCompatActivity() {
 
             //val intent = Intent(this, BuyTickets::class.java)
             //startActivity(intent)
+        }
+
+        val params =
+            LinearLayout.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT
+            )
+        params.setMargins(0, 0, 10, 0)
+
+
+
+
+        club.labels.forEach { e ->
+            val shape = GradientDrawable()
+            shape.cornerRadius = 10f
+            shape.setColor(Club.getLabelColorFromName(e))
+
+            val textview = TextView(this)
+            textview.setText(e)
+            textview.background = shape
+            textview.setPadding(8)
+
+
+            textview.layoutParams = params
+
+
+            tagLayout.addView(textview)
         }
 
 

@@ -8,13 +8,11 @@
 
     <ImageView
         android:id="@+id/clubDetailClubImage"
-        android:layout_width="403dp"
-        android:layout_height="210dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="411dp"
+        android:layout_height="209dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -72,7 +70,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintHorizontal_bias="0.755"
         app:layout_constraintStart_toEndOf="@+id/clubDetailsClubName"
         app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage"
         app:srcCompat="@drawable/ic_baseline_favorite_24" />
@@ -82,8 +80,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Add to favourites"
+        android:text="Aggiungi ai preferiti"
         app:layout_constraintEnd_toEndOf="@+id/clubDetailsFavouritesButton"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="@+id/clubDetailsFavouritesButton"
         app:layout_constraintTop_toBottomOf="@+id/clubDetailsFavouritesButton" />
 
@@ -91,7 +90,7 @@
         android:id="@+id/clubDetailsDrinkMenuButton"
         android:layout_width="142dp"
         android:layout_height="48dp"
-        android:text="Open drink menu"
+        android:text="Apri drink menu"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
@@ -102,7 +101,7 @@
         android:id="@+id/clubDetailsBuyTicketsButton"
         android:layout_width="117dp"
         android:layout_height="48dp"
-        android:text="Buy tickets"
+        android:text="Compra Biglietti"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.943"
@@ -173,6 +172,10 @@
                 android:id="@+id/clubDetailsReviewText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -186,7 +189,9 @@
         android:id="@+id/clubDeatilsClubDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -197,7 +202,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Write a review"
+        android:text="Scrivi una recensione"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -208,20 +213,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Read all reviews"
+        android:text="Leggi le recensioni"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="203dp"
-        android:layout_height="75dp"
+    <LinearLayout
+        android:id="@+id/clubDetailsTagLayout"
+        android:layout_width="178dp"
+        android:layout_height="68dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
