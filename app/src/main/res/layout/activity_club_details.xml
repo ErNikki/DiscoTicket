@@ -7,123 +7,221 @@
     tools:context=".activities.ClubDetails">
 
     <ImageView
-        android:id="@+id/ClubImage"
+        android:id="@+id/clubDetailClubImage"
         android:layout_width="403dp"
         android:layout_height="210dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/clubName"
+        android:id="@+id/clubDetailsClubName"
         android:layout_width="157dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:text="TextView"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ClubImage" />
+        app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage" />
 
     <TextView
-        android:id="@+id/address"
-        android:layout_width="wrap_content"
+        android:id="@+id/clubDetailsAddress"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:text="TextView"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubName" />
+        app:layout_constraintTop_toBottomOf="@+id/clubDetailsClubName" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="238dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="4dp"
+        android:id="@+id/clubDeatilsRatingBar"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
+        android:layout_width="174dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address" />
+        app:layout_constraintTop_toBottomOf="@+id/clubDetailsAddress" />
 
     <TextView
-        android:id="@+id/totalReviews"
-        android:layout_width="65dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="80dp"
+        android:id="@+id/clubDetailsTotalReviews"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="4dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+        app:layout_constraintBottom_toBottomOf="@+id/clubDeatilsRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar"
-        app:layout_constraintTop_toTopOf="@+id/ratingBar" />
-
-    <EditText
-        android:id="@+id/clubDescriptionText"
-        android:layout_width="394dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="dfddddd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.285"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintStart_toEndOf="@+id/clubDeatilsRatingBar"
+        app:layout_constraintTop_toTopOf="@+id/clubDeatilsRatingBar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="41dp"
-        android:layout_height="44dp"
+        android:id="@+id/clubDetailsFavouritesButton"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.812"
-        app:layout_constraintStart_toEndOf="@+id/clubName"
-        app:layout_constraintTop_toBottomOf="@+id/ClubImage"
+        app:layout_constraintStart_toEndOf="@+id/clubDetailsClubName"
+        app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage"
         app:srcCompat="@drawable/ic_baseline_favorite_24" />
 
     <TextView
-        android:id="@+id/addToFavouritiesText"
+        android:id="@+id/clubDeatilsAddToFavouritiesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-        app:layout_constraintStart_toStartOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        android:layout_marginEnd="8dp"
+        android:text="Add to favourites"
+        app:layout_constraintEnd_toEndOf="@+id/clubDetailsFavouritesButton"
+        app:layout_constraintStart_toStartOf="@+id/clubDetailsFavouritesButton"
+        app:layout_constraintTop_toBottomOf="@+id/clubDetailsFavouritesButton" />
 
     <Button
-        android:id="@+id/drinkMenuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:id="@+id/clubDetailsDrinkMenuButton"
+        android:layout_width="142dp"
+        android:layout_height="48dp"
         android:text="Open drink menu"
+        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDescriptionText" />
+        app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription" />
 
     <Button
-        android:id="@+id/buyTicketsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/clubDetailsBuyTicketsButton"
+        android:layout_width="117dp"
+        android:layout_height="48dp"
         android:text="Buy tickets"
+        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/drinkMenuButton" />
+        app:layout_constraintTop_toBottomOf="@+id/clubDetailsDrinkMenuButton" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/clubDetailsReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:text="Reviews"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buyTicketsButton" />
+        app:layout_constraintTop_toBottomOf="@+id/clubDetailsBuyTicketsButton" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="399dp"
+        android:layout_height="118dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clubDetailsReview">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="119dp">
+
+            <ImageView
+                android:id="@+id/clubDetailsReviewerImage"
+                android:layout_width="46dp"
+                android:layout_height="44dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/clubDetailsReviewerName"
+                android:layout_width="84dp"
+                android:layout_height="17dp"
+                android:text="TextView"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/clubDetailsReviewerImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/clubDetailsReviewDate"
+                android:layout_width="54dp"
+                android:layout_height="15dp"
+                android:text="TextView"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/clubDetailsReviewerImage"
+                app:layout_constraintTop_toBottomOf="@+id/clubDetailsReviewerName" />
+
+            <RatingBar
+                android:id="@+id/clubDeatilsReviwerRatingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.219" />
+
+            <TextView
+                android:id="@+id/clubDetailsReviewText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clubDetailsReviewerImage" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/clubDeatilsClubDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clubDeatilsRatingBar" />
+
+    <Button
+        android:id="@+id/clubDetailsWriteReviewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Write a review"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <Button
+        android:id="@+id/clubDetailsReadReviewsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Read all reviews"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="203dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
