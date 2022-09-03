@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.BuyTicket">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:paddingBottom="24dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/BuyTicketClubName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Club/Event Name"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/BuyTicketClubAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Via prova"
+                    app:layout_constraintStart_toStartOf="@+id/BuyTicketClubName"
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketClubName" />
+
+                <Space
+                    android:id="@+id/space"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketClubAddress" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seleziona il giorno"
+                    app:layout_constraintStart_toStartOf="@+id/BuyTicketClubAddress"
+                    app:layout_constraintTop_toBottomOf="@+id/space" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/BuyTicketCalendarCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView15"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <LinearLayout
+                            android:id="@+id/BuyTicketDayOfWeekLLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:clipToPadding="false"
+                            android:foregroundGravity="fill_horizontal|fill"
+                            android:orientation="horizontal"
+                            android:showDividers="middle" />
+
+                        <com.kizitonwose.calendarview.CalendarView
+                            android:id="@+id/BuyTicketCalendar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cv_dayViewResource="@layout/calendar_day_layout"
+                            app:cv_monthHeaderResource="@layout/calendar_month_header_layout"
+                            app:cv_scrollMode="paged" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/BuyTicketCalendarCard"
+                    app:layout_constraintStart_toStartOf="@+id/BuyTicketCalendarCard"
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarCard">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ingresso semplice"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ingresso con un drink gratuito"
+                            app:layout_constraintStart_toStartOf="@+id/textView16"
+                            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/textView17"
+                            app:layout_constraintTop_toTopOf="@+id/textView16">
+
+                            <EditText
+                                android:id="@+id/BuyTicketAmountSimpleTicket"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="number"
+                                android:text="0" />
+
+                            <TextView
+                                android:id="@+id/BuyTicketSimpleTicketPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10€/Persona" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/cardView1"
+                    app:layout_constraintStart_toStartOf="@+id/cardView1"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView1">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ingresso con tavolo"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ingresso con tavolo e consumazione"
+                            app:layout_constraintStart_toStartOf="@+id/textView19"
+                            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView20"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/textView20"
+                            app:layout_constraintTop_toTopOf="@+id/textView19">
+
+                            <EditText
+                                android:id="@+id/BuyTicketAmountTableTicket"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:inputType="number"
+                                android:text="0" />
+
+                            <TextView
+                                android:id="@+id/BuyTicketTableTicketPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="50€/Persona" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#BFBFBF"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Totale"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/BuyTicketTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="0€"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/textView22"
+                app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22">
+
+                <Button
+                    android:id="@+id/BuyTicketViewTableButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:text="Vedi tavoli" />
+
+                <Button
+                    android:id="@+id/BuyTicketPayButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="Pagamento" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

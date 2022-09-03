@@ -11,11 +11,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.activities.BuyTicket
 import com.hackerini.discoticket.activities.DrinkMenu
 import com.hackerini.discoticket.activities.Payment
 import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
+import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.OrderPreview
+import kotlinx.coroutines.channels.TickerMode
 
 class   HomeFragment : Fragment() {
 
@@ -48,6 +51,7 @@ class   HomeFragment : Fragment() {
         val button = view.findViewById<Button>(R.id.button3)
         val buttonDrink = view.findViewById<Button>(R.id.buttonDrinkMenu)
         val buttonPayment = view.findViewById<Button>(R.id.buttonPayment)
+        val buttonTicket = view.findViewById<Button>(R.id.buttonTicketHome)
 
         button?.setOnClickListener {
             val intent = Intent(activity, SearchResult::class.java)
@@ -60,6 +64,14 @@ class   HomeFragment : Fragment() {
         buttonPayment?.setOnClickListener {
             val intent = Intent(activity, Payment::class.java)
             intent.putExtra("OrderPreview", OrderPreview())
+            startActivity(intent)
+        }
+        buttonTicket?.setOnClickListener {
+            val club = Club()
+            club.name = "DISCO 1"
+            club.address = "Via della prova"
+            val intent = Intent(activity, BuyTicket::class.java)
+            intent.putExtra("club", club)
             startActivity(intent)
         }
     }
