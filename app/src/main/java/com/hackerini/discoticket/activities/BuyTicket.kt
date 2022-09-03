@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.activities
 
 import android.app.ActionBar
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
@@ -142,6 +143,10 @@ class BuyTicket : AppCompatActivity() {
             dayOfWeekLLayout.addView(textView)
         }
 
+        viewTable.setOnClickListener {
+            val intent = Intent(this,SelectTable::class.java)
+            startActivity(intent)
+        }
         payButton.setOnClickListener {
             Log.d("BOOK", "BOOKED FOR " + selectedDate.toString())
         }
