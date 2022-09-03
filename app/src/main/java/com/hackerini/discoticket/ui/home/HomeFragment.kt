@@ -20,7 +20,7 @@ import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.OrderPreview
 import kotlinx.coroutines.channels.TickerMode
 
-class HomeFragment : Fragment() {
+class   HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
