@@ -7,7 +7,7 @@
     tools:context=".activities.Payment">
 
     <ScrollView
-        android:id="@+id/purchaseDetails"
+        android:id="@+id/paymentDetails"
         android:layout_width="376dp"
         android:layout_height="94dp"
         android:layout_marginStart="68dp"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.022">
 
         <LinearLayout
-            android:id="@+id/purchaseList"
+            android:id="@+id/paymentList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
@@ -58,7 +58,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/purchaseTotal"
+                android:id="@+id/paymentTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -70,7 +70,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/paymentButton"
                 android:layout_width="369dp"
                 android:layout_height="54dp"
                 android:layout_marginBottom="10dp"
