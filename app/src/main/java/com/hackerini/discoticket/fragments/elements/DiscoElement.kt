@@ -84,6 +84,7 @@ class DiscoElement : Fragment() {
         discoRating.rating = club?.rating!!
         discoRatingAvg.setText(club?.rating.toString())
         discoRatingAmount.setText("(" + club?.reviewAmount.toString() + " Recensioni)")
+
         val imageSize = 250
         Picasso.get().load(club?.imgUrl).resize(imageSize, imageSize).into(image)
 
