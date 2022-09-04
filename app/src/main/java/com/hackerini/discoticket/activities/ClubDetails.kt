@@ -19,7 +19,6 @@ class ClubDetails : AppCompatActivity() {
         setContentView(R.layout.activity_club_details)
 
         val club = intent.getSerializableExtra("club") as Club
-        Log.d("TAG", club.name)
 
         val clubImage = findViewById<ImageView>(R.id.clubDetailClubImage)
         val clubName = findViewById<TextView>(R.id.clubDetailsClubName)
@@ -29,13 +28,11 @@ class ClubDetails : AppCompatActivity() {
         val clubDescription= findViewById<TextView>(R.id.clubDeatilsClubDescription)
         val tagLayout = findViewById<LinearLayout>(R.id.clubDetailsTagLayout)
 
-
         clubName.setText(club.name)
         address.setText(club.address)
         ratingBar.rating = club.rating
         totalReview.text=club.reviewAmount.toString()+" "+"Recensioni"
         clubDescription.setText(club.description)
-
 
         val imageSize = 250
         Picasso.get().load(club.imgUrl).resize(imageSize, imageSize).into(clubImage)
@@ -48,9 +45,9 @@ class ClubDetails : AppCompatActivity() {
 
         val buyTicketsButton = findViewById<Button>(R.id.clubDetailsBuyTicketsButton) as Button
         buyTicketsButton.setOnClickListener {
-
-            //val intent = Intent(this, BuyTickets::class.java)
-            //startActivity(intent)
+            val intent = Intent(this, BuyTicket::class.java)
+            intent.putExtra("club",club)
+            startActivity(intent)
         }
 
         val params =
