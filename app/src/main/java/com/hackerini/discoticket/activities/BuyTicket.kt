@@ -15,12 +15,10 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.views.DayViewContainer
 import com.hackerini.discoticket.fragments.views.MonthViewContainer
 import com.hackerini.discoticket.objects.Club
-import com.hackerini.discoticket.objects.Event
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -144,11 +142,20 @@ class BuyTicket : AppCompatActivity() {
         }
 
         viewTable.setOnClickListener {
-            val intent = Intent(this,SelectTable::class.java)
+            val club = Club()
+            club.name = "Discoteca prova"
+            club.address = "Via del corso, 43, Roma"
+            val intent = Intent(this, SelectTable::class.java)
+            intent.putExtra("club", club)
+            if (this.amountOfTableTicket > 0) {
+                intent.putExtra("showMode", false)
+                intent.putExtra("tableTicket", amountOfTableTicket)
+            } else
+                intent.putExtra("showMode", true)
             startActivity(intent)
         }
         payButton.setOnClickListener {
-            Log.d("BOOK", "BOOKED FOR " + selectedDate.toString())
+            Log.d("BOOK", "MISSING IMPLEMENTATION")
         }
         simpleTicketCounter.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
@@ -201,7 +208,7 @@ class BuyTicket : AppCompatActivity() {
             totalAmountView.setText(String.format("%.2f", amount) + "€")
         }
 
-        if ((amountOfTableTicket > 0 || amountOfSimpleTicket > 0) && selectedDate!=null)
+        if ((amountOfTableTicket > 0 || amountOfSimpleTicket > 0) && selectedDate != null)
             payButton.isEnabled = true
     }
 
