@@ -19,7 +19,6 @@ class ClubDetails : AppCompatActivity() {
         setContentView(R.layout.activity_club_details)
 
         val club = intent.getSerializableExtra("club") as Club
-        Log.d("CIAO",club.reviews.first().date)
 
         val clubImage = findViewById<ImageView>(R.id.clubDetailClubImage)
         val clubName = findViewById<TextView>(R.id.clubDetailsClubName)
