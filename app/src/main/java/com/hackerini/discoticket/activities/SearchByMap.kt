@@ -2,13 +2,13 @@ package com.hackerini.discoticket.activities
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
+import android.graphics.Point
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -18,8 +18,11 @@ import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.SearchResult.Companion.getElementToShow
 import com.hackerini.discoticket.fragments.views.Filter
+import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.utils.ObjectLoader
 import com.microsoft.maps.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SearchByMap : AppCompatActivity() {
@@ -120,6 +123,23 @@ class SearchByMap : AppCompatActivity() {
             }
         }
 
+        mMapView?.addOnMapTappedListener { mapTappedEventArgs ->
+            val position = mapTappedEventArgs.position
+            val elements = mMapView?.findMapElementsAtOffset(position)
+            if (elements != null) {
+                for (mapElement in elements) {
+                    if (mapElement is MapIcon) {
+                        val mapIcon = mapElement as MapIcon
+                        val intent = Intent(this, ClubDetails::class.java)
+                        intent.putExtra("club",mapIcon.tag as Club)
+                        startActivity(intent)
+                        break
+                    }
+                }
+            }
+            false
+        }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -192,7 +212,7 @@ class SearchByMap : AppCompatActivity() {
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mMapView?.onLowMemory()
+        //mMapView?.onLowMemory()
     }
 
 }
