@@ -1,7 +1,7 @@
 [
   {
     "clubId": 1,
-    "date": "Sep 5, 2022 2:37:10 PM",
+    "date": "Sep 31, 2022 2:37:10 PM",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "id": 1,
     "imgUrl": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grand-opening-event-club-bar-disco-party-ad-design-template-ee7e062b37aaa286789fc2ca1ec89db9_screen.jpg",
@@ -13,12 +13,23 @@
   {
     "id": 2,
     "clubId": 2,
-    "date": "Sep 5, 2022 2:37:10 PM",
+    "date": "Oct 5, 2022 2:37:10 PM",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "imgUrl": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grand-opening-event-club-bar-disco-party-ad-design-template-ee7e062b37aaa286789fc2ca1ec89db9_screen.jpg",
+    "imgUrl": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/instagram-music-night-event-ad-template-design-2f7c0d70be23110ad6d594f87431017b_screen.jpg?ts=1568652421",
     "musicGenres": [
       "Techno"
     ],
     "name": "Nature beat"
+  },
+  {
+    "id": 3,
+    "clubId": 4,
+    "date": "Sep 29, 2022 2:37:10 PM",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "imgUrl": "https://thumbs.dreamstime.com/b/photo-portrait-nice-couple-dancing-together-student-party-wearing-stylish-bright-formal-clothes-photo-portrait-nice-201091829.jpg",
+    "musicGenres": [
+      "EDM"
+    ],
+    "name": "Student party"
   }
 ]
