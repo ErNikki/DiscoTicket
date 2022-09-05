@@ -5,7 +5,7 @@
     "id": 1,
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "distanceFromYou": 10,
-    "imgUrl": "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg",
+    "imgUrl": "https://hips.hearstapps.com/gioit.h-cdn.co/assets/16/09/768x578/gallery-1456948763-discoteca-e1439826574579.png?resize=480:*",
     "locationType": "Chiuso",
     "musicGenres": [
       "Rock"
@@ -56,7 +56,7 @@
     "id": 2,
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "distanceFromYou": 13,
-    "imgUrl": "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg",
+    "imgUrl": "https://citynews-milanotoday.stgy.ovh/~media/horizontal-mid/7690430458408/discoteca-5.jpg",
     "gpsCords": [
       41.88853537867636,
       12.49944080569197
@@ -108,7 +108,7 @@
     "id": 3,
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "distanceFromYou": 70,
-    "imgUrl": "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg",
+    "imgUrl": "https://www.ansa.it/webimages/img_457x/2021/12/23/1e38938b16663ef194717df2e702be87.jpg",
     "gpsCords": [
       41.875384794269436,
       12.489646627853247
@@ -152,5 +152,55 @@
     ],
     "simpleTicketPrice": 22.0,
     "tableTicketPrice": 57.6
+  },
+  {
+    "address": "Via di S. Elena, 6, 00186 Roma RM",
+    "avgPrice": 40,
+    "id": 4,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "distanceFromYou": 35,
+    "imgUrl": "https://www.affarimiei.biz/wp-content/uploads/2017/07/aprire-una-discoteca.jpg",
+    "gpsCords": [
+      41.89397833883503, 12.476643923091892
+    ],
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Reggaeton"
+    ],
+    "name": "Disco Rome",
+    "rating": 4.1,
+    "reviewAmount": 23,
+    "reviews": [
+      {
+        "date": "05/09/2022",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "images": [
+          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
+          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
+        ],
+        "rating": 4,
+        "user": {
+          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
+          "name": "Luca",
+          "surname": "Hackerino"
+        }
+      },
+      {
+        "date": "05/09/2022",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "images": [
+          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
+          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
+        ],
+        "rating": 3,
+        "user": {
+          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
+          "name": "Luca",
+          "surname": "Hackerino"
+        }
+      }
+    ],
+    "simpleTicketPrice": 20.0,
+    "tableTicketPrice": 50.0
   }
 ]

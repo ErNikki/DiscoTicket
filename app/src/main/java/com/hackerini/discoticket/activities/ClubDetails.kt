@@ -1,15 +1,12 @@
 package com.hackerini.discoticket.activities
 
 import android.app.ActionBar
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.setPadding
 import com.hackerini.discoticket.R
@@ -79,6 +76,7 @@ class ClubDetails : AppCompatActivity() {
             tagLayout.addView(textview)
         }
 
+        //Review
         if (club!!.reviews.isEmpty()) {
             findViewById<ConstraintLayout>(R.id.clubDeatilsReviwerBlock).visibility = View.GONE
             findViewById<TextView>(R.id.clubDeatilsReviwerNoReview).visibility =
