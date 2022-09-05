@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hackerini.discoticket.R
@@ -36,10 +35,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val nearYouLL = view.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
-        val nextEventLL = view.findViewById<LinearLayout>(R.id.HomeNextEventLinearLayout)
-        val lastViewedLL = view.findViewById<LinearLayout>(R.id.HomeLastViewedLinearLayout)
 
         val clubs = ObjectLoader.getClubs(requireContext())
         var transaction = parentFragmentManager.beginTransaction()
