@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Drink
+import java.io.Serializable
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,15 +24,18 @@ private const val ARG_PARAM2 = "param2"
  */
 class DrinkElement : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var drink: Drink? = null
+    private var counter= 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            drink = it.getSerializable(ARG_PARAM1) as Drink
+
         }
+
+
     }
 
     override fun onCreateView(
@@ -49,12 +57,52 @@ class DrinkElement : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: Serializable) =
             DrinkElement().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
+
                 }
             }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var drinkName= view.findViewById<TextView>(R.id.drinkElementDrinkName)
+        var ingredients= view.findViewById<TextView>(R.id.drinkElementIngredients)
+        var price=view.findViewById<TextView>(R.id.drinkElementDrinkPrice)
+        var numberOfDrinkSelected=view.findViewById<TextView>(R.id.drinkElementDrinkQuantity)
+
+        drinkName.setText(drink?.drinkName)
+        price.setText(drink?.price.toString())
+
+        drink?.drinkIngredients?.forEach { e ->
+
+            val builder = StringBuilder()
+            builder.append(ingredients.text.toString())
+                .append(", ")
+                .append(e)
+            ingredients.text=builder.toString()
+
+        }
+
+
+        var decreaseButton = view.findViewById<Button>(R.id.drinkElementDecreaseButton)
+        decreaseButton.setOnClickListener {
+
+            if(counter>0) {
+                counter--
+                numberOfDrinkSelected.setText(counter.toString())
+            }
+
+        }
+
+        var increaseButton= view.findViewById<Button>(R.id.drinkElementIncreaseButton)
+        increaseButton.setOnClickListener {
+            counter++
+            numberOfDrinkSelected.setText(counter.toString())
+        }
+
     }
 }
