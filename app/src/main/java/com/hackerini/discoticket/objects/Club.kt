@@ -1,9 +1,15 @@
 package com.hackerini.discoticket.objects
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
+import android.util.Log
+import com.hackerini.discoticket.room.FavoriteClub
+import com.hackerini.discoticket.room.RoomManager
 import java.io.Serializable
 
 class Club : Serializable {
+    var id: Int = 0
     var name: String = ""
     var address: String = ""
     var rating: Float = (10..50).random() / 10F
@@ -15,28 +21,28 @@ class Club : Serializable {
     var avgPrice = (10..60).random()
     var distanceFromYou = (5..100).random()
     var simpleTicketPrice = (100..350).random() / 10F
-    var tableTicketPrice = (500..1000).random() /10F
+    var tableTicketPrice = (500..1000).random() / 10F
+    var gpsCords: Array<Float> = arrayOf(0F, 0F)
     var locationType = ""
-        get() {
-            if (field.isBlank()) {
-                field = arrayOf("Aperto", "Chiuso", "Entrambi").random()
-            }
-            return field
 
+    /*get() {
+        if (field.isBlank()) {
+            field = arrayOf("Aperto", "Chiuso", "Entrambi").random()
         }
+        return field
 
+    }*/
     var musicGenres = arrayOf("")
-        get() {
-            if (field[0].isBlank()) {
-                val a = arrayOf("EDM", "Reggaeton", "Techno", "Rock")
-                a.shuffle()
-                field = a.take(2).toTypedArray()
-            }
-            return field
 
+    /*get() {
+        if (field[0].isBlank()) {
+            val a = arrayOf("EDM", "Reggaeton", "Techno", "Rock")
+            a.shuffle()
+            field = a.take(2).toTypedArray()
         }
+        return field
 
-
+    }*/
     var labels = arrayOf("")
         get() {
             return if (locationType != "Chiuso")
@@ -46,11 +52,27 @@ class Club : Serializable {
 
         }
 
+    fun isFavorite(context: Context): Boolean {
+        val favDao = RoomManager(context).db.favoriteDao()
+        return favDao.getAll().contains(FavoriteClub(this.id))
+    }
+
+    fun removeToFavorite(context: Context) {
+        val favDao = RoomManager(context).db.favoriteDao()
+        favDao.deleteFavorite(FavoriteClub(this.id))
+    }
+
+    fun addToFavorite(context: Context) {
+        val favDao = RoomManager(context).db.favoriteDao()
+        favDao.insertFavorite(FavoriteClub(this.id))
+    }
+
+
     companion object {
         fun getLabelColorFromName(labelName: String): Int {
             return when (labelName) {
                 "EDM" -> Color.argb(180, 255, 128, 128)
-                "Outdoor" -> Color.argb(180, 128, 255, 128)
+                "Aperto" -> Color.argb(255, 200, 200, 200)
                 "Techno" -> Color.argb(180, 80, 80, 160)
                 "Reggaeton" -> Color.argb(180, 200, 80, 200)
                 "Free entry" -> Color.argb(180, 200, 255, 200)

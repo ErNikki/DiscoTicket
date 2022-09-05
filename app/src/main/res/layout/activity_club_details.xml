@@ -6,228 +6,273 @@
     android:layout_height="match_parent"
     tools:context=".activities.ClubDetails">
 
-    <ImageView
-        android:id="@+id/clubDetailClubImage"
-        android:layout_width="411dp"
-        android:layout_height="209dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/clubDetailsClubName"
-        android:layout_width="157dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage" />
-
-    <TextView
-        android:id="@+id/clubDetailsAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDetailsClubName" />
-
-    <RatingBar
-        android:id="@+id/clubDeatilsRatingBar"
-        style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
-        android:layout_width="174dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDetailsAddress" />
-
-    <TextView
-        android:id="@+id/clubDetailsTotalReviews"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="4dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/clubDeatilsRatingBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toEndOf="@+id/clubDeatilsRatingBar"
-        app:layout_constraintTop_toTopOf="@+id/clubDeatilsRatingBar"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
-        android:id="@+id/clubDetailsFavouritesButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.755"
-        app:layout_constraintStart_toEndOf="@+id/clubDetailsClubName"
-        app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage"
-        app:srcCompat="@drawable/ic_baseline_favorite_24" />
-
-    <TextView
-        android:id="@+id/clubDeatilsAddToFavouritiesText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="Aggiungi ai preferiti"
-        app:layout_constraintEnd_toEndOf="@+id/clubDetailsFavouritesButton"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="@+id/clubDetailsFavouritesButton"
-        app:layout_constraintTop_toBottomOf="@+id/clubDetailsFavouritesButton" />
-
-    <Button
-        android:id="@+id/clubDetailsDrinkMenuButton"
-        android:layout_width="142dp"
-        android:layout_height="48dp"
-        android:text="Apri drink menu"
-        android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription" />
-
-    <Button
-        android:id="@+id/clubDetailsBuyTicketsButton"
-        android:layout_width="117dp"
-        android:layout_height="48dp"
-        android:text="Compra Biglietti"
-        android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDetailsDrinkMenuButton" />
-
-    <TextView
-        android:id="@+id/clubDetailsReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="Reviews"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDetailsBuyTicketsButton" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="399dp"
-        android:layout_height="118dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDetailsReview">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="119dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/clubDetailsReviewerImage"
-                android:layout_width="46dp"
-                android:layout_height="44dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/clubDetailsReviewerName"
-                android:layout_width="84dp"
-                android:layout_height="17dp"
-                android:text="TextView"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/clubDetailsReviewerImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/clubDetailClubImage"
+                    android:layout_width="411dp"
+                    android:layout_height="209dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
-                android:id="@+id/clubDetailsReviewDate"
-                android:layout_width="54dp"
-                android:layout_height="15dp"
-                android:text="TextView"
-                android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/clubDetailsReviewerImage"
-                app:layout_constraintTop_toBottomOf="@+id/clubDetailsReviewerName" />
+                <TextView
+                    android:id="@+id/clubDetailsClubName"
+                    android:layout_width="157dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="TextView"
+                    android:textSize="30sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage" />
 
-            <RatingBar
-                android:id="@+id/clubDeatilsReviwerRatingBar"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.219" />
+                <TextView
+                    android:id="@+id/clubDetailsAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="TextView"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/clubDeatilsAddToFavouritiesText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsClubName" />
 
-            <TextView
-                android:id="@+id/clubDetailsReviewText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/clubDetailsReviewerImage" />
+                <RatingBar
+                    android:id="@+id/clubDeatilsRatingBar"
+                    style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
+                    android:layout_width="174dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsAddress" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/clubDetailsTotalReviews"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="84dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/clubDeatilsRatingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.238"
+                    app:layout_constraintStart_toEndOf="@+id/clubDeatilsRatingBar"
+                    app:layout_constraintTop_toTopOf="@+id/clubDeatilsRatingBar"
+                    app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/clubDeatilsClubDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDeatilsRatingBar" />
+                <ImageButton
+                    android:id="@+id/clubDetailsFavouritesButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.755"
+                    app:layout_constraintStart_toEndOf="@+id/clubDetailsClubName"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage"
+                    app:srcCompat="@drawable/ic_baseline_favorite_24" />
 
-    <Button
-        android:id="@+id/clubDetailsWriteReviewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Scrivi una recensione"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                <TextView
+                    android:id="@+id/clubDeatilsAddToFavouritiesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Aggiungi ai preferiti"
+                    app:layout_constraintEnd_toEndOf="@+id/clubDetailsFavouritesButton"
+                    app:layout_constraintHorizontal_bias="0.458"
+                    app:layout_constraintStart_toStartOf="@+id/clubDetailsFavouritesButton"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsFavouritesButton" />
 
-    <Button
-        android:id="@+id/clubDetailsReadReviewsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="Leggi le recensioni"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                <Button
+                    android:id="@+id/clubDetailsDrinkMenuButton"
+                    android:layout_width="142dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Apri drink menu"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.954"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription" />
 
-    <LinearLayout
-        android:id="@+id/clubDetailsTagLayout"
-        android:layout_width="178dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription"></LinearLayout>
+                <Button
+                    android:id="@+id/clubDetailsBuyTicketsButton"
+                    android:layout_width="117dp"
+                    android:layout_height="48dp"
+                    android:text="Compra Biglietti"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.943"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsDrinkMenuButton" />
+
+                <TextView
+                    android:id="@+id/clubDetailsReview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Recensione più popolare"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsBuyTicketsButton" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsReview">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/clubDeatilsReviwerNoReview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non ci sono recensioni per questa discoteca"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/clubDeatilsReviwerBlock"
+                            app:layout_constraintEnd_toEndOf="@+id/clubDeatilsReviwerBlock"
+                            app:layout_constraintStart_toStartOf="@+id/clubDeatilsReviwerBlock"
+                            app:layout_constraintTop_toTopOf="@+id/clubDeatilsReviwerBlock" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clubDeatilsReviwerBlock"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/clubDetailsReviewerImage"
+                                android:layout_width="46dp"
+                                android:layout_height="44dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:srcCompat="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/clubDetailsReviewerName"
+                                android:layout_width="84dp"
+                                android:layout_height="17dp"
+                                android:text="TextView"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toEndOf="@+id/clubDetailsReviewerImage"
+                                app:layout_constraintTop_toTopOf="@+id/clubDetailsReviewerImage" />
+
+                            <TextView
+                                android:id="@+id/clubDetailsReviewDate"
+                                android:layout_width="54dp"
+                                android:layout_height="15dp"
+                                android:text="TextView"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="@+id/clubDetailsReviewerName"
+                                app:layout_constraintTop_toBottomOf="@+id/clubDetailsReviewerName" />
+
+                            <RatingBar
+                                android:id="@+id/clubDeatilsReviwerRatingBar"
+                                style="@style/Widget.AppCompat.RatingBar.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/clubDetailsReviewerImage"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/clubDetailsReviewerImage"
+                                app:layout_constraintVertical_bias="0.219" />
+
+                            <TextView
+                                android:id="@+id/clubDetailsReviewText"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="TextView"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/clubDetailsReviewerImage" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/clubDeatilsClubDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDeatilsRatingBar" />
+
+                <Button
+                    android:id="@+id/clubDetailsWriteReviewButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Scrivi una recensione"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+                <Button
+                    android:id="@+id/clubDetailsReadReviewsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Leggi le recensioni"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+                <LinearLayout
+                    android:id="@+id/clubDetailsTagLayout"
+                    android:layout_width="178dp"
+                    android:layout_height="68dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription"></LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

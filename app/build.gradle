@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id "org.jetbrains.kotlin.kapt"
 }
+
+apply from: 'secrets.gradle'
 
 android {
     compileSdk 32
@@ -20,6 +23,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        buildTypes.each {
+            it.buildConfigField "String", "CREDENTIALS_KEY", "\"$credentialsKey\""
         }
     }
     compileOptions {
@@ -50,6 +56,10 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
     implementation 'com.github.kizitonwose:CalendarView:1.1.0'
+    implementation 'com.microsoft.maps:maps-sdk:1.2.0'
+    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation("androidx.room:room-runtime:2.4.3")
+    kapt "androidx.room:room-compiler:2.4.3"
 }
 
 task wrapper(type: Wrapper){
