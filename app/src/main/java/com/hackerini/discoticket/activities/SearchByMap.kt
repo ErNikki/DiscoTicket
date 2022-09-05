@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Point
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
@@ -21,8 +20,6 @@ import com.hackerini.discoticket.fragments.views.Filter
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.utils.ObjectLoader
 import com.microsoft.maps.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class SearchByMap : AppCompatActivity() {
@@ -40,7 +37,9 @@ class SearchByMap : AppCompatActivity() {
                 // if you need to show the current location, uncomment the line below
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 // WRITE_EXTERNAL_STORAGE is required in order to show the map
-                Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+
             )
         )
 
@@ -52,7 +51,7 @@ class SearchByMap : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.SearchResultByMapMap).addView(mMapView)
         mMapView?.onCreate(savedInstanceState)
         mMapView?.layers?.add(pinLayer)
-        val myPosition = Geopoint(47.609466, -122.265185)
+
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -129,9 +128,8 @@ class SearchByMap : AppCompatActivity() {
             if (elements != null) {
                 for (mapElement in elements) {
                     if (mapElement is MapIcon) {
-                        val mapIcon = mapElement as MapIcon
                         val intent = Intent(this, ClubDetails::class.java)
-                        intent.putExtra("club",mapIcon.tag as Club)
+                        intent.putExtra("club", mapElement.tag as Club)
                         startActivity(intent)
                         break
                     }

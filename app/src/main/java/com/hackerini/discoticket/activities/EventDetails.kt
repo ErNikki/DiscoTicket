@@ -42,7 +42,7 @@ class EventDetails : AppCompatActivity() {
         clubName.text = event.club?.name
         eventDescription.text = event.description
         val imageSize = 250
-        Picasso.get().load(event!!.imgUrl).resize(imageSize, imageSize).into(eventImage)
+        Picasso.get().load(event.imgUrl).resize(imageSize, imageSize).into(eventImage)
 
         findViewById<Button>(R.id.eventDetailsDrinkMenuButton).setOnClickListener {
             val intent = Intent(this, DrinkMenu::class.java)
