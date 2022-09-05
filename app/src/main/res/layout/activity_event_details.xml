@@ -6,13 +6,129 @@
     android:layout_height="match_parent"
     tools:context=".activities.EventDetails">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Event details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/eventDetaileventImage"
+                    android:layout_width="411dp"
+                    android:layout_height="209dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/eventDetailseventName"
+                    android:layout_width="157dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="TextView"
+                    android:textSize="30sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetaileventImage" />
+
+                <TextView
+                    android:id="@+id/eventDetailsAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="TextView"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailseventName" />
+
+                <Button
+                    android:id="@+id/eventDetailsDrinkMenuButton"
+                    android:layout_width="142dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Apri drink menu"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.954"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDeatilseventDescription" />
+
+                <Button
+                    android:id="@+id/eventDetailsBuyTicketsButton"
+                    android:layout_width="117dp"
+                    android:layout_height="48dp"
+                    android:text="Compra Biglietti"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.943"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsDrinkMenuButton" />
+
+                <TextView
+                    android:id="@+id/eventDeatilseventDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsDate" />
+
+                <LinearLayout
+                    android:id="@+id/eventDetailsTagLayout"
+                    android:layout_width="178dp"
+                    android:layout_height="68dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDeatilseventDescription"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/eventDetailsDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    app:layout_constraintStart_toStartOf="@+id/eventDetailsAddress"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsAddress" />
+
+                <TextView
+                    android:id="@+id/kfflgkflkgf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="at: "
+                    android:textStyle="bold|italic"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventDetailsDate"
+                    app:layout_constraintStart_toEndOf="@+id/eventDetailsDate"
+                    app:layout_constraintTop_toTopOf="@+id/eventDetailsDate" />
+
+                <TextView
+                    android:id="@+id/eventDetailClubName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/kfflgkflkgf"
+                    app:layout_constraintStart_toEndOf="@+id/kfflgkflkgf"
+                    app:layout_constraintTop_toTopOf="@+id/kfflgkflkgf" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

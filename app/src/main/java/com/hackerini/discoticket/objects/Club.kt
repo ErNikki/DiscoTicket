@@ -1,9 +1,7 @@
 package com.hackerini.discoticket.objects
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import com.hackerini.discoticket.room.FavoriteClub
 import com.hackerini.discoticket.room.RoomManager
 import java.io.Serializable
@@ -77,7 +75,7 @@ class Club : Serializable {
                 "Reggaeton" -> Color.argb(180, 200, 80, 200)
                 "Free entry" -> Color.argb(180, 200, 255, 200)
                 "Rock" -> Color.argb(120, 30, 255, 255)
-                else -> Color.argb(180, 255, 255, 255)
+                else -> Color.argb(255, 200, 200, 255)
             }
         }
     }

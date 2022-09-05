@@ -2,15 +2,18 @@ package com.hackerini.discoticket.fragments.elements
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
+import com.hackerini.discoticket.activities.EventDetails
 import com.hackerini.discoticket.objects.Event
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
@@ -49,13 +52,23 @@ class HomePageEventElement : Fragment() {
         Picasso.get().load(event?.imgUrl).resize(250, 250)
             .into(view.findViewById<ImageView>(R.id.HomePageEventElementImage))
         val df = SimpleDateFormat("dd/MM", Locale.getDefault())
-        view.findViewById<TextView>(R.id.HomePageEventDate).text = "il "+df.format(event?.date)
-        view.findViewById<TextView>(R.id.HomePageEventLocation).text = "Luogo: "+event?.club?.name
+        view.findViewById<TextView>(R.id.HomePageEventDate).text = "il " + df.format(event?.date)
+
+        val discoName = view.findViewById<TextView>(R.id.HomePageEventLocation)
+        val mSpannableString = SpannableString("Luogo: " + event?.club?.name)
+        mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)
+        discoName.text = mSpannableString
 
         view.findViewById<CardView>(R.id.HomePageEventCard).setOnClickListener {
-            //val intent = Intent(requireContext(), ClubDetails::class.java)
-            //intent.putExtra("event",event)
-            //startActivity(intent)
+            val intent = Intent(requireContext(), EventDetails::class.java)
+            intent.putExtra("event", event)
+            startActivity(intent)
+        }
+
+        discoName.setOnClickListener {
+            val intent = Intent(context, ClubDetails::class.java)
+            intent.putExtra("club", event?.club)
+            startActivity(intent)
         }
 
     }

@@ -8,7 +8,8 @@
     "musicGenres": [
       "EDM"
     ],
-    "name": "Presidium"
+    "name": "Presidium",
+    "freeEntryEarlierEntry": true
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "musicGenres": [
       "Techno"
     ],
-    "name": "Nature beat"
+    "name": "Nature beat",
+    "freeEntryEarlierEntry": false
   },
   {
     "id": 3,
@@ -30,6 +32,7 @@
     "musicGenres": [
       "EDM"
     ],
-    "name": "Student party"
+    "name": "Student party",
+    "freeEntryEarlierEntry": true
   }
 ]
