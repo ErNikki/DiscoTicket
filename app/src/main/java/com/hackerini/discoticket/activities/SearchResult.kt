@@ -1,9 +1,11 @@
 package com.hackerini.discoticket.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
@@ -28,6 +30,7 @@ class SearchResult : AppCompatActivity() {
         setContentView(R.layout.activity_search_result)
 
         val filterButton = findViewById<Button>(R.id.SearchResultFilterButton)
+        val openMapButton = findViewById<ImageButton>(R.id.SearchResultOpenMap)
 
         //Update the search text with the one from the previous activity
         val searchText = findViewById<EditText>(R.id.SearchResultSearchText)
@@ -53,6 +56,10 @@ class SearchResult : AppCompatActivity() {
             loadContent(elementToShow)
         }
         loadContent(ElementToShow.ALL)
+
+        openMapButton.setOnClickListener {
+            startActivity(Intent(this,SearchByMap::class.java))
+        }
     }
 
     private fun getElementToShow(discoChip: Boolean, eventChip: Boolean): ElementToShow {
