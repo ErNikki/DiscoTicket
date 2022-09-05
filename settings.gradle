@@ -12,6 +12,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven { url 'https://microsoftmaps.jfrog.io/artifactory/Maven/' }
     }
 }
 rootProject.name = "Disco Ticket"

@@ -3,7 +3,10 @@ package com.hackerini.discoticket.objects
 import java.io.Serializable
 import java.util.*
 
-class Event(var name: String, var date: Date, var club: Club) : Serializable {
+class Event(var name: String, var date: Date) : Serializable {
+    var id: Int = 0
+    var clubId = 0
+    var club: Club? = null
     var imgUrl: String =
         "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grand-opening-event-club-bar-disco-party-ad-design-template-ee7e062b37aaa286789fc2ca1ec89db9_screen.jpg"
     var description: String =
@@ -23,7 +26,7 @@ class Event(var name: String, var date: Date, var club: Club) : Serializable {
 
     var labels = arrayOf("")
         get() {
-            return if (club.locationType != "Chiuso")
+            return if (club?.locationType != "Chiuso")
                 musicGenres + arrayOf("Aperto")
             else
                 musicGenres

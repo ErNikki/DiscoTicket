@@ -4,6 +4,7 @@ import android.graphics.Color
 import java.io.Serializable
 
 class Club : Serializable {
+    var id:Int = 0
     var name: String = ""
     var address: String = ""
     var rating: Float = (10..50).random() / 10F
@@ -16,17 +17,17 @@ class Club : Serializable {
     var distanceFromYou = (5..100).random()
     var simpleTicketPrice = (100..350).random() / 10F
     var tableTicketPrice = (500..1000).random() /10F
+    var gpsCords:Array<Float> = arrayOf(0F,0F)
     var locationType = ""
-        get() {
+        /*get() {
             if (field.isBlank()) {
                 field = arrayOf("Aperto", "Chiuso", "Entrambi").random()
             }
             return field
 
-        }
-
+        }*/
     var musicGenres = arrayOf("")
-        get() {
+        /*get() {
             if (field[0].isBlank()) {
                 val a = arrayOf("EDM", "Reggaeton", "Techno", "Rock")
                 a.shuffle()
@@ -34,9 +35,7 @@ class Club : Serializable {
             }
             return field
 
-        }
-
-
+        }*/
     var labels = arrayOf("")
         get() {
             return if (locationType != "Chiuso")

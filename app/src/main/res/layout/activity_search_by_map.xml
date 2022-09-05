@@ -19,20 +19,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <org.osmdroid.views.MapView
+    <LinearLayout
         android:id="@+id/SearchResultByMapMap"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SearchResultMapFilterButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/SearchResultMapFilterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Filtra"
         app:icon="@drawable/ic_baseline_filter_alt_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +58,8 @@
             android:layout_height="wrap_content"
             android:checkable="true"
             android:checked="true"
-            android:text="Discoteche" />
+            android:text="Discoteche"
+            android:textColor="#455A64" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/searchResultMapEventChip"

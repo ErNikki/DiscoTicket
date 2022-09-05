@@ -1,23 +1,32 @@
 package com.hackerini.discoticket.activities
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.location.LocationManager
 import android.os.Bundle
-import android.preference.PreferenceManager
+import android.util.Log
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
+import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
-
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory
-import org.osmdroid.views.MapView
-import org.osmdroid.config.Configuration.*
-
+import com.hackerini.discoticket.activities.SearchResult.Companion.getElementToShow
+import com.hackerini.discoticket.fragments.views.Filter
+import com.hackerini.discoticket.utils.ObjectLoader
+import com.microsoft.maps.*
 
 
 class SearchByMap : AppCompatActivity() {
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
-    private var map: MapView? = null
+    private var mMapView: MapView? = null
+
+    private val pinLayer = MapElementLayer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +40,85 @@ class SearchByMap : AppCompatActivity() {
                 Manifest.permission.MANAGE_EXTERNAL_STORAGE
             )
         )
-        getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
+
 
         setContentView(R.layout.activity_search_by_map)
 
-        map = findViewById<MapView>(R.id.SearchResultByMapMap)
-        map?.setTileSource(TileSourceFactory.MAPNIK)
+        mMapView = MapView(this, MapRenderMode.VECTOR)
+        mMapView?.setCredentialsKey("AhkGU_SdJLTmYKYZortAP7pRMmQU_Rt_VQV6Q9b-XxWa9aepqjcgCo_BcXbO4wMm")
+        findViewById<LinearLayout>(R.id.SearchResultByMapMap).addView(mMapView)
+        mMapView?.onCreate(savedInstanceState)
+        mMapView?.layers?.add(pinLayer)
+        val myPosition = Geopoint(47.609466, -122.265185)
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionsIfNecessary(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))
+            return
+        }
+        val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        if (location != null) {
+            val geopoint = Geopoint(location.latitude, location.longitude)
+            mMapView?.setScene(
+                MapScene.createFromLocationAndZoomLevel(geopoint, 10.0),
+                MapAnimationKind.NONE
+            )
+        }
+
+        val discoChip = findViewById<Chip>(R.id.searchResultMapClubChip)
+        val eventChip = findViewById<Chip>(R.id.searchResultMapEventChip)
+        discoChip.setOnClickListener {
+            Log.d("CIAO", "CIAO")
+        }
+        discoChip.setOnCheckedChangeListener { _, _ ->
+            val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
+            loadContent(elementToShow)
+        }
+        eventChip.setOnCheckedChangeListener { _, _ ->
+            val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
+            loadContent(elementToShow)
+        }
+        findViewById<Button>(R.id.SearchResultMapFilterButton).setOnClickListener {
+            //Instead to pass the String ciao, you will pass and object with the current search criteria
+            val filterFragment = Filter.newInstance("ciao")
+            filterFragment.show(supportFragmentManager, "prova")
+        }
+        loadContent(ElementToShow.ALL)
+    }
+
+    private fun loadContent(elementToShow: ElementToShow) {
+        pinLayer.elements.clear()
+
+        if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
+            val drawable = ContextCompat.getDrawable(this,R.drawable.ic_baseline_club_location_on_24)
+            val clubs = ObjectLoader.getClubs(applicationContext)
+            clubs.forEach { item ->
+                val pin = MapIcon()
+                pin.location = Geopoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
+                pin.title = item.name
+                pin.tag = item
+                pin.image = MapImage(drawable!!.toBitmap())
+                pinLayer.elements.add(pin)
+            }
+        }
+        if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
+            val drawable = ContextCompat.getDrawable(this,R.drawable.ic_baseline_event_location_on_24)
+            val clubs = ObjectLoader.getClubs(applicationContext)
+            clubs.forEach { item ->
+                val pin = MapIcon()
+                pin.location = Geopoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
+                pin.title = item.name
+                pin.tag = item
+                pin.image = MapImage(drawable!!.toBitmap())
+                pinLayer.elements.add(pin)
+            }
+        }
 
     }
 
@@ -78,13 +160,39 @@ class SearchByMap : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        mMapView?.onStart()
+    }
+
     override fun onResume() {
         super.onResume()
-        map?.onResume()
+        mMapView?.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        map?.onPause()
+        mMapView?.onPause()
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mMapView?.onSaveInstanceState(outState);
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mMapView?.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mMapView?.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mMapView?.onLowMemory()
+    }
+
 }
