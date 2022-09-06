@@ -107,23 +107,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <RelativeLayout
-        android:id="@+id/paymentRelativeLayout"
-        android:layout_width="156dp"
-        android:layout_height="105dp"
-        android:background="@android:color/transparent"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="370dp">
-
-        <TextView
-            android:id="@+id/paymentHelp"
-            android:layout_width="152dp"
-            android:layout_height="87dp"
-            android:text="Hello World"
-            android:textColor="#FF0000"
-            android:textSize="50sp" />
-    </RelativeLayout>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
