@@ -5,7 +5,6 @@ import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -36,36 +35,18 @@ class Payment : AppCompatActivity() {
         }
 
         //Create dropdown menu for discounts
-        val dropdown = findViewById<Spinner>(R.id.paymentSpinner) as Spinner
+        val dropdown = findViewById<Spinner>(R.id.paymentSpinner)
         val items = listOf("Non utilizzare nessuno sconto", "Un drink gratis", "Sconto del 20%")    //DOVREBBE ESSERCI UNA FUNZIONE APPOSTA
         val dataAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items)
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)      //Layout style - list view with radio button
         dropdown.adapter = dataAdapter
 
         //Question mark popup
-        val questionMark = findViewById<ImageView>(R.id.paymentQuestionMark) as ImageView
+        val questionMark = findViewById<ImageView>(R.id.paymentQuestionMark)
         questionMark.setOnClickListener {
-            Log.d("TAG","HEHEEHEHEHH")
-            val text = TextView(this)
-            text.textSize = 20f
-            text.text = "AAAAAAAAAAAAA"
-            //questionMark.addView(text)
-            //val layoutParams = questionMark.layoutParams as RelativeLayout.LayoutParams
-            //val paymentHelp = findViewById<TextView>(R.id.paymentHelp)
-            //paymentHelp.layoutParams = layoutParams
-
-            /*val position = IntArray(2)
-            questionMark.getLocationOnScreen(position)
-            Log.d("TAG", position[0].toString() + " " + position[1])
-            val help = findViewById<RelativeLayout>(R.id.paymentRelativeLayout)
-            help.x = position[0].toFloat()
-            help.y = position[1].toFloat()
-            Log.d("TAG", help.x.toString() + " " + help.y.toString())*/
-
             val alert = AlertDialog.Builder(this).create()
-            //alert.setCancelable(false)
             alert.setMessage("Puoi selezionare uno sconto, se ne hai uno disponibile; in alternativa, puoi anche inserire un codice coupon")
-            alert.show()
+            alert.show()                    //COME FACCIO A FAR SCRIVERE MANUALMENTE??
         }
 
         //Write the total amount
@@ -73,7 +54,7 @@ class Payment : AppCompatActivity() {
         totalAmount.append(String.format("%.2f", orderPreview.getTotalAmount()) + "€")
 
         //Create alert on button press
-        val button = findViewById<Button>(R.id.paymentButton) as Button
+        val button = findViewById<Button>(R.id.paymentButton)
         button.setOnClickListener {
             val alert = AlertDialog.Builder(this).create()
             alert.setCancelable(false)
@@ -88,7 +69,7 @@ class Payment : AppCompatActivity() {
             layoutParams.weight = 10f
             buttonNegative.layoutParams = layoutParams
             buttonPositive.layoutParams = layoutParams
-            val buttonHeight = 170
+            val buttonHeight = 200
             buttonNegative.height = buttonHeight
             buttonPositive.height = buttonHeight
 

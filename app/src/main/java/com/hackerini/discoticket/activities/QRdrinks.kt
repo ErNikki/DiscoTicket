@@ -12,7 +12,7 @@ class QRdrinks : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_drinks)
 
-        val button = findViewById<Button>(R.id.qrDrinksButton) as Button
+        val button = findViewById<Button>(R.id.qrDrinksButton)
         button.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
