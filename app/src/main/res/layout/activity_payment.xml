@@ -54,19 +54,19 @@
                 android:textSize="22sp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/paymentButton1"
                 android:layout_width="match_parent"
                 android:layout_height="121dp"
                 android:text="Carta di debito o credito" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/paymentButton2"
                 android:layout_width="match_parent"
                 android:layout_height="121dp"
                 android:text="PayPal" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/paymentButton3"
                 android:layout_width="match_parent"
                 android:layout_height="121dp"
                 android:text="Google Pay" />
