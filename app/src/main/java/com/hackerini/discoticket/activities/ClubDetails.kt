@@ -95,13 +95,23 @@ class ClubDetails : AppCompatActivity() {
             reviewRatingBar.rating = review.rating.toFloat()
             Picasso.get().load(review.user.imageProfileUrl).resize(100, 100).into(reviewerImage)
         }
+        findViewById<Button>(R.id.clubDetailsReadReviewsButton).setOnClickListener {
+            val intent = Intent(applicationContext, AllReview::class.java)
+            intent.putExtra("club", club)
+            startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.clubDetailsWriteReviewButton).setOnClickListener {
+            val intent = Intent(applicationContext, WriteReview::class.java)
+            intent.putExtra("club", club)
+            startActivity(intent)
+        }
 
         updateButtonStatus()
         favouritesButton?.setOnClickListener {
             if (club?.isFavorite(this) == true) {
                 club?.removeToFavorite(this)
-            }
-            else
+            } else
                 club?.addToFavorite(this)
             updateButtonStatus()
         }
