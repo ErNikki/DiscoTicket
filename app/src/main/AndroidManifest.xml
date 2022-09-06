@@ -25,6 +25,12 @@
         android:theme="@style/Theme.DiscoTicket"
         tools:targetApi="31">
         <activity
+            android:name=".activities.WriteReview"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AllReview"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignUp"
             android:exported="false" />
         <activity
