@@ -46,6 +46,17 @@ class Club : Serializable {
 
         }
 
+    var drinks = arrayOf("")
+        get(){
+            val listOfDrink= arrayOf("Negroni", "Spritz", "Mojito", "White Russian",
+                "London Mule", "Whisky sour",
+                "Gin Lemon","Gin Tonic", "Margharita"
+            )
+            listOfDrink.shuffle()
+            field = listOfDrink.take((4..7).random()).toTypedArray()
+            return field
+        }
+
     companion object {
         fun getLabelColorFromName(labelName: String): Int {
             return when (labelName) {

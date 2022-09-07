@@ -103,7 +103,7 @@ class SearchResult : AppCompatActivity() {
             ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(event0))
             ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(event1))
         }
-        5
+        ft.commitNow()
     }
 
 

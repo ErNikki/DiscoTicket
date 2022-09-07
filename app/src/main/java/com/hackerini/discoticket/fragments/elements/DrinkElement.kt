@@ -1,14 +1,15 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Drink
 import java.io.Serializable
 
@@ -26,6 +27,8 @@ class DrinkElement : Fragment() {
     // TODO: Rename and change types of parameters
     private var drink: Drink? = null
     private var counter= 0
+    private var name=""
+    private var price=0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,40 +72,69 @@ class DrinkElement : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var drinkName= view.findViewById<TextView>(R.id.drinkElementDrinkName)
-        var ingredients= view.findViewById<TextView>(R.id.drinkElementIngredients)
-        var price=view.findViewById<TextView>(R.id.drinkElementDrinkPrice)
-        var numberOfDrinkSelected=view.findViewById<TextView>(R.id.drinkElementDrinkQuantity)
+        val drinkImage= view.findViewById<ImageView>(R.id.drinkElementDrinkIcon)
+        val drinkName= view.findViewById<TextView>(R.id.drinkElementDrinkName)
+        val ingredients= view.findViewById<TextView>(R.id.drinkElementIngredients)
+        val priceText=view.findViewById<TextView>(R.id.drinkElementDrinkPrice)
+        val numberOfDrinkSelected=view.findViewById<TextView>(R.id.drinkElementDrinkQuantity)
+        var cartTotal=requireActivity().findViewById<View>(R.id.drinkMenuCartTotal) as TextView
 
-        drinkName.setText(drink?.drinkName)
-        price.setText(drink?.price.toString())
 
+
+        name= drink?.drinkName.toString()
+        drinkName.setText(name)
+
+        price= drink?.price!!
+        priceText.setText(price.toString().plus(" €"))
+
+        ingredients.text=""
+        val builder = StringBuilder()
         drink?.drinkIngredients?.forEach { e ->
-
-            val builder = StringBuilder()
             builder.append(ingredients.text.toString())
-                .append(", ")
                 .append(e)
-            ingredients.text=builder.toString()
-
+                .append(", ")
         }
+        ingredients.text=builder.toString().dropLast(2)
 
-
-        var decreaseButton = view.findViewById<Button>(R.id.drinkElementDecreaseButton)
+        numberOfDrinkSelected.text= counter.toString()
+        var totalCartAux=0
+        var auxString=""
+        val decreaseButton = view.findViewById<Button>(R.id.drinkElementDecreaseButton)
         decreaseButton.setOnClickListener {
 
             if(counter>0) {
+
                 counter--
                 numberOfDrinkSelected.setText(counter.toString())
+
+                auxString= cartTotal.text.toString()
+                totalCartAux = auxString.dropLast(2).toInt()
+                cartTotal.setText((totalCartAux- price!!).toString().plus(" €"))
+
             }
 
         }
 
-        var increaseButton= view.findViewById<Button>(R.id.drinkElementIncreaseButton)
+        val increaseButton= view.findViewById<Button>(R.id.drinkElementIncreaseButton)
         increaseButton.setOnClickListener {
             counter++
             numberOfDrinkSelected.setText(counter.toString())
+
+            auxString= cartTotal.text.toString()
+            totalCartAux = auxString.dropLast(2).toInt()
+            cartTotal.setText((totalCartAux+ price!!).toString().plus(" €"))
         }
 
+
+
+    }
+    fun getName():String{
+        return name
+    }
+    fun getPrice():Int{
+        return price
+    }
+    fun getQuantity():Int{
+        return counter
     }
 }
