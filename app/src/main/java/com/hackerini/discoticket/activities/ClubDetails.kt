@@ -7,9 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.setPadding
+import androidx.fragment.app.FragmentContainerView
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.squareup.picasso.Picasso
 
@@ -25,7 +26,6 @@ class ClubDetails : AppCompatActivity() {
         favouritesButton = findViewById(R.id.clubDetailsFavouritesButton)
 
         club = intent.getSerializableExtra("club") as Club
-
 
 
         val clubImage = findViewById<ImageView>(R.id.clubDetailClubImage)
@@ -48,7 +48,7 @@ class ClubDetails : AppCompatActivity() {
         val drinkMenuButton = findViewById<Button>(R.id.clubDetailsDrinkMenuButton) as Button
         drinkMenuButton.setOnClickListener {
             val intent = Intent(this, DrinkMenu::class.java)
-            intent.putExtra("club",club)
+            intent.putExtra("club", club)
             startActivity(intent)
         }
 
@@ -81,22 +81,16 @@ class ClubDetails : AppCompatActivity() {
 
         //Review
         if (club!!.reviews.isEmpty()) {
-            findViewById<ConstraintLayout>(R.id.clubDeatilsReviwerBlock).visibility = View.GONE
+            findViewById<FragmentContainerView>(R.id.clubDetailsFragmentContainerView).visibility =
+                View.GONE
             findViewById<TextView>(R.id.clubDeatilsReviwerNoReview).visibility =
                 View.VISIBLE
         } else {
-            val reviewerImage = findViewById<ImageView>(R.id.clubDetailsReviewerImage)
-            val reviewerName = findViewById<TextView>(R.id.clubDetailsReviewerName)
-            val reviewDate = findViewById<TextView>(R.id.clubDetailsReviewDate)
-            val reviewContent = findViewById<TextView>(R.id.clubDetailsReviewText)
-            val reviewRatingBar = findViewById<RatingBar>(R.id.clubDeatilsReviwerRatingBar)
-
-            val review = club!!.reviews.first()
-            reviewerName.text = review.user.name + " " + review.user.surname
-            reviewDate.text = review.date
-            reviewContent.text = review.description
-            reviewRatingBar.rating = review.rating.toFloat()
-            Picasso.get().load(review.user.imageProfileUrl).resize(100, 100).into(reviewerImage)
+            supportFragmentManager.beginTransaction().add(
+                R.id.clubDetailsFragmentContainerView, ReviewElement.newInstance(
+                    club!!.reviews.first()
+                )
+            ).commit()
         }
         findViewById<Button>(R.id.clubDetailsReadReviewsButton).setOnClickListener {
             val intent = Intent(applicationContext, AllReview::class.java)
