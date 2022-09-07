@@ -2,7 +2,7 @@ package com.hackerini.discoticket.objects
 
 import java.io.Serializable
 
-class Drink (var drinkName:String, var price: Int=(8..11).random()) : Serializable{
+class Drink(var drinkName: String, var price: Float = (80..111).random() / 10F) : Serializable {
     //var price=(8..11).random()
     /*constructor(drinkName:String, price:Int) : this(drinkName){
         this.price=price
