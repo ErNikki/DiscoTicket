@@ -7,17 +7,17 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.MainActivity
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.objects.OrderPreview
+import com.hackerini.discoticket.objects.OrderWithOrderItem
 
 class QRdrinks : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_drinks)
 
-        val orderPreview = intent.getSerializableExtra("orderPreview") as OrderPreview
+        val orderPreview = intent.getSerializableExtra("order") as OrderWithOrderItem?
         val message = findViewById<TextView>(R.id.QrCodeMessage)
 
-        if (orderPreview.tickets.isNotEmpty()) {
+        if (orderPreview?.includeTickets() == true) {
             message.text =
                 "Mostra questo codice QR al personale all'ingresso: lo scannerizzerà e ti farà entrare!"
         }

@@ -1,0 +1,88 @@
+[
+  {
+    "name": "Negroni",
+    "ingredients": [
+      "Gin",
+      "Campari",
+      "Vermouth",
+      "Fetta di arancia"
+    ]
+  },
+  {
+    "name": "Spritz",
+    "ingredients": [
+      "Aperol",
+      "Prosecco",
+      "Soda",
+      "Fetta di arancia"
+    ]
+  },
+  {
+    "name": "Mojito",
+    "ingredients": [
+      "Rum ",
+      "Foglie di menta",
+      "Lime",
+      "Zucchero",
+      "Soda"
+    ]
+  },
+  {
+    "name": "White Russian",
+    "ingredients": [
+      "Vodka",
+      "Liquore al caffè",
+      "Panna fresca liquida"
+    ]
+  },
+  {
+    "name": "London Mule",
+    "ingredients": [
+      "Gin",
+      "Succo di lime",
+      "Ginger beer",
+      "Fetta di lime"
+    ]
+  },
+  {
+    "name": "White Russian",
+    "ingredients": [
+      "Vodka",
+      "Liquore al caffè",
+      "Panna fresca liquida"
+    ]
+  },
+  {
+    "name": "Whisky sour",
+    "ingredients": [
+      "Bourbon whiskey",
+      "Succo di limone",
+      "sciroppo di zucchero"
+    ]
+  },
+  {
+    "name": "Gin Lemon",
+    "ingredients": [
+      "Gin",
+      "Limonata",
+      "Fetta di limone"
+    ]
+  },
+  {
+    "name": "Gin Tonic",
+    "ingredients": [
+      "Gin",
+      "Acqua tonica",
+      "Fetta di limone"
+    ]
+  },
+  {
+    "name": "Margharita",
+    "ingredients": [
+      "Tequila",
+      "Succo di lime",
+      "Triple sec",
+      "Sale fino"
+    ]
+  }
+]

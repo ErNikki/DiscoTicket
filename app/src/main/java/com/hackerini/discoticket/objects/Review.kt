@@ -2,7 +2,6 @@ package com.hackerini.discoticket.objects
 
 import java.io.Serializable
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 class Review : Serializable {

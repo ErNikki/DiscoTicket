@@ -35,7 +35,6 @@ class DrinkElement : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             drink = it.getSerializable(ARG_PARAM1) as Drink
-
         }
 
 
@@ -79,7 +78,7 @@ class DrinkElement : Fragment() {
         val numberOfDrinkSelected=view.findViewById<TextView>(R.id.drinkElementDrinkQuantity)
         var cartTotal=requireActivity().findViewById<View>(R.id.drinkMenuCartTotal) as TextView
 
-        name= drink?.drinkName.toString()
+        name = drink?.name.toString()
         drinkName.setText(name)
 
         price = drink?.price!!
@@ -87,7 +86,7 @@ class DrinkElement : Fragment() {
 
         ingredients.text=""
         val builder = StringBuilder()
-        drink?.drinkIngredients?.forEach { e ->
+        drink?.ingredients?.forEach { e ->
             builder.append(ingredients.text.toString())
                 .append(e)
                 .append(", ")
