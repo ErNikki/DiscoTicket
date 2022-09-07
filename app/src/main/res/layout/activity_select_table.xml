@@ -95,17 +95,19 @@
 
                 <TextView
                     android:id="@+id/SelectTableActionRecapt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/SelectTableSuccessIcon"
                     app:layout_constraintTop_toBottomOf="@+id/SelectTableLinearLayoutMap" />
 
                 <TextView
                     android:id="@+id/SelectTableRemainRecapt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/SelectTableActionRecapt"
                     app:layout_constraintTop_toBottomOf="@+id/SelectTableActionRecapt" />
 

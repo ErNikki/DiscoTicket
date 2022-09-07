@@ -64,7 +64,7 @@
     "locationType": "Entrambi",
     "musicGenres": [
       "Techno",
-      "EDM"
+      "Elettronica"
     ],
     "name": "Vertigo",
     "rating": 3.7,
@@ -113,7 +113,7 @@
       41.875384794269436,
       12.489646627853247
     ],
-    "locationType": "Aperto",
+    "locationType": "All'aperto",
     "musicGenres": [
       "Reggaeton"
     ],

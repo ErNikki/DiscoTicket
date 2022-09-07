@@ -24,12 +24,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        app:tint="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/SearchResultSearchText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/SearchResultSearchText"
         app:layout_constraintTop_toTopOf="@+id/SearchResultSearchText"
-        app:srcCompat="@android:drawable/ic_dialog_map" />
+        app:srcCompat="@android:drawable/ic_dialog_map"
+        app:tint="#000000" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -60,12 +60,9 @@
         android:id="@+id/chipGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:foregroundGravity="left"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/SearchResultFilterButton"
-        app:layout_constraintTop_toBottomOf="@+id/SearchResultSearchText">
+        app:layout_constraintStart_toStartOf="@+id/SearchResultFilterButton"
+        app:layout_constraintTop_toBottomOf="@+id/SearchResultFilterButton">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/searchResultClubChip"
@@ -84,5 +81,23 @@
             android:text="Eventi" />
 
     </com.google.android.material.chip.ChipGroup>
+
+    <Spinner
+        android:id="@+id/SearchResultOrderSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/SearchResultFilterButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SearchResultFilterButton" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Ordina per:"
+        app:layout_constraintBottom_toBottomOf="@+id/SearchResultOrderSpinner"
+        app:layout_constraintEnd_toStartOf="@+id/SearchResultOrderSpinner"
+        app:layout_constraintTop_toTopOf="@+id/SearchResultOrderSpinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
