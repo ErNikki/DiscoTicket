@@ -1,5 +1,6 @@
 package com.hackerini.discoticket.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.views.ClubMap
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.OrderItem
+import com.hackerini.discoticket.objects.OrderPreview
 import kotlin.math.ceil
 
 class SelectTable : AppCompatActivity() {
@@ -17,7 +20,8 @@ class SelectTable : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_table)
         val club = intent.getSerializableExtra("club") as Club
-        val tableTickets = intent.getIntExtra("tableTicket", 15)
+        val tableTickets = intent.getIntExtra("tableTicket", 0)
+        val simpleTickets = intent.getIntExtra("simpleTicket", 0)
         val isShowMode = intent.getBooleanExtra("showMode", true)
 
         val titleTextView = findViewById<TextView>(R.id.SelectTableClubName)
@@ -31,7 +35,7 @@ class SelectTable : AppCompatActivity() {
         payButton.isEnabled = false
         titleTextView.text = club.name
         addressTextView.text = club.address
-        actionRecapTextView.text = "Stai prenotando per un totale di ${tableTickets} persone"
+        actionRecapTextView.text = "Stai prenotando per un totale di ${tableTickets} persone sedute"
         if (tableTickets > 8)
             remainderOfSeatsTextView.text = "Seleziona più tavoli per avere ${tableTickets} sedute"
         else
@@ -72,13 +76,23 @@ class SelectTable : AppCompatActivity() {
 
         if (isShowMode) {
             payButton.visibility = View.GONE
-            findViewById<TextView>(R.id.SelectTableActionTitle).visibility=View.GONE
-            findViewById<TextView>(R.id.SelectTableExplain).visibility=View.GONE
-            actionRecapTextView.visibility=View.GONE
-            remainderOfSeatsTextView.visibility=View.GONE
-            successIconImageView.visibility=View.GONE
+            actionTitle.visibility = View.GONE
+            findViewById<TextView>(R.id.SelectTableExplain).visibility = View.GONE
+            actionRecapTextView.visibility = View.GONE
+            remainderOfSeatsTextView.visibility = View.GONE
+            successIconImageView.visibility = View.GONE
             clubMap.isShowMode = isShowMode
+        }
 
+        payButton.setOnClickListener {
+            val orderPreview = OrderPreview()
+            val orderItem0 = OrderItem("Ingresso semplice", simpleTickets, club.simpleTicketPrice)
+            val orderItem1 = OrderItem("Ingresso con tavolo", tableTickets, club.tableTicketPrice)
+            orderPreview.tickets.add(orderItem0)
+            orderPreview.tickets.add(orderItem1)
+            val intent = Intent(applicationContext, Payment::class.java)
+            intent.putExtra("OrderPreview", orderPreview)
+            startActivity(intent)
         }
     }
 }

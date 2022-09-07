@@ -11,35 +11,48 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.MainActivity
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.objects.Discount
 import com.hackerini.discoticket.objects.OrderPreview
+import com.hackerini.discoticket.objects.TypeOfDiscount
 
-class Payment : AppCompatActivity() {
+class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+    val spinnerItems = listOf(
+        Discount("Non utilizzare nessuno sconto", 0F, TypeOfDiscount.Nothing),
+        Discount("Un drink gratis", 1F, TypeOfDiscount.FreeDrink),
+        Discount("Sconto del 20%", 0.2F, TypeOfDiscount.Percentage),
+    )    //DOVREBBE ESSERCI UNA FUNZIONE APPOSTA
+
+    var orderPreview: OrderPreview? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
-
-        //Add border to the box containing the purchase list
-        val listBox = findViewById<ScrollView>(R.id.paymentDetails)
-        listBox.addBorder()
+        orderPreview = intent.getSerializableExtra("OrderPreview") as OrderPreview
 
         //Retrieve the items to purchase and populate the list
-        val orderPreview = intent.getSerializableExtra("OrderPreview") as OrderPreview
         val purchaseList = findViewById<LinearLayout>(R.id.paymentList)
-        orderPreview.items.forEach { e ->
-            val listElement = TextView(this)
-            listElement.text = " " + e.quantity.toString() + "x " + e.name + " - " +
-                                String.format("%.2f", e.getTotalAmount()) + "€"
-            listElement.textSize = 21f
-            listElement.addBorder()
-            purchaseList.addView(listElement)
+        orderPreview?.getAllElements()?.forEach { e ->
+            if (e.quantity > 0) {
+                val listElement = TextView(this)
+                listElement.text = " " + e.quantity.toString() + "x " + e.name + " - " +
+                        String.format("%.2f", e.getTotalAmount()) + "€"
+                listElement.textSize = 21f
+                listElement.addBorder()
+                purchaseList.addView(listElement)
+            }
         }
 
         //Create dropdown menu for discounts
         val dropdown = findViewById<Spinner>(R.id.paymentSpinner)
-        val items = listOf("Non utilizzare nessuno sconto", "Un drink gratis", "Sconto del 20%")    //DOVREBBE ESSERCI UNA FUNZIONE APPOSTA
-        val dataAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items)
+        val dataAdapter: ArrayAdapter<String> =
+            ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                spinnerItems.map { e -> e.name })
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)      //Layout style - list view with radio button
         dropdown.adapter = dataAdapter
+        dropdown.onItemSelectedListener = this
+
 
         //Question mark popup
         val questionMark = findViewById<ImageView>(R.id.paymentQuestionMark)
@@ -50,8 +63,9 @@ class Payment : AppCompatActivity() {
         }
 
         //Write the total amount
-        val totalAmount = findViewById<TextView>(R.id.paymentTotal)                         //DOVREBBE AGGIORNARSI CON GLI SCONTI
-        totalAmount.append(String.format("%.2f", orderPreview.getTotalAmount()) + "€")
+        val totalAmount =
+            findViewById<TextView>(R.id.paymentTotal)
+        totalAmount.text = String.format("%.2f", orderPreview?.getTotalAmount()).plus("€")
 
         //Create alert on button press
         val button = findViewById<Button>(R.id.paymentButton)
@@ -59,8 +73,14 @@ class Payment : AppCompatActivity() {
             val alert = AlertDialog.Builder(this).create()
             alert.setCancelable(false)
             alert.setTitle("L'acquisto è andato a buon fine!")
-            alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Torna alla\nhomepage") { dialog, _ -> dialog.dismiss() }
-            alert.setButton(AlertDialog.BUTTON_POSITIVE, "Mostra\ncodice QR") { dialog, _ -> dialog.dismiss() }
+            alert.setButton(
+                AlertDialog.BUTTON_NEGATIVE,
+                "Torna alla\nhomepage"
+            ) { dialog, _ -> dialog.dismiss() }
+            alert.setButton(
+                AlertDialog.BUTTON_POSITIVE,
+                "Mostra\ncodice QR"
+            ) { dialog, _ -> dialog.dismiss() }
             alert.show()
 
             val buttonNegative = alert.getButton(AlertDialog.BUTTON_NEGATIVE)
@@ -79,6 +99,7 @@ class Payment : AppCompatActivity() {
             }
             buttonPositive.setOnClickListener {
                 val intent = Intent(this, QRdrinks::class.java)         //Show QR
+                intent.putExtra("orderPreview", orderPreview)
                 startActivity(intent)
             }
         }
@@ -94,5 +115,59 @@ class Payment : AppCompatActivity() {
             }
         }
         background = drawable
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val totalAmount = findViewById<TextView>(R.id.paymentTotal)
+        val totalAmountNotDiscounted = findViewById<TextView>(R.id.paymentPreTotal)
+        val totalAmountNotDiscountedText = findViewById<TextView>(R.id.paymentPreTotalText)
+        val discount = findViewById<TextView>(R.id.paymentDiscount)
+        val discountText = findViewById<TextView>(R.id.paymentDiscountText)
+        val errorText = findViewById<TextView>(R.id.paymentCouponError)
+
+        val selectedDiscount = spinnerItems[position]
+        totalAmountNotDiscounted.text =
+            String.format("%.2f", orderPreview?.getTotalAmount()).plus("€")
+
+        totalAmountNotDiscounted.visibility = View.GONE
+        totalAmountNotDiscountedText.visibility = View.GONE
+        discountText.visibility = View.GONE
+        discount.visibility = View.GONE
+        totalAmount.text = String.format("%.2f", orderPreview?.getTotalAmount()!!).plus("€")
+
+        if (selectedDiscount.type == TypeOfDiscount.Percentage) {
+            val discountAmount = selectedDiscount.amount * orderPreview?.getTotalAmount()!!
+            discount.text = "-".plus(String.format("%.2f", discountAmount)).plus("€")
+            totalAmount.text =
+                String.format("%.2f", orderPreview?.getTotalAmount()!! - discountAmount)
+                    .plus("€")
+        } else if (selectedDiscount.type == TypeOfDiscount.FreeDrink) {
+            if (orderPreview?.drinks?.isNotEmpty() == true) {
+                val discountAmount =
+                    orderPreview?.drinks?.minBy { e -> e.unitaryPrice }?.unitaryPrice ?: 0f
+                discount.text = "-".plus(String.format("%.2f", discountAmount)).plus("€")
+                totalAmount.text =
+                    String.format("%.2f", orderPreview?.getTotalAmount()!! - discountAmount)
+                        .plus("€")
+            } else {
+                errorText.text = "Copuon non valido per questo ordine"
+                errorText.visibility = View.VISIBLE
+                totalAmount.text = String.format("%.2f", orderPreview?.getTotalAmount()!!).plus("€")
+            }
+        }
+
+        val isSelectionValid =
+            selectedDiscount.type == TypeOfDiscount.Percentage || (selectedDiscount.type == TypeOfDiscount.FreeDrink && (orderPreview?.drinks?.isNotEmpty() == true))
+        if (isSelectionValid) {
+            totalAmountNotDiscounted.visibility = View.VISIBLE
+            totalAmountNotDiscountedText.visibility = View.VISIBLE
+            discountText.visibility = View.VISIBLE
+            discount.visibility = View.VISIBLE
+            errorText.visibility = View.GONE
+        }
+
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 }

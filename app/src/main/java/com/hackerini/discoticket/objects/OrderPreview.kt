@@ -3,18 +3,20 @@ package com.hackerini.discoticket.objects
 import java.io.Serializable
 
 class OrderPreview : Serializable {
-    val items = arrayOf(
-        OrderItem("Mojito", 3, 7.5F),
-        OrderItem("Negroni", 2, 10F),
-        OrderItem("Gin Tonic", 1, 5F),
-        OrderItem("Gin Lemon", 1, 5F),
-        OrderItem("Margarita", 2, 6.5F),
-    )
+    val drinks = ArrayList<OrderItem>()
+    val tickets = ArrayList<OrderItem>()
+
+    fun getAllElements(): List<OrderItem> {
+        return drinks + tickets
+    }
 
     //Return the total amount of the order
     fun getTotalAmount(): Float {
         var amount = 0F
-        items.forEach { item ->
+        drinks.forEach { item ->
+            amount += item.getTotalAmount()
+        }
+        tickets.forEach { item ->
             amount += item.getTotalAmount()
         }
         return amount

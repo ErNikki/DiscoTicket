@@ -8,7 +8,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +18,8 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.views.DayViewContainer
 import com.hackerini.discoticket.fragments.views.MonthViewContainer
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.OrderItem
+import com.hackerini.discoticket.objects.OrderPreview
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -149,13 +150,32 @@ class BuyTicket : AppCompatActivity() {
             intent.putExtra("club", club)
             if (this.amountOfTableTicket > 0) {
                 intent.putExtra("showMode", false)
+                intent.putExtra("simpleTicket", amountOfSimpleTicket)
                 intent.putExtra("tableTicket", amountOfTableTicket)
             } else
                 intent.putExtra("showMode", true)
             startActivity(intent)
         }
         payButton.setOnClickListener {
-            Log.d("BOOK", "MISSING IMPLEMENTATION")
+            if (amountOfTableTicket > 0) {
+                val intent = Intent(this, SelectTable::class.java)
+                intent.putExtra("club", club)
+                intent.putExtra("showMode", false)
+                intent.putExtra("simpleTicket", amountOfSimpleTicket)
+                intent.putExtra("tableTicket", amountOfTableTicket)
+                startActivity(intent)
+            } else {
+                val orderPreview = OrderPreview()
+                val orderItem0 =
+                    OrderItem("Ingresso semplice", amountOfSimpleTicket, club!!.simpleTicketPrice)
+                val orderItem1 =
+                    OrderItem("Ingresso con tavolo", amountOfTableTicket, club!!.tableTicketPrice)
+                orderPreview.tickets.add(orderItem0)
+                orderPreview.tickets.add(orderItem1)
+                val intent = Intent(applicationContext, Payment::class.java)
+                intent.putExtra("OrderPreview", orderPreview)
+                startActivity(intent)
+            }
         }
         simpleTicketCounter.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
@@ -196,20 +216,20 @@ class BuyTicket : AppCompatActivity() {
         val viewTable = findViewById<Button>(R.id.BuyTicketViewTableButton)
         val totalAmountView = findViewById<TextView>(R.id.BuyTicketTotalAmount)
         if (this.amountOfTableTicket > 0) {
-            viewTable.setText("Seleziona tavolo")
-            payButton.visibility = View.GONE
+            viewTable.visibility = View.GONE
+            payButton.text = "Seleziona tavolo"
         } else {
-            viewTable.setText("Vedi tavoli")
-            payButton.visibility = View.VISIBLE
+            viewTable.visibility = View.VISIBLE
+            payButton.text = "Pagamento"
         }
         club?.let {
             val amount =
                 it.simpleTicketPrice * amountOfSimpleTicket + it.tableTicketPrice * amountOfTableTicket
-            totalAmountView.setText(String.format("%.2f", amount) + "€")
+            totalAmountView.text = String.format("%.2f", amount).plus("€")
         }
 
-        if ((amountOfTableTicket > 0 || amountOfSimpleTicket > 0) && selectedDate != null)
-            payButton.isEnabled = true
+        payButton.isEnabled =
+            (amountOfTableTicket > 0 || amountOfSimpleTicket > 0) && selectedDate != null
     }
 
     fun daysOfWeekFromLocale(): Array<DayOfWeek> {

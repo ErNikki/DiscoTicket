@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -12,6 +13,8 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DrinkElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Drink
+import com.hackerini.discoticket.objects.OrderItem
+import com.hackerini.discoticket.objects.OrderPreview
 
 class DrinkMenu : AppCompatActivity() {
 
@@ -28,10 +31,10 @@ class DrinkMenu : AppCompatActivity() {
         val club = intent.getSerializableExtra("club") as Club
         Log.d("TAG", club.name)
 
-        val drinks=club?.drinks
+        val drinks = club.drinks
 
         //var scrollView = findViewById<ScrollView>(R.id.drinkMenuScrollView)
-        val layout= findViewById<LinearLayout>(R.id.drinkMenuLinearLayout)
+        val layout = findViewById<LinearLayout>(R.id.drinkMenuLinearLayout)
 
         val fragmentManager = supportFragmentManager.fragments
         val transaction = supportFragmentManager.beginTransaction()
@@ -40,33 +43,36 @@ class DrinkMenu : AppCompatActivity() {
             transaction.remove(fragment)
         }
 
-        var i=0
-        if (drinks != null) {
-            drinks.forEach { e->
-                val drink= Drink(e)
-                val frame = FrameLayout(this)
-                frame.id=i
-                layout.addView(frame)
-                transaction.add(i,DrinkElement.newInstance(drink),e)
-                i++
-            }
+        var i = 0
+        drinks.forEach { e ->
+            val drink = Drink(e)
+            val frame = FrameLayout(this)
+            frame.id = i
+            layout.addView(frame)
+            transaction.add(i, DrinkElement.newInstance(drink), e)
+            i++
         }
         transaction.commit()
 
-        val checkoutButton=findViewById<Button>(R.id.drinkMenuCheckoutButon)
+        val checkoutButton = findViewById<Button>(R.id.drinkMenuCheckoutButon)
         checkoutButton.setOnClickListener {
-            //manca solo buildare l'order item!!!!!!
-            if (drinks != null) {
-                drinks.forEach { e->
-                    var drinkElement= getSupportFragmentManager().findFragmentByTag(e) as DrinkElement
-                    Log.d("tag",drinkElement.getName())
-                    Log.d("tag", drinkElement.getPrice().toString())
-                    Log.d("tag", drinkElement.getQuantity().toString())
+            val orderPreview = OrderPreview()
+            drinks.forEach { e ->
+                val drinkElement = supportFragmentManager.findFragmentByTag(e) as DrinkElement
+                if (drinkElement.getQuantity() > 0) {
+                    val orderItem = OrderItem(
+                        drinkElement.getName(),
+                        drinkElement.getQuantity(),
+                        drinkElement.getPrice()
+                    )
+                    orderPreview.drinks.add(orderItem)
                 }
             }
 
+            val intent = Intent(applicationContext, Payment::class.java)
+            intent.putExtra("OrderPreview", orderPreview)
+            startActivity(intent)
 
-            //Log.d("tag", )
         }
     }
 }
