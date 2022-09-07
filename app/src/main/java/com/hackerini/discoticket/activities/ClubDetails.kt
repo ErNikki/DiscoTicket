@@ -122,6 +122,7 @@ class ClubDetails : AppCompatActivity() {
             favouriteText.text = "Rimuovi dai preferiti"
         } else {
             favouritesButton?.setImageResource(R.drawable.ic_baseline_favorite_off_24)
+            favouriteText.text = "Aggiungi ai preferiti"
         }
     }
 
