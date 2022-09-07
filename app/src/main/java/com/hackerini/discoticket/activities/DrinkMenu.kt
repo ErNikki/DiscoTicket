@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -12,6 +13,8 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DrinkElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Drink
+import com.hackerini.discoticket.objects.OrderItem
+import com.hackerini.discoticket.objects.OrderPreview
 
 class DrinkMenu : AppCompatActivity() {
 
@@ -53,16 +56,21 @@ class DrinkMenu : AppCompatActivity() {
 
         val checkoutButton = findViewById<Button>(R.id.drinkMenuCheckoutButon)
         checkoutButton.setOnClickListener {
-            //manca solo buildare l'order item!!!!!!
+            val orderPreview = OrderPreview()
             drinks.forEach { e ->
-                var drinkElement = getSupportFragmentManager().findFragmentByTag(e) as DrinkElement
-                Log.d("tag", drinkElement.getName())
-                Log.d("tag", drinkElement.getPrice().toString())
-                Log.d("tag", drinkElement.getQuantity().toString())
+                val drinkElement = supportFragmentManager.findFragmentByTag(e) as DrinkElement
+                val orderItem = OrderItem(
+                    drinkElement.getName(),
+                    drinkElement.getQuantity(),
+                    drinkElement.getPrice()
+                )
+                orderPreview.items.add(orderItem)
             }
 
+            val intent = Intent(applicationContext, Payment::class.java)
+            intent.putExtra("OrderPreview", orderPreview)
+            startActivity(intent)
 
-            //Log.d("tag", )
         }
     }
 }
