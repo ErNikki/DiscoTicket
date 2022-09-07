@@ -77,6 +77,7 @@ class Payment : AppCompatActivity() {
             }
             buttonPositive.setOnClickListener {
                 val intent = Intent(this, QRdrinks::class.java)         //Show QR
+                intent.putExtra("orderPreview", orderPreview)
                 startActivity(intent)
             }
         }

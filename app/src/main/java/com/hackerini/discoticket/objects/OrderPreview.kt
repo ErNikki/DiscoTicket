@@ -4,6 +4,7 @@ import java.io.Serializable
 
 class OrderPreview : Serializable {
     val items = ArrayList<OrderItem>()
+    var isEntranceTicket = false
 
     //Return the total amount of the order
     fun getTotalAmount(): Float {
