@@ -26,6 +26,8 @@ class ClubDetails : AppCompatActivity() {
 
         club = intent.getSerializableExtra("club") as Club
 
+
+
         val clubImage = findViewById<ImageView>(R.id.clubDetailClubImage)
         val clubName = findViewById<TextView>(R.id.clubDetailsClubName)
         val address = findViewById<TextView>(R.id.clubDetailsAddress)
@@ -46,6 +48,7 @@ class ClubDetails : AppCompatActivity() {
         val drinkMenuButton = findViewById<Button>(R.id.clubDetailsDrinkMenuButton) as Button
         drinkMenuButton.setOnClickListener {
             val intent = Intent(this, DrinkMenu::class.java)
+            intent.putExtra("club",club)
             startActivity(intent)
         }
 
