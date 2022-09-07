@@ -22,4 +22,6 @@
     <style name="Theme.DiscoTicket.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.DiscoTicket.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
 </resources>

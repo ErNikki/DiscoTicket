@@ -6,13 +6,146 @@
     android:layout_height="match_parent"
     tools:context=".activities.Payment">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Payment activity goes here"
+    <ScrollView
+        android:id="@+id/paymentScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/paymentText1"
+                android:layout_width="221dp"
+                android:layout_height="47dp"
+                android:gravity="center_vertical"
+                android:text="Dettagli dell'acquisto"
+                android:textSize="22sp" />
+
+            <ScrollView
+                android:id="@+id/paymentDetails"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="#001A3BDF"
+                tools:ignore="SpeakableTextPresentCheck">
+
+                <LinearLayout
+                    android:id="@+id/paymentList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/paymentText2"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:gravity="center_vertical"
+                android:text="Scegli il metodo di pagamento"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/paymentButton1"
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:text="Carta di debito o credito" />
+
+            <Button
+                android:id="@+id/paymentButton2"
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:text="PayPal" />
+
+            <Button
+                android:id="@+id/paymentButton3"
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:text="Google Pay" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/paymentText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="47dp"
+                    android:gravity="center_vertical"
+                    android:text="Seleziona sconto"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:id="@+id/paymentQuestionMark"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:gravity="center"
+                    android:translationX="4dp"
+                    android:translationY="10dp"
+                    app:srcCompat="@drawable/question_mark_icon" />
+
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/paymentSpinner"
+                android:layout_width="384dp"
+                android:layout_height="48dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:cardBackgroundColor="#D5D2D2"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/paymentTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Totale: "
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.053"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/paymentButton"
+                android:layout_width="369dp"
+                android:layout_height="54dp"
+                android:layout_marginBottom="10dp"
+                android:text="Paga e genera codice QR"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SelectTable">
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/SelectTableClubName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Titolo"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/SelectTableClubAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Indirizzo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SelectTableClubName" />
+
+                <Space
+                    android:id="@+id/space2"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:backgroundTintMode="screen"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SelectTableClubAddress" />
+
+                <TextView
+                    android:id="@+id/SelectTableActionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/space2" />
+
+                <TextView
+                    android:id="@+id/SelectTableExplain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Il numero all'interno di ogni tavolo rappresenta il numero massimo di posti a sedere"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SelectTableActionTitle" />
+
+                <LinearLayout
+                    android:id="@+id/SelectTableLinearLayoutMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="700px"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SelectTableExplain">
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/SelectTableSuccessIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/SelectTableRemainRecapt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/SelectTableActionRecapt"
+                    app:srcCompat="@drawable/ic_baseline_close_24" />
+
+                <TextView
+                    android:id="@+id/SelectTableActionRecapt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintStart_toEndOf="@+id/SelectTableSuccessIcon"
+                    app:layout_constraintTop_toBottomOf="@+id/SelectTableLinearLayoutMap" />
+
+                <TextView
+                    android:id="@+id/SelectTableRemainRecapt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintStart_toStartOf="@+id/SelectTableActionRecapt"
+                    app:layout_constraintTop_toBottomOf="@+id/SelectTableActionRecapt" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#BFBFBF"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/SelectTablePayButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pagamento" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

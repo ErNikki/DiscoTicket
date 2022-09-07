@@ -15,12 +15,12 @@
         android:inputType="textPersonName"
         android:selectAllOnFocus="false"
         android:singleLine="true"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/SearchResultOpenMap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/SearchResultOpenMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
