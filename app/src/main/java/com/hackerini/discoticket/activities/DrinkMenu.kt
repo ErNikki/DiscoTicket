@@ -42,7 +42,7 @@ class DrinkMenu : AppCompatActivity() {
             transaction.remove(fragment)
         }
 
-        var i = 0
+        var i = 1
         drinks.forEach { e ->
             val frame = FrameLayout(this)
             frame.id = i

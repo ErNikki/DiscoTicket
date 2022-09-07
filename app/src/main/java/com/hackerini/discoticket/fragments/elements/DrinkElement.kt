@@ -1,7 +1,6 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,7 +78,7 @@ class DrinkElement : Fragment() {
         var cartTotal=requireActivity().findViewById<View>(R.id.drinkMenuCartTotal) as TextView
 
         name = drink?.name.toString()
-        drinkName.setText(name)
+        drinkName.text = name
 
         price = drink?.price!!
         priceText.text = String.format("%.2f", price).plus("€/Drink")
@@ -103,7 +102,6 @@ class DrinkElement : Fragment() {
                 numberOfDrinkSelected.text = counter.toString()
 
                 auxString = cartTotal.text.toString()
-                Log.d("AXU", auxString)
                 totalCartAux = auxString.dropLast(2).replace(",", ".").toFloat()
                 cartTotal.text = String.format("%.2f", totalCartAux - price).plus(" €")
             }
