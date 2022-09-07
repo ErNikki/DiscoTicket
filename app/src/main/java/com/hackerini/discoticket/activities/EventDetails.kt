@@ -46,6 +46,7 @@ class EventDetails : AppCompatActivity() {
 
         findViewById<Button>(R.id.eventDetailsDrinkMenuButton).setOnClickListener {
             val intent = Intent(this, DrinkMenu::class.java)
+            intent.putExtra("club", event.club)
             startActivity(intent)
         }
 
