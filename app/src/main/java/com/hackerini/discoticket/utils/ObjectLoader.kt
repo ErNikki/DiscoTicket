@@ -5,6 +5,7 @@ import android.os.Environment
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Drink
 import com.hackerini.discoticket.objects.Event
 import java.io.FileWriter
 import java.io.IOException
@@ -40,6 +41,16 @@ class ObjectLoader {
                 event.club = clubs.first { club -> club.id == event.clubId }
             }
             return events
+        }
+
+        fun getDrinks(context: Context, club: Club): Array<Drink> {
+            val gson = Gson()
+            val jsonFileString = getJsonDataFromAsset(context, "drinks.json")
+            val listPersonType = object : TypeToken<Array<Drink>>() {}.type
+            val list = gson.fromJson(jsonFileString, listPersonType) as Array<Drink>
+            for (e in list)
+                e.club = club
+            return list
         }
 
         fun generateJson(fileName: String, elements: Array<Serializable>) {

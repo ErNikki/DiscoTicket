@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.views.ClubMap
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Order
 import com.hackerini.discoticket.objects.OrderItem
-import com.hackerini.discoticket.objects.OrderPreview
 import kotlin.math.ceil
 
 class SelectTable : AppCompatActivity() {
@@ -22,6 +22,7 @@ class SelectTable : AppCompatActivity() {
         val club = intent.getSerializableExtra("club") as Club
         val tableTickets = intent.getIntExtra("tableTicket", 0)
         val simpleTickets = intent.getIntExtra("simpleTicket", 0)
+        val selectedDate = intent.getStringExtra("date")
         val isShowMode = intent.getBooleanExtra("showMode", true)
 
         val titleTextView = findViewById<TextView>(R.id.SelectTableClubName)
@@ -49,7 +50,9 @@ class SelectTable : AppCompatActivity() {
 
         val llMap = findViewById<LinearLayout>(R.id.SelectTableLinearLayoutMap)
         val clubMap = ClubMap(this)
+        var selectedTables: List<Int>? = null
         clubMap.setOnTableClickListener { tables ->
+            selectedTables = tables.map { table -> table.tableId }
             val bookedSeats = tables.map { table -> table.numberOfSets }.sum()
             if (bookedSeats >= tableTickets) {
                 //Selection complete
@@ -85,13 +88,16 @@ class SelectTable : AppCompatActivity() {
         }
 
         payButton.setOnClickListener {
-            val orderPreview = OrderPreview()
+            val order = Order()
             val orderItem0 = OrderItem("Ingresso semplice", simpleTickets, club.simpleTicketPrice)
             val orderItem1 = OrderItem("Ingresso con tavolo", tableTickets, club.tableTicketPrice)
-            orderPreview.tickets.add(orderItem0)
-            orderPreview.tickets.add(orderItem1)
+            order.tickets.add(orderItem0)
+            order.tickets.add(orderItem1)
+            order.tableIdsList = selectedTables!!
+            order.date = selectedDate!!
+            order.club = club
             val intent = Intent(applicationContext, Payment::class.java)
-            intent.putExtra("OrderPreview", orderPreview)
+            intent.putExtra("OrderPreview", order)
             startActivity(intent)
         }
     }

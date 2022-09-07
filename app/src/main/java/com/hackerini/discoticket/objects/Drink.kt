@@ -1,33 +1,16 @@
 package com.hackerini.discoticket.objects
 
 import java.io.Serializable
+import java.security.MessageDigest
+import kotlin.math.abs
 
-class Drink(var drinkName: String, var price: Float = (80..111).random() / 10F) : Serializable {
-    //var price=(8..11).random()
-    /*constructor(drinkName:String, price:Int) : this(drinkName){
-        this.price=price
-    }*/
-    companion object {
-        val ingredients = mapOf<String, Array<String>>(
-            "Negroni" to arrayOf("Gin", "Campari", "Vermouth", "Fetta di arancia"),
-            "Spritz" to arrayOf("Aperol", "Prosecco", "Soda", "Fetta di arancia"),
-            "Mojito" to arrayOf("Rum ", "Foglie di menta", "Lime", "Zucchero", "Soda"),
-            "White Russian" to arrayOf("Vodka", "Liquore al caffè", "Panna fresca liquida"),
-            "London Mule" to arrayOf("Gin", "Succo di lime", "Ginger beer", "Fetta di lime"),
-            "Whisky sour" to arrayOf("Bourbon whiskey", "Succo di limone", "sciroppo di zucchero"),
-            "Gin Lemon" to arrayOf("Gin", "Limonata", "Fetta di limone" ),
-            "Gin Tonic" to arrayOf("Gin", "Acqua tonica", "Fetta di limone"),
-            "Margharita" to arrayOf("Tequila", "Succo di lime", "Triple sec", "Sale fino")
-
-        )
-    }
-
-    var drinkIngredients: Array<String>? = arrayOf("")
+class Drink(var name: String, var ingredients: Array<String>) : Serializable {
+    var club: Club? = null
+    var price = 0F
         get() {
-            return ingredients.get(this.drinkName)
+            val md = MessageDigest.getInstance("MD5")
+            val magicNumber = md.digest((name + club?.name + club?.id).toByteArray()).sum()
+            val prices = (80..120 step 5).toList()
+            return prices[abs(magicNumber % prices.size)] / 10F
         }
-
-
-
-
 }

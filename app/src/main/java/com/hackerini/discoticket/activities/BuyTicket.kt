@@ -8,6 +8,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -18,8 +19,8 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.views.DayViewContainer
 import com.hackerini.discoticket.fragments.views.MonthViewContainer
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Order
 import com.hackerini.discoticket.objects.OrderItem
-import com.hackerini.discoticket.objects.OrderPreview
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -163,17 +164,21 @@ class BuyTicket : AppCompatActivity() {
                 intent.putExtra("showMode", false)
                 intent.putExtra("simpleTicket", amountOfSimpleTicket)
                 intent.putExtra("tableTicket", amountOfTableTicket)
+                intent.putExtra("date", selectedDate?.date.toString())
                 startActivity(intent)
             } else {
-                val orderPreview = OrderPreview()
+                val order = Order()
                 val orderItem0 =
                     OrderItem("Ingresso semplice", amountOfSimpleTicket, club!!.simpleTicketPrice)
                 val orderItem1 =
                     OrderItem("Ingresso con tavolo", amountOfTableTicket, club!!.tableTicketPrice)
-                orderPreview.tickets.add(orderItem0)
-                orderPreview.tickets.add(orderItem1)
+                order.tickets.add(orderItem0)
+                order.tickets.add(orderItem1)
+                order.date = selectedDate?.date.toString()
+                order.club = club
+                Log.d("CLUB", club?.id.toString())
                 val intent = Intent(applicationContext, Payment::class.java)
-                intent.putExtra("OrderPreview", orderPreview)
+                intent.putExtra("OrderPreview", order)
                 startActivity(intent)
             }
         }

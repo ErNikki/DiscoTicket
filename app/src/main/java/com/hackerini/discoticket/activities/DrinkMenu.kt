@@ -12,12 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DrinkElement
 import com.hackerini.discoticket.objects.Club
-import com.hackerini.discoticket.objects.Drink
+import com.hackerini.discoticket.objects.ItemType
+import com.hackerini.discoticket.objects.Order
 import com.hackerini.discoticket.objects.OrderItem
-import com.hackerini.discoticket.objects.OrderPreview
 
 class DrinkMenu : AppCompatActivity() {
-
 
 
     @SuppressLint("ResourceType")
@@ -25,13 +24,13 @@ class DrinkMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drink_menu)
 
-        val totalCart=findViewById<TextView>(R.id.drinkMenuCartTotal)
+        val totalCart = findViewById<TextView>(R.id.drinkMenuCartTotal)
         totalCart.setText(0.toString().plus(" €"))
 
         val club = intent.getSerializableExtra("club") as Club
         Log.d("TAG", club.name)
 
-        val drinks = club.drinks
+        val drinks = club.getClubDrinks(this)
 
         //var scrollView = findViewById<ScrollView>(R.id.drinkMenuScrollView)
         val layout = findViewById<LinearLayout>(R.id.drinkMenuLinearLayout)
@@ -43,34 +42,37 @@ class DrinkMenu : AppCompatActivity() {
             transaction.remove(fragment)
         }
 
-        var i = 0
+        var i = 1
         drinks.forEach { e ->
-            val drink = Drink(e)
             val frame = FrameLayout(this)
             frame.id = i
             layout.addView(frame)
-            transaction.add(i, DrinkElement.newInstance(drink), e)
+            transaction.add(i, DrinkElement.newInstance(e), e.name)
             i++
         }
         transaction.commit()
 
         val checkoutButton = findViewById<Button>(R.id.drinkMenuCheckoutButon)
         checkoutButton.setOnClickListener {
-            val orderPreview = OrderPreview()
+            val order = Order()
+            order.club = club
             drinks.forEach { e ->
-                val drinkElement = supportFragmentManager.findFragmentByTag(e) as DrinkElement
+                val drinkElement = supportFragmentManager.findFragmentByTag(e.name) as DrinkElement
                 if (drinkElement.getQuantity() > 0) {
                     val orderItem = OrderItem(
+                        0,
                         drinkElement.getName(),
                         drinkElement.getQuantity(),
-                        drinkElement.getPrice()
+                        drinkElement.getPrice(),
+                        ItemType.Drink,
+                        0
                     )
-                    orderPreview.drinks.add(orderItem)
+                    order.drinks.add(orderItem)
                 }
             }
 
             val intent = Intent(applicationContext, Payment::class.java)
-            intent.putExtra("OrderPreview", orderPreview)
+            intent.putExtra("OrderPreview", order)
             startActivity(intent)
 
         }

@@ -1,15 +1,12 @@
 package com.hackerini.discoticket.ui.home
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.activities.ClubDetails
 import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ObjectLoader

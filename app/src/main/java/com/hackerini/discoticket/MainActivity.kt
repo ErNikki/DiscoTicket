@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, Login::class.java)
             startActivity(i)
         }
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

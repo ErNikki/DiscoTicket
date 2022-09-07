@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import com.hackerini.discoticket.room.FavoriteClub
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.ObjectLoader
 import java.io.Serializable
 
 class Club : Serializable {
@@ -66,16 +67,9 @@ class Club : Serializable {
     }
 
 
-    var drinks = arrayOf("")
-        get(){
-            val listOfDrink= arrayOf("Negroni", "Spritz", "Mojito", "White Russian",
-                "London Mule", "Whisky sour",
-                "Gin Lemon","Gin Tonic", "Margharita"
-            )
-            listOfDrink.shuffle()
-            field = listOfDrink.take((4..7).random()).toTypedArray()
-            return field
-        }
+    fun getClubDrinks(context: Context): Array<Drink> {
+        return ObjectLoader.getDrinks(context, this)
+    }
 
     companion object {
         fun getLabelColorFromName(labelName: String): Int {
