@@ -1,28 +1,16 @@
 package com.hackerini.discoticket.activities
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toFile
 import com.google.android.material.chip.Chip
-import com.google.gson.Gson
-import com.google.gson.stream.JsonReader
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.Filter
-import com.hackerini.discoticket.objects.Club
-import com.hackerini.discoticket.objects.Event
 import com.hackerini.discoticket.utils.ObjectLoader
-import java.io.File
-import java.io.FileReader
-import java.io.InputStream
-import java.util.*
 
 
 enum class ElementToShow {
@@ -39,12 +27,18 @@ class SearchResult : AppCompatActivity() {
 
         val filterButton = findViewById<Button>(R.id.SearchResultFilterButton)
         val openMapButton = findViewById<ImageButton>(R.id.SearchResultOpenMap)
+        val locationSpinner = findViewById<Spinner>(R.id.SearchResultOrderSpinner)
+
+        val languages = resources.getStringArray(R.array.orderBy)
+        val adapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, languages)
+        locationSpinner.adapter = adapter
 
         //Update the search text with the one from the previous activity
         val searchText = findViewById<EditText>(R.id.SearchResultSearchText)
         val queryString = intent.getStringExtra("query")
         searchText.setText(queryString)
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         filterButton.setOnClickListener {
             //Instead to pass the String ciao, you will pass and object with the current search criteria
