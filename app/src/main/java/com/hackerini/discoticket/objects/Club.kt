@@ -80,7 +80,7 @@ class Club : Serializable {
     companion object {
         fun getLabelColorFromName(labelName: String): Int {
             return when (labelName) {
-                "EDM" -> Color.argb(180, 255, 128, 128)
+                "Elettronica" -> Color.argb(180, 255, 128, 128)
                 "Aperto" -> Color.argb(255, 200, 200, 200)
                 "Techno" -> Color.argb(180, 80, 80, 160)
                 "Reggaeton" -> Color.argb(180, 200, 80, 200)
