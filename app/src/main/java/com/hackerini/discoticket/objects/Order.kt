@@ -22,6 +22,9 @@ data class Order(
     @ColumnInfo(name = "clubId")
     var clubId: Int = -1
 
+    @ColumnInfo(name = "discount")
+    var discount: Float = 0F
+
     @Ignore
     var tableIdsList: List<Int> = ArrayList()
 
@@ -67,7 +70,7 @@ data class OrderWithOrderItem(
     val items: List<OrderItem>
 ) : Serializable {
     fun getTotalAmount(): Float {
-        return items.map { e -> e.quantity * e.unitaryPrice }.sum()
+        return items.map { e -> e.quantity * e.unitaryPrice }.sum() - order.discount
     }
 
     fun includeTickets(): Boolean {

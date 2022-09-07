@@ -163,6 +163,7 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         if (selectedDiscount.type == TypeOfDiscount.Percentage) {
             val discountAmount = selectedDiscount.amount * order?.getTotalAmount()!!
+            order?.discount = discountAmount
             discount.text = "-".plus(String.format("%.2f", discountAmount)).plus("€")
             totalAmount.text =
                 String.format("%.2f", order?.getTotalAmount()!! - discountAmount)
@@ -171,11 +172,13 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             if (order?.drinks?.isNotEmpty() == true) {
                 val discountAmount =
                     order?.drinks?.minBy { e -> e.unitaryPrice }?.unitaryPrice ?: 0f
+                order?.discount = discountAmount
                 discount.text = "-".plus(String.format("%.2f", discountAmount)).plus("€")
                 totalAmount.text =
                     String.format("%.2f", order?.getTotalAmount()!! - discountAmount)
                         .plus("€")
             } else {
+                order?.discount = 0F
                 errorText.text = "Copuon non valido per questo ordine"
                 errorText.visibility = View.VISIBLE
                 totalAmount.text = String.format("%.2f", order?.getTotalAmount()!!).plus("€")
