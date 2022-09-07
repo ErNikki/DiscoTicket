@@ -83,7 +83,7 @@ class DrinkElement : Fragment() {
         drinkName.setText(name)
 
         price = drink?.price!!
-        priceText.text = String.format("%.2f", price).plus(" €")
+        priceText.text = String.format("%.2f", price).plus("€/Drink")
 
         ingredients.text=""
         val builder = StringBuilder()
