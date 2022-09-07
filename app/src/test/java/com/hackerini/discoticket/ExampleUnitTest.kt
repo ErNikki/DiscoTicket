@@ -14,9 +14,9 @@ class ExampleUnitTest {
     @Test
     fun OrderPreviewIsCorrect() {
         val orderPreview = OrderPreview()
-        orderPreview.items.add(OrderItem("a", 2, 5.5F))
-        orderPreview.items.add(OrderItem("a", 1, 7.5F))
-        orderPreview.items.add(OrderItem("a", 3, 5F))
+        orderPreview.drinks.add(OrderItem("a", 2, 5.5F))
+        orderPreview.drinks.add(OrderItem("a", 1, 7.5F))
+        orderPreview.tickets.add(OrderItem("a", 3, 5F))
 
         assertEquals(orderPreview.getTotalAmount(), 33.5F)
     }
