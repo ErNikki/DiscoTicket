@@ -76,22 +76,20 @@ class SelectTable : AppCompatActivity() {
 
         if (isShowMode) {
             payButton.visibility = View.GONE
-            findViewById<TextView>(R.id.SelectTableActionTitle).visibility = View.GONE
+            actionTitle.visibility = View.GONE
             findViewById<TextView>(R.id.SelectTableExplain).visibility = View.GONE
             actionRecapTextView.visibility = View.GONE
             remainderOfSeatsTextView.visibility = View.GONE
             successIconImageView.visibility = View.GONE
             clubMap.isShowMode = isShowMode
-
         }
 
         payButton.setOnClickListener {
             val orderPreview = OrderPreview()
             val orderItem0 = OrderItem("Ingresso semplice", simpleTickets, club.simpleTicketPrice)
             val orderItem1 = OrderItem("Ingresso con tavolo", tableTickets, club.tableTicketPrice)
-            orderPreview.isEntranceTicket = true
-            orderPreview.items.add(orderItem0)
-            orderPreview.items.add(orderItem1)
+            orderPreview.tickets.add(orderItem0)
+            orderPreview.tickets.add(orderItem1)
             val intent = Intent(applicationContext, Payment::class.java)
             intent.putExtra("OrderPreview", orderPreview)
             startActivity(intent)

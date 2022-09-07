@@ -209,8 +209,19 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/paymentText3"
+                    app:layout_constraintTop_toBottomOf="@+id/paymentCouponError"
                     tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/paymentCouponError"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Copuon non valido"
+                    android:textColor="#BF0000"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/paymentText3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -220,7 +231,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="102dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         app:cardBackgroundColor="#D5D2D2"
@@ -231,28 +242,83 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/paymentPreTotalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Totale non scontato:"
+                android:textSize="12sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/paymentTotalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Totale: "
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/paymentDiscountText"
+                app:layout_constraintTop_toBottomOf="@+id/paymentDiscountText" />
+
+            <TextView
+                android:id="@+id/paymentDiscountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sconto:"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/paymentPreTotalText"
+                app:layout_constraintTop_toBottomOf="@+id/paymentPreTotalText" />
+
+            <Button
+                android:id="@+id/paymentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Paga e genera codice QR"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paymentTotalText" />
 
             <TextView
                 android:id="@+id/paymentTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Totale: "
-                android:textSize="25sp"
+                android:text="TextView"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/paymentTotalText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.053"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/paymentTotalText"
+                app:layout_constraintTop_toTopOf="@+id/paymentTotalText" />
 
-            <Button
-                android:id="@+id/paymentButton"
-                android:layout_width="369dp"
-                android:layout_height="54dp"
-                android:layout_marginBottom="10dp"
-                android:text="Paga e genera codice QR"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <TextView
+                android:id="@+id/paymentDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/paymentDiscountText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/paymentDiscountText"
+                app:layout_constraintTop_toTopOf="@+id/paymentDiscountText" />
+
+            <TextView
+                android:id="@+id/paymentPreTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/paymentPreTotalText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/paymentPreTotalText"
+                app:layout_constraintTop_toTopOf="@+id/paymentPreTotalText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

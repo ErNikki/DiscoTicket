@@ -59,12 +59,14 @@ class DrinkMenu : AppCompatActivity() {
             val orderPreview = OrderPreview()
             drinks.forEach { e ->
                 val drinkElement = supportFragmentManager.findFragmentByTag(e) as DrinkElement
-                val orderItem = OrderItem(
-                    drinkElement.getName(),
-                    drinkElement.getQuantity(),
-                    drinkElement.getPrice()
-                )
-                orderPreview.items.add(orderItem)
+                if (drinkElement.getQuantity() > 0) {
+                    val orderItem = OrderItem(
+                        drinkElement.getName(),
+                        drinkElement.getQuantity(),
+                        drinkElement.getPrice()
+                    )
+                    orderPreview.drinks.add(orderItem)
+                }
             }
 
             val intent = Intent(applicationContext, Payment::class.java)

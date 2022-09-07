@@ -17,7 +17,7 @@ class QRdrinks : AppCompatActivity() {
         val orderPreview = intent.getSerializableExtra("orderPreview") as OrderPreview
         val message = findViewById<TextView>(R.id.QrCodeMessage)
 
-        if (orderPreview.isEntranceTicket) {
+        if (orderPreview.tickets.isNotEmpty()) {
             message.text =
                 "Mostra questo codice QR al personale all'ingresso: lo scannerizzerà e ti farà entrare!"
         }
