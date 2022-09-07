@@ -77,6 +77,10 @@ data class OrderWithOrderItem(
         return items.any { item -> item.type == ItemType.Ticket }
     }
 
+    fun getTotalQuantity(): Int {
+        return items.sumOf { item -> item.quantity }
+    }
+
     fun includeDrinks(): Boolean {
         return !includeTickets()
     }

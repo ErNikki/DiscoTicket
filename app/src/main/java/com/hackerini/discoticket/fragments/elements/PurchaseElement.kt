@@ -53,17 +53,17 @@ class PurchaseElement : Fragment() {
         amount.text = String.format("%.2f", order?.getTotalAmount()).plus("€")
 
         if (order?.includeTickets() == true) {
-            title.text = "${order?.items?.size} biglietti per ${club.name}"
+            title.text = "${order?.getTotalQuantity()} biglietti per ${club.name}"
             date.text =
                 "Per il ".plus(order?.order?.date?.split("-")?.reversed()?.joinToString("-"))
+            image.setImageResource(R.drawable.ic_ticket)
         } else {
             val calendar = Calendar.getInstance()
             calendar.timeInMillis = order!!.order.createdAt
             val dataFormatter = SimpleDateFormat("dd/MM/yyyy")
             date.text = dataFormatter.format(calendar.time)
 
-            title.text = "${order?.items?.size} drink al ${club.name}"
-            image.setImageResource(R.drawable.ic_ticket)
+            title.text = "${order?.getTotalQuantity()} drink al ${club.name}"
 
         }
 
