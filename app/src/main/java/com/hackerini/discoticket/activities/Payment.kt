@@ -18,20 +18,18 @@ class Payment : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
-        //Add border to the box containing the purchase list
-        val listBox = findViewById<ScrollView>(R.id.paymentDetails)
-        listBox.addBorder()
-
         //Retrieve the items to purchase and populate the list
         val orderPreview = intent.getSerializableExtra("OrderPreview") as OrderPreview
         val purchaseList = findViewById<LinearLayout>(R.id.paymentList)
         orderPreview.items.forEach { e ->
-            val listElement = TextView(this)
-            listElement.text = " " + e.quantity.toString() + "x " + e.name + " - " +
-                                String.format("%.2f", e.getTotalAmount()) + "€"
-            listElement.textSize = 21f
-            listElement.addBorder()
-            purchaseList.addView(listElement)
+            if (e.quantity > 0) {
+                val listElement = TextView(this)
+                listElement.text = " " + e.quantity.toString() + "x " + e.name + " - " +
+                        String.format("%.2f", e.getTotalAmount()) + "€"
+                listElement.textSize = 21f
+                listElement.addBorder()
+                purchaseList.addView(listElement)
+            }
         }
 
         //Create dropdown menu for discounts
