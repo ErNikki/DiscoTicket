@@ -18,6 +18,8 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.SearchResult.Companion.getElementToShow
 import com.hackerini.discoticket.fragments.views.Filter
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.ElementToShow
+import com.hackerini.discoticket.objects.FilterCriteria
 import com.hackerini.discoticket.utils.ObjectLoader
 import com.microsoft.maps.*
 
@@ -88,7 +90,8 @@ class SearchByMap : AppCompatActivity() {
         }
         findViewById<Button>(R.id.SearchResultMapFilterButton).setOnClickListener {
             //Instead to pass the String ciao, you will pass and object with the current search criteria
-            val filterFragment = Filter.newInstance("ciao")
+            val filterCriteria = FilterCriteria()
+            val filterFragment = Filter.newInstance(filterCriteria)
             filterFragment.show(supportFragmentManager, "prova")
         }
         loadContent(ElementToShow.ALL)
