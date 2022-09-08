@@ -38,14 +38,15 @@ class HomeFragment : Fragment() {
 
         val clubs = ObjectLoader.getClubs(requireContext())
         var transaction = parentFragmentManager.beginTransaction()
-        clubs.forEach { club ->
-            transaction.add(R.id.HomeNearYouLinearLayout,HomePageDiscoElement.newInstance(club))
-            transaction.add(R.id.HomeLastViewedLinearLayout,HomePageDiscoElement.newInstance(club))
+        clubs.sortBy { club -> club.distanceFromYou }
+        clubs.take(5).forEach { club ->
+            transaction.add(R.id.HomeNearYouLinearLayout, HomePageDiscoElement.newInstance(club))
+            transaction.add(R.id.HomeLastViewedLinearLayout, HomePageDiscoElement.newInstance(club))
         }
 
         val events = ObjectLoader.getEvents(requireContext())
-        events.sortBy { event->event.date.time }
-        events.forEach { event ->
+        events.sortBy { event -> event.date.time }
+        events.take(5).forEach { event ->
             transaction.add(R.id.HomeNextEventLinearLayout, HomePageEventElement.newInstance(event))
         }
 
