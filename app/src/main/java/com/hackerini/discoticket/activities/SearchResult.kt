@@ -2,6 +2,8 @@ package com.hackerini.discoticket.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
@@ -15,7 +17,7 @@ import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.utils.ObjectLoader
 import java.util.*
 
-class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, TextWatcher {
     private var filterCriteria = FilterCriteria()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,7 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val filterButton = findViewById<Button>(R.id.SearchResultFilterButton)
         val openMapButton = findViewById<ImageButton>(R.id.SearchResultOpenMap)
         val locationSpinner = findViewById<Spinner>(R.id.SearchResultOrderSpinner)
+        val queryEditText = findViewById<EditText>(R.id.SearchResultSearchText)
 
         val languages = resources.getStringArray(R.array.orderBy)
         val adapter =
@@ -39,7 +42,6 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         filterButton.setOnClickListener {
-            //Instead to pass the String ciao, you will pass and object with the current search criteria
             val filterFragment = Filter.newInstance(filterCriteria)
             filterFragment.onOkClicked = { a ->
                 this.filterCriteria = a
@@ -61,6 +63,7 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 getElementToShow(discoChip.isChecked, eventChip.isChecked)
             loadContent()
         }
+        searchText.addTextChangedListener(this)
         filterCriteria.elementToShow = ElementToShow.ALL
         loadContent()
 
@@ -100,7 +103,9 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val elementToShow = filterCriteria.elementToShow
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
             for (e in clubList) {
-                if (query?.isNotBlank() == true && e.name.contains(query, true)) {
+                if (query?.isBlank() == true)
+                    elements.add(e)
+                else if (query?.isNotBlank() == true && e.name.contains(query, true)) {
                     elements.add(e)
                 }
             }
@@ -108,7 +113,9 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
             for (e in events) {
-                if (query?.isNotBlank() == true && e.name.contains(query, true)) {
+                if (query?.isBlank() == true)
+                    elements.add(e)
+                else if (query?.isNotBlank() == true && e.name.contains(query, true)) {
                     elements.add(e)
                 }
             }
@@ -149,7 +156,6 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 else -> true
             }
         }
-
 
         //Sorting createria
         if (filterCriteria.orderCriteria == OrderCriteria.NameAZ) {
@@ -192,6 +198,17 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        filterCriteria.query = s.toString()
+        loadContent()
+    }
+
+    override fun afterTextChanged(s: Editable?) {
     }
 
 
