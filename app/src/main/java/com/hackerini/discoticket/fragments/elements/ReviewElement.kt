@@ -8,9 +8,12 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.Review
-import com.squareup.picasso.Picasso
+import com.hackerini.discoticket.objects.User
+import java.lang.Math.abs
+import java.security.MessageDigest
 
 private const val ARG_PARAM1 = "param1"
 
@@ -45,8 +48,29 @@ class ReviewElement : Fragment() {
         reviewDate.text = review?.date
         reviewContent.text = review?.description
         reviewRatingBar.rating = review?.rating!!.toFloat()
-        Picasso.get().load(review?.user?.imageProfileUrl).resize(100, 100).into(reviewerImage)
 
+        val image = AvatarGenerator.AvatarBuilder(requireContext())
+            .setLabel(review!!.user.name)
+            .setAvatarSize(100)
+            .setTextSize(30)
+            .toSquare()
+            .toCircle()
+            .setBackgroundColor(getRandomColor(review!!.user))
+            .build()
+        reviewerImage.setImageDrawable(image)
+    }
+
+    fun getRandomColor(user: User): Int {
+        val list = arrayOf(
+            0xfff44336, 0xffe91e63, 0xff9c27b0, 0xff673ab7,
+            0xff3f51b5, 0xff2196f3, 0xff03a9f4, 0xff00bcd4,
+            0xff009688, 0xff4caf50, 0xff8bc34a, 0xffcddc39,
+            0xffffeb3b, 0xffffc107, 0xffff9800, 0xffff5722,
+            0xff795548, 0xff9e9e9e, 0xff607d8b, 0xff333333
+        )
+        val md = MessageDigest.getInstance("MD5")
+        val number = md.digest((user.name + user.surname).toByteArray()).sum()
+        return list[abs(number) % list.size - 1].toInt()
     }
 
     companion object {
