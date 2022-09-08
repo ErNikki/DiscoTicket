@@ -2,6 +2,7 @@ package com.hackerini.discoticket.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -10,17 +11,13 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.Filter
+import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.utils.ObjectLoader
+import java.util.*
 
+class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+    private var filterCriteria = FilterCriteria()
 
-enum class ElementToShow {
-    ALL,
-    CLUBS,
-    EVENTS,
-    NONE
-}
-
-class SearchResult : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
@@ -33,16 +30,21 @@ class SearchResult : AppCompatActivity() {
         val adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, languages)
         locationSpinner.adapter = adapter
+        locationSpinner.onItemSelectedListener = this
 
         //Update the search text with the one from the previous activity
         val searchText = findViewById<EditText>(R.id.SearchResultSearchText)
-        val queryString = intent.getStringExtra("query")
-        searchText.setText(queryString)
+        filterCriteria.query = intent.getStringExtra("query")
+        searchText.setText(filterCriteria.query)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         filterButton.setOnClickListener {
             //Instead to pass the String ciao, you will pass and object with the current search criteria
-            val filterFragment = Filter.newInstance("ciao")
+            val filterFragment = Filter.newInstance(filterCriteria)
+            filterFragment.onOkClicked = { a ->
+                this.filterCriteria = a
+                loadContent()
+            }
             filterFragment.show(supportFragmentManager, "prova")
         }
 
@@ -50,14 +52,17 @@ class SearchResult : AppCompatActivity() {
         val eventChip = findViewById<Chip>(R.id.searchResultEventChip)
 
         discoChip.setOnCheckedChangeListener { _, _ ->
-            val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
-            loadContent(elementToShow)
+            filterCriteria.elementToShow =
+                getElementToShow(discoChip.isChecked, eventChip.isChecked)
+            loadContent()
         }
         eventChip.setOnCheckedChangeListener { _, _ ->
-            val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
-            loadContent(elementToShow)
+            filterCriteria.elementToShow =
+                getElementToShow(discoChip.isChecked, eventChip.isChecked)
+            loadContent()
         }
-        loadContent(ElementToShow.ALL)
+        filterCriteria.elementToShow = ElementToShow.ALL
+        loadContent()
 
         openMapButton.setOnClickListener {
             startActivity(Intent(this, SearchByMap::class.java))
@@ -77,9 +82,9 @@ class SearchResult : AppCompatActivity() {
         }
     }
 
-    private fun loadContent(elementToShow: ElementToShow) {
+    private fun loadContent() {
         val clubList = ObjectLoader.getClubs(applicationContext)
-
+        val events = ObjectLoader.getEvents(applicationContext)
 
         val fragments = supportFragmentManager.fragments
         val ft = supportFragmentManager.beginTransaction()
@@ -88,19 +93,105 @@ class SearchResult : AppCompatActivity() {
             ft.remove(fragment)
         }
 
+        var elements = LinkedList<Any>()
+
+        //Filter by club or event
+        val query = filterCriteria.query
+        val elementToShow = filterCriteria.elementToShow
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
             for (e in clubList) {
-                ft.add(R.id.searchResultLinearLayout, DiscoElement.newInstance(e))
+                if (query?.isNotBlank() == true && e.name.contains(query, true)) {
+                    elements.add(e)
+                }
             }
         }
 
-        val event = ObjectLoader.getEvents(applicationContext)
-
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
-            ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(event[0]))
-            ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(event[1]))
+            for (e in events) {
+                if (query?.isNotBlank() == true && e.name.contains(query, true)) {
+                    elements.add(e)
+                }
+            }
+        }
+
+        //Filter by music
+        if (filterCriteria.genres.isNotEmpty()) {
+            elements.retainAll { item ->
+                if (item is Club) item.musicGenres.any { s -> filterCriteria.genres.contains(s) }
+                else (item as Event).musicGenres.any { s -> filterCriteria.genres.contains(s) }
+            }
+        }
+
+        //Filter by distance
+        elements.retainAll { item ->
+            if (item is Club) item.distanceFromYou < filterCriteria.maxDistance
+            else (item as Event).club!!.distanceFromYou < filterCriteria.maxDistance
+        }
+
+        //Filter by price range
+        elements.retainAll { item ->
+            val club = if (item is Club) item else (item as Event).club
+            filterCriteria.priceRange.first < club!!.simpleTicketPrice && club.simpleTicketPrice < filterCriteria.priceRange.second
+        }
+
+        //Filter by location type range
+        elements.retainAll { item ->
+            val club = if (item is Club) item else (item as Event).club
+            when (filterCriteria.locationType) {
+                LocationType.Outdoor -> club!!.locationType.contains(
+                    "aperto",
+                    ignoreCase = true
+                ) || club.locationType.contains("entrambi", ignoreCase = true)
+                LocationType.Indoor -> club!!.locationType.contains(
+                    "chiuso",
+                    ignoreCase = true
+                ) || club.locationType.contains("entrambi", ignoreCase = true)
+                else -> true
+            }
+        }
+
+
+        //Sorting createria
+        if (filterCriteria.orderCriteria == OrderCriteria.NameAZ) {
+            elements.sortBy { item ->
+                if (item is Club)
+                    item.name
+                else
+                    (item as Event).name
+            }
+        } else if (filterCriteria.orderCriteria == OrderCriteria.NameZA) {
+            elements.sortByDescending { item ->
+                if (item is Club)
+                    item.name
+                else
+                    (item as Event).name
+            }
+        } else if (filterCriteria.orderCriteria == OrderCriteria.Distance09) {
+            elements.sortBy { item ->
+                if (item is Club)
+                    item.distanceFromYou
+                else
+                    (item as Event).club!!.distanceFromYou
+            }
+        }
+
+
+        elements.forEach { item ->
+            if (item is Club)
+                ft.add(R.id.searchResultLinearLayout, DiscoElement.newInstance(item))
+            else if (item is Event)
+                ft.add(R.id.searchResultLinearLayout, EventElement.newInstance(item))
+
         }
         ft.commitNow()
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        filterCriteria.orderCriteria = OrderCriteria.values()[position]
+        loadContent()
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
 

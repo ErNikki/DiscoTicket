@@ -6,8 +6,8 @@
 
     <string-array name="LocationType">
         <item>Tutto</item>
-        <item>Interno</item>
-        <item>Esterno</item>
+        <item>Al chiuso</item>
+        <item>All\'Aperto</item>
     </string-array>
 
     <string-array name="genres">
@@ -15,6 +15,7 @@
         <item>Techno</item>
         <item>Rock</item>
         <item>90s</item>
+        <item>Reggaeton</item>
     </string-array>
 
     <string-array name="orderBy">
@@ -22,6 +23,5 @@
         <item>Nome A-Z</item>
         <item>Nome Z-A</item>
         <item>Distanza 0-9</item>
-        <item>Distanza 9-0</item>
     </string-array>
 </resources>

@@ -6,21 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.objects.FilterCriteria
+import com.hackerini.discoticket.objects.LocationType
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 
-class Filter : DialogFragment() {
-    private var param1: String? = null
+class Filter : DialogFragment(), CompoundButton.OnCheckedChangeListener,
+    AdapterView.OnItemSelectedListener {
+    private var filterCriteria: FilterCriteria? = null
+    private var originalFilterCriteria: FilterCriteria? = null
+    var onOkClicked: ((FilterCriteria) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            filterCriteria = it.getSerializable(ARG_PARAM1) as FilterCriteria
         }
+        originalFilterCriteria = filterCriteria?.copy()
     }
 
     override fun onCreateView(
@@ -33,10 +38,10 @@ class Filter : DialogFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String) =
+        fun newInstance(filterCriteria: FilterCriteria) =
             Filter().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
+                    putSerializable(ARG_PARAM1, filterCriteria)
                 }
             }
     }
@@ -50,29 +55,64 @@ class Filter : DialogFragment() {
         val genresLinearLayout = view.findViewById<LinearLayout>(R.id.filterGenreLinearLayout)
         val okButton = view.findViewById<Button>(R.id.filterOkButton)
         val cancelButton = view.findViewById<Button>(R.id.filterCancelButton)
+        val priceSlider = view.findViewById<RangeSlider>(R.id.filterPriceRange)
 
         val languages = resources.getStringArray(R.array.LocationType)
         val adapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, languages)
         locationSpinner.adapter = adapter
+        locationSpinner.onItemSelectedListener = this
+        locationSpinner.setSelection(filterCriteria?.locationType!!.ordinal)
+
+        distanceRange.value =
+            filterCriteria!!.maxDistance.toFloat().coerceIn(0F, distanceRange.valueTo)
+
+        priceSlider.values = arrayListOf(
+            filterCriteria!!.priceRange.first.toFloat().coerceAtLeast(0f),
+            filterCriteria!!.priceRange.second.toFloat().coerceAtMost(priceSlider.valueTo)
+        )
 
         distanceRange.addOnChangeListener { slider, value, fromUser ->
-            distanceText.setText(value.toInt().toString() + " Km")
+            filterCriteria?.maxDistance = value.toInt()
+            distanceText.text = value.toInt().toString() + " Km"
+        }
+        priceSlider.addOnChangeListener { slider, value, fromUser ->
+            filterCriteria?.priceRange =
+                Pair(slider.values.first().toInt(), slider.values[1].toInt())
         }
 
         val genres = resources.getStringArray(R.array.genres)
         genres.forEach {
             val checkbox = CheckBox(requireContext())
-            checkbox.setText(it)
+            checkbox.text = it
+            checkbox.tag = it
+            checkbox.isChecked = filterCriteria?.genres?.find { s -> s == it } != null
+            checkbox.setOnCheckedChangeListener(this)
             genresLinearLayout.addView(checkbox)
         }
 
         okButton.setOnClickListener {
             this.dismiss()
+            onOkClicked?.invoke(filterCriteria!!)
         }
         cancelButton.setOnClickListener {
             this.dismiss()
         }
 
+    }
+
+    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+        if (isChecked)
+            filterCriteria?.genres?.add(buttonView?.tag as String)
+        else
+            filterCriteria?.genres?.remove(buttonView?.tag as String)
+
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        filterCriteria?.locationType = LocationType.values()[position]
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 }
