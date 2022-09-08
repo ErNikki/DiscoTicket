@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
 import com.hackerini.discoticket.fragments.elements.HomePageDiscoElement
 import com.hackerini.discoticket.fragments.elements.HomePageEventElement
+import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.utils.ObjectLoader
 
 class HomeFragment : Fragment() {
@@ -19,6 +21,8 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var clubs: Array<Club>
+    private lateinit var lastViewedLL: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +31,7 @@ class HomeFragment : Fragment() {
     ): View {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
-
+        clubs = ObjectLoader.getClubs(requireContext())
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
@@ -35,13 +39,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lastViewedLL = view.findViewById(R.id.HomeLastViewedLinearLayout)
 
-        val clubs = ObjectLoader.getClubs(requireContext())
         var transaction = parentFragmentManager.beginTransaction()
         clubs.sortBy { club -> club.distanceFromYou }
         clubs.take(5).forEach { club ->
             transaction.add(R.id.HomeNearYouLinearLayout, HomePageDiscoElement.newInstance(club))
-            transaction.add(R.id.HomeLastViewedLinearLayout, HomePageDiscoElement.newInstance(club))
         }
 
         val events = ObjectLoader.getEvents(requireContext())
@@ -56,5 +59,21 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lastViewedLL.removeAllViews()
+        var transaction = parentFragmentManager.beginTransaction()
+
+        Club.getLastSeen(requireContext())
+            .map { id -> clubs.first { club -> club.id == id } }
+            .forEach { club ->
+                transaction.add(
+                    R.id.HomeLastViewedLinearLayout,
+                    HomePageDiscoElement.newInstance(club)
+                )
+            }
+        transaction.commit()
     }
 }
