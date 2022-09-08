@@ -27,7 +27,6 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, Te
         val filterButton = findViewById<Button>(R.id.SearchResultFilterButton)
         val openMapButton = findViewById<ImageButton>(R.id.SearchResultOpenMap)
         val locationSpinner = findViewById<Spinner>(R.id.SearchResultOrderSpinner)
-        val queryEditText = findViewById<EditText>(R.id.SearchResultSearchText)
 
         val languages = resources.getStringArray(R.array.orderBy)
         val adapter =
@@ -37,7 +36,8 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, Te
 
         //Update the search text with the one from the previous activity
         val searchText = findViewById<EditText>(R.id.SearchResultSearchText)
-        filterCriteria.query = intent.getStringExtra("query")
+        searchText.requestFocus()
+
         searchText.setText(filterCriteria.query)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
@@ -96,16 +96,16 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, Te
             ft.remove(fragment)
         }
 
-        var elements = LinkedList<Any>()
+        val elements = LinkedList<Any>()
 
         //Filter by club or event
         val query = filterCriteria.query
         val elementToShow = filterCriteria.elementToShow
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
             for (e in clubList) {
-                if (query?.isBlank() == true)
+                if (query.isBlank())
                     elements.add(e)
-                else if (query?.isNotBlank() == true && e.name.contains(query, true)) {
+                else if (query.isNotBlank() && e.name.contains(query, true)) {
                     elements.add(e)
                 }
             }
@@ -113,9 +113,9 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, Te
 
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
             for (e in events) {
-                if (query?.isBlank() == true)
+                if (query.isBlank())
                     elements.add(e)
-                else if (query?.isNotBlank() == true && e.name.contains(query, true)) {
+                else if (query.isNotBlank() && e.name.contains(query, true)) {
                     elements.add(e)
                 }
             }

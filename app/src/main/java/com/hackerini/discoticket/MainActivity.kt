@@ -1,5 +1,6 @@
 package com.hackerini.discoticket
 
+import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
@@ -15,6 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.hackerini.discoticket.activities.Login
 import com.hackerini.discoticket.activities.SearchResult
 import com.hackerini.discoticket.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,18 +46,16 @@ class MainActivity : AppCompatActivity() {
 
         //Setup search element
         val searchView = findViewById<SearchView>(R.id.homeSearchView)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
+        val searchManager = getSystemService(SEARCH_SERVICE) as SearchManager
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.isClickable = true
+        searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
                 val intent = Intent(applicationContext, SearchResult::class.java)
-                intent.putExtra("query", query)
                 startActivity(intent)
-                return false
+                searchView.clearFocus()
             }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
-        })
+        }
 
         //Setup profile button
         val profileButton = findViewById<ImageButton>(R.id.homeProfileButton)
