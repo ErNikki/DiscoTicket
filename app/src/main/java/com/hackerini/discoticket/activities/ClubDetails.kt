@@ -35,12 +35,16 @@ class ClubDetails : AppCompatActivity() {
         val totalReview = findViewById<TextView>(R.id.clubDetailsTotalReviews)
         val clubDescription = findViewById<TextView>(R.id.clubDeatilsClubDescription)
         val tagLayout = findViewById<LinearLayout>(R.id.clubDetailsTagLayout)
+        val price = findViewById<TextView>(R.id.clubDetailsPrice)
+        val distance = findViewById<TextView>(R.id.clubDetailsDistance)
 
         clubName.text = club!!.name
         address.text = club!!.address
         ratingBar.rating = club!!.rating
         totalReview.text = club!!.reviewAmount.toString() + " " + "Recensioni"
         clubDescription.text = club!!.description
+        price.text = "Prezzi a partire da " + String.format("%.2f", club!!.simpleTicketPrice) + "€"
+        distance.text = "Si trova a " + club!!.distanceFromYou + "km da te"
 
         val imageSize = 250
         Picasso.get().load(club!!.imgUrl).resize(imageSize, imageSize).into(clubImage)
