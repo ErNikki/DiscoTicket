@@ -2,6 +2,7 @@ package com.hackerini.discoticket.objects
 
 import android.content.Context
 import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.room.FavoriteClub
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ObjectLoader
@@ -70,6 +71,22 @@ class Club : Serializable {
         return ObjectLoader.getDrinks(context, this)
     }
 
+    fun addToLastSeen(context: Context) {
+        val sharedPreferences = context.getSharedPreferences(
+            "DiscoTicketPref",
+            AppCompatActivity.MODE_PRIVATE
+        )
+        val clubIdsString = sharedPreferences.getString("lastSeenClub", "") ?: ""
+        val clubIds = clubIdsString.split(",").toMutableList()
+        clubIds.remove(this.id.toString())
+        clubIds.add(0, this.id.toString())
+        while (clubIds.size > 5)
+            clubIds.removeLast()
+        val editable = sharedPreferences.edit()
+        editable.putString("lastSeenClub", clubIds.joinToString(","))
+        editable.apply()
+    }
+
     companion object {
         fun getLabelColorFromName(labelName: String): Int {
             return when (labelName) {
@@ -81,6 +98,15 @@ class Club : Serializable {
                 "Rock" -> Color.argb(120, 30, 255, 255)
                 else -> Color.argb(255, 200, 200, 255)
             }
+        }
+
+        fun getLastSeen(context: Context): List<Int> {
+            val sharedPreferences = context.getSharedPreferences(
+                "DiscoTicketPref",
+                AppCompatActivity.MODE_PRIVATE
+            )
+            val clubIdsString = sharedPreferences.getString("lastSeenClub", "") ?: ""
+            return clubIdsString.split(",").mapNotNull { e -> e.toIntOrNull() }
         }
     }
 

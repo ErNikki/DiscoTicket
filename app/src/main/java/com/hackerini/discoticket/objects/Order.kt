@@ -58,6 +58,10 @@ data class Order(
         Log.d("CLUB", "CLUB " + club?.id)
         clubId = this.club?.id!!
         tableIds = tableIdsList.joinToString(",")
+        for (e in tickets)
+            e.type = ItemType.Ticket
+        for (e in drinks)
+            e.type = ItemType.Drink
     }
 }
 

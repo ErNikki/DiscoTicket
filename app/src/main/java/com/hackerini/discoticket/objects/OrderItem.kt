@@ -14,7 +14,7 @@ class OrderItem(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "quantity") val quantity: Int,
     @ColumnInfo(name = "unitaryPrice") val unitaryPrice: Float,
-    @ColumnInfo(name = "type") val type: ItemType,
+    @ColumnInfo(name = "type") var type: ItemType,
     @ColumnInfo(name = "orderId") var orderId: Int,
 ) : Serializable {
 
