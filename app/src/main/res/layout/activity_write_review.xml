@@ -7,12 +7,53 @@
     tools:context=".activities.WriteReview">
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/writeReviewRatingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Activity to write a review"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Valutazione (consigliata)"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/writeReviewRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeReviewRatingLabel" />
+
+    <TextView
+        android:id="@+id/writeReviewDescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Descrizione"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeReviewRatingBar" />
+
+    <EditText
+        android:id="@+id/writeReviewDescriptionText"
+        android:layout_width="391dp"
+        android:layout_height="217dp"
+        android:background="@drawable/customborder"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeReviewDescriptionLabel" />
+
+    <LinearLayout
+        android:layout_width="391dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeReviewDescriptionText"></LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
