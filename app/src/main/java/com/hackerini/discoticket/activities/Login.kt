@@ -3,13 +3,19 @@ package com.hackerini.discoticket.activities
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.hackerini.discoticket.MainActivity
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.objects.User
+import com.hackerini.discoticket.room.RoomManager
 import java.util.regex.Pattern
+
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +28,35 @@ class Login : AppCompatActivity() {
 
         val emailTextEdit = findViewById<EditText>(R.id.LoginMailAddress)
         val passwordTextEdit = findViewById<EditText>(R.id.LoginPassword)
+
+        val loginLayout = findViewById<ConstraintLayout>(R.id.LoginNotLoggedLayout)
+        val logoutLayout = findViewById<ConstraintLayout>(R.id.LoginLoggedLayout)
+
+        val welcomeText = findViewById<TextView>(R.id.LoginWelcomeText)
+        val logoutButton = findViewById<Button>(R.id.LoginLogoutButton)
+        val deleteAccount = findViewById<Button>(R.id.LoginDeleteAccount)
+        val errorMessage = findViewById<TextView>(R.id.LoginWrongCredentials)
+
+        if (User.isLogged(this)) {
+            val user = User.getLoggedUser(this)
+            welcomeText.text = "Benvenuto ${user?.name}"
+
+            logoutButton.setOnClickListener {
+                User.logout(this)
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            deleteAccount.setOnClickListener {
+                User.deleteCurrentAccount(this)
+                User.logout(this)
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+
+            loginLayout.visibility = View.GONE
+            logoutLayout.visibility = View.VISIBLE
+        } else {
+            loginLayout.visibility = View.VISIBLE
+            logoutLayout.visibility = View.GONE
+        }
 
         forgottenPassword.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         signUpTextView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
@@ -37,23 +72,37 @@ class Login : AppCompatActivity() {
         )
 
         loginButton.setOnClickListener {
-            var error = ""
-            if (passwordTextEdit.text.toString().isEmpty())
-                error += "Password non inserita\n"
-            if (emailTextEdit.text.toString().isEmpty())
-                error += "E-mail non inserita\n"
-            else if (!EMAIL_ADDRESS_PATTERN.matcher(emailTextEdit.text.toString().trim()).matches())
-                error += "E-mail non valida\n"
+            errorMessage.visibility = View.GONE
+            var hasError = false
+            if (passwordTextEdit.text.toString().isEmpty()) {
+                passwordTextEdit.error = "Password non inserita"
+                hasError = true
+            }
+            if (emailTextEdit.text.toString().isEmpty()) {
+                emailTextEdit.error = "E-mail non inserita"
+                hasError = true
+            } else if (!EMAIL_ADDRESS_PATTERN.matcher(emailTextEdit.text.toString().trim())
+                    .matches()
+            ) {
+                emailTextEdit.error = "E-mail non valida\n"
+                hasError = true
+            }
 
-            if (error.isNotEmpty()) {
-                val alert = AlertDialog.Builder(this).create()
-                alert.setCancelable(false)
-                alert.setTitle("Dati inseriti errati")
-                alert.setMessage(error)
-                alert.setButton(AlertDialog.BUTTON_POSITIVE, "Ok") { dialog, _ -> dialog.dismiss() }
-                alert.show()
-            } else {
+            if (!hasError) {
                 //Form validated
+                val userDao = RoomManager(this).db.userDao()
+                val hashedPassword = User.hashPassword(passwordTextEdit.text.toString())
+                val queryResult =
+                    userDao.getUserByCredential(emailTextEdit.text.toString(), hashedPassword)
+                Log.d("RES", queryResult.toString())
+                if (queryResult.isNotEmpty()) {
+                    //Success
+                    val user = queryResult.first()
+                    User.setUserLogged(this, user)
+                    startActivity(Intent(this, MainActivity::class.java))
+                } else {
+                    errorMessage.visibility = View.VISIBLE
+                }
             }
         }
 

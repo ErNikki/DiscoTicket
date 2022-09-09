@@ -8,7 +8,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,8 +20,10 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LoginNotLoggedLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="visible">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView7"
@@ -115,14 +121,14 @@
                     android:id="@+id/LoginForgottenPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:autoLink="none"
                     android:linksClickable="false"
                     android:text="Password dimenticata?"
                     android:textColor="@color/purple_500"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LoginPassword" />
+                    app:layout_constraintTop_toBottomOf="@+id/LoginWrongCredentials" />
 
                 <Button
                     android:id="@+id/LoginLoginButton"
@@ -277,6 +283,58 @@
                         android:text="Registrati"
                         android:textColor="@color/purple_500" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/LoginWrongCredentials"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="I dati inseriti non sono validi o l'account non esiste"
+                    android:textAlignment="center"
+                    android:textColor="#FF0000"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginPassword" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LoginLoggedLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/LoginWelcomeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/LoginLogoutButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Logout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginWelcomeText" />
+
+                <Button
+                    android:id="@+id/LoginDeleteAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Elimina account"
+                    app:layout_constraintEnd_toEndOf="@+id/LoginLogoutButton"
+                    app:layout_constraintStart_toStartOf="@+id/LoginLogoutButton"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginLogoutButton" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
