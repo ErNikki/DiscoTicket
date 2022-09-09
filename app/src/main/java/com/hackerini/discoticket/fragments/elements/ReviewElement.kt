@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,8 @@ class ReviewElement : Fragment() {
         reviewContent.text = review?.description
         reviewRatingBar.rating = review?.rating!!.toFloat()
         Picasso.get().load(review?.user?.imageProfileUrl).resize(100, 100).into(reviewerImage)
-
+        if (reviewContent.text == "")
+            reviewContent.visibility = View.GONE
     }
 
     companion object {

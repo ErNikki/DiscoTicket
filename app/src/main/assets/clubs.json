@@ -2,7 +2,7 @@
   {
     "address": "Via Gian Giacomo Porro, 00197 Roma RM",
     "id": 1,
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "description": "Benvenuti al Monkey Club!\nSe vi piace la vita in discoteca ma volete spezzare la routine e ascoltare della musica diversa da solito... questo è il posto giusto! Venite a ballare al ritmo di rock a tutto volume, e scatenatevi come solo voi sapete fare!",
     "distanceFromYou": 10,
     "imgUrl": "https://hips.hearstapps.com/gioit.h-cdn.co/assets/16/09/768x578/gallery-1456948763-discoteca-e1439826574579.png?resize=480:*",
     "locationType": "Chiuso",
@@ -13,7 +13,7 @@
       41.92923781456024,
       12.489402379276749
     ],
-    "name": "Monkey",
+    "name": "Monkey Club",
     "rating": 4.1,
     "reviewAmount": 34,
     "reviews": [
@@ -34,6 +34,34 @@
       {
         "date": "05/09/2022",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "images": [
+          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
+          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
+        ],
+        "rating": 1,
+        "user": {
+          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
+          "name": "Luca",
+          "surname": "Hackerino"
+        }
+      },
+      {
+        "date": "05/09/2022",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "images": [
+          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
+          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
+        ],
+        "rating": 1,
+        "user": {
+          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
+          "name": "Luca",
+          "surname": "Hackerino"
+        }
+      },
+      {
+        "date": "05/09/2022",
+        "description":  "",
         "images": [
           "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
           "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
