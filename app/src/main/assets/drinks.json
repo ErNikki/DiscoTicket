@@ -5,7 +5,7 @@
       "Gin",
       "Campari",
       "Vermouth",
-      "Fetta di arancia"
+      "fetta di arancia"
     ]
   },
   {
@@ -13,42 +13,42 @@
     "ingredients": [
       "Aperol",
       "Prosecco",
-      "Soda",
-      "Fetta di arancia"
+      "soda",
+      "fetta di arancia"
     ]
   },
   {
     "name": "Mojito",
     "ingredients": [
       "Rum ",
-      "Foglie di menta",
-      "Lime",
-      "Zucchero",
-      "Soda"
+      "foglie di menta",
+      "lime",
+      "zucchero",
+      "soda"
     ]
   },
   {
     "name": "London Mule",
     "ingredients": [
       "Gin",
-      "Succo di lime",
-      "Ginger beer",
-      "Fetta di lime"
+      "succo di lime",
+      "ginger beer",
+      "fetta di lime"
     ]
   },
   {
     "name": "White Russian",
     "ingredients": [
       "Vodka",
-      "Liquore al caffè",
-      "Panna fresca liquida"
+      "liquore al caffè",
+      "panna fresca liquida"
     ]
   },
   {
     "name": "Whisky sour",
     "ingredients": [
       "Bourbon whiskey",
-      "Succo di limone",
+      "succo di limone",
       "sciroppo di zucchero"
     ]
   },
@@ -56,25 +56,25 @@
     "name": "Gin Lemon",
     "ingredients": [
       "Gin",
-      "Limonata",
-      "Fetta di limone"
+      "limonata",
+      "fetta di limone"
     ]
   },
   {
     "name": "Gin Tonic",
     "ingredients": [
       "Gin",
-      "Acqua tonica",
-      "Fetta di limone"
+      "acqua tonica",
+      "fetta di limone"
     ]
   },
   {
     "name": "Margharita",
     "ingredients": [
       "Tequila",
-      "Succo di lime",
+      "succo di lime",
       "Triple sec",
-      "Sale fino"
+      "sale fino"
     ]
   }
 ]

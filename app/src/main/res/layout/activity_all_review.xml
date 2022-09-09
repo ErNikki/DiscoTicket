@@ -34,10 +34,11 @@
                     android:id="@+id/AllReviewName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="16dp"
                     android:text="TextView"
+                    android:textAlignment="center"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -45,17 +46,17 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="-6dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="@+id/AllReviewName"
                     app:layout_constraintTop_toBottomOf="@+id/AllReviewName">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/AllReviewAvg"
@@ -72,8 +73,15 @@
                             style="@style/Widget.AppCompat.RatingBar.Small"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginBottom="6dp"
                             android:numStars="5"
                             android:rating="4.1"
+                            android:scaleX="1.6"
+                            android:scaleY="1.6"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/AllReviewAvg" />
@@ -83,13 +91,16 @@
                         android:id="@+id/AllReviewReviewAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(234 recensioni)" />
+                        android:text="(234 recensioni)"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <com.taufiqrahman.reviewratings.RatingReviews
                     android:id="@+id/rating_reviews"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="18dp"
                     app:animation="true"
                     app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
                     app:layout_constraintEnd_toEndOf="parent"

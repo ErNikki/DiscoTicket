@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,9 @@ class ReviewElement : Fragment() {
         reviewDate.text = review?.date
         reviewContent.text = review?.description
         reviewRatingBar.rating = review?.rating!!.toFloat()
+        //Picasso.get().load(review?.user?.imageProfileUrl).resize(100, 100).into(reviewerImage)
+        if (reviewContent.text == "")
+            reviewContent.visibility = View.GONE
 
         val image = AvatarGenerator.AvatarBuilder(requireContext())
             .setLabel(review!!.user.name)
