@@ -35,7 +35,6 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, Te
         locationSpinner.onItemSelectedListener = this
 
         val searchText = findViewById<TextInputEditText>(R.id.SearchResultSearchText)
-        searchText.showSoftInputOnFocus = false
         searchText.requestFocus()
 
         filterButton.setOnClickListener {

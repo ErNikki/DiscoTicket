@@ -23,14 +23,15 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SearchResultSearchText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/SearchResultOpenMap"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/SearchResultSearchTextLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/SearchResultSearchTextLayout"
