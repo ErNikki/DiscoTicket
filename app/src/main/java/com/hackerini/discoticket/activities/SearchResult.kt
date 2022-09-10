@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
+import com.google.android.material.textfield.TextInputEditText
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.fragments.elements.EventElement
@@ -34,12 +34,9 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, Te
         locationSpinner.adapter = adapter
         locationSpinner.onItemSelectedListener = this
 
-        //Update the search text with the one from the previous activity
-        val searchText = findViewById<EditText>(R.id.SearchResultSearchText)
+        val searchText = findViewById<TextInputEditText>(R.id.SearchResultSearchText)
+        searchText.showSoftInputOnFocus = false
         searchText.requestFocus()
-
-        searchText.setText(filterCriteria.query)
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         filterButton.setOnClickListener {
             val filterFragment = Filter.newInstance(filterCriteria)
