@@ -24,15 +24,6 @@ class SignUp : AppCompatActivity() {
                 ")+"
     )
 
-    val NO_NAME = 1 shr 0
-    val NO_SURNAME = 1 shr 1
-    val NO_EMAIL = 1 shr 2
-    val NO_PASSOWORD = 1 shr 3
-    val NO_REPEAT_PASSWORD = 1 shr 4
-    val EMAIL_WRONG = 1 shr 5
-    val USER_ALREADY_EXISTS = 1 shr 6
-    val PASSWORD_DOESNT_MATCH = 1 shr 7
-
     lateinit var name: EditText
     lateinit var surname: EditText
     lateinit var email: EditText
