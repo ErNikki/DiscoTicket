@@ -27,7 +27,7 @@ class Event(var name: String, var date: Date) : Serializable {
         get() {
             var content = musicGenres
             if (club?.locationType != "Chiuso")
-                content = content.plus("Aperto")
+                content = content.plus("All'aperto")
             return content
 
         }
