@@ -34,7 +34,7 @@ data class FilterCriteria(
         OrderCriteria.SearchResult,
     )
 
-    var query: String? = null
+    var query: String = ""
     var priceRange = Pair(0, Int.MAX_VALUE)
     var maxDistance = Int.MAX_VALUE
     var genres = LinkedList<String>()
