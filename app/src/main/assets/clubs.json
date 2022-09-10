@@ -1,9 +1,198 @@
 [
   {
-    "address": "Via Gian Giacomo Porro, 00197 Roma RM",
+    "address": "Roma, Via del Vascello 11",
     "id": 1,
+    "description": "Una location spaziosa, la migliore musica e drink di alta qualità: tutto questo lo potete trovare al Club '900. Con i nostri frequenti eventi siamo pronti ad accogliervi e farvi ballare tutta la notte non-stop!",
+    "distanceFromYou": 13,
+    "imgUrl": "https://gsud.cdn-immedia.net/2022/07/discoteca-5-625x350-1658693316.jpg",
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Elettronica",
+      "Reggaeton"
+    ],
+    "gpsCords": [
+      41.886771,
+      12.459447
+    ],
+    "name": "Club '900",
+    "rating": 4.1,
+    "reviewAmount": 34,
+    "reviews": [
+      {
+        "date": "11/09/2022",
+        "description": "Ottimi drink e ottima musica, peccato per il servizio un po' lento, ma vi consiglio davvero di andarci",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Francesca",
+          "surname": "D'Antonio"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "Locale pulito e curato, mi sono divertita",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Barbara",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "03/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Nicholas",
+          "surname": "Camilli"
+        }
+      },
+      {
+        "date": "02/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Federico",
+          "surname": "Cimini"
+        }
+      },
+      {
+        "date": "26/08/2022",
+        "description": "I drink sono annacquati",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Emanuele",
+          "surname": "Rizzo"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Mario",
+          "surname": "Leopardi"
+        }
+      },
+      {
+        "date": "13/08/2022",
+        "description": "E' stata una serata incredibile, questi ragazzi sanno veramente organizzare degli eventi come si deve!!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Laura",
+          "surname": "Fiorelli"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giulio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "31/07/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Valerio",
+          "surname": "Ferrante"
+        }
+      }
+    ],
+    "simpleTicketPrice": 20,
+    "tableTicketPrice": 84.5
+  },
+
+  {
+    "address": "Roma, Via Gian Giacomo Porro 18",
+    "id": 2,
     "description": "Benvenuti al Monkey Club!\nSe vi piace la vita in discoteca ma volete spezzare la routine e ascoltare della musica diversa da solito... questo è il posto giusto! Venite a ballare al ritmo di rock a tutto volume, e scatenatevi come solo voi sapete fare!",
-    "distanceFromYou": 10,
+    "distanceFromYou": 32,
     "imgUrl": "https://hips.hearstapps.com/gioit.h-cdn.co/assets/16/09/768x578/gallery-1456948763-discoteca-e1439826574579.png?resize=480:*",
     "locationType": "Chiuso",
     "musicGenres": [
@@ -18,71 +207,139 @@
     "reviewAmount": 34,
     "reviews": [
       {
-        "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "date": "09/09/2022",
+        "description": "Niente male, sono un appassionato di musica elettronica ma non sono rimasto deluso. Sono andato in questa discoteca per pura curiosità e mi sono divertito, la selezione di musica è inaspettatamente buona e 'ballabile', e il DJ sa veramente intrattenere!",
         "images": [
           "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
           "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
         "rating": 5,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
-          "name": "Luca",
-          "surname": "Hackerino"
+          "name": "Marco",
+          "surname": "Gatti"
         }
       },
       {
-        "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "date": "08/09/2022",
+        "description": "",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
-        "rating": 1,
+        "rating": 3,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
           "name": "Luca",
-          "surname": "Hackerino"
+          "surname": "De Gregorio"
         }
       },
       {
-        "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "date": "01/09/2022",
+        "description": "",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
-        "rating": 1,
+        "rating": 5,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
-          "name": "Luca",
-          "surname": "Hackerino"
+          "name": "Claudia",
+          "surname": "Regoli"
         }
       },
       {
-        "date": "05/09/2022",
-        "description":  "",
+        "date": "28/08/2022",
+        "description": "È stata una serata divertente",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
-        "rating": 1,
+        "rating": 4,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
-          "name": "Luca",
-          "surname": "Hackerino"
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "26/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Angelica",
+          "surname": "Fazio"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Lorenzo",
+          "surname": "Romano"
+        }
+      },
+      {
+        "date": "22/08/2022",
+        "description": "Io e le mie amiche ci siamo divertite molto, prima o poi ci torneremo! I camerieri sono super gentili e non vediamo l'ora di partecipare a qualche serata con evento, sarà sicuramente divertente",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Claudia",
+          "surname": "D'Angelilli"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Giulio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "David",
+          "surname": "Bianchi"
+        }
+      },
+      {
+        "date": "10/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Stefano",
+          "surname": "Garcia"
         }
       }
     ],
     "simpleTicketPrice": 20.5,
     "tableTicketPrice": 84.4
   },
+
   {
-    "address": "Via di S. Giovanni in Laterano, 154, 00184 Roma RM",
-    "id": 2,
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "distanceFromYou": 13,
-    "imgUrl": "https://citynews-milanotoday.stgy.ovh/~media/horizontal-mid/7690430458408/discoteca-5.jpg",
+    "address": "Roma, Via di S. Giovanni in Laterano 154",
+    "id": 3,
+    "description": "Al Vertigo troverete arredamenti mozzafiato e un'ampia area all'aperto in cui potrete ballare e divertirvi in tutta libertà. Non perdetevi l'emozione di scatenarvi col nostro fantastico DJ e un personale altamente qualificato!",
+    "distanceFromYou": 10,
+    "imgUrl": "https://www.discotechemilano.it/wp-content/uploads/2021/04/discoteche-all-aperto2.jpg",
     "gpsCords": [
       41.88853537867636,
       12.49944080569197
@@ -97,40 +354,35 @@
     "reviewAmount": 92,
     "reviews": [
       {
-        "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "date": "10/09/2022",
+        "description": "SIEEEEE",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
         "rating": 3,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
-          "name": "Luca",
-          "surname": "Hackerino"
+          "name": "Sara",
+          "surname": "Arcuri"
         }
       },
       {
-        "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "date": "10/09/2022",
+        "description": "",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
-        "rating": 3,
+        "rating": 5,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
-          "name": "Luca",
-          "surname": "Hackerino"
+          "name": "Valentino",
+          "surname": "Battaglioni"
         }
       }
     ],
     "simpleTicketPrice": 27.6,
     "tableTicketPrice": 77.4
   },
+
   {
-    "address": "Via Ambrogio Contarini, 11, 00154 Roma RM",
-    "id": 3,
+    "address": "Roma, Via Ambrogio Contarini 11",
+    "id": 4,
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "distanceFromYou": 70,
     "imgUrl": "https://www.ansa.it/webimages/img_457x/2021/12/23/1e38938b16663ef194717df2e702be87.jpg",
@@ -150,12 +402,9 @@
         "date": "05/09/2022",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
         "rating": 4,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
           "name": "Luca",
           "surname": "Hackerino"
         }
@@ -164,12 +413,9 @@
         "date": "05/09/2022",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
         "rating": 3,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
           "name": "Luca",
           "surname": "Hackerino"
         }
@@ -178,9 +424,10 @@
     "simpleTicketPrice": 22.0,
     "tableTicketPrice": 57.6
   },
+
   {
-    "address": "Via di S. Elena, 6, 00186 Roma RM",
-    "id": 4,
+    "address": "Roma, Via di S. Elena 6",
+    "id": 5,
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "distanceFromYou": 35,
     "imgUrl": "https://www.affarimiei.biz/wp-content/uploads/2017/07/aprire-una-discoteca.jpg",
@@ -199,12 +446,9 @@
         "date": "05/09/2022",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
         "rating": 4,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
           "name": "Luca",
           "surname": "Hackerino"
         }
@@ -213,12 +457,9 @@
         "date": "05/09/2022",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         "images": [
-          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
         ],
         "rating": 3,
         "user": {
-          "imageProfileUrl": "https://www.citrix.com/blogs/wp-content/upload/2018/03/slack_compressed-e1521621363404-360x360.jpg",
           "name": "Luca",
           "surname": "Hackerino"
         }
