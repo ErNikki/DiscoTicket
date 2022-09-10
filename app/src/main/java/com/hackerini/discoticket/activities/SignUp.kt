@@ -69,8 +69,8 @@ class SignUp : AppCompatActivity() {
         dialog.setButton(
             AlertDialog.BUTTON_POSITIVE,
             "Login"
-        ) { dialog, _ ->
-            dialog.dismiss()
+        ) { d, _ ->
+            d.dismiss()
             startActivity(Intent(this, Login::class.java))
         }
         dialog.show()
