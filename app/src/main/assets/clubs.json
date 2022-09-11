@@ -14,7 +14,7 @@
       41.886771,
       12.459447
     ],
-    "name": "Club '900",
+    "name": "Club '901",
     "reviews": [
       {
         "date": "11/09/2022",
@@ -674,7 +674,7 @@
     "address": "Roma, Via di S. Elena 6",
     "id": 5,
     "description": "",
-    "distanceFromYou": 35,
+    "distanceFromYou": 49,
     "imgUrl": "https://www.ansa.it/webimages/img_457x/2021/12/23/1e38938b16663ef194717df2e702be87.jpg",
     "gpsCords": [
       41.89397833883503,
@@ -828,6 +828,753 @@
       "Techno"
     ],
     "name": "The Bridge",
+    "reviews": [
+      {
+        "date": "13/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "12/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "04/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Franca",
+          "surname": "Capoccetti"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      }
+    ],
+    "simpleTicketPrice": 27.6,
+    "tableTicketPrice": 77.4
+  },
+
+  {
+    "address": "Roma, Via Riccardo Zandonai 44",
+    "id": 7,
+    "description": "",
+    "distanceFromYou": 35,
+    "imgUrl": "https://static.fanpage.it/wp-content/uploads/sites/29/2020/08/discoteca-sesto-senso-brescia.jpg",
+    "gpsCords": [
+      41.948487,
+      12.458154
+    ],
+    "locationType": "Entrambi",
+    "musicGenres": [
+      "Elettronica",
+      "Reggaeton"
+    ],
+    "name": "Disco Glam",
+    "reviews": [
+      {
+        "date": "13/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "12/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "04/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Franca",
+          "surname": "Capoccetti"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      }
+    ],
+    "simpleTicketPrice": 27.6,
+    "tableTicketPrice": 77.4
+  },
+
+  {
+    "address": "Fiumicino (RM), Lungomare della Salute 103",
+    "id": 8,
+    "description": "",
+    "distanceFromYou": 70,
+    "imgUrl": "https://www.lignanosabbiadoro.com/assets/web/images/discoteca-kursaal-lignano.jpg",
+    "gpsCords": [
+      41.761906,
+      12.225555
+    ],
+    "locationType": "All'aperto",
+    "musicGenres": [
+      "Reggaeton",
+      "Techno"
+    ],
+    "name": "Marea",
+    "reviews": [
+      {
+        "date": "13/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "12/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "04/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Franca",
+          "surname": "Capoccetti"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      }
+    ],
+    "simpleTicketPrice": 27.6,
+    "tableTicketPrice": 77.4
+  },
+
+  {
+    "address": "Roma, Via Giuseppe Rovani 22",
+    "id": 9,
+    "description": "",
+    "distanceFromYou": 53,
+    "imgUrl": "https://www.larena.it/image/policy:1.9555490:1659608408/La+violenza+%25C3%25A8+avvenuta+fuori+da+una+discoteca+di+Gabicce.jpg?f=default&w=1024&$p$f$w=4f44181",
+    "gpsCords": [
+      41.946085,
+      12.549263
+    ],
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Elettronica"
+    ],
+    "name": "EDM Pop Club",
+    "reviews": [
+      {
+        "date": "13/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "12/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "04/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Franca",
+          "surname": "Capoccetti"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      }
+    ],
+    "simpleTicketPrice": 27.6,
+    "tableTicketPrice": 77.4
+  },
+
+  {
+    "address": "Guidonia Montecelio (RM), Via Pantano 12",
+    "id": 10,
+    "description": "",
+    "distanceFromYou": 64,
+    "imgUrl": "https://www.supersud.it/wp-content/uploads/2020/05/Discoteca.jpg",
+    "gpsCords": [
+      41.987000,
+      12.717655
+    ],
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Reggaeton",
+      "Rock"
+    ],
+    "name": "Red Night",
     "reviews": [
       {
         "date": "13/09/2022",
