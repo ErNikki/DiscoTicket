@@ -15,8 +15,6 @@
       12.459447
     ],
     "name": "Club '900",
-    "rating": 4.1,
-    "reviewAmount": 34,
     "reviews": [
       {
         "date": "11/09/2022",
@@ -192,7 +190,7 @@
     "address": "Roma, Via Gian Giacomo Porro 18",
     "id": 2,
     "description": "Benvenuti al Monkey Club!\nSe vi piace la vita in discoteca ma volete spezzare la routine e ascoltare della musica diversa da solito... questo è il posto giusto! Venite a ballare al ritmo di rock a tutto volume, e scatenatevi come solo voi sapete fare!",
-    "distanceFromYou": 32,
+    "distanceFromYou": 23,
     "imgUrl": "https://hips.hearstapps.com/gioit.h-cdn.co/assets/16/09/768x578/gallery-1456948763-discoteca-e1439826574579.png?resize=480:*",
     "locationType": "Chiuso",
     "musicGenres": [
@@ -203,8 +201,6 @@
       12.489402379276749
     ],
     "name": "Monkey Club",
-    "rating": 4.1,
-    "reviewAmount": 34,
     "reviews": [
       {
         "date": "09/09/2022",
@@ -338,7 +334,7 @@
     "address": "Roma, Via di S. Giovanni in Laterano 154",
     "id": 3,
     "description": "Al Vertigo troverete arredamenti mozzafiato e un'ampia area all'aperto in cui potrete ballare e divertirvi in tutta libertà. Non perdetevi l'emozione di scatenarvi col nostro fantastico DJ e un personale altamente qualificato!",
-    "distanceFromYou": 10,
+    "distanceFromYou": 8,
     "imgUrl": "https://www.discotechemilano.it/wp-content/uploads/2021/04/discoteche-all-aperto2.jpg",
     "gpsCords": [
       41.88853537867636,
@@ -350,12 +346,10 @@
       "Elettronica"
     ],
     "name": "Vertigo",
-    "rating": 3.7,
-    "reviewAmount": 92,
     "reviews": [
       {
         "date": "10/09/2022",
-        "description": "La discoteca è davvero carina, ",
+        "description": "La discoteca è davvero carina e molto particolare. I prezzi sono leggermente alti, ma considerando la qualità che ho trovato non posso decisamente lamentarmi.",
         "images": [
         ],
         "rating": 4,
@@ -366,13 +360,145 @@
       },
       {
         "date": "10/09/2022",
+        "description": "Bellissimo posto!!!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Karim",
+          "surname": "Merrino"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Valentino",
+          "surname": "Battaglioni"
+        }
+      },
+      {
+        "date": "02/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Barbara",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Giulia",
+          "surname": "Trotta"
+        }
+      },
+      {
+        "date": "24/08/2022",
+        "description": "Veramente costoso",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Stefano",
+          "surname": "Garcia"
+        }
+      },
+      {
+        "date": "21/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Luigi",
+          "surname": "Napolitano"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Angelica",
+          "surname": "Fazio"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Lorenzo",
+          "surname": "Romano"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Carla",
+          "surname": "Barone"
+        }
+      },
+      {
+        "date": "11/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "09/08/2022",
         "description": "",
         "images": [
         ],
         "rating": 5,
         "user": {
-          "name": "Valentino",
-          "surname": "Battaglioni"
+          "name": "Daniela",
+          "surname": "Leone"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Riccardo",
+          "surname": "Mosca"
         }
       }
     ],
@@ -383,9 +509,9 @@
   {
     "address": "Roma, Via Ambrogio Contarini 11",
     "id": 4,
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "distanceFromYou": 70,
-    "imgUrl": "https://www.ansa.it/webimages/img_457x/2021/12/23/1e38938b16663ef194717df2e702be87.jpg",
+    "description": "",
+    "distanceFromYou": 40,
+    "imgUrl": "https://www.affarimiei.biz/wp-content/uploads/2017/07/aprire-una-discoteca.jpg",
     "gpsCords": [
       41.875384794269436,
       12.489646627853247
@@ -394,30 +520,149 @@
     "musicGenres": [
       "Reggaeton"
     ],
-    "name": "Green Disco",
-    "rating": 3.6,
-    "reviewAmount": 59,
+    "name": "Hollywood",
     "reviews": [
       {
-        "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        "images": [
-        ],
-        "rating": 4,
-        "user": {
-          "name": "Luca",
-          "surname": "Hackerino"
-        }
-      },
-      {
-        "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "date": "10/09/2022",
+        "description": "",
         "images": [
         ],
         "rating": 3,
         "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "03/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "David",
+          "surname": "Bianchi"
+        }
+      },
+      {
+        "date": "01/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Claudia",
+          "surname": "D'Angelilli"
+        }
+      },
+      {
+        "date": "27/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Luigi",
+          "surname": "Napolitano"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
           "name": "Luca",
-          "surname": "Hackerino"
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Sara",
+          "surname": "Arcuri"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Nicholas",
+          "surname": "Camilli"
+        }
+      },
+      {
+        "date": "24/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Valentino",
+          "surname": "Battaglioni"
+        }
+      },
+      {
+        "date": "23/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Mario",
+          "surname": "Leopardi"
+        }
+      },
+      {
+        "date": "19/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Laura",
+          "surname": "Fiorelli"
+        }
+      },
+      {
+        "date": "15/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "11/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Emanuele",
+          "surname": "Rizzo"
+        }
+      },
+      {
+        "date": "04/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
         }
       }
     ],
@@ -428,44 +673,329 @@
   {
     "address": "Roma, Via di S. Elena 6",
     "id": 5,
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "description": "",
     "distanceFromYou": 35,
-    "imgUrl": "https://www.affarimiei.biz/wp-content/uploads/2017/07/aprire-una-discoteca.jpg",
+    "imgUrl": "https://www.ansa.it/webimages/img_457x/2021/12/23/1e38938b16663ef194717df2e702be87.jpg",
     "gpsCords": [
-      41.89397833883503, 12.476643923091892
+      41.89397833883503,
+      12.476643923091892
     ],
     "locationType": "Chiuso",
     "musicGenres": [
-      "Reggaeton"
+      "Reggaeton",
+      "Elettronica"
     ],
     "name": "Disco Rome",
-    "rating": 4.1,
-    "reviewAmount": 23,
     "reviews": [
       {
-        "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "date": "11/09/2022",
+        "description": "",
         "images": [
         ],
         "rating": 4,
         "user": {
-          "name": "Luca",
-          "surname": "Hackerino"
+          "name": "Riccardo",
+          "surname": "Mosca"
         }
       },
       {
         "date": "05/09/2022",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "description": "",
         "images": [
         ],
         "rating": 3,
         "user": {
-          "name": "Luca",
-          "surname": "Hackerino"
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "01/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Valerio",
+          "surname": "Ferrante"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Claudia",
+          "surname": "Regoli"
+        }
+      },
+      {
+        "date": "30/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Karim",
+          "surname": "Merrino"
+        }
+      },
+      {
+        "date": "22/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Federico",
+          "surname": "Cimini"
+        }
+      },
+      {
+        "date": "18/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giulia",
+          "surname": "Trotta"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Daniela",
+          "surname": "Leone"
         }
       }
     ],
     "simpleTicketPrice": 20.0,
     "tableTicketPrice": 50.0
+  },
+
+  {
+    "address": "Roma, Via Papiria 78",
+    "id": 6,
+    "description": "The Bridge, il luogo dove scatenarsi come pazzi ed essere puramente se stessi senza paura. Vi accoglieremo con calore e non vediamo l'ora di vedervi partecipare ai nostri folli eventi: benvenuti a una discoteca assolutamente infernale!",
+    "distanceFromYou": 26,
+    "imgUrl": "https://citynews-milanotoday.stgy.ovh/~media/horizontal-mid/7690430458408/discoteca-5.jpg",
+    "gpsCords": [
+      41.863572,
+      12.560874
+    ],
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Techno"
+    ],
+    "name": "The Bridge",
+    "reviews": [
+      {
+        "date": "13/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "12/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "04/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Franca",
+          "surname": "Capoccetti"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      }
+    ],
+    "simpleTicketPrice": 27.6,
+    "tableTicketPrice": 77.4
   }
 ]

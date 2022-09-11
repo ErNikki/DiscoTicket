@@ -103,7 +103,7 @@
                     android:layout_width="142dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:text="Apri drink menu"
+                    android:text="Apri menù dei drink"
                     android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.954"
