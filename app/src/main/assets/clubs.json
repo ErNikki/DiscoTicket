@@ -53,7 +53,7 @@
       },
       {
         "date": "02/09/2022",
-        "description": "",
+        "description": "Clamoroso.",
         "images": [
         ],
         "rating": 5,
@@ -355,10 +355,10 @@
     "reviews": [
       {
         "date": "10/09/2022",
-        "description": "SIEEEEE",
+        "description": "La discoteca è davvero carina, ",
         "images": [
         ],
-        "rating": 3,
+        "rating": 4,
         "user": {
           "name": "Sara",
           "surname": "Arcuri"

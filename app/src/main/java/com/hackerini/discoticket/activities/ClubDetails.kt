@@ -28,21 +28,25 @@ class ClubDetails : AppCompatActivity() {
         club = intent.getSerializableExtra("club") as Club
         club?.addToLastSeen(this)
 
-
         val clubImage = findViewById<ImageView>(R.id.clubDetailClubImage)
         val clubName = findViewById<TextView>(R.id.clubDetailsClubName)
         val address = findViewById<TextView>(R.id.clubDetailsAddress)
         val ratingBar = findViewById<RatingBar>(R.id.clubDeatilsRatingBar)
+        val reviewsAvg = findViewById<TextView>(R.id.clubDetailsAvg)
         val totalReview = findViewById<TextView>(R.id.clubDetailsTotalReviews)
         val clubDescription = findViewById<TextView>(R.id.clubDeatilsClubDescription)
         val tagLayout = findViewById<LinearLayout>(R.id.clubDetailsTagLayout)
         val price = findViewById<TextView>(R.id.clubDetailsPrice)
         val distance = findViewById<TextView>(R.id.clubDetailsDistance)
 
+        val reviews = club!!.reviews
+        val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
+
         clubName.text = club!!.name
         address.text = club!!.address
-        ratingBar.rating = club!!.rating
-        totalReview.text = club!!.reviewAmount.toString() + " " + "Recensioni"
+        ratingBar.rating = average
+        reviewsAvg.text = String.format("%.1f", average)
+        totalReview.text = "(${reviews.size} recensioni)"
         clubDescription.text = club!!.description
         price.text = "Prezzi a partire da " + String.format("%.2f", club!!.simpleTicketPrice) + "€"
         distance.text = "Si trova a " + club!!.distanceFromYou + "km da te"
