@@ -10,17 +10,17 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.DayViewContainer
 import com.hackerini.discoticket.fragments.views.MonthViewContainer
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Event
 import com.hackerini.discoticket.objects.Order
 import com.hackerini.discoticket.objects.OrderItem
+import com.hackerini.discoticket.utils.ObjectLoader
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -30,6 +30,7 @@ import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.ZoneId
 import java.time.format.TextStyle
 import java.time.temporal.WeekFields
 import java.util.*
@@ -46,6 +47,7 @@ class BuyTicket : AppCompatActivity() {
         setContentView(R.layout.activity_buy_ticket)
 
         club = intent.getSerializableExtra("club") as Club
+        val events = ObjectLoader.getEvents(this).filter { event -> event.club?.id == club?.id }
 
         val clubName = findViewById<TextView>(R.id.BuyTicketClubName)
         val clubAddress = findViewById<TextView>(R.id.BuyTicketClubAddress)
@@ -84,19 +86,29 @@ class BuyTicket : AppCompatActivity() {
 
 
                 if (day.owner == DayOwner.THIS_MONTH) {
-                    val isOpened = day.date.dayOfWeek.ordinal == 5
+                    val isThereEvent = events.any { event -> isSameDate(event.date, day.date) }
+                    val isOpened = day.date.dayOfWeek.ordinal == 5 || isThereEvent
                     val isFuture =
                         day.date.isAfter(LocalDate.now()) || day.date.isEqual(LocalDate.now())
                     if (day.date == container.selectedDate && isOpened && isFuture) {
                         selectedDate = day
                         if (amountOfTableTicket > 0 || amountOfSimpleTicket > 0)
                             payButton.isEnabled = true
-                        lastHighlighted?.setTextColor(Color.BLACK)
+
+                        lastHighlighted?.setTextColor(if (lastHighlighted?.tag == true) Color.RED else Color.BLACK)
                         lastHighlighted?.background = null
 
                         textView.setTextColor(Color.WHITE)
                         textView.background = shape
+                        textView.tag = isThereEvent
                         lastHighlighted = textView
+                        if (isThereEvent)
+                            showEvent(events.first { event -> isSameDate(event.date, day.date) })
+                        else
+                            showEvent(null)
+                    } else if (isThereEvent) {
+                        textView.setTextColor(Color.RED)
+                        textView.background = null
                     } else if (!isOpened || !isFuture) {
                         textView.setTextColor(Color.GRAY)
                         textView.background = null
@@ -214,6 +226,23 @@ class BuyTicket : AppCompatActivity() {
                 updateCartTotal()
             }
         })
+    }
+
+    private fun isSameDate(date: Date, localDate: LocalDate): Boolean {
+        val d = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+        return d.dayOfYear == localDate.dayOfYear && d.year == localDate.year
+    }
+
+    private fun showEvent(event: Event?) {
+        val eventLayout = findViewById<FrameLayout>(R.id.BuyTicketEventCardLayout)
+        eventLayout.removeAllViews()
+        eventLayout.visibility = View.GONE
+        if (event != null) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(eventLayout.id, EventElement.newInstance(event, marginless = true))
+            transaction.commit()
+            eventLayout.visibility = View.VISIBLE
+        }
     }
 
     fun updateCartTotal() {

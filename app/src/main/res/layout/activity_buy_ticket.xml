@@ -63,8 +63,101 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Seleziona il giorno"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/BuyTicketClubAddress"
                     app:layout_constraintTop_toBottomOf="@+id/space" />
+
+                <LinearLayout
+                    android:id="@+id/textView5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:text="Eventi:rosso, Giorni apertura: Nero, Chiusura:Grigio"
+                    app:layout_constraintStart_toStartOf="@+id/textView15"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView33"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Eventi:" />
+
+                        <TextView
+                            android:id="@+id/textView35"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_weight="1"
+                            android:text="rosso"
+                            android:textColor="#FF0000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView36"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Giorni di chiusura:" />
+
+                        <TextView
+                            android:id="@+id/grigio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_weight="1"
+                            android:text="grigio"
+                            android:textColor="@android:color/darker_gray" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView38"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Giorni di apertura:" />
+
+                        <TextView
+                            android:id="@+id/textView39"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_weight="1"
+                            android:text="nero"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/BuyTicketEventCardLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarCard">
+
+                </FrameLayout>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/BuyTicketCalendarCard"
@@ -74,8 +167,8 @@
                     android:layout_marginEnd="8dp"
                     android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView15"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15">
+                    app:layout_constraintStart_toStartOf="@+id/textView5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -112,7 +205,7 @@
                     android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="@+id/BuyTicketCalendarCard"
                     app:layout_constraintStart_toStartOf="@+id/BuyTicketCalendarCard"
-                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarCard">
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketEventCardLayout">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
