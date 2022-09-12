@@ -2,7 +2,7 @@
   {
     "address": "Roma, Via del Vascello 11",
     "id": 1,
-    "description": "Una location spaziosa, la migliore musica e drink di alta qualità: tutto questo lo potete trovare al Club '900. Con i nostri frequenti eventi siamo pronti ad accogliervi e farvi ballare tutta la notte non-stop!",
+    "description": "Una location spaziosa, la migliore musica e drink di alta qualità: tutto questo lo potete trovare al Club '901. Con i nostri frequenti eventi siamo pronti ad accogliervi e farvi ballare tutta la notte non-stop!",
     "distanceFromYou": 13,
     "imgUrl": "https://gsud.cdn-immedia.net/2022/07/discoteca-5-625x350-1658693316.jpg",
     "locationType": "Chiuso",
@@ -509,7 +509,7 @@
   {
     "address": "Roma, Via Ambrogio Contarini 11",
     "id": 4,
-    "description": "",
+    "description": "L'Hollywood è il luogo ideale se avete voglia di divertirvi, ballare tutta la notte e conoscere nuove persone ma senza rinunciare al piacere dell'aria aperta. Siamo certi che la nostra ampia location all'aperto e i nostri squisiti drink vi delizieranno.",
     "distanceFromYou": 40,
     "imgUrl": "https://www.affarimiei.biz/wp-content/uploads/2017/07/aprire-una-discoteca.jpg",
     "gpsCords": [
@@ -673,9 +673,9 @@
   {
     "address": "Roma, Via di S. Elena 6",
     "id": 5,
-    "description": "",
+    "description": "Disco Rome è il miglior luogo di ritrovo per i giovani! Decine e decine di persone non vedono l'ora di incontrarvi, fare la vostra conoscenza e ballare con voi, mentre i membri del nostro staff faranno del loro meglio per viziarvi!\nE voi cosa state aspettando?",
     "distanceFromYou": 49,
-    "imgUrl": "https://www.ansa.it/webimages/img_457x/2021/12/23/1e38938b16663ef194717df2e702be87.jpg",
+    "imgUrl": "https://images.agi.it/pictures/agi/agi/2022/02/12/060720124-3f6c6902-8870-4697-aff6-43dc3e5b106c.jpeg",
     "gpsCords": [
       41.89397833883503,
       12.476643923091892
@@ -1012,7 +1012,7 @@
   {
     "address": "Roma, Via Riccardo Zandonai 44",
     "id": 7,
-    "description": "",
+    "description": "Tanti eventi, ospiti da tutta Italia, interni alla moda e innovativi, elaborati giochi di luce e fumo: Disco Glam vi offrirà tutto ciò, per delle serate indimenticabili e di qualità!",
     "distanceFromYou": 35,
     "imgUrl": "https://static.fanpage.it/wp-content/uploads/sites/29/2020/08/discoteca-sesto-senso-brescia.jpg",
     "gpsCords": [
@@ -1254,7 +1254,7 @@
   {
     "address": "Fiumicino (RM), Lungomare della Salute 103",
     "id": 8,
-    "description": "",
+    "description": "Solo al Marea potrete godervi una vera estate indimenticabile! Questa discoteca sulla spiaggia è il luogo perfetto per ballare in una location informale e amichevole, con la compagnia del mare a due passi!\nAl Marea troverete drink super rinfrescanti perfetti per l'estate e un'ottima selezione di musica. Pronti per ballare sulla sabbia?",
     "distanceFromYou": 70,
     "imgUrl": "https://www.lignanosabbiadoro.com/assets/web/images/discoteca-kursaal-lignano.jpg",
     "gpsCords": [
@@ -1408,7 +1408,7 @@
   {
     "address": "Roma, Via Giuseppe Rovani 22",
     "id": 9,
-    "description": "",
+    "description": "Il divertimento è assicurato all'EDM Pop Club! In questo ospitale locale si trova la migliore musica elettronica di Roma, accompagnata da prezzi modici e buonissimi drink. Vi aspettiamo per ballare insieme fino a notte tarda!",
     "distanceFromYou": 53,
     "imgUrl": "https://www.larena.it/image/policy:1.9555490:1659608408/La+violenza+%25C3%25A8+avvenuta+fuori+da+una+discoteca+di+Gabicce.jpg?f=default&w=1024&$p$f$w=4f44181",
     "gpsCords": [
@@ -1616,7 +1616,7 @@
   {
     "address": "Guidonia Montecelio (RM), Via Pantano 12",
     "id": 10,
-    "description": "",
+    "description": "Red Night non vede l'ora di accogliervi!\nAnche la più grande discoteca di Guidonia sbarca su Disco-Ticket, e noi non aspettiamo altro che veniate a trovarci. Il solito luogo, il solito gentilisso staff e il solito divertimento tutta la notte vi attendono!",
     "distanceFromYou": 64,
     "imgUrl": "https://www.supersud.it/wp-content/uploads/2020/05/Discoteca.jpg",
     "gpsCords": [
