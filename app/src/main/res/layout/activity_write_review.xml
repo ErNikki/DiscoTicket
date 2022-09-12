@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="Descrizione"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,23 +38,34 @@
 
     <EditText
         android:id="@+id/writeReviewDescriptionText"
-        android:layout_width="391dp"
-        android:layout_height="217dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/customborder"
         android:ems="10"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writeReviewDescriptionLabel" />
 
-    <LinearLayout
-        android:layout_width="391dp"
-        android:layout_height="154dp"
+    <ScrollView
+        android:id="@+id/writeReviewScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/writeReviewDescriptionText"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/writeReviewDescriptionText">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

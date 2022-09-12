@@ -12,5 +12,7 @@ class WriteReview : AppCompatActivity() {
 
         val club = intent.getSerializableExtra("club") as Club
 
+
+
     }
 }
