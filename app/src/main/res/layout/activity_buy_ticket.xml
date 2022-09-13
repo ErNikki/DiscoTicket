@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/BuyTicketClubAddress" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/BuyTicketCalendarAction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Seleziona il giorno"
@@ -68,13 +68,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/space" />
 
                 <LinearLayout
-                    android:id="@+id/textView5"
+                    android:id="@+id/BuyTicketCalendarLegend"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:text="Eventi:rosso, Giorni apertura: Nero, Chiusura:Grigio"
-                    app:layout_constraintStart_toStartOf="@+id/textView15"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15">
+                    app:layout_constraintStart_toStartOf="@+id/BuyTicketCalendarAction"
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarAction">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -166,9 +166,10 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="8dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5">
+                    app:layout_constraintStart_toStartOf="@+id/BuyTicketCalendarLegend"
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarLegend">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,8 +204,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:padding="8dp"
-                    app:layout_constraintEnd_toEndOf="@+id/BuyTicketCalendarCard"
-                    app:layout_constraintStart_toStartOf="@+id/BuyTicketCalendarCard"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/BuyTicketEventCardLayout">
 
                     <androidx.constraintlayout.widget.ConstraintLayout

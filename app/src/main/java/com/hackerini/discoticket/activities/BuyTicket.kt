@@ -9,9 +9,11 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.DayViewContainer
@@ -27,6 +29,7 @@ import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -41,12 +44,14 @@ class BuyTicket : AppCompatActivity() {
     private var amountOfSimpleTicket = 0
     private var amountOfTableTicket = 0
     private var club: Club? = null
+    private var event: Event? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy_ticket)
 
         club = intent.getSerializableExtra("club") as Club
+        event = intent.getSerializableExtra("event") as Event?
         val events = ObjectLoader.getEvents(this).filter { event -> event.club?.id == club?.id }
 
         val clubName = findViewById<TextView>(R.id.BuyTicketClubName)
@@ -79,6 +84,7 @@ class BuyTicket : AppCompatActivity() {
                 container.day = day
                 textView.text = day.date.dayOfMonth.toString()
                 textView.visibility = View.VISIBLE
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_PT, 12F)
 
                 val shape = GradientDrawable()
                 shape.cornerRadius = 20F
@@ -98,6 +104,7 @@ class BuyTicket : AppCompatActivity() {
                         lastHighlighted?.setTextColor(if (lastHighlighted?.tag == true) Color.RED else Color.BLACK)
                         lastHighlighted?.background = null
 
+                        textView.setTypeface(null, Typeface.BOLD)
                         textView.setTextColor(Color.WHITE)
                         textView.background = shape
                         textView.tag = isThereEvent
@@ -107,6 +114,7 @@ class BuyTicket : AppCompatActivity() {
                         else
                             showEvent(null)
                     } else if (isThereEvent) {
+                        textView.setTypeface(null, Typeface.BOLD)
                         textView.setTextColor(Color.RED)
                         textView.background = null
                     } else if (!isOpened || !isFuture) {
@@ -129,6 +137,12 @@ class BuyTicket : AppCompatActivity() {
                     month.yearMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
                         .replaceFirstChar(Char::uppercase) + " " + month.year
             }
+        }
+
+        if (event != null) {
+            findViewById<TextView>(R.id.BuyTicketCalendarAction).visibility = View.GONE
+            findViewById<LinearLayout>(R.id.BuyTicketCalendarLegend).visibility = View.GONE
+            findViewById<CardView>(R.id.BuyTicketCalendarCard).visibility = View.GONE
         }
 
         val currentMonth = YearMonth.now()
@@ -170,13 +184,17 @@ class BuyTicket : AppCompatActivity() {
             startActivity(intent)
         }
         payButton.setOnClickListener {
+            var formatter = SimpleDateFormat("yyyy-MM-dd")
             if (amountOfTableTicket > 0) {
                 val intent = Intent(this, SelectTable::class.java)
                 intent.putExtra("club", club)
                 intent.putExtra("showMode", false)
                 intent.putExtra("simpleTicket", amountOfSimpleTicket)
                 intent.putExtra("tableTicket", amountOfTableTicket)
-                intent.putExtra("date", selectedDate?.date.toString())
+                if (event == null)
+                    intent.putExtra("date", selectedDate?.date.toString())
+                else
+                    intent.putExtra("date", formatter.format(event!!.date))
                 startActivity(intent)
             } else {
                 val order = Order()
@@ -186,7 +204,10 @@ class BuyTicket : AppCompatActivity() {
                     OrderItem("Ingresso con tavolo", amountOfTableTicket, club!!.tableTicketPrice)
                 order.tickets.add(orderItem0)
                 order.tickets.add(orderItem1)
-                order.date = selectedDate?.date.toString()
+                if (event == null) //2022-09-24
+                    order.date = selectedDate?.date.toString()
+                else
+                    order.date = formatter.format(event!!.date)
                 order.club = club
                 Log.d("CLUB", club?.id.toString())
                 val intent = Intent(applicationContext, Payment::class.java)
@@ -263,7 +284,7 @@ class BuyTicket : AppCompatActivity() {
         }
 
         payButton.isEnabled =
-            (amountOfTableTicket > 0 || amountOfSimpleTicket > 0) && selectedDate != null
+            (amountOfTableTicket > 0 || amountOfSimpleTicket > 0) && (event != null || selectedDate != null)
     }
 
     fun daysOfWeekFromLocale(): Array<DayOfWeek> {

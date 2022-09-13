@@ -53,6 +53,7 @@ class EventDetails : AppCompatActivity() {
         findViewById<Button>(R.id.eventDetailsBuyTicketsButton).setOnClickListener {
             val intent = Intent(this, BuyTicket::class.java)
             intent.putExtra("club", event.club)
+            intent.putExtra("event", event)
             startActivity(intent)
         }
 
