@@ -182,8 +182,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 20,
-    "tableTicketPrice": 84.5
+    "simpleTicketPrice": 20.0,
+    "tableTicketPrice": 42.0
   },
 
   {
@@ -326,8 +326,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 20.5,
-    "tableTicketPrice": 84.4
+    "simpleTicketPrice": 18.5,
+    "tableTicketPrice": 45.0
   },
 
   {
@@ -502,8 +502,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 27.6,
-    "tableTicketPrice": 77.4
+    "simpleTicketPrice": 32.0,
+    "tableTicketPrice": 75.0
   },
 
   {
@@ -666,8 +666,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 22.0,
-    "tableTicketPrice": 57.6
+    "simpleTicketPrice": 14.9,
+    "tableTicketPrice": 39.9
   },
 
   {
@@ -809,8 +809,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 20.0,
-    "tableTicketPrice": 50.0
+    "simpleTicketPrice": 40.0,
+    "tableTicketPrice": 65.0
   },
 
   {
@@ -1005,8 +1005,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 27.6,
-    "tableTicketPrice": 77.4
+    "simpleTicketPrice": 34.0,
+    "tableTicketPrice": 64.0
   },
 
   {
@@ -1247,8 +1247,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 27.6,
-    "tableTicketPrice": 77.4
+    "simpleTicketPrice": 50.0,
+    "tableTicketPrice": 89.0
   },
 
   {
@@ -1401,8 +1401,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 27.6,
-    "tableTicketPrice": 77.4
+    "simpleTicketPrice": 9.9,
+    "tableTicketPrice": 25.0
   },
 
   {
@@ -1609,8 +1609,8 @@
         }
       }
     ],
-    "simpleTicketPrice": 27.6,
-    "tableTicketPrice": 77.4
+    "simpleTicketPrice": 17.0,
+    "tableTicketPrice": 40.0
   },
 
   {
@@ -1796,7 +1796,7 @@
         }
       }
     ],
-    "simpleTicketPrice": 27.6,
-    "tableTicketPrice": 77.4
+    "simpleTicketPrice": 29.0,
+    "tableTicketPrice": 66.0
   }
 ]
