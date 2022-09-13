@@ -74,7 +74,7 @@ class ReviewElement : Fragment() {
         )
         val md = MessageDigest.getInstance("MD5")
         val number = md.digest((user.name + user.surname).toByteArray()).sum()
-        return list[abs(number) % list.size - 1].toInt()
+        return list[abs(number) % list.size].toInt()
     }
 
     companion object {

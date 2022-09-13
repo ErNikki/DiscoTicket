@@ -52,7 +52,7 @@ class AllReview : AppCompatActivity() {
             reviews.filter { r -> r.rating == 1 }.size,
         )
 
-        ratingReviews.createRatingBars(20, BarLabels.STYPE1, colors, raters)
+        ratingReviews.createRatingBars(1, BarLabels.STYPE1, colors, raters)
 
         val transaction = supportFragmentManager.beginTransaction()
         reviews.forEach { review ->

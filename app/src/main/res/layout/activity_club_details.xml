@@ -38,6 +38,7 @@
                     android:layout_marginTop="4dp"
                     android:text="TextView"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage" />
 
@@ -68,16 +69,11 @@
                     android:id="@+id/clubDetailsTotalReviews"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="84dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginStart="7dp"
                     android:text="TextView"
-                    app:layout_constraintBottom_toBottomOf="@+id/clubDeatilsRatingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.238"
-                    app:layout_constraintStart_toEndOf="@+id/clubDeatilsRatingBar"
-                    app:layout_constraintTop_toTopOf="@+id/clubDeatilsRatingBar"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintBottom_toBottomOf="@+id/clubDetailsAvg"
+                    app:layout_constraintStart_toEndOf="@+id/clubDetailsAvg"
+                    app:layout_constraintTop_toTopOf="@+id/clubDetailsAvg" />
 
                 <ImageButton
                     android:id="@+id/clubDetailsFavouritesButton"
@@ -107,7 +103,7 @@
                     android:layout_width="142dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:text="Apri drink menu"
+                    android:text="Apri menù dei drink"
                     android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.954"
@@ -218,6 +214,18 @@
                     android:text="TextView"
                     app:layout_constraintStart_toStartOf="@+id/clubDetailsTagLayout"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailsDistance" />
+
+                <TextView
+                    android:id="@+id/clubDetailsAvg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:text="TextView"
+                    android:textSize="32sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/clubDeatilsRatingBar"
+                    app:layout_constraintStart_toEndOf="@+id/clubDeatilsRatingBar"
+                    app:layout_constraintTop_toTopOf="@+id/clubDeatilsRatingBar" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

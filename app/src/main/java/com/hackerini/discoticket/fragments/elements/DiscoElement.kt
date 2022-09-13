@@ -79,11 +79,17 @@ class DiscoElement : Fragment() {
         val discoRatingAmount = view.findViewById<TextView>(R.id.discoElementReviewAmount)
         val labelLayout = view.findViewById<LinearLayout>(R.id.discoElementLabelsLayout)
 
+        val reviews = club!!.reviews
+        val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
+
         discoName.setText(club?.name)
         discoAddress.setText(club?.address)
-        discoRating.rating = club?.rating!!
-        discoRatingAvg.setText(club?.rating.toString())
-        discoRatingAmount.setText("(" + club?.reviewAmount.toString() + " Recensioni)")
+        //discoRating.rating = club?.rating!!
+        discoRating.rating = average
+        //discoRatingAvg.setText(club?.rating.toString())
+        discoRatingAvg.setText(String.format("%.1f", average))
+        //discoRatingAmount.setText("(" + club?.reviewAmount.toString() + " Recensioni)")
+        discoRatingAmount.setText("(${reviews.size} recensioni)")
 
         val imageSize = 250
         Picasso.get().load(club?.imgUrl).resize(imageSize, imageSize).into(image)
