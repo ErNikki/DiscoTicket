@@ -61,17 +61,6 @@
         }
       },
       {
-        "date": "26/08/2022",
-        "description": "I drink sono annacquati",
-        "images": [
-        ],
-        "rating": 1,
-        "user": {
-          "name": "Stella",
-          "surname": "Esposito"
-        }
-      },
-      {
         "date": "25/08/2022",
         "description": "",
         "images": [
@@ -102,6 +91,17 @@
         "user": {
           "name": "Alessia",
           "surname": "Bonino"
+        }
+      },
+      {
+        "date": "19/08/2022",
+        "description": "I drink sono annacquati",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
         }
       },
       {
@@ -404,7 +404,7 @@
       },
       {
         "date": "24/08/2022",
-        "description": "Veramente costoso",
+        "description": "E' veramente costoso",
         "images": [
         ],
         "rating": 2,
@@ -437,7 +437,7 @@
       },
       {
         "date": "16/08/2022",
-        "description": "",
+        "description": "Non sono stata male, ma il luogo è scomodo da raggiungere e lo staff non è stato gentilissimo. Devo però riconoscere la qualità della location e dei drink.",
         "images": [
         ],
         "rating": 3,
@@ -492,7 +492,7 @@
       },
       {
         "date": "05/08/2022",
-        "description": "",
+        "description": "Bellissimo! Questa è una delle discoteche più particolari e belle che abbia mai visto, sono stato proprio bene",
         "images": [
         ],
         "rating": 5,
@@ -524,7 +524,7 @@
     "reviews": [
       {
         "date": "10/09/2022",
-        "description": "",
+        "description": "La musica non era niente di che, però per una volta è stato carino provare una discoteca completamente all'aperto.",
         "images": [
         ],
         "rating": 3,
@@ -557,7 +557,7 @@
       },
       {
         "date": "27/08/2022",
-        "description": "",
+        "description": "Mi dispiace ma non mi sono divertito, sono stato servito lentamente e faceva pure freddo...",
         "images": [
         ],
         "rating": 1,
@@ -590,7 +590,7 @@
       },
       {
         "date": "25/08/2022",
-        "description": "",
+        "description": "E' stata una serata ottima, sono rimasto a ballare fino a tardi e mi sono divertito. Prezzi onesti.",
         "images": [
         ],
         "rating": 5,
@@ -689,7 +689,7 @@
     "reviews": [
       {
         "date": "11/09/2022",
-        "description": "",
+        "description": "Mi sono trovato bene, lo staff è gentile e ho conosciuto delle persone simpatiche.",
         "images": [
         ],
         "rating": 4,
@@ -733,7 +733,7 @@
       },
       {
         "date": "30/08/2022",
-        "description": "",
+        "description": "Sono andata con degli amici e torneremo sicuramente!!!",
         "images": [
         ],
         "rating": 5,
@@ -766,7 +766,7 @@
       },
       {
         "date": "20/08/2022",
-        "description": "",
+        "description": "La musica non era male e il clima era piuttosto amichevole, però il locale è molto anonimo.",
         "images": [
         ],
         "rating": 3,
@@ -831,7 +831,7 @@
     "reviews": [
       {
         "date": "13/09/2022",
-        "description": "",
+        "description": "Non mi sono mai scatenato così tanto, ero totalmente trasportato dalla musica. Bella la discoteca e il DJ è davvero matto (in senso buono!). Straconsigliata!",
         "images": [
         ],
         "rating": 5,
@@ -853,7 +853,7 @@
       },
       {
         "date": "09/09/2022",
-        "description": "",
+        "description": "Io e i miei amici ci siamo divertiti",
         "images": [
         ],
         "rating": 4,
@@ -897,7 +897,7 @@
       },
       {
         "date": "25/08/2022",
-        "description": "",
+        "description": "E' STATO INCREDIBILE!",
         "images": [
         ],
         "rating": 5,
@@ -908,7 +908,7 @@
       },
       {
         "date": "20/08/2022",
-        "description": "",
+        "description": "Veramente troppo caotico per me, mi sono sentito disorientato per tutto il tempo e costa tanto.",
         "images": [
         ],
         "rating": 2,
@@ -941,7 +941,7 @@
       },
       {
         "date": "17/08/2022",
-        "description": "",
+        "description": "Non so quando questi ragazzi organizzeranno un nuovo evento, ma dovete assolutamente andarci. L'evento di Ferragosto è stato fantastico",
         "images": [
         ],
         "rating": 5,
@@ -963,7 +963,7 @@
       },
       {
         "date": "12/08/2022",
-        "description": "",
+        "description": "Niente male, la gente si è divertita molto e si sono tutti lasciati trasportare. Forse la musica è un po' alta.",
         "images": [
         ],
         "rating": 4,
@@ -1028,7 +1028,7 @@
     "reviews": [
       {
         "date": "16/09/2022",
-        "description": "",
+        "description": "L'evento organizzato per Ferragosto non è stato male, ma considerando che c'era un DJ famoso a suonare mi sarei aspettata un po' di più; alla fine è stata una serata normale come tante altre, peccato. Comunque vi consiglio di andarci e provare voi stessi.",
         "images": [
         ],
         "rating": 3,
@@ -1072,7 +1072,7 @@
       },
       {
         "date": "31/08/2022",
-        "description": "",
+        "description": "In questa discoteca hanno davvero tanta fantasia nell'organizzare serate; anche i drink erano particolarmente buoni.",
         "images": [
         ],
         "rating": 5,
@@ -1094,7 +1094,7 @@
       },
       {
         "date": "30/08/2022",
-        "description": "",
+        "description": "Non solo per qualche motivo stavano per non farci entrare, ma ci sono anche stati dei malfunzionamenti durante la serata. Non ci siamo.",
         "images": [
         ],
         "rating": 1,
@@ -1127,7 +1127,7 @@
       },
       {
         "date": "17/08/2022",
-        "description": "",
+        "description": "Molto divertente, ho ballato fino a tardi e conosciuto delle belle persone.",
         "images": [
         ],
         "rating": 5,
@@ -1182,7 +1182,7 @@
       },
       {
         "date": "09/08/2022",
-        "description": "",
+        "description": "Gli interni sono decisamente particolari e originali, ma anche la sezione all'aperto mi è piaciuta. Credo che ci tornerò, peccato per i prezzi un po' altini ma ne capisco il perché.",
         "images": [
         ],
         "rating": 4,
@@ -1270,7 +1270,7 @@
     "reviews": [
       {
         "date": "05/09/2022",
-        "description": "",
+        "description": "La serata è stata ok, niente di speciale. La location è carina e accogliente ma un po' piccola.",
         "images": [
         ],
         "rating": 3,
@@ -1281,7 +1281,7 @@
       },
       {
         "date": "02/09/2022",
-        "description": "",
+        "description": "Che bello ballare in spiaggia!! Spero di tornarci presto con tutti i miei amici, è forse il locale migliori di tutta Fiumicino!",
         "images": [
         ],
         "rating": 5,
@@ -1347,7 +1347,7 @@
       },
       {
         "date": "17/08/2022",
-        "description": "",
+        "description": "La musica scelta dal DJ è molto particolare, ne sono rimasto piacevolmente sorpreso. Nel complesso è un posto carino, consigliato.",
         "images": [
         ],
         "rating": 4,
@@ -1358,7 +1358,7 @@
       },
       {
         "date": "16/08/2022",
-        "description": "",
+        "description": "Mi sa che i drink sono annacquati",
         "images": [
         ],
         "rating": 3,
@@ -1423,7 +1423,7 @@
     "reviews": [
       {
         "date": "13/09/2022",
-        "description": "",
+        "description": "Se siete appassionati di musica elettronica e ascoltate anche qualcosa più di nicchia, allora vi consiglio di provare questa discoteca, ne rimarrete soddisfatti",
         "images": [
         ],
         "rating": 4,
@@ -1467,7 +1467,7 @@
       },
       {
         "date": "31/08/2022",
-        "description": "",
+        "description": "Mi aspettavo qualcosa di più, locali e drink sono normali ma il barman è stato un po' burbero",
         "images": [
         ],
         "rating": 2,
@@ -1522,7 +1522,7 @@
       },
       {
         "date": "19/08/2022",
-        "description": "",
+        "description": "Il posto è abbastanza carino, l'evento speciale organizzato in discoteca per Ferragosto è stato divertente; ve la consiglio anche per la scelta di musica particolare, i brani sono piuttosto inusuali.",
         "images": [
         ],
         "rating": 4,
@@ -1566,7 +1566,7 @@
       },
       {
         "date": "11/08/2022",
-        "description": "",
+        "description": "Si potrebbe fare un pochino di meglio con i drink, ma sono stata abbastanza bene.",
         "images": [
         ],
         "rating": 3,
@@ -1632,7 +1632,7 @@
     "reviews": [
       {
         "date": "11/09/2022",
-        "description": "",
+        "description": "Sono super soddisfatto, non pensavo Guidonia ospitasse una discoteca simile!!",
         "images": [
         ],
         "rating": 5,
@@ -1665,7 +1665,7 @@
       },
       {
         "date": "01/09/2022",
-        "description": "",
+        "description": "Faccio i complimenti ai proprietari della discoteca, è veramente grande e spaziosa. Il prezzo del biglietto è un po' alto, però i miei amici si sono divertiti tutti quanti",
         "images": [
         ],
         "rating": 4,
@@ -1709,7 +1709,7 @@
       },
       {
         "date": "22/08/2022",
-        "description": "",
+        "description": "Tutto in questa discoteca è di alta qualità, se siete di Guidonia e dintorni non avete motivo di non andarci!",
         "images": [
         ],
         "rating": 5,
@@ -1720,7 +1720,7 @@
       },
       {
         "date": "20/08/2022",
-        "description": "",
+        "description": "LOCALE PAZZESCO!",
         "images": [
         ],
         "rating": 5,
@@ -1742,7 +1742,7 @@
       },
       {
         "date": "15/08/2022",
-        "description": "",
+        "description": "Mi è sembrata una discoteca come tante altre, solo che ha dei prezzi esorbitanti",
         "images": [
         ],
         "rating": 2,
