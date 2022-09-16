@@ -1,17 +1,50 @@
 package com.hackerini.discoticket.objects
 
+import androidx.room.*
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Review : Serializable {
-    var user: User = User()
-    var rating: Int = (1..10).random()
-    var date = SimpleDateFormat("dd/MM/yyy").format(Date())
-    var description: String =
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    var images = arrayOf(
+@Entity
+class Review(
+    @PrimaryKey(autoGenerate = true) val reviewId: Int,
+    @ColumnInfo val userCreatorId : Int,
+    @ColumnInfo val rating : Int,
+    @ColumnInfo val date: String = SimpleDateFormat("dd/MM/yyy").format(Date()),
+    @ColumnInfo val description : String
+    ) : Serializable {
+
+    /*var images = arrayOf(
         "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
         "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
+    )*/
+
+}
+
+
+data class UserWithReviews(
+    @Embedded val user : User,
+    @Relation(
+        parentColumn = "userId",
+        entityColumn = "userCreatorId"
     )
+    val reviews : List<Review>
+    ):Serializable {
+
+}
+
+
+@Dao
+interface ReviewDao{
+    @Query("SELECT * FROM review")
+    fun getAll(): List<Review>
+
+    /*@Transaction
+    @Query("SELECT * FROM ")*/
+
+    @Insert
+    fun insert()
+
+    @Delete
+    fun delete()
 }
