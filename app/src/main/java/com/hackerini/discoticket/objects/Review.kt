@@ -14,4 +14,9 @@ class Review : Serializable {
         "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
         "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
     )
+
+    public fun getLongTime(): Long {
+        val localDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(this.date)
+        return localDate.time
+    }
 }
