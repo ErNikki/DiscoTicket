@@ -1,21 +1,32 @@
 package com.hackerini.discoticket.activities
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.location.LocationManager
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.Gravity
+import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.setPadding
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.SearchResult.Companion.getElementToShow
 import com.hackerini.discoticket.fragments.views.Filter
+import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.ElementToShow
+import com.hackerini.discoticket.objects.Event
 import com.hackerini.discoticket.objects.FilterCriteria
 import com.hackerini.discoticket.utils.ObjectLoader
 import org.osmdroid.config.Configuration
@@ -23,12 +34,15 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.infowindow.InfoWindow
+import java.util.*
 
 
-class SearchByMap : AppCompatActivity(), Marker.OnMarkerClickListener {
+class SearchByMap : AppCompatActivity() {
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
     private var map: MapView? = null
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,7 +54,12 @@ class SearchByMap : AppCompatActivity(), Marker.OnMarkerClickListener {
         map?.setTileSource(TileSourceFactory.MAPNIK)
         map?.setBuiltInZoomControls(true)
         map?.setMultiTouchControls(true)
-
+        map?.setOnTouchListener { v, event ->
+            map?.overlays?.forEach { e ->
+                (e as Marker).infoWindow.close()
+            }
+            false
+        }
 
         requestPermissionsIfNecessary(
             arrayOf(
@@ -52,7 +71,6 @@ class SearchByMap : AppCompatActivity(), Marker.OnMarkerClickListener {
 
             )
         )
-
 
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ActivityCompat.checkSelfPermission(
@@ -97,42 +115,51 @@ class SearchByMap : AppCompatActivity(), Marker.OnMarkerClickListener {
 
     private fun loadContent(elementToShow: ElementToShow) {
         map?.overlays?.clear()
-
-        if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
-            val drawable =
-                ContextCompat.getDrawable(this, R.drawable.ic_baseline_club_location_on_24)
-            val clubs = ObjectLoader.getClubs(applicationContext)
-            clubs.forEach { item ->
-                val marker = Marker(map)
-                marker.position = GeoPoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
-                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
-                marker.title = item.name
-                marker.icon = drawable
-                marker.setOnMarkerClickListener(this)
-                map?.overlays?.add(marker)
-            }
-        }
+        val addedClubIds = LinkedList<Int>()
 
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
             val drawable =
-                ContextCompat.getDrawable(this, R.drawable.ic_baseline_event_location_on_24)
+                ContextCompat.getDrawable(this, R.drawable.map_pin_icon_event)
             val events = ObjectLoader.getEvents(applicationContext)
             events.forEach { item ->
                 val marker = Marker(map)
                 item.club?.let {
                     marker.position = GeoPoint(
-                        it.gpsCords[0].toDouble() + 0.0001,
-                        it.gpsCords[1].toDouble() + 0.0001
+                        it.gpsCords[0].toDouble(),
+                        it.gpsCords[1].toDouble()
                     )
                     marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
-                    marker.icon = drawable
                     marker.title = item.name
-                    marker.setOnMarkerClickListener(this)
+                    marker.icon = drawable
+                    marker.infoWindow = MyInfoWindows.create(this, item, map)
                     map?.overlays?.add(marker)
+                    addedClubIds.add(item.clubId)
                 }
 
             }
         }
+
+        if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
+            val drawable =
+                ContextCompat.getDrawable(this, R.drawable.map_pin_icon_club)
+            val clubs = ObjectLoader.getClubs(applicationContext)
+            clubs.forEach { item ->
+                if (!addedClubIds.contains(item.id)) {
+                    val marker = Marker(map)
+                    marker.position =
+                        GeoPoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
+                    marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+                    marker.title = item.name
+                    marker.icon = drawable
+                    marker.infoWindow = MyInfoWindows.create(this, item, map)
+                    map?.overlays?.add(marker)
+                }
+            }
+        }
+
+        map?.invalidate()
+
+
     }
 
     override fun onRequestPermissionsResult(
@@ -182,28 +209,79 @@ class SearchByMap : AppCompatActivity(), Marker.OnMarkerClickListener {
         super.onPause()
         map?.onPause()
     }
+}
 
-    override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
-        if (marker != null) {
-            val clubs = ObjectLoader.getClubs(this)
-            val selectedClub = clubs.firstOrNull { club -> club.name == marker.title }
-            if (selectedClub != null) {
-                val intent = Intent(this, ClubDetails::class.java)
-                intent.putExtra("club", selectedClub)
-                startActivity(intent)
-                return true
-            }
+private class MyInfoWindows(view: View, mapView: MapView?) : InfoWindow(view, mapView) {
+    override fun onOpen(item: Any?) {
+    }
 
-            val events = ObjectLoader.getEvents(this)
-            val selectedEvents = events.firstOrNull { event -> event.name == marker.title }
-            if (selectedEvents != null) {
-                val intent = Intent(this, EventDetails::class.java)
-                intent.putExtra("event", selectedEvents)
-                startActivity(intent)
-                return true
+    override fun onClose() {
+    }
+
+    companion object {
+        fun create(context: Context, event: Event, mapView: MapView?): MyInfoWindows {
+            val shape = GradientDrawable()
+            shape.cornerRadius = 20F
+            shape.setColor(Color.WHITE)
+            shape.setStroke(3, Color.BLACK)
+
+            val ll = LinearLayout(context)
+            ll.orientation = LinearLayout.VERTICAL
+            val eventName = TextView(context)
+            eventName.text = event.name
+            eventName.textSize = 24.0F
+            val clubName = TextView(context)
+            clubName.text = "Al " + event.club?.name
+            clubName.textSize = 14.0F
+            val buttonEvent = MaterialButton(context)
+            buttonEvent.text = "Info evento"
+            val buttonClub = MaterialButton(context)
+            buttonClub.text = "Info club"
+            ll.addView(eventName)
+            ll.addView(clubName)
+            ll.addView(buttonEvent)
+            ll.addView(buttonClub)
+            ll.background = shape
+            ll.setPadding(10)
+
+            ll.gravity = Gravity.CENTER_VERTICAL
+            buttonEvent.setOnClickListener {
+                val intent = Intent(context, EventDetails::class.java)
+                intent.putExtra("event", event)
+                context.startActivity(intent)
             }
+            buttonClub.setOnClickListener {
+                val intent = Intent(context, ClubDetails::class.java)
+                intent.putExtra("club", event.club!!)
+                context.startActivity(intent)
+            }
+            return MyInfoWindows(ll, mapView)
         }
-        return false
+
+        fun create(context: Context, club: Club, mapView: MapView?): MyInfoWindows {
+            val shape = GradientDrawable()
+            shape.cornerRadius = 20F
+            shape.setColor(Color.WHITE)
+
+            val ll = LinearLayout(context)
+            ll.orientation = LinearLayout.VERTICAL
+            val title = TextView(context)
+            title.text = club.name
+            title.textSize = 24F
+            val button = MaterialButton(context)
+            button.text = "Info"
+            ll.addView(title)
+            ll.addView(button)
+            ll.background = shape
+            ll.setPadding(10)
+            ll.gravity = Gravity.CENTER_VERTICAL
+            button.setOnClickListener {
+                val intent = Intent(context, ClubDetails::class.java)
+                intent.putExtra("club", club)
+                context.startActivity(intent)
+            }
+            return MyInfoWindows(ll, mapView)
+        }
     }
 
 }
