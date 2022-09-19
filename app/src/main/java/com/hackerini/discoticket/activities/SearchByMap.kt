@@ -139,43 +139,43 @@ class SearchByMap : AppCompatActivity() {
                     elements.add(e)
                 }
             }
+        }
 
-            val drawableEvent =
-                ContextCompat.getDrawable(this, R.drawable.map_pin_icon_event)
-            val drawableClub =
-                ContextCompat.getDrawable(this, R.drawable.map_pin_icon_club)
+        val drawableEvent =
+            ContextCompat.getDrawable(this, R.drawable.map_pin_icon_event)
+        val drawableClub =
+            ContextCompat.getDrawable(this, R.drawable.map_pin_icon_club)
 
-            filterCriteria.filter(elements).forEach { item ->
+        filterCriteria.filter(elements).forEach { item ->
 
-                if (item is Event) {
-                    val marker = Marker(map)
-                    item.club?.let {
-                        marker.position = GeoPoint(
-                            it.gpsCords[0].toDouble(),
-                            it.gpsCords[1].toDouble()
-                        )
-                        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
-                        marker.title = item.name
-                        marker.icon = drawableEvent
-                        marker.infoWindow = MyInfoWindows.create(this, item, map)
-                        map?.overlays?.add(marker)
-                    }
-                } else if (item is Club) {
-                    val marker = Marker(map)
-                    marker.position =
-                        GeoPoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
+            if (item is Event) {
+                val marker = Marker(map)
+                item.club?.let {
+                    marker.position = GeoPoint(
+                        it.gpsCords[0].toDouble(),
+                        it.gpsCords[1].toDouble()
+                    )
                     marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
                     marker.title = item.name
-                    marker.icon = drawableClub
+                    marker.icon = drawableEvent
                     marker.infoWindow = MyInfoWindows.create(this, item, map)
                     map?.overlays?.add(marker)
                 }
+            } else if (item is Club) {
+                val marker = Marker(map)
+                marker.position =
+                    GeoPoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+                marker.title = item.name
+                marker.icon = drawableClub
+                marker.infoWindow = MyInfoWindows.create(this, item, map)
+                map?.overlays?.add(marker)
             }
-
-            map?.invalidate()
-
-
         }
+
+        map?.invalidate()
+
+
     }
 
     override fun onRequestPermissionsResult(
