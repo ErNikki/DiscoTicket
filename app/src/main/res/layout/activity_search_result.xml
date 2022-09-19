@@ -100,11 +100,13 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Ordina per:"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toBottomOf="@+id/SearchResultOrderSpinner"
         app:layout_constraintEnd_toStartOf="@+id/SearchResultOrderSpinner"
+        app:layout_constraintStart_toEndOf="@+id/SearchResultFilterButton"
         app:layout_constraintTop_toTopOf="@+id/SearchResultOrderSpinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
