@@ -6,32 +6,40 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
+import android.preference.PreferenceManager
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import com.google.android.material.chip.Chip
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.SearchResult.Companion.getElementToShow
 import com.hackerini.discoticket.fragments.views.Filter
-import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.ElementToShow
 import com.hackerini.discoticket.objects.FilterCriteria
 import com.hackerini.discoticket.utils.ObjectLoader
-import com.microsoft.maps.*
+import org.osmdroid.config.Configuration
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.Marker
 
 
-class SearchByMap : AppCompatActivity() {
+class SearchByMap : AppCompatActivity(), Marker.OnMarkerClickListener {
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
-    private var mMapView: MapView? = null
-
-    private val pinLayer = MapElementLayer()
+    private var map: MapView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val ctx = applicationContext
+        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
+        setContentView(R.layout.activity_search_by_map)
+
+        map = findViewById(R.id.SearchByMapMap)
+        map?.setTileSource(TileSourceFactory.MAPNIK)
+        map?.setBuiltInZoomControls(true)
+        map?.setMultiTouchControls(true)
 
 
         requestPermissionsIfNecessary(
@@ -45,14 +53,6 @@ class SearchByMap : AppCompatActivity() {
             )
         )
 
-
-        setContentView(R.layout.activity_search_by_map)
-
-        mMapView = MapView(this, MapRenderMode.VECTOR)
-        mMapView?.setCredentialsKey("AhkGU_SdJLTmYKYZortAP7pRMmQU_Rt_VQV6Q9b-XxWa9aepqjcgCo_BcXbO4wMm")
-        findViewById<LinearLayout>(R.id.SearchResultByMapMap).addView(mMapView)
-        mMapView?.onCreate(savedInstanceState)
-        mMapView?.layers?.add(pinLayer)
 
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ActivityCompat.checkSelfPermission(
@@ -68,18 +68,14 @@ class SearchByMap : AppCompatActivity() {
         }
         val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         if (location != null) {
-            val geopoint = Geopoint(location.latitude, location.longitude)
-            mMapView?.setScene(
-                MapScene.createFromLocationAndZoomLevel(geopoint, 10.0),
-                MapAnimationKind.NONE
-            )
+            val mapController = map?.controller
+            mapController?.setZoom(11.5)
+            val startPoint = GeoPoint(location.latitude, location.longitude)
+            mapController?.setCenter(startPoint)
         }
 
         val discoChip = findViewById<Chip>(R.id.searchResultMapClubChip)
         val eventChip = findViewById<Chip>(R.id.searchResultMapEventChip)
-        discoChip.setOnClickListener {
-            Log.d("CIAO", "CIAO")
-        }
         discoChip.setOnCheckedChangeListener { _, _ ->
             val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
             loadContent(elementToShow)
@@ -95,52 +91,48 @@ class SearchByMap : AppCompatActivity() {
             filterFragment.show(supportFragmentManager, "prova")
         }
         loadContent(ElementToShow.ALL)
+
     }
 
+
     private fun loadContent(elementToShow: ElementToShow) {
-        pinLayer.elements.clear()
+        map?.overlays?.clear()
 
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
-            val drawable = ContextCompat.getDrawable(this,R.drawable.ic_baseline_club_location_on_24)
+            val drawable =
+                ContextCompat.getDrawable(this, R.drawable.ic_baseline_club_location_on_24)
             val clubs = ObjectLoader.getClubs(applicationContext)
             clubs.forEach { item ->
-                val pin = MapIcon()
-                pin.location = Geopoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
-                pin.title = item.name
-                pin.tag = item
-                pin.image = MapImage(drawable!!.toBitmap())
-                pinLayer.elements.add(pin)
+                val marker = Marker(map)
+                marker.position = GeoPoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+                marker.title = item.name
+                marker.icon = drawable
+                marker.setOnMarkerClickListener(this)
+                map?.overlays?.add(marker)
             }
         }
+
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
-            val drawable = ContextCompat.getDrawable(this,R.drawable.ic_baseline_event_location_on_24)
-            val clubs = ObjectLoader.getClubs(applicationContext)
-            clubs.forEach { item ->
-                val pin = MapIcon()
-                pin.location = Geopoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
-                pin.title = item.name
-                pin.tag = item
-                pin.image = MapImage(drawable!!.toBitmap())
-                pinLayer.elements.add(pin)
-            }
-        }
-
-        mMapView?.addOnMapTappedListener { mapTappedEventArgs ->
-            val position = mapTappedEventArgs.position
-            val elements = mMapView?.findMapElementsAtOffset(position)
-            if (elements != null) {
-                for (mapElement in elements) {
-                    if (mapElement is MapIcon) {
-                        val intent = Intent(this, ClubDetails::class.java)
-                        intent.putExtra("club", mapElement.tag as Club)
-                        startActivity(intent)
-                        break
-                    }
+            val drawable =
+                ContextCompat.getDrawable(this, R.drawable.ic_baseline_event_location_on_24)
+            val events = ObjectLoader.getEvents(applicationContext)
+            events.forEach { item ->
+                val marker = Marker(map)
+                item.club?.let {
+                    marker.position = GeoPoint(
+                        it.gpsCords[0].toDouble() + 0.0001,
+                        it.gpsCords[1].toDouble() + 0.0001
+                    )
+                    marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+                    marker.icon = drawable
+                    marker.title = item.name
+                    marker.setOnMarkerClickListener(this)
+                    map?.overlays?.add(marker)
                 }
-            }
-            false
-        }
 
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -181,39 +173,37 @@ class SearchByMap : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        mMapView?.onStart()
-    }
-
     override fun onResume() {
         super.onResume()
-        mMapView?.onResume()
+        map?.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        mMapView?.onPause()
+        map?.onPause()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mMapView?.onSaveInstanceState(outState);
-    }
+    override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
+        if (marker != null) {
+            val clubs = ObjectLoader.getClubs(this)
+            val selectedClub = clubs.firstOrNull { club -> club.name == marker.title }
+            if (selectedClub != null) {
+                val intent = Intent(this, ClubDetails::class.java)
+                intent.putExtra("club", selectedClub)
+                startActivity(intent)
+                return true
+            }
 
-    override fun onStop() {
-        super.onStop()
-        mMapView?.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mMapView?.onDestroy()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        //mMapView?.onLowMemory()
+            val events = ObjectLoader.getEvents(this)
+            val selectedEvents = events.firstOrNull { event -> event.name == marker.title }
+            if (selectedEvents != null) {
+                val intent = Intent(this, EventDetails::class.java)
+                intent.putExtra("event", selectedEvents)
+                startActivity(intent)
+                return true
+            }
+        }
+        return false
     }
 
 }

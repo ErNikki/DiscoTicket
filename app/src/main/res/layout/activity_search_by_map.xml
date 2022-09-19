@@ -71,4 +71,13 @@
 
     </com.google.android.material.chip.ChipGroup>
 
+    <org.osmdroid.views.MapView
+        android:id="@+id/SearchByMapMap"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/SearchResultByMapMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
