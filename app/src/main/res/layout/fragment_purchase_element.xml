@@ -71,6 +71,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Info discoteca"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="@+id/PurchaseElementOpenQR"
                 app:layout_constraintEnd_toStartOf="@+id/PurchaseElementOpenQR"
                 app:layout_constraintStart_toEndOf="@+id/PurchaseElementImage"
