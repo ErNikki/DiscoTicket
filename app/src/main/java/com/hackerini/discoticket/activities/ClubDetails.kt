@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentContainerView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Review
 import com.squareup.picasso.Picasso
 
 class ClubDetails : AppCompatActivity() {
@@ -40,7 +41,7 @@ class ClubDetails : AppCompatActivity() {
         val distance = findViewById<TextView>(R.id.clubDetailsDistance)
 
         val reviews = club!!.reviews
-        val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
+        val average = reviews.sumOf { r:Review -> r.rating } / reviews.size.toFloat()
 
         clubName.text = club!!.name
         address.text = club!!.address

@@ -9,10 +9,13 @@ import java.util.*
 class Review(
     @PrimaryKey(autoGenerate = true) val reviewId: Int,
     @ColumnInfo val userCreatorId : Int,
-    @ColumnInfo val rating : Int,
-    @ColumnInfo val date: String = SimpleDateFormat("dd/MM/yyy").format(Date()),
+    @ColumnInfo val rating : Float,
+    @ColumnInfo val date: String ,
     @ColumnInfo val description : String
+
     ) : Serializable {
+    constructor(userId: Int, rating: Float, description: String) : this(0, userId, rating, SimpleDateFormat("dd/MM/yyy").format(Date()), description)
+
 
     /*var images = arrayOf(
         "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
@@ -25,7 +28,7 @@ class Review(
 data class UserWithReviews(
     @Embedded val user : User,
     @Relation(
-        parentColumn = "userId",
+        parentColumn = "id",
         entityColumn = "userCreatorId"
     )
     val reviews : List<Review>
@@ -36,15 +39,20 @@ data class UserWithReviews(
 
 @Dao
 interface ReviewDao{
-    @Query("SELECT * FROM review")
-    fun getAll(): List<Review>
+    @Query("SELECT * FROM 'Review' ")
+    fun getAllReviews(): List<Review>
 
-    /*@Transaction
-    @Query("SELECT * FROM ")*/
+    @Transaction
+    @Query("SELECT * FROM 'User' ")
+    fun getUsersReviews(): List<UserWithReviews>
+
+    @Transaction
+    @Query("SELECT * FROM 'User' Where id=:id")
+    fun getAllReviewsOfUser(id : Int): UserWithReviews
 
     @Insert
-    fun insert()
+    fun insert(review : Review)
 
     @Delete
-    fun delete()
+    fun delete(review : Review)
 }
