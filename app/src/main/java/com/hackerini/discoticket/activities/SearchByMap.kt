@@ -41,6 +41,7 @@ import java.util.*
 class SearchByMap : AppCompatActivity() {
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
     private var map: MapView? = null
+    private var filterCriteria = FilterCriteria()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,71 +96,86 @@ class SearchByMap : AppCompatActivity() {
         val discoChip = findViewById<Chip>(R.id.searchResultMapClubChip)
         val eventChip = findViewById<Chip>(R.id.searchResultMapEventChip)
         discoChip.setOnCheckedChangeListener { _, _ ->
-            val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
-            loadContent(elementToShow)
+            filterCriteria.elementToShow =
+                getElementToShow(discoChip.isChecked, eventChip.isChecked)
+            loadContent()
         }
         eventChip.setOnCheckedChangeListener { _, _ ->
-            val elementToShow = getElementToShow(discoChip.isChecked, eventChip.isChecked)
-            loadContent(elementToShow)
+            filterCriteria.elementToShow =
+                getElementToShow(discoChip.isChecked, eventChip.isChecked)
+            loadContent()
         }
         findViewById<Button>(R.id.SearchResultMapFilterButton).setOnClickListener {
             //Instead to pass the String ciao, you will pass and object with the current search criteria
-            val filterCriteria = FilterCriteria()
             val filterFragment = Filter.newInstance(filterCriteria)
+            filterFragment.onOkClicked = { a ->
+                this.filterCriteria = a
+                loadContent()
+            }
             filterFragment.show(supportFragmentManager, "prova")
         }
-        loadContent(ElementToShow.ALL)
+        filterCriteria.elementToShow = ElementToShow.ALL
+        loadContent()
 
     }
 
 
-    private fun loadContent(elementToShow: ElementToShow) {
+    private fun loadContent() {
         map?.overlays?.clear()
         val addedClubIds = LinkedList<Int>()
+        val elementToShow = filterCriteria.elementToShow
+        val elements = LinkedList<Any>()
 
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
-            val drawable =
-                ContextCompat.getDrawable(this, R.drawable.map_pin_icon_event)
-            val events = ObjectLoader.getEvents(applicationContext)
-            events.forEach { item ->
-                val marker = Marker(map)
-                item.club?.let {
-                    marker.position = GeoPoint(
-                        it.gpsCords[0].toDouble(),
-                        it.gpsCords[1].toDouble()
-                    )
-                    marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
-                    marker.title = item.name
-                    marker.icon = drawable
-                    marker.infoWindow = MyInfoWindows.create(this, item, map)
-                    map?.overlays?.add(marker)
-                    addedClubIds.add(item.clubId)
-                }
-
+            for (e in ObjectLoader.getEvents(applicationContext)) {
+                elements.add(e)
+                addedClubIds.add(e.clubId)
             }
         }
 
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
-            val drawable =
+            for (e in ObjectLoader.getClubs(applicationContext)) {
+                if (!addedClubIds.contains(e.id)) {
+                    elements.add(e)
+                }
+            }
+
+            val drawableEvent =
+                ContextCompat.getDrawable(this, R.drawable.map_pin_icon_event)
+            val drawableClub =
                 ContextCompat.getDrawable(this, R.drawable.map_pin_icon_club)
-            val clubs = ObjectLoader.getClubs(applicationContext)
-            clubs.forEach { item ->
-                if (!addedClubIds.contains(item.id)) {
+
+            filterCriteria.filter(elements).forEach { item ->
+
+                if (item is Event) {
+                    val marker = Marker(map)
+                    item.club?.let {
+                        marker.position = GeoPoint(
+                            it.gpsCords[0].toDouble(),
+                            it.gpsCords[1].toDouble()
+                        )
+                        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+                        marker.title = item.name
+                        marker.icon = drawableEvent
+                        marker.infoWindow = MyInfoWindows.create(this, item, map)
+                        map?.overlays?.add(marker)
+                    }
+                } else if (item is Club) {
                     val marker = Marker(map)
                     marker.position =
                         GeoPoint(item.gpsCords[0].toDouble(), item.gpsCords[1].toDouble())
                     marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
                     marker.title = item.name
-                    marker.icon = drawable
+                    marker.icon = drawableClub
                     marker.infoWindow = MyInfoWindows.create(this, item, map)
                     map?.overlays?.add(marker)
                 }
             }
+
+            map?.invalidate()
+
+
         }
-
-        map?.invalidate()
-
-
     }
 
     override fun onRequestPermissionsResult(

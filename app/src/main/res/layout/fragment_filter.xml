@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minWidth="300dp"
         android:padding="10dp">
 
         <TextView
@@ -44,10 +45,8 @@
         <com.google.android.material.slider.RangeSlider
             android:id="@+id/filterPriceRange"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:max="10"
             android:stepSize="10"
             android:valueFrom="0"
@@ -72,7 +71,6 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:stepSize="10"
             android:value="50.0"
