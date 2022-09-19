@@ -60,22 +60,22 @@
                 android:id="@+id/PurchaseElementOpenQR"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="Apri QR Code"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@+id/PurchaseElementInfo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/PurchaseElementInfo"
+                app:layout_constraintTop_toTopOf="@+id/PurchaseElementInfo" />
 
             <Button
                 android:id="@+id/PurchaseElementInfo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
                 android:text="Info discoteca"
                 android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/PurchaseElementOpenQR"
-                app:layout_constraintEnd_toStartOf="@+id/PurchaseElementOpenQR"
-                app:layout_constraintStart_toEndOf="@+id/PurchaseElementImage"
-                app:layout_constraintTop_toTopOf="@+id/PurchaseElementOpenQR" />
+                app:layout_constraintStart_toStartOf="@+id/PurchaseElementDate"
+                app:layout_constraintTop_toBottomOf="@+id/PurchaseElementDate" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
