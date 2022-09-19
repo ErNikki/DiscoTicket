@@ -78,7 +78,10 @@
             android:layout_height="wrap_content"
             android:checkable="true"
             android:checked="true"
-            android:text="Discoteche" />
+            android:text="Discoteche"
+            android:textColor="@color/black"
+            app:chipStrokeColor="@color/clubColorStrong"
+            app:chipStrokeWidth="3dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/searchResultEventChip"
@@ -86,7 +89,10 @@
             android:layout_height="wrap_content"
             android:checkable="true"
             android:checked="true"
-            android:text="Eventi" />
+            android:text="Eventi"
+            android:textColor="@color/black"
+            app:chipStrokeColor="@color/eventColorStrong"
+            app:chipStrokeWidth="3dp" />
 
     </com.google.android.material.chip.ChipGroup>
 

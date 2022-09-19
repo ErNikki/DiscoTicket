@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="#EFEFEF"
+        app:cardBackgroundColor="@color/clubColor"
         app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
