@@ -278,6 +278,7 @@ private class MyInfoWindows(view: View, mapView: MapView?) : InfoWindow(view, ma
             val shape = GradientDrawable()
             shape.cornerRadius = 20F
             shape.setColor(Color.WHITE)
+            shape.setStroke(3, Color.BLACK)
 
             val ll = LinearLayout(context)
             ll.orientation = LinearLayout.VERTICAL
@@ -285,7 +286,7 @@ private class MyInfoWindows(view: View, mapView: MapView?) : InfoWindow(view, ma
             title.text = club.name
             title.textSize = 24F
             val button = MaterialButton(context)
-            button.text = "Info"
+            button.text = "Info club"
             ll.addView(title)
             ll.addView(button)
             ll.background = shape
