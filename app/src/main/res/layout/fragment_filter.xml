@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minWidth="300dp"
         android:padding="10dp">
 
         <TextView
@@ -36,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="1000€"
+            android:text="100€"
             app:layout_constraintBottom_toBottomOf="@+id/filterPriceRange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/filterPriceRange" />
@@ -44,14 +45,12 @@
         <com.google.android.material.slider.RangeSlider
             android:id="@+id/filterPriceRange"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:max="10"
-            android:stepSize="10"
+            android:stepSize="1"
             android:valueFrom="0"
-            android:valueTo="1000"
+            android:valueTo="100"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toStartOf="@+id/textView10"
             app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -72,12 +71,11 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:stepSize="10"
-            android:value="50.0"
+            android:value="100.0"
             android:valueFrom="0.0"
-            android:valueTo="1000.0"
+            android:valueTo="100.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/filterTextDistance"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -86,7 +84,7 @@
             android:id="@+id/filterTextDistance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="50 Km"
+            android:text="100 Km"
             app:layout_constraintBottom_toBottomOf="@+id/filterSliderDistance"
             app:layout_constraintStart_toStartOf="@+id/textView7"
             app:layout_constraintTop_toTopOf="@+id/filterSliderDistance" />

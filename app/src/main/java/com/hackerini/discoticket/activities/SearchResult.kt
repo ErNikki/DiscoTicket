@@ -117,68 +117,7 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, Te
             }
         }
 
-        //Filter by music
-        if (filterCriteria.genres.isNotEmpty()) {
-            elements.retainAll { item ->
-                if (item is Club) item.musicGenres.any { s -> filterCriteria.genres.contains(s) }
-                else (item as Event).musicGenres.any { s -> filterCriteria.genres.contains(s) }
-            }
-        }
-
-        //Filter by distance
-        elements.retainAll { item ->
-            if (item is Club) item.distanceFromYou < filterCriteria.maxDistance
-            else (item as Event).club!!.distanceFromYou < filterCriteria.maxDistance
-        }
-
-        //Filter by price range
-        elements.retainAll { item ->
-            val club = if (item is Club) item else (item as Event).club
-            filterCriteria.priceRange.first < club!!.simpleTicketPrice && club.simpleTicketPrice < filterCriteria.priceRange.second
-        }
-
-        //Filter by location type range
-        elements.retainAll { item ->
-            val club = if (item is Club) item else (item as Event).club
-            when (filterCriteria.locationType) {
-                LocationType.Outdoor -> club!!.locationType.contains(
-                    "aperto",
-                    ignoreCase = true
-                ) || club.locationType.contains("entrambi", ignoreCase = true)
-                LocationType.Indoor -> club!!.locationType.contains(
-                    "chiuso",
-                    ignoreCase = true
-                ) || club.locationType.contains("entrambi", ignoreCase = true)
-                else -> true
-            }
-        }
-
-        //Sorting createria
-        if (filterCriteria.orderCriteria == OrderCriteria.NameAZ) {
-            elements.sortBy { item ->
-                if (item is Club)
-                    item.name
-                else
-                    (item as Event).name
-            }
-        } else if (filterCriteria.orderCriteria == OrderCriteria.NameZA) {
-            elements.sortByDescending { item ->
-                if (item is Club)
-                    item.name
-                else
-                    (item as Event).name
-            }
-        } else if (filterCriteria.orderCriteria == OrderCriteria.Distance09) {
-            elements.sortBy { item ->
-                if (item is Club)
-                    item.distanceFromYou
-                else
-                    (item as Event).club!!.distanceFromYou
-            }
-        }
-
-
-        elements.forEach { item ->
+        filterCriteria.filter(elements).forEach { item ->
             if (item is Club)
                 ft.add(R.id.searchResultLinearLayout, DiscoElement.newInstance(item))
             else if (item is Event)
