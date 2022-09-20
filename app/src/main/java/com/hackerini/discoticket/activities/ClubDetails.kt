@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentContainerView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.User
 import com.squareup.picasso.Picasso
 
 class ClubDetails : AppCompatActivity() {
@@ -108,9 +109,13 @@ class ClubDetails : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.clubDetailsWriteReviewButton).setOnClickListener {
-            val intent = Intent(applicationContext, WriteReview::class.java)
-            intent.putExtra("club", club)
-            startActivity(intent)
+            if (User.isLogged(this)) {
+                val intent = Intent(applicationContext, WriteReview::class.java)
+                intent.putExtra("club", club)
+                startActivity(intent)
+            } else {
+                User.generateNotLoggedAlertDialog(this).show()
+            }
         }
 
         updateButtonStatus()

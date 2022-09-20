@@ -11,10 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DrinkElement
-import com.hackerini.discoticket.objects.Club
-import com.hackerini.discoticket.objects.ItemType
-import com.hackerini.discoticket.objects.Order
-import com.hackerini.discoticket.objects.OrderItem
+import com.hackerini.discoticket.objects.*
 
 class DrinkMenu : AppCompatActivity() {
 
@@ -54,27 +51,31 @@ class DrinkMenu : AppCompatActivity() {
 
         val checkoutButton = findViewById<Button>(R.id.drinkMenuCheckoutButon)
         checkoutButton.setOnClickListener {
-            val order = Order()
-            order.club = club
-            drinks.forEach { e ->
-                val drinkElement = supportFragmentManager.findFragmentByTag(e.name) as DrinkElement
-                if (drinkElement.getQuantity() > 0) {
-                    val orderItem = OrderItem(
-                        0,
-                        drinkElement.getName(),
-                        drinkElement.getQuantity(),
-                        drinkElement.getPrice(),
-                        ItemType.Drink,
-                        0
-                    )
-                    order.drinks.add(orderItem)
+            if (User.isLogged(this)) {
+                val order = Order()
+                order.club = club
+                drinks.forEach { e ->
+                    val drinkElement =
+                        supportFragmentManager.findFragmentByTag(e.name) as DrinkElement
+                    if (drinkElement.getQuantity() > 0) {
+                        val orderItem = OrderItem(
+                            0,
+                            drinkElement.getName(),
+                            drinkElement.getQuantity(),
+                            drinkElement.getPrice(),
+                            ItemType.Drink,
+                            0
+                        )
+                        order.drinks.add(orderItem)
+                    }
                 }
+
+                val intent = Intent(applicationContext, Payment::class.java)
+                intent.putExtra("OrderPreview", order)
+                startActivity(intent)
+            } else {
+                User.generateNotLoggedAlertDialog(this).show()
             }
-
-            val intent = Intent(applicationContext, Payment::class.java)
-            intent.putExtra("OrderPreview", order)
-            startActivity(intent)
-
         }
     }
 }

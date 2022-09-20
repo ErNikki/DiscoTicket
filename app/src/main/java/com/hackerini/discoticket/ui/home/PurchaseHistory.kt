@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.PurchaseElement
+import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
 
 class PurchaseHistory : Fragment() {
@@ -29,7 +30,7 @@ class PurchaseHistory : Fragment() {
 
         val orderDao = RoomManager(requireContext()).db.orderDao()
         val orders = orderDao.getAllOrderWithOrderItem()
-        if (orders.isNotEmpty()) {
+        if (orders.isNotEmpty() && User.isLogged(requireContext())) {
             view.findViewById<TextView>(R.id.PurchaseHystoryNoPurchaseWarning).visibility =
                 View.GONE
             val transaction = parentFragmentManager.beginTransaction()

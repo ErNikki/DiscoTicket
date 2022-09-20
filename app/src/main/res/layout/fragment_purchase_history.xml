@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
-                android:text="Non hai effettuato ancora nessun acquisto"
+                android:text="Non hai effettuato ancora nessun acquisto o non hai effettuato l'accesso"
                 android:textAlignment="center" />
         </LinearLayout>
     </ScrollView>

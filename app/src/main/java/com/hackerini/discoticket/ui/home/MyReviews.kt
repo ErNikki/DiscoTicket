@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.objects.User
 
 class MyReviews : Fragment() {
 
@@ -26,7 +27,7 @@ class MyReviews : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val areThereReviews = false
-        if (!areThereReviews) {
+        if (areThereReviews && User.isLogged(requireContext())) {
             view.findViewById<TextView>(R.id.MyReviewEmptyWarning).visibility = View.GONE
         }
     }
