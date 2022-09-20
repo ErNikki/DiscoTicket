@@ -6,7 +6,7 @@ import com.hackerini.discoticket.objects.*
 
 @Database(
     entities = [FavoriteClub::class, Order::class, OrderItem::class, User::class],
-    version = 9
+    version = 10
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteClubDao

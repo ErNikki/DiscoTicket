@@ -9,12 +9,11 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.MainActivity
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.objects.Discount
-import com.hackerini.discoticket.objects.Order
-import com.hackerini.discoticket.objects.OrderWithOrderItem
-import com.hackerini.discoticket.objects.TypeOfDiscount
+import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.room.RoomManager
 
 class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -74,17 +73,25 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         button.setOnClickListener {
             val orderPreview = storeOrder()
 
-            val alert = AlertDialog.Builder(this).create()
-            alert.setCancelable(false)
-            alert.setTitle("L'acquisto è andato a buon fine!")
-            alert.setButton(
-                AlertDialog.BUTTON_NEGATIVE,
+            //Update points
+            val userDao = RoomManager(this).db.userDao()
+            val earnedPoints =
+                (ResourcesCompat.getFloat(resources, R.dimen.euroToPoint)
+                        * orderPreview.getTotalAmount()).toInt()
+            userDao.incrementsPoints(earnedPoints, User.getLoggedUser(this)!!.id)
+
+            val builder = MaterialAlertDialogBuilder(this)
+            builder.setCancelable(false)
+            builder.setTitle("L'acquisto è andato a buon fine!")
+            builder.setMessage("Complementi! Hai guadagnato ${earnedPoints} punti che potrai usare per ottenere sconti")
+            builder.setNegativeButton(
                 "Torna alla\nhomepage"
             ) { dialog, _ -> dialog.dismiss() }
-            alert.setButton(
-                AlertDialog.BUTTON_POSITIVE,
+            builder.setPositiveButton(
                 "Mostra\ncodice QR"
             ) { dialog, _ -> dialog.dismiss() }
+
+            val alert = builder.create()
             alert.show()
 
             val buttonNegative = alert.getButton(AlertDialog.BUTTON_NEGATIVE)

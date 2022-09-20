@@ -22,6 +22,7 @@ class User : Serializable {
     var email: String = ""
     var password: String = ""
     var imageProfileUrl: String = ""
+    var points: Int = 0
 
     companion object {
 
@@ -109,6 +110,12 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE id=:id LIMIT 1")
     fun getUserById(id: Int): List<User>
+
+    @Query("UPDATE user SET points=:points WHERE id=:id")
+    fun updatePoints(points: Int, id: Int)
+
+    @Query("UPDATE user SET points=points+:points WHERE id=:id")
+    fun incrementsPoints(points: Int, id: Int)
 
     fun isUserExists(mail: String): Boolean {
         return getUserByMail(mail).isNotEmpty()
