@@ -15,7 +15,7 @@ class Club : Serializable {
     var rating: Float = (10..50).random() / 10F
     var reviewAmount = (10..100).random()
     var imgUrl: String = "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg"
-    var reviews = arrayOf(Review(), Review())
+    var reviews = arrayOf<Review>()
     var description =
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     var distanceFromYou = (5..100).random()

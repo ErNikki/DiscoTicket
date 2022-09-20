@@ -45,10 +45,14 @@ class ReviewElement : Fragment() {
         val reviewContent = view.findViewById<TextView>(R.id.ReviewReviewText)
         val reviewRatingBar = view.findViewById<RatingBar>(R.id.clubDeatilsReviwerRatingBar)
 
-        val roomManager =  RoomManager(requireContext()).db.userDao()
-        val user= roomManager.getUserById(review?.userCreatorId!!).first()
-        val name=user.name
-        val surname=user.surname
+        //val roomManager =  RoomManager(requireContext()).db.userDao()
+        //val user= roomManager.getUserById(review?.userCreatorId!!).first()
+        //val name=user.name
+        //val surname=user.surname
+
+        val user=review?.user
+        val name=review?.user?.name
+        val surname=review?.user?.surname
 
         reviewerName.text = name + " " + surname
         reviewDate.text = review?.date
@@ -59,12 +63,12 @@ class ReviewElement : Fragment() {
             reviewContent.visibility = View.GONE
 
         val image = AvatarGenerator.AvatarBuilder(requireContext())
-            .setLabel(name)
+            .setLabel(name!!)
             .setAvatarSize(100)
             .setTextSize(30)
             .toSquare()
             .toCircle()
-            .setBackgroundColor(getRandomColor(user))
+            .setBackgroundColor(getRandomColor(user!!))
             .build()
         reviewerImage.setImageDrawable(image)
     }

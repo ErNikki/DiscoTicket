@@ -9,18 +9,30 @@ import java.util.*
 class Review(
     @PrimaryKey(autoGenerate = true) val reviewId: Int,
     @ColumnInfo val userCreatorId : Int,
-    @ColumnInfo val rating : Float,
-    @ColumnInfo val date: String ,
-    @ColumnInfo val description : String
-
     ) : Serializable {
-    constructor(userId: Int, rating: Float, description: String) : this(0, userId, rating, SimpleDateFormat("dd/MM/yyy").format(Date()), description)
+    constructor(userId: Int) : this(0, userId)
 
+    //mi permette di creare una review vuota che viene però attribuita all'user -1 che non dovrebbe esistere
+    constructor() : this(0,-1)
 
-    /*var images = arrayOf(
+    var rating : Double = 0.0
+
+    //da sitemare
+    @Ignore
+    val date= SimpleDateFormat("dd/MM/yyy").format(Date())
+
+    @Ignore
+    //serve perchè le recensioni vengono prese dal json
+    val user=User()
+
+    @Ignore
+    var description : String =" "
+
+    @Ignore
+    var images = arrayOf(
         "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
         "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
-    )*/
+    )
 
 }
 

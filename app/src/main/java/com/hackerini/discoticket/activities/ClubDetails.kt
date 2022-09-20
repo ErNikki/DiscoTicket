@@ -45,7 +45,7 @@ class ClubDetails : AppCompatActivity() {
 
         clubName.text = club!!.name
         address.text = club!!.address
-        ratingBar.rating = average
+        ratingBar.rating = average.toFloat()
         reviewsAvg.text = String.format("%.1f", average)
         totalReview.text = "(${reviews.size} recensioni)"
         clubDescription.text = club!!.description

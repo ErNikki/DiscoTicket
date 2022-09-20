@@ -33,7 +33,7 @@ class AllReview : AppCompatActivity() {
         val r : Float
         val reviewAvg = reviews.sumOf { r :Review -> r.rating  } / reviews.size.toFloat()
         findViewById<TextView>(R.id.AllReviewAvg).text = String.format("%.1f", reviewAvg)
-        findViewById<RatingBar>(R.id.AllReviewRating).rating = reviewAvg
+        findViewById<RatingBar>(R.id.AllReviewRating).rating = reviewAvg.toFloat()
 
 
         val ratingReviews = findViewById<View>(R.id.rating_reviews) as RatingReviews
@@ -47,11 +47,11 @@ class AllReview : AppCompatActivity() {
         )
 
         val raters = intArrayOf(
-            reviews.filter { r :Review -> r.rating == 5.toFloat() }.size,
-            reviews.filter { r :Review-> r.rating == 4.toFloat() }.size,
-            reviews.filter { r :Review-> r.rating == 3.toFloat() }.size,
-            reviews.filter { r :Review-> r.rating == 2.toFloat() }.size,
-            reviews.filter { r :Review-> r.rating == 1.toFloat() }.size,
+            reviews.filter { r :Review -> r.rating == 5.0 }.size,
+            reviews.filter { r :Review-> r.rating == 4.0 }.size,
+            reviews.filter { r :Review-> r.rating == 3.0 }.size,
+            reviews.filter { r :Review-> r.rating == 2.0 }.size,
+            reviews.filter { r :Review-> r.rating == 1.0 }.size,
         )
 
         ratingReviews.createRatingBars(1, BarLabels.STYPE1, colors, raters)

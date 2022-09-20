@@ -86,7 +86,7 @@ class DiscoElement : Fragment() {
         discoName.setText(club?.name)
         discoAddress.setText(club?.address)
         //discoRating.rating = club?.rating!!
-        discoRating.rating = average
+        discoRating.rating = average.toFloat()
         //discoRatingAvg.setText(club?.rating.toString())
         discoRatingAvg.setText(String.format("%.1f", average))
         //discoRatingAmount.setText("(" + club?.reviewAmount.toString() + " Recensioni)")
