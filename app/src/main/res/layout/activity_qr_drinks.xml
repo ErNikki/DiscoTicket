@@ -38,7 +38,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Potrai ritrovare questo codice QR dalla home, nella sezione &quot;Cronologia acquisti&quot;"
+                    android:text="Potrai ritrovare questo codice QR dalla home, nella sezione &quot;Cronologia acquisti&quot;."
                     android:textAlignment="center"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/imageView"

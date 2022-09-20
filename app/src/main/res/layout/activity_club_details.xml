@@ -80,10 +80,8 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.755"
-                    app:layout_constraintStart_toEndOf="@+id/clubDetailsClubName"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage"
                     app:srcCompat="@drawable/ic_baseline_favorite_24" />
 
@@ -91,6 +89,7 @@
                     android:id="@+id/clubDeatilsAddToFavouritiesText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-6dp"
                     android:layout_marginEnd="8dp"
                     android:text="Aggiungi ai preferiti"
                     app:layout_constraintEnd_toEndOf="@+id/clubDetailsFavouritesButton"

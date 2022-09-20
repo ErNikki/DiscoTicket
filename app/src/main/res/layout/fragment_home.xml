@@ -43,14 +43,16 @@
                         android:id="@+id/HomeNearYouLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal" />
+                        android:orientation="horizontal"
+                        android:divider="@drawable/layout_divider"
+                        android:showDividers="middle" />
                 </HorizontalScrollView>
 
                 <TextView
                     android:id="@+id/textView18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
                     android:text="Prossimi eventi"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -70,15 +72,17 @@
                         android:id="@+id/HomeNextEventLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal" />
+                        android:orientation="horizontal"
+                        android:divider="@drawable/layout_divider"
+                        android:showDividers="middle" />
                 </HorizontalScrollView>
 
                 <TextView
                     android:id="@+id/rtrgfgf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Gli ultimi visti"
+                    android:layout_marginTop="32dp"
+                    android:text="Gli ultimi visualizzati"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +100,9 @@
                         android:id="@+id/HomeLastViewedLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal" />
+                        android:orientation="horizontal"
+                        android:divider="@drawable/layout_divider"
+                        android:showDividers="middle" />
                 </HorizontalScrollView>
 
 
