@@ -31,7 +31,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Non ci sono discoteche aggiunte ai tuoi preferiti"
+                    android:paddingTop="20dp"
+                    android:text="Non ci sono discoteche aggiunte ai tuoi preferiti."
                     android:textAlignment="center"
                     android:textSize="16sp" />
             </LinearLayout>

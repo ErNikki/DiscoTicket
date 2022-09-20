@@ -19,8 +19,10 @@
                 android:id="@+id/MyReviewEmptyWarning"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Non ci sono recensioni per l'utente corrente o non hai ancora effettuato l'accesso"
-                android:textAlignment="center" />
+                android:paddingTop="20dp"
+                android:text="Non ci sono recensioni per l'utente corrente o non hai ancora effettuato l'accesso."
+                android:textAlignment="center"
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 
