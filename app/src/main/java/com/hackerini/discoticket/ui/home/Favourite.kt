@@ -41,15 +41,16 @@ class Favourite : Fragment() {
         super.onResume()
 
         val favClubs = RoomManager(requireContext()).db.favoriteDao().getAll()
-
-        val ft = parentFragmentManager.beginTransaction()
-        view?.findViewById<LinearLayout>(R.id.FavoriteLinearLayout)?.removeAllViews()
-        val clubs = ObjectLoader.getClubs(requireContext())
-        clubs.forEach { club ->
-            if (favClubs.map { e->e.id }.contains(club.id)) {
-                ft.add(R.id.FavoriteLinearLayout, DiscoElement.newInstance(club))
+        if (favClubs.isNotEmpty()) {
+            view?.findViewById<LinearLayout>(R.id.FavoriteLinearLayout)?.removeAllViews()
+            val ft = parentFragmentManager.beginTransaction()
+            val clubs = ObjectLoader.getClubs(requireContext())
+            clubs.forEach { club ->
+                if (favClubs.map { e -> e.id }.contains(club.id)) {
+                    ft.add(R.id.FavoriteLinearLayout, DiscoElement.newInstance(club))
+                }
             }
+            ft.commit()
         }
-        ft.commit()
     }
 }

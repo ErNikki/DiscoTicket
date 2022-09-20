@@ -3,25 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PurchaseHistory">
+    tools:context=".Settings">
 
+    <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/PurchaseHistoryLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/PurchaseHystoryNoPurchaseWarning"
+                android:id="@+id/MyReviewEmptyWarning"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:text="Non hai effettuato ancora nessun acquisto"
+                android:layout_height="match_parent"
+                android:text="Non ci sono recensioni per l'utente corrente"
                 android:textAlignment="center" />
         </LinearLayout>
     </ScrollView>
+
 </FrameLayout>
