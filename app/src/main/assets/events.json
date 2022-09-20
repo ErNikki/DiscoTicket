@@ -3,7 +3,7 @@
     "id": 1,
     "clubId": 7,
     "date": "Oct 1, 2022 23:00:00 PM",
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "description": "La stagione estiva volge al termine, ma noi rimaniamo qui ad accogliervi! Come ogni anno diamo il benvenuto all'autunno con il Presidium, la festa più spettacolare della città: due famosi DJ vi delizieranno con un mix di musica unico, con fuochi d'artificio alla fine!",
     "imgUrl": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grand-opening-event-club-bar-disco-party-ad-design-template-ee7e062b37aaa286789fc2ca1ec89db9_screen.jpg",
     "musicGenres": [
       "Reggaeton"
@@ -14,7 +14,7 @@
     "id": 2,
     "clubId": 2,
     "date": "Oct 7, 2022 22:00:00 PM",
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "description": "Venerdì 7 ottobre dalle 22 fino a tutta la notte: non dimenticatevi di questa data!\nIl Monkey Club si rinnova: nuovi arredamenti e nuovi buonissimi drink. Per l'occasione vi faremo sentire un po' di musica diversa da ciò che vi proponiamo solitamente, per festeggiare le novità che vi aspettano al prossimo anno. Vi attende anche una sorpresa a fine serata, non mancate!",
     "imgUrl": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/instagram-music-night-event-ad-template-design-2f7c0d70be23110ad6d594f87431017b_screen.jpg?ts=1568652421",
     "musicGenres": [
       "Elettronica"
@@ -37,7 +37,7 @@
     "id": 4,
     "clubId": 8,
     "date": "Oct 22, 2022 22:30:00 PM",
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\u0027s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "description": "La nostra discoteca sul mare è pronta a farvi scatenare: il 22 ottobre serata Rock all'insegna del divertimento! Vi promettiamo una notte indimenticabile a tema chitarra, basso e batteria sulla sabbia!",
     "imgUrl": "https://us.123rf.com/450wm/onyxprj/onyxprj1708/onyxprj170800433/84890075-vector-chitarra-rock-retr%C3%B2-e-microfono-music-club-logo-vettoriale.jpg",
     "musicGenres": [
       "Rock"
