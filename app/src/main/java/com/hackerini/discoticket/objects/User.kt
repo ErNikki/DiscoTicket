@@ -1,8 +1,11 @@
 package com.hackerini.discoticket.objects
 
 import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.*
+import com.hackerini.discoticket.activities.Login
 import com.hackerini.discoticket.room.RoomManager
 import java.io.Serializable
 import java.nio.charset.StandardCharsets
@@ -75,6 +78,19 @@ class User : Serializable {
             )
             val userId = sharedPreferences.getInt("userId", -1)
             return userId != -1
+        }
+
+        fun generateNotLoggedAlertDialog(context: Context): AlertDialog {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Accesso non effettuato")
+            builder.setMessage("Per proseguire è necessario effettuare l'accesso")
+            builder.setPositiveButton("Accedi") { _, _ ->
+                context.startActivity(Intent(context, Login::class.java))
+            }
+            builder.setNegativeButton("Annulla") { dialog, _ ->
+                dialog.dismiss()
+            }
+            return builder.create()
         }
     }
 }

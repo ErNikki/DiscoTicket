@@ -13,6 +13,7 @@ import com.hackerini.discoticket.fragments.views.ClubMap
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Order
 import com.hackerini.discoticket.objects.OrderItem
+import com.hackerini.discoticket.objects.User
 import kotlin.math.ceil
 
 class SelectTable : AppCompatActivity() {
@@ -88,17 +89,25 @@ class SelectTable : AppCompatActivity() {
         }
 
         payButton.setOnClickListener {
-            val order = Order()
-            val orderItem0 = OrderItem("Ingresso semplice", simpleTickets, club.simpleTicketPrice)
-            val orderItem1 = OrderItem("Ingresso con tavolo", tableTickets, club.tableTicketPrice)
-            order.tickets.add(orderItem0)
-            order.tickets.add(orderItem1)
-            order.tableIdsList = selectedTables!!
-            order.date = selectedDate!!
-            order.club = club
-            val intent = Intent(applicationContext, Payment::class.java)
-            intent.putExtra("OrderPreview", order)
-            startActivity(intent)
+            if (User.isLogged(this)) {
+                val order = Order()
+                val orderItem0 =
+                    OrderItem("Ingresso semplice", simpleTickets, club.simpleTicketPrice)
+                val orderItem1 =
+                    OrderItem("Ingresso con tavolo", tableTickets, club.tableTicketPrice)
+                order.tickets.add(orderItem0)
+                order.tickets.add(orderItem1)
+                order.tableIdsList = selectedTables!!
+                order.date = selectedDate!!
+                order.club = club
+                val intent = Intent(applicationContext, Payment::class.java)
+                intent.putExtra("OrderPreview", order)
+                startActivity(intent)
+            } else {
+                val dialog = User.generateNotLoggedAlertDialog(this)
+                dialog.show()
+            }
         }
+
     }
 }
