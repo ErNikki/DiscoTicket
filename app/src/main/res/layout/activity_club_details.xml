@@ -21,7 +21,7 @@
 
                 <ImageView
                     android:id="@+id/clubDetailClubImage"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="209dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -193,10 +193,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toStartOf="@+id/clubDetailsDrinkMenuButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsPrice" />
+                    app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription" />
 
                 <TextView
                     android:id="@+id/clubDetailsDistance"
@@ -205,7 +206,7 @@
                     android:layout_marginTop="8dp"
                     android:text="TextView"
                     app:layout_constraintStart_toStartOf="@+id/clubDeatilsClubDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/clubDeatilsClubDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsTagLayout" />
 
                 <TextView
                     android:id="@+id/clubDetailsPrice"
