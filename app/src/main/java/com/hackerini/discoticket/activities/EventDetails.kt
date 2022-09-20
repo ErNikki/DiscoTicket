@@ -25,6 +25,7 @@ class EventDetails : AppCompatActivity() {
         setContentView(R.layout.activity_event_details)
 
         val event = intent.getSerializableExtra("event") as Event
+        Club.addToLastSeen(this, event.id, Event::class)
         val df = SimpleDateFormat("dd/MM/YYYY", Locale.getDefault())
 
         val eventImage = findViewById<ImageView>(R.id.eventDetaileventImage)

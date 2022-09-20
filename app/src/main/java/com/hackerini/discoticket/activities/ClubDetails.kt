@@ -26,7 +26,7 @@ class ClubDetails : AppCompatActivity() {
         favouritesButton = findViewById(R.id.clubDetailsFavouritesButton)
 
         club = intent.getSerializableExtra("club") as Club
-        club?.addToLastSeen(this)
+        Club.addToLastSeen(this, club!!.id, Club::class)
 
         val clubImage = findViewById<ImageView>(R.id.clubDetailClubImage)
         val clubName = findViewById<TextView>(R.id.clubDetailsClubName)
