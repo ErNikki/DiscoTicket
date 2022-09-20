@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.PurchaseElement
@@ -26,12 +27,17 @@ class PurchaseHistory : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val transaction = parentFragmentManager.beginTransaction()
         val orderDao = RoomManager(requireContext()).db.orderDao()
-        orderDao.getAllOrderWithOrderItem().forEach { a ->
-            transaction.add(R.id.PurchaseHistoryLinearLayout, PurchaseElement.newInstance(a))
+        val orders = orderDao.getAllOrderWithOrderItem()
+        if (orders.isNotEmpty()) {
+            view.findViewById<TextView>(R.id.PurchaseHystoryNoPurchaseWarning).visibility =
+                View.GONE
+            val transaction = parentFragmentManager.beginTransaction()
+            orders.forEach { a ->
+                transaction.add(R.id.PurchaseHistoryLinearLayout, PurchaseElement.newInstance(a))
+            }
+            transaction.commit()
         }
-        transaction.commit()
     }
 
     companion object {
