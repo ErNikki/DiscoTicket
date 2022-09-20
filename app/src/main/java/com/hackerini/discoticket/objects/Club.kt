@@ -2,11 +2,13 @@ package com.hackerini.discoticket.objects
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.room.FavoriteClub
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ObjectLoader
 import java.io.Serializable
+import kotlin.reflect.KClass
 
 class Club : Serializable {
     var id: Int = 0
@@ -71,22 +73,6 @@ class Club : Serializable {
         return ObjectLoader.getDrinks(context, this)
     }
 
-    fun addToLastSeen(context: Context) {
-        val sharedPreferences = context.getSharedPreferences(
-            "DiscoTicketPref",
-            AppCompatActivity.MODE_PRIVATE
-        )
-        val clubIdsString = sharedPreferences.getString("lastSeenClub", "") ?: ""
-        val clubIds = clubIdsString.split(",").toMutableList()
-        clubIds.remove(this.id.toString())
-        clubIds.add(0, this.id.toString())
-        while (clubIds.size > 5)
-            clubIds.removeLast()
-        val editable = sharedPreferences.edit()
-        editable.putString("lastSeenClub", clubIds.joinToString(","))
-        editable.apply()
-    }
-
     companion object {
         fun getLabelColorFromName(labelName: String): Int {
             return when (labelName) {
@@ -100,13 +86,54 @@ class Club : Serializable {
             }
         }
 
-        fun getLastSeen(context: Context): List<Int> {
+        fun getLastSeen(context: Context): List<Any> {
             val sharedPreferences = context.getSharedPreferences(
                 "DiscoTicketPref",
                 AppCompatActivity.MODE_PRIVATE
             )
+            val clubs = ObjectLoader.getClubs(context)
+            val events = ObjectLoader.getEvents(context)
             val clubIdsString = sharedPreferences.getString("lastSeenClub", "") ?: ""
-            return clubIdsString.split(",").mapNotNull { e -> e.toIntOrNull() }
+            val splittedId = clubIdsString.split(",")
+            if (splittedId.any { e -> e.matches("[0-9]+".toRegex()) }) {
+                val editable = sharedPreferences.edit()
+                editable.remove("lastSeenClub")
+                editable.apply()
+                return arrayListOf<Club>()
+            }
+            return splittedId.filter { e -> e.isNotEmpty() }.mapNotNull { e ->
+                Log.d("ELEMENT", e)
+                val typeString = e.substring(0, 1)
+                val id = e.substring(1).toInt()
+                when (typeString) {
+                    "c" -> clubs.first { club -> club.id == id }
+                    else -> events.first { event -> event.id == id }
+                }
+            }
+        }
+
+        fun addToLastSeen(context: Context, id: Int, objectType: KClass<*>) {
+
+            val sharedPreferences = context.getSharedPreferences(
+                "DiscoTicketPref",
+                AppCompatActivity.MODE_PRIVATE
+            )
+            val type = when (objectType) {
+                Club::class -> "c"
+                else -> "e"
+            }
+
+            val clubIdsString = sharedPreferences.getString("lastSeenClub", "") ?: ""
+            val clubIds = clubIdsString.split(",").toMutableList()
+            val field = type.plus(id)
+            clubIds.remove(field)
+            clubIds.add(0, field)
+
+            while (clubIds.size > 5)
+                clubIds.removeLast()
+            val editable = sharedPreferences.edit()
+            editable.putString("lastSeenClub", clubIds.joinToString(","))
+            editable.apply()
         }
     }
 

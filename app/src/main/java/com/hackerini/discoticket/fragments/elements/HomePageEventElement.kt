@@ -19,22 +19,18 @@ import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "hideDetails"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomePageEventElement.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomePageEventElement : Fragment() {
     private var event: Event? = null
+    private var hideDetails: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             event = it.getSerializable(ARG_PARAM1) as Event
+            hideDetails = it.getBoolean(ARG_PARAM2)
         }
     }
 
@@ -51,23 +47,30 @@ class HomePageEventElement : Fragment() {
         view.findViewById<TextView>(R.id.HomePageEventElementName).text = event?.name
         Picasso.get().load(event?.imgUrl).resize(250, 250)
             .into(view.findViewById<ImageView>(R.id.HomePageEventElementImage))
-        val df = SimpleDateFormat("dd/MM", Locale.getDefault())
-        view.findViewById<TextView>(R.id.HomePageEventDate).text = "il " + df.format(event?.date)
 
         val discoName = view.findViewById<TextView>(R.id.HomePageEventLocation)
-        val mSpannableString = SpannableString("Luogo: " + event?.club?.name)
-        mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)
-        discoName.text = mSpannableString
+        val eventDate = view.findViewById<TextView>(R.id.HomePageEventDate)
 
+        if (hideDetails) {
+            val df = SimpleDateFormat("dd/MM", Locale.getDefault())
+            eventDate.text = "il " + df.format(event?.date)
+
+            val mSpannableString = SpannableString("Luogo: " + event?.club?.name)
+            mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)
+            discoName.text = mSpannableString
+
+            discoName.setOnClickListener {
+                val intent = Intent(context, ClubDetails::class.java)
+                intent.putExtra("club", event?.club)
+                startActivity(intent)
+            }
+        } else {
+            discoName.visibility = View.GONE
+            eventDate.visibility = View.GONE
+        }
         view.findViewById<CardView>(R.id.HomePageEventCard).setOnClickListener {
             val intent = Intent(requireContext(), EventDetails::class.java)
             intent.putExtra("event", event)
-            startActivity(intent)
-        }
-
-        discoName.setOnClickListener {
-            val intent = Intent(context, ClubDetails::class.java)
-            intent.putExtra("club", event?.club)
             startActivity(intent)
         }
 
@@ -75,10 +78,11 @@ class HomePageEventElement : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(event: Event) =
+        fun newInstance(event: Event, hideDetails: Boolean = false) =
             HomePageEventElement().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, event)
+                    putBoolean(ARG_PARAM2, hideDetails)
                 }
             }
     }
