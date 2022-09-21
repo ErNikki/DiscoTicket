@@ -79,7 +79,14 @@ data class FilterCriteria(
         }
 
         //Sorting createria
-        if (this.orderCriteria == OrderCriteria.Distance09) {
+        if (this.orderCriteria == OrderCriteria.SearchResult) {
+            elements.sortBy { item ->
+                if (item is Club)
+                    item.id
+                else
+                    (item as Event).club!!.id
+            }
+        } else if (this.orderCriteria == OrderCriteria.Distance09) {
             elements.sortBy { item ->
                 if (item is Club)
                     item.distanceFromYou
