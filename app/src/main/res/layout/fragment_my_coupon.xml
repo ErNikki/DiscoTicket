@@ -35,7 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mario Rossi"
-                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -177,6 +178,15 @@
                             android:elevation="5dp"
                             android:visibility="gone">
 
+                            <TextView
+                                android:id="@+id/textView15"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Digita un codice promozionale per ottenere un coupon"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
                             <EditText
                                 android:id="@+id/MyCouponInsertedCode"
                                 android:layout_width="0dp"
@@ -187,7 +197,7 @@
                                 android:textSize="14sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
                             <TextView
                                 android:id="@+id/MyCouponWrongCode"
@@ -217,6 +227,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="I miei coupon"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/cardView8"
                     app:layout_constraintStart_toStartOf="@+id/cardView8"
                     app:layout_constraintTop_toBottomOf="@+id/cardView9" />
