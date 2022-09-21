@@ -13,9 +13,9 @@ enum class ElementToShow {
 
 enum class OrderCriteria {
     SearchResult,
-    NameAZ,
-    NameZA,
-    Distance09
+    Distance09,
+    Price09,
+    Price90
 }
 
 enum class LocationType {
@@ -79,26 +79,26 @@ data class FilterCriteria(
         }
 
         //Sorting createria
-        if (this.orderCriteria == OrderCriteria.NameAZ) {
-            elements.sortBy { item ->
-                if (item is Club)
-                    item.name
-                else
-                    (item as Event).name
-            }
-        } else if (this.orderCriteria == OrderCriteria.NameZA) {
-            elements.sortByDescending { item ->
-                if (item is Club)
-                    item.name
-                else
-                    (item as Event).name
-            }
-        } else if (this.orderCriteria == OrderCriteria.Distance09) {
+        if (this.orderCriteria == OrderCriteria.Distance09) {
             elements.sortBy { item ->
                 if (item is Club)
                     item.distanceFromYou
                 else
                     (item as Event).club!!.distanceFromYou
+            }
+        } else if (this.orderCriteria == OrderCriteria.Price09) {
+            elements.sortBy { item ->
+                if (item is Club)
+                    item.simpleTicketPrice
+                else
+                    (item as Event).club!!.simpleTicketPrice
+            }
+        } else if (this.orderCriteria == OrderCriteria.Price90) {
+            elements.sortByDescending { item ->
+                if (item is Club)
+                    item.simpleTicketPrice
+                else
+                    (item as Event).club!!.simpleTicketPrice
             }
         }
 

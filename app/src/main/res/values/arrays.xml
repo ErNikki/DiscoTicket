@@ -12,9 +12,9 @@
 
     <string-array name="orderBy">
         <item>Consigliati</item>
-        <item>Nome (A-Z)</item>
-        <item>Nome (Z-A)</item>
         <item>Distanza</item>
+        <item>Prezzo crescente</item>
+        <item>Prezzo decrescente</item>
     </string-array>
 
     <string-array name="AllReviewOrderBy">
