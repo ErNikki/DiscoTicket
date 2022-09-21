@@ -18,8 +18,13 @@
             android:title="Cronologia acquisti" />
 
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_review"
             android:icon="@drawable/ic_baseline_rate_review_24"
             android:title="Le mie recensioni" />
+
+        <item
+            android:id="@+id/nav_points"
+            android:icon="@drawable/ic_baseline_monetization_on_24"
+            android:title="Coupon" />
     </group>
 </menu>
