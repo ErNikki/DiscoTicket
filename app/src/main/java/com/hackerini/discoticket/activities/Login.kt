@@ -33,6 +33,7 @@ class Login : AppCompatActivity() {
         val logoutLayout = findViewById<ConstraintLayout>(R.id.LoginLoggedLayout)
 
         val welcomeText = findViewById<TextView>(R.id.LoginWelcomeText)
+        val pointsRecup = findViewById<TextView>(R.id.LoginPointRecup)
         val logoutButton = findViewById<Button>(R.id.LoginLogoutButton)
         val deleteAccount = findViewById<Button>(R.id.LoginDeleteAccount)
         val errorMessage = findViewById<TextView>(R.id.LoginWrongCredentials)
@@ -40,6 +41,7 @@ class Login : AppCompatActivity() {
         if (User.isLogged(this)) {
             val user = User.getLoggedUser(this)
             welcomeText.text = "Benvenuto ${user?.name}"
+            pointsRecup.text = "Hai un totale di ${user!!.points} punti"
 
             logoutButton.setOnClickListener {
                 User.logout(this)
