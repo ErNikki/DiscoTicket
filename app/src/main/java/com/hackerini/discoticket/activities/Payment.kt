@@ -15,15 +15,13 @@ import com.hackerini.discoticket.MainActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.room.RoomManager
+import java.lang.Float.min
+import java.util.*
 
 class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
-    val spinnerItems = listOf(
-        Discount("Non utilizzare nessuno sconto", 0F, TypeOfDiscount.Nothing),
-        Discount("Un drink gratis", 1F, TypeOfDiscount.FreeDrink),
-        Discount("Sconto del 20%", 0.2F, TypeOfDiscount.Percentage),
-    )    //DOVREBBE ESSERCI UNA FUNZIONE APPOSTA
 
     var order: Order? = null
+    private var coupons: List<Discount> = LinkedList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +41,24 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
         }
 
+        if (User.isLogged(this)) {
+            val userId = User.getLoggedUser(this)!!.id
+            coupons = RoomManager(this).db.userDao().getUserDiscount(userId).first().items
+            val mutableList = coupons.toMutableList()
+            mutableList.add(
+                0,
+                Discount("Non utilizzare nessuno sconto", 0F, TypeOfDiscount.Nothing)
+            )
+            coupons = mutableList.toList()
+        }
+
         //Create dropdown menu for discounts
         val dropdown = findViewById<Spinner>(R.id.paymentSpinner)
         val dataAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_spinner_item,
-                spinnerItems.map { e -> e.name })
+                coupons.map { e -> e.name })
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)      //Layout style - list view with radio button
         dropdown.adapter = dataAdapter
         dropdown.onItemSelectedListener = this
@@ -120,6 +129,7 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val roomManager = RoomManager(this)
         val dao = roomManager.db.orderDao()
         val itemDao = roomManager.db.orderItemDao()
+        val discountDao = roomManager.db.discountDao()
         order?.prepare()
         dao.insert(order!!)
         val lastId = dao.getLastId()
@@ -135,6 +145,7 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 itemDao.insert(orderItem)
             }
         }
+        order?.appliedDiscount?.let { discountDao.delete(it) }
         return dao.getOrderWithOrderItem(lastId)
     }
 
@@ -151,54 +162,64 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val totalAmount = findViewById<TextView>(R.id.paymentTotal)
-        val totalAmountNotDiscounted = findViewById<TextView>(R.id.paymentPreTotal)
+        val totalAmountTextView = findViewById<TextView>(R.id.paymentTotal)
+        val totalAmountNotDiscountedTextView = findViewById<TextView>(R.id.paymentPreTotal)
         val totalAmountNotDiscountedText = findViewById<TextView>(R.id.paymentPreTotalText)
-        val discount = findViewById<TextView>(R.id.paymentDiscount)
+        val discountAmountTextView = findViewById<TextView>(R.id.paymentDiscount)
         val discountText = findViewById<TextView>(R.id.paymentDiscountText)
         val errorText = findViewById<TextView>(R.id.paymentCouponError)
+        val pointPreview = findViewById<TextView>(R.id.paymentPointsPreview)
 
-        val selectedDiscount = spinnerItems[position]
-        totalAmountNotDiscounted.text =
+        val selectedDiscount = coupons[position]
+        totalAmountNotDiscountedTextView.text =
             String.format("%.2f", order?.getTotalAmount()).plus("€")
 
-        totalAmountNotDiscounted.visibility = View.GONE
+        totalAmountNotDiscountedTextView.visibility = View.GONE
         totalAmountNotDiscountedText.visibility = View.GONE
         discountText.visibility = View.GONE
-        discount.visibility = View.GONE
-        totalAmount.text = String.format("%.2f", order?.getTotalAmount()!!).plus("€")
+        discountAmountTextView.visibility = View.GONE
+        totalAmountTextView.text = String.format("%.2f", order?.getTotalAmount()!!).plus("€")
 
-        if (selectedDiscount.type == TypeOfDiscount.Percentage) {
-            val discountAmount = selectedDiscount.amount * order?.getTotalAmount()!!
-            order?.discount = discountAmount
-            discount.text = "-".plus(String.format("%.2f", discountAmount)).plus("€")
-            totalAmount.text =
-                String.format("%.2f", order?.getTotalAmount()!! - discountAmount)
-                    .plus("€")
-        } else if (selectedDiscount.type == TypeOfDiscount.FreeDrink) {
-            if (order?.drinks?.isNotEmpty() == true) {
-                val discountAmount =
-                    order?.drinks?.minBy { e -> e.unitaryPrice }?.unitaryPrice ?: 0f
-                order?.discount = discountAmount
-                discount.text = "-".plus(String.format("%.2f", discountAmount)).plus("€")
-                totalAmount.text =
-                    String.format("%.2f", order?.getTotalAmount()!! - discountAmount)
-                        .plus("€")
-            } else {
+        when (selectedDiscount.type) {
+            TypeOfDiscount.Percentage -> order?.discount =
+                selectedDiscount.amount * order?.getTotalAmount()!!
+            TypeOfDiscount.NeatValue -> order?.discount =
+                min(selectedDiscount.amount, order!!.getTotalAmount())
+            TypeOfDiscount.FreeDrink -> {
+                if (order?.drinks?.isNotEmpty() == true) {
+                    order?.discount =
+                        order?.drinks?.minBy { e -> e.unitaryPrice }?.unitaryPrice ?: 0f
+                } else {
+                    order?.discount = 0F
+                    errorText.text = "Copuon non valido per questo ordine"
+                    errorText.visibility = View.VISIBLE
+                }
+            }
+            TypeOfDiscount.Nothing -> {
+                errorText.visibility = View.GONE
                 order?.discount = 0F
-                errorText.text = "Copuon non valido per questo ordine"
-                errorText.visibility = View.VISIBLE
-                totalAmount.text = String.format("%.2f", order?.getTotalAmount()!!).plus("€")
             }
         }
 
+        discountAmountTextView.text = "-".plus(String.format("%.2f", order?.discount)).plus("€")
+        val discountedAmount = order!!.getTotalAmount() - order?.discount!!
+        totalAmountTextView.text =
+            String.format("%.2f", discountedAmount).plus("€")
+        val pointThatWillEarn =
+            (ResourcesCompat.getFloat(resources, R.dimen.euroToPoint) * discountedAmount).toInt()
+        pointPreview.text =
+            "Completando questo ordine otterrai ".plus(pointThatWillEarn).plus(" punti")
+        order?.appliedDiscount = selectedDiscount
+
         val isSelectionValid =
-            selectedDiscount.type == TypeOfDiscount.Percentage || (selectedDiscount.type == TypeOfDiscount.FreeDrink && (order?.drinks?.isNotEmpty() == true))
+            selectedDiscount.type == TypeOfDiscount.Percentage ||
+                    selectedDiscount.type == TypeOfDiscount.NeatValue ||
+                    (selectedDiscount.type == TypeOfDiscount.FreeDrink && (order?.drinks?.isNotEmpty() == true))
         if (isSelectionValid) {
-            totalAmountNotDiscounted.visibility = View.VISIBLE
+            totalAmountNotDiscountedTextView.visibility = View.VISIBLE
             totalAmountNotDiscountedText.visibility = View.VISIBLE
             discountText.visibility = View.VISIBLE
-            discount.visibility = View.VISIBLE
+            discountAmountTextView.visibility = View.VISIBLE
             errorText.visibility = View.GONE
         }
 

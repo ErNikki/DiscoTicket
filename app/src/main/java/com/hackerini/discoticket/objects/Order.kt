@@ -37,6 +37,9 @@ data class Order(
     @Ignore
     var club: Club? = null
 
+    @Ignore
+    var appliedDiscount: Discount? = null
+
     fun getAllElements(): List<OrderItem> {
         return drinks + tickets
     }
@@ -83,10 +86,6 @@ data class OrderWithOrderItem(
 
     fun getTotalQuantity(): Int {
         return items.sumOf { item -> item.quantity }
-    }
-
-    fun includeDrinks(): Boolean {
-        return !includeTickets()
     }
 }
 

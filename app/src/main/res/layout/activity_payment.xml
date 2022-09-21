@@ -262,7 +262,6 @@
                 android:id="@+id/paymentTotalText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:text="Totale carrello:"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/paymentDiscountText"
@@ -281,19 +280,17 @@
                 android:id="@+id/paymentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
                 android:text="Paga e genera codice QR"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/paymentTotalText" />
+                app:layout_constraintTop_toBottomOf="@+id/paymentPointsPreview" />
 
             <TextView
                 android:id="@+id/paymentTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
                 android:text="TextView"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/paymentTotalText"
@@ -325,6 +322,15 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/paymentPreTotalText"
                 app:layout_constraintTop_toTopOf="@+id/paymentPreTotalText" />
+
+            <TextView
+                android:id="@+id/paymentPointsPreview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Completando questo ordine otterria 0 punti"
+                app:layout_constraintEnd_toEndOf="@+id/paymentTotal"
+                app:layout_constraintStart_toStartOf="@+id/paymentTotalText"
+                app:layout_constraintTop_toBottomOf="@+id/paymentTotalText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
