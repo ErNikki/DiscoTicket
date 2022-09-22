@@ -17,15 +17,20 @@ class Review(
 
     var rating : Double = 0.0
 
-    //da sitemare
-    @Ignore
-    val date= SimpleDateFormat("dd/MM/yyy").format(Date())
+    /*
+    * viene usato sia in write review per distinguire la review fatta dall'app da
+    * quelle del json
+    * che in review element per prendere il nome direttamente dal db
+    * */
+
+    var json=false
+
+    var date= " "
 
     @Ignore
     //serve perchè le recensioni vengono prese dal json
     val user=User()
 
-    @Ignore
     var description : String =" "
 
     @Ignore

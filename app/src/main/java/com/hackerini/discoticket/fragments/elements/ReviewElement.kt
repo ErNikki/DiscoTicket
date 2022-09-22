@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,14 +46,30 @@ class ReviewElement : Fragment() {
         val reviewContent = view.findViewById<TextView>(R.id.ReviewReviewText)
         val reviewRatingBar = view.findViewById<RatingBar>(R.id.clubDeatilsReviwerRatingBar)
 
-        //val roomManager =  RoomManager(requireContext()).db.userDao()
-        //val user= roomManager.getUserById(review?.userCreatorId!!).first()
-        //val name=user.name
-        //val surname=user.surname
+        var user=User()
+        var name=""
+        var surname=""
 
-        val user=review?.user
-        val name=review?.user?.name
-        val surname=review?.user?.surname
+        /*questo per distinguire le review che sono inserite dal json e quindi che
+        hanno utenti che non esistono realmente
+        da quelle di utenti registrati nel database
+        ho fatto cosi in caso eliminiamo i json o decidiciamo di cambiarli possiamo prendere
+        direttamente le cose dal db
+        */
+
+        if(review?.json == true){
+            val roomManager =  RoomManager(requireContext()).db.userDao()
+            user= roomManager.getUserById(review?.userCreatorId!!).first()
+            name=user.name
+            surname=user.surname
+        }
+
+        else{
+            user= review?.user!!
+            name= review?.user?.name.toString()
+            surname= review?.user?.surname.toString()
+        }
+
 
         reviewerName.text = name + " " + surname
         reviewDate.text = review?.date

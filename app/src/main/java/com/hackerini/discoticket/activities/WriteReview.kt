@@ -10,10 +10,13 @@ import android.widget.RatingBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WriteReview : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +37,15 @@ class WriteReview : AppCompatActivity() {
             if(User.isLogged(this)) {
 
                 val review = Review(User.getLoggedUser(this)?.id!!)
-                review.description = description.toString()
+                review.description = description.text.toString()
+                review.date= SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(Date())
+
+                //da provare ho fatto un check in review element ma forse non serve
+                //perchè tanto la lista di review in club non è modificabile
+                //quindi in all review semplicemente aggiungo anche quelle nel database
+                review.json=true
+
+
 
                 if (rating.rating != 0f) {
                     review.rating = rating.rating.toDouble()
@@ -43,8 +54,9 @@ class WriteReview : AppCompatActivity() {
 
                     val builder = MaterialAlertDialogBuilder(context)
                     builder.setTitle("Recensione Aggiunta")
-                    builder.setMessage("Grazie per aver lasciato una recensione")
+                    builder.setMessage("Grazie per aver lasciato una recensione"+ " " + review.description)
                     builder.create().show()
+
                 }
 
                 else{

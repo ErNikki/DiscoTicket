@@ -2,6 +2,7 @@ package com.hackerini.discoticket.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
@@ -11,6 +12,7 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
+import com.hackerini.discoticket.room.RoomManager
 import com.squareup.picasso.Picasso
 import com.taufiqrahman.reviewratings.BarLabels
 import com.taufiqrahman.reviewratings.RatingReviews
@@ -56,8 +58,23 @@ class AllReview : AppCompatActivity() {
 
         ratingReviews.createRatingBars(1, BarLabels.STYPE1, colors, raters)
 
+        /*
+        * L'array di luca nei club non è modificabile quindi prima prendo le review dal club
+        * inserite tramite json
+        */
         val transaction = supportFragmentManager.beginTransaction()
         reviews.forEach { review :Review ->
+            transaction.add(R.id.AllReviewLinearLayout, ReviewElement.newInstance(review))
+        }
+
+        /*
+        * poi inserisco le review fatte dagli utenti registrati
+        */
+
+        val roomManager =  RoomManager(this).db.reviewDao()
+        val reviewsDB=roomManager.getAllReviews()
+
+        reviewsDB.forEach { review :Review ->
             transaction.add(R.id.AllReviewLinearLayout, ReviewElement.newInstance(review))
         }
         transaction.commit()
