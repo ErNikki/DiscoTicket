@@ -64,4 +64,9 @@ class MyReviews : Fragment() {
         fun newInstance() =
             MyReviews()
     }
+
+    override fun onResume() {
+        super.onResume()
+        loadContent()
+    }
 }

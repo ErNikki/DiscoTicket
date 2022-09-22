@@ -1,7 +1,7 @@
 package com.hackerini.discoticket.fragments.elements
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +13,11 @@ import androidx.fragment.app.Fragment
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.activities.WriteReview
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.ObjectLoader
 import java.lang.Math.abs
 import java.security.MessageDigest
 
@@ -54,7 +56,6 @@ class ReviewElement : Fragment() {
         val name = review!!.user.name
         val surname = review!!.user.surname
 
-        Log.d("QUA", name + surname)
         reviewerName.text = name + " " + surname
         reviewDate.text = review?.date
         reviewContent.text = review?.description
@@ -64,7 +65,7 @@ class ReviewElement : Fragment() {
             reviewContent.visibility = View.GONE
 
         val image = AvatarGenerator.AvatarBuilder(requireContext())
-            .setLabel(name!!)
+            .setLabel(name)
             .setAvatarSize(100)
             .setTextSize(30)
             .toSquare()
@@ -76,6 +77,7 @@ class ReviewElement : Fragment() {
         if (User.isLogged(requireContext()) && review?.user?.id == User.getLoggedUser(requireContext())?.id) {
             editButton.visibility = View.VISIBLE
             deleteButton.visibility = View.VISIBLE
+            editButton.setOnClickListener { onEditClick() }
             deleteButton.setOnClickListener { onDeleteClick() }
         }
     }
@@ -104,6 +106,15 @@ class ReviewElement : Fragment() {
         }
         dialogBuilder.setOnDismissListener { onRefreshNeeded?.invoke() }
         dialogBuilder.create().show()
+    }
+
+    fun onEditClick() {
+        val intent = Intent(requireContext(), WriteReview::class.java)
+        val club =
+            ObjectLoader.getClubs(requireContext()).first { club -> club.id == review?.clubId }
+        intent.putExtra("club", club)
+        intent.putExtra("review", review!!)
+        startActivity(intent)
     }
 
     companion object {
