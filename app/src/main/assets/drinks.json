@@ -6,7 +6,8 @@
       "Campari",
       "Vermouth",
       "fetta di arancia"
-    ]
+    ],
+    "imagePath": "negroni.jpg"
   },
   {
     "name": "Spritz",
@@ -15,7 +16,8 @@
       "Prosecco",
       "soda",
       "fetta di arancia"
-    ]
+    ],
+    "imagePath": "spritz.png"
   },
   {
     "name": "Mojito",
@@ -25,7 +27,8 @@
       "lime",
       "zucchero",
       "soda"
-    ]
+    ],
+    "imagePath": "mojito.jpg"
   },
   {
     "name": "London Mule",
@@ -34,7 +37,8 @@
       "succo di lime",
       "ginger beer",
       "fetta di lime"
-    ]
+    ],
+    "imagePath": "london-mule.jpg"
   },
   {
     "name": "White Russian",
@@ -42,7 +46,8 @@
       "Vodka",
       "liquore al caffè",
       "panna fresca liquida"
-    ]
+    ],
+    "imagePath": "white-russian.jpg"
   },
   {
     "name": "Whisky sour",
@@ -50,7 +55,8 @@
       "Bourbon whiskey",
       "succo di limone",
       "sciroppo di zucchero"
-    ]
+    ],
+    "imagePath": "whisky-sour.jpg"
   },
   {
     "name": "Gin Lemon",
@@ -58,7 +64,8 @@
       "Gin",
       "limonata",
       "fetta di limone"
-    ]
+    ],
+    "imagePath": "gin-lemon.jpg"
   },
   {
     "name": "Gin Tonic",
@@ -66,7 +73,8 @@
       "Gin",
       "acqua tonica",
       "fetta di limone"
-    ]
+    ],
+    "imagePath": "gin-tonic.jpg"
   },
   {
     "name": "Margharita",
@@ -75,6 +83,7 @@
       "succo di lime",
       "Triple sec",
       "sale fino"
-    ]
+    ],
+    "imagePath": "margarita.jpg"
   }
 ]

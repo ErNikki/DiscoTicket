@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentContainerView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
-import com.hackerini.discoticket.objects.Review
 import com.squareup.picasso.Picasso
 
 class ClubDetails : AppCompatActivity() {
@@ -27,7 +26,7 @@ class ClubDetails : AppCompatActivity() {
         favouritesButton = findViewById(R.id.clubDetailsFavouritesButton)
 
         club = intent.getSerializableExtra("club") as Club
-        club?.addToLastSeen(this)
+        Club.addToLastSeen(this, club!!.id, Club::class)
 
         val clubImage = findViewById<ImageView>(R.id.clubDetailClubImage)
         val clubName = findViewById<TextView>(R.id.clubDetailsClubName)
@@ -41,11 +40,11 @@ class ClubDetails : AppCompatActivity() {
         val distance = findViewById<TextView>(R.id.clubDetailsDistance)
 
         val reviews = club!!.reviews
-        val average = reviews.sumOf { r:Review -> r.rating } / reviews.size.toFloat()
+        val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
 
         clubName.text = club!!.name
         address.text = club!!.address
-        ratingBar.rating = average.toFloat()
+        ratingBar.rating = average
         reviewsAvg.text = String.format("%.1f", average)
         totalReview.text = "(${reviews.size} recensioni)"
         clubDescription.text = club!!.description
@@ -109,9 +108,13 @@ class ClubDetails : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.clubDetailsWriteReviewButton).setOnClickListener {
-            val intent = Intent(applicationContext, WriteReview::class.java)
-            intent.putExtra("club", club)
-            startActivity(intent)
+            if (User.isLogged(this)) {
+                val intent = Intent(applicationContext, WriteReview::class.java)
+                intent.putExtra("club", club)
+                startActivity(intent)
+            } else {
+                User.generateNotLoggedAlertDialog(this).show()
+            }
         }
 
         updateButtonStatus()

@@ -18,10 +18,7 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.DayViewContainer
 import com.hackerini.discoticket.fragments.views.MonthViewContainer
-import com.hackerini.discoticket.objects.Club
-import com.hackerini.discoticket.objects.Event
-import com.hackerini.discoticket.objects.Order
-import com.hackerini.discoticket.objects.OrderItem
+import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.utils.ObjectLoader
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -184,35 +181,47 @@ class BuyTicket : AppCompatActivity() {
             startActivity(intent)
         }
         payButton.setOnClickListener {
-            var formatter = SimpleDateFormat("yyyy-MM-dd")
-            if (amountOfTableTicket > 0) {
-                val intent = Intent(this, SelectTable::class.java)
-                intent.putExtra("club", club)
-                intent.putExtra("showMode", false)
-                intent.putExtra("simpleTicket", amountOfSimpleTicket)
-                intent.putExtra("tableTicket", amountOfTableTicket)
-                if (event == null)
-                    intent.putExtra("date", selectedDate?.date.toString())
-                else
-                    intent.putExtra("date", formatter.format(event!!.date))
-                startActivity(intent)
+            if (User.isLogged(this)) {
+                var formatter = SimpleDateFormat("yyyy-MM-dd")
+                if (amountOfTableTicket > 0) {
+                    val intent = Intent(this, SelectTable::class.java)
+                    intent.putExtra("club", club)
+                    intent.putExtra("showMode", false)
+                    intent.putExtra("simpleTicket", amountOfSimpleTicket)
+                    intent.putExtra("tableTicket", amountOfTableTicket)
+                    if (event == null)
+                        intent.putExtra("date", selectedDate?.date.toString())
+                    else
+                        intent.putExtra("date", formatter.format(event!!.date))
+                    startActivity(intent)
+                } else {
+                    val order = Order()
+                    val orderItem0 =
+                        OrderItem(
+                            "Ingresso semplice",
+                            amountOfSimpleTicket,
+                            club!!.simpleTicketPrice
+                        )
+                    val orderItem1 =
+                        OrderItem(
+                            "Ingresso con tavolo",
+                            amountOfTableTicket,
+                            club!!.tableTicketPrice
+                        )
+                    order.tickets.add(orderItem0)
+                    order.tickets.add(orderItem1)
+                    if (event == null) //2022-09-24
+                        order.date = selectedDate?.date.toString()
+                    else
+                        order.date = formatter.format(event!!.date)
+                    order.club = club
+                    Log.d("CLUB", club?.id.toString())
+                    val intent = Intent(applicationContext, Payment::class.java)
+                    intent.putExtra("OrderPreview", order)
+                    startActivity(intent)
+                }
             } else {
-                val order = Order()
-                val orderItem0 =
-                    OrderItem("Ingresso semplice", amountOfSimpleTicket, club!!.simpleTicketPrice)
-                val orderItem1 =
-                    OrderItem("Ingresso con tavolo", amountOfTableTicket, club!!.tableTicketPrice)
-                order.tickets.add(orderItem0)
-                order.tickets.add(orderItem1)
-                if (event == null) //2022-09-24
-                    order.date = selectedDate?.date.toString()
-                else
-                    order.date = formatter.format(event!!.date)
-                order.club = club
-                Log.d("CLUB", club?.id.toString())
-                val intent = Intent(applicationContext, Payment::class.java)
-                intent.putExtra("OrderPreview", order)
-                startActivity(intent)
+                User.generateNotLoggedAlertDialog(this).show()
             }
         }
         simpleTicketCounter.addTextChangedListener(object : TextWatcher {

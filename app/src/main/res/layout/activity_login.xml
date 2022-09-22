@@ -23,7 +23,7 @@
                 android:id="@+id/LoginNotLoggedLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView7"
@@ -303,7 +303,7 @@
                 android:id="@+id/LoginLoggedLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/LoginWelcomeText"
@@ -316,15 +316,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/LoginPointRecup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="@+id/LoginWelcomeText"
+                    app:layout_constraintStart_toStartOf="@+id/LoginWelcomeText"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginWelcomeText" />
+
                 <Button
                     android:id="@+id/LoginLogoutButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="Logout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LoginWelcomeText" />
+                    app:layout_constraintTop_toBottomOf="@+id/LoginPointRecup" />
 
                 <Button
                     android:id="@+id/LoginDeleteAccount"

@@ -1,8 +1,12 @@
 package com.hackerini.discoticket.objects
 
 import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.hackerini.discoticket.activities.Login
 import com.hackerini.discoticket.room.RoomManager
 import java.io.Serializable
 import java.nio.charset.StandardCharsets
@@ -18,6 +22,7 @@ class User : Serializable {
     var email: String = ""
     var password: String = ""
     var imageProfileUrl: String = ""
+    var points: Int = 0
 
     companion object {
 
@@ -68,16 +73,31 @@ class User : Serializable {
             }
         }
 
-        fun isLogged(context: Context): Boolean {
-            val sharedPreferences = context.getSharedPreferences(
-                "DiscoTicketPref",
-                AppCompatActivity.MODE_PRIVATE
-            )
-            val userId = sharedPreferences.getInt("userId", -1)
-            return userId != -1
+        fun isLogged(context: Context): Boolean = getLoggedUser(context) != null
+
+        fun generateNotLoggedAlertDialog(context: Context): AlertDialog {
+            val builder = MaterialAlertDialogBuilder(context)
+            builder.setTitle("Accesso non effettuato")
+            builder.setMessage("Per proseguire è necessario effettuare l'accesso")
+            builder.setPositiveButton("Accedi") { _, _ ->
+                context.startActivity(Intent(context, Login::class.java))
+            }
+            builder.setNegativeButton("Annulla") { dialog, _ ->
+                dialog.dismiss()
+            }
+            return builder.create()
         }
     }
 }
+
+data class UserWithDiscount(
+    @Embedded val user: User,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "userId"
+    )
+    val items: List<Discount>
+) : Serializable
 
 @Dao
 interface UserDao {
@@ -92,6 +112,16 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE id=:id LIMIT 1")
     fun getUserById(id: Int): List<User>
+
+    @Transaction
+    @Query("SELECT * FROM `user` WHERE id=:id")
+    fun getUserDiscount(id: Int): List<UserWithDiscount>
+
+    @Query("UPDATE user SET points=:points WHERE id=:id")
+    fun updatePoints(points: Int, id: Int)
+
+    @Query("UPDATE user SET points=points+:points WHERE id=:id")
+    fun incrementsPoints(points: Int, id: Int)
 
     fun isUserExists(mail: String): Boolean {
         return getUserByMail(mail).isNotEmpty()

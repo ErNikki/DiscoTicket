@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
@@ -13,6 +14,7 @@ import com.hackerini.discoticket.utils.ObjectLoader
 
 class Favourite : Fragment() {
 
+    lateinit var emptyScreenWarning: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +37,27 @@ class Favourite : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        emptyScreenWarning = view.findViewById(R.id.FavoriteClubEmptyWarning)
+
     }
 
     override fun onResume() {
         super.onResume()
-
         val favClubs = RoomManager(requireContext()).db.favoriteDao().getAll()
-
-        val ft = parentFragmentManager.beginTransaction()
         view?.findViewById<LinearLayout>(R.id.FavoriteLinearLayout)?.removeAllViews()
-        val clubs = ObjectLoader.getClubs(requireContext())
-        clubs.forEach { club ->
-            if (favClubs.map { e->e.id }.contains(club.id)) {
-                ft.add(R.id.FavoriteLinearLayout, DiscoElement.newInstance(club))
-            }
+        if (favClubs.isEmpty()) {
+            emptyScreenWarning.visibility = View.VISIBLE
         }
-        ft.commit()
+        if (favClubs.isNotEmpty()) {
+            emptyScreenWarning.visibility = View.GONE
+            val ft = parentFragmentManager.beginTransaction()
+            val clubs = ObjectLoader.getClubs(requireContext())
+            clubs.forEach { club ->
+                if (favClubs.map { e -> e.id }.contains(club.id)) {
+                    ft.add(R.id.FavoriteLinearLayout, DiscoElement.newInstance(club))
+                }
+            }
+            ft.commit()
+        }
     }
 }

@@ -12,7 +12,9 @@ import com.hackerini.discoticket.databinding.FragmentHomeBinding
 import com.hackerini.discoticket.fragments.elements.HomePageDiscoElement
 import com.hackerini.discoticket.fragments.elements.HomePageEventElement
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Event
 import com.hackerini.discoticket.utils.ObjectLoader
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -48,10 +50,15 @@ class HomeFragment : Fragment() {
         }
 
         val events = ObjectLoader.getEvents(requireContext())
-        events.sortBy { event -> event.date.time }
-        events.take(5).forEach { event ->
-            transaction.add(R.id.HomeNextEventLinearLayout, HomePageEventElement.newInstance(event))
-        }
+        events.filter { event -> event.date.after(Date()) }
+            .sortedBy { event -> event.date.time }
+            .take(5)
+            .forEach { event ->
+                transaction.add(
+                    R.id.HomeNextEventLinearLayout,
+                    HomePageEventElement.newInstance(event, true)
+                )
+            }
 
         transaction.commit()
     }
@@ -67,12 +74,17 @@ class HomeFragment : Fragment() {
         var transaction = parentFragmentManager.beginTransaction()
 
         Club.getLastSeen(requireContext())
-            .map { id -> clubs.first { club -> club.id == id } }
-            .forEach { club ->
-                transaction.add(
-                    R.id.HomeLastViewedLinearLayout,
-                    HomePageDiscoElement.newInstance(club)
-                )
+            .forEach { item ->
+                if (item is Club)
+                    transaction.add(
+                        R.id.HomeLastViewedLinearLayout,
+                        HomePageDiscoElement.newInstance(item)
+                    )
+                else if (item is Event)
+                    transaction.add(
+                        R.id.HomeLastViewedLinearLayout,
+                        HomePageEventElement.newInstance(item, false)
+                    )
             }
         transaction.commit()
     }

@@ -1,0 +1,11 @@
+<resources>
+    <item name="pointPerReview" type="integer">5</item>
+
+    <!-- Ration between earned points and discount value-->
+    <item name="pointToEuro" format="float" type="dimen">0.01</item>
+    <item name="pointToEuroThreshold" type="integer">500</item>
+
+    <!-- Ration between spent money and earned points-->
+    <item name="euroToPoint" format="float" type="dimen">0.1</item>
+
+</resources>

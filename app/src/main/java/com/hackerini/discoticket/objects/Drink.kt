@@ -6,6 +6,7 @@ import kotlin.math.abs
 
 class Drink(var name: String, var ingredients: Array<String>) : Serializable {
     var club: Club? = null
+    var imagePath: String = ""
     var price = 0F
         get() {
             val md = MessageDigest.getInstance("MD5")

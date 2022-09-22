@@ -5,8 +5,8 @@ import androidx.room.RoomDatabase
 import com.hackerini.discoticket.objects.*
 
 @Database(
-    entities = [FavoriteClub::class, Order::class, OrderItem::class, User::class, Review::class],
-    version = 15
+    entities = [FavoriteClub::class, Order::class, OrderItem::class, User::class, Review::class, Discount::class],
+    version = 16
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteClubDao
@@ -14,4 +14,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun orderItemDao(): OrderItemDao
     abstract fun userDao(): UserDao
     abstract fun reviewDao(): ReviewDao
+    abstract fun discountDao(): DiscountDao
 }

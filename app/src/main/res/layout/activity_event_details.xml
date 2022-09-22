@@ -21,7 +21,7 @@
 
                 <ImageView
                     android:id="@+id/eventDetaileventImage"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="209dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
                     android:layout_width="142dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    android:text="Apri drink menu"
+                    android:text="Apri menù dei drink"
                     android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.954"
@@ -112,8 +112,8 @@
                     android:id="@+id/kfflgkflkgf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="at: "
+                    android:layout_marginStart="6dp"
+                    android:text="a: "
                     android:textStyle="bold|italic"
                     app:layout_constraintBottom_toBottomOf="@+id/eventDetailsDate"
                     app:layout_constraintStart_toEndOf="@+id/eventDetailsDate"
