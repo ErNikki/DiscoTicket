@@ -16,83 +16,108 @@
         app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/DiscoElementLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/discoElementImage"
+            <ImageButton
+                android:id="@+id/DiscoElementRemoveIcon"
                 android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@color/purple_500"
+                android:cropToPadding="true"
+                android:paddingHorizontal="8dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/DiscoElementLayout"
+                app:layout_constraintStart_toEndOf="@id/DiscoElementLayout"
+                app:layout_constraintTop_toTopOf="@id/DiscoElementLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/DiscoElementLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/discoElementLabelsLayout"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:mipmap/sym_def_app_icon"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/discoElementName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Club #1"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/discoElementImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/discoElementImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/discoElementLabelsLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:mipmap/sym_def_app_icon"
+                    tools:src="@tools:sample/avatars" />
 
-            <TextView
-                android:id="@+id/discoElementAddress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="Via prova, 232"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/discoElementName"
-                app:layout_constraintTop_toBottomOf="@+id/discoElementName" />
+                <TextView
+                    android:id="@+id/discoElementName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Club #1"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/discoElementImage"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <RatingBar
-                android:id="@+id/discoElementRating"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/discoElementAddress"
-                app:layout_constraintTop_toBottomOf="@+id/discoElementAddress" />
+                <TextView
+                    android:id="@+id/discoElementAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Via prova, 232"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/discoElementName"
+                    app:layout_constraintTop_toBottomOf="@+id/discoElementName" />
 
-            <TextView
-                android:id="@+id/discoElementReviewAvg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="4.3"
-                app:layout_constraintBottom_toBottomOf="@+id/discoElementRating"
-                app:layout_constraintStart_toEndOf="@+id/discoElementRating"
-                app:layout_constraintTop_toTopOf="@+id/discoElementRating" />
+                <RatingBar
+                    android:id="@+id/discoElementRating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/discoElementAddress"
+                    app:layout_constraintTop_toBottomOf="@+id/discoElementAddress" />
 
-            <TextView
-                android:id="@+id/discoElementReviewAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="(450 Recensioni)"
-                app:layout_constraintBottom_toBottomOf="@+id/discoElementReviewAvg"
-                app:layout_constraintStart_toEndOf="@+id/discoElementReviewAvg"
-                app:layout_constraintTop_toTopOf="@+id/discoElementReviewAvg" />
+                <TextView
+                    android:id="@+id/discoElementReviewAvg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="4.3"
+                    app:layout_constraintBottom_toBottomOf="@+id/discoElementRating"
+                    app:layout_constraintStart_toEndOf="@+id/discoElementRating"
+                    app:layout_constraintTop_toTopOf="@+id/discoElementRating" />
 
-            <LinearLayout
-                android:id="@+id/discoElementLabelsLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@+id/discoElementRating"
-                app:layout_constraintTop_toBottomOf="@+id/discoElementRating"></LinearLayout>
+                <TextView
+                    android:id="@+id/discoElementReviewAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="(450 Recensioni)"
+                    app:layout_constraintBottom_toBottomOf="@+id/discoElementReviewAvg"
+                    app:layout_constraintStart_toEndOf="@+id/discoElementReviewAvg"
+                    app:layout_constraintTop_toTopOf="@+id/discoElementReviewAvg" />
+
+                <LinearLayout
+                    android:id="@+id/discoElementLabelsLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/discoElementRating"
+                    app:layout_constraintTop_toBottomOf="@+id/discoElementRating"></LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>
