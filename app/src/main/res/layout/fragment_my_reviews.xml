@@ -15,8 +15,10 @@
             android:id="@+id/MyReviewEmptyWarning"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
             android:text="Non ci sono recensioni per l'utente corrente o non hai ancora effettuato l'accesso"
             android:textAlignment="center"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
