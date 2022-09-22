@@ -3,7 +3,6 @@ package com.hackerini.discoticket.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -25,7 +24,6 @@ class DrinkMenu : AppCompatActivity() {
         totalCart.setText(0.toString().plus(" €"))
 
         val club = intent.getSerializableExtra("club") as Club
-        Log.d("TAG", club.name)
 
         val drinks = club.getClubDrinks(this)
 

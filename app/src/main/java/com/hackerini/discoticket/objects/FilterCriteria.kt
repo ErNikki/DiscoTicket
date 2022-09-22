@@ -1,6 +1,5 @@
 package com.hackerini.discoticket.objects
 
-import android.util.Log
 import java.io.Serializable
 import java.util.*
 
@@ -63,7 +62,6 @@ data class FilterCriteria(
             this.priceRange.first < club!!.simpleTicketPrice && club.simpleTicketPrice < this.priceRange.second
         }
 
-        Log.d("FILTER", this.locationType.name)
         //Filter by location type range
         elements.retainAll { item ->
             val club = if (item is Club) item else (item as Event).club
