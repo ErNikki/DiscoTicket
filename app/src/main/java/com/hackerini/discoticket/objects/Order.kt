@@ -1,6 +1,5 @@
 package com.hackerini.discoticket.objects
 
-import android.util.Log
 import androidx.room.*
 import java.io.Serializable
 import java.util.*
@@ -58,7 +57,6 @@ data class Order(
 
     //Call it before the storage
     fun prepare() {
-        Log.d("CLUB", "CLUB " + club?.id)
         clubId = this.club?.id!!
         tableIds = tableIdsList.joinToString(",")
         for (e in tickets)

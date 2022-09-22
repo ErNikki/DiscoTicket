@@ -7,6 +7,9 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.view.MotionEvent
 import android.view.View
+import com.hackerini.discoticket.objects.Club
+import java.nio.charset.StandardCharsets
+import java.security.MessageDigest
 import java.util.*
 
 enum class TableState {
@@ -17,7 +20,7 @@ enum class TableState {
 
 class Table(var tableId: Int, var rect: RectF, var state: TableState, var numberOfSets: Int)
 
-class ClubMap(context: Context) : View(context) {
+class ClubMap(context: Context, club: Club, date: String) : View(context) {
     private val linePaint = Paint()
     private val fillPaint = Paint()
     private val textPaint = Paint()
@@ -34,6 +37,11 @@ class ClubMap(context: Context) : View(context) {
     private val selectedTables = LinkedList<Table>()
     var selectableTables = 1
     var isShowMode = false
+
+    private val md = MessageDigest.getInstance("SHA-256")
+    private val clubUniqueString = club.name + club.address + club.id + date
+    private val hash = md.digest(clubUniqueString.toByteArray(StandardCharsets.UTF_8))
+    private val randomStream = hash.inputStream()
 
     init {
         generateRowOfTable(30F, 30F)
@@ -88,7 +96,7 @@ class ClubMap(context: Context) : View(context) {
         canvas?.drawCircle(30F + offset, 630F, 20F, linePaint)
         canvas?.drawText("Occupato", 70F + offset, 645F, legendTextPaint)
 
-        if(!isShowMode) {
+        if (!isShowMode) {
             fillPaint.color = Color.CYAN
             offset = 600F
             canvas?.drawCircle(30F + offset, 630F, 20F, fillPaint)
@@ -101,7 +109,7 @@ class ClubMap(context: Context) : View(context) {
         for (col in 0..4 step 1) {
             val colStep = 200F * col
             val r = RectF(startX + colStep, startY, tableWidth + colStep, startY + tableHeigth)
-            val tableState = if (((0..100).random() > 30))
+            val tableState = if (randomStream.read() % 100 > 30)
                 TableState.Available
             else
                 TableState.NotAvailable
@@ -115,7 +123,7 @@ class ClubMap(context: Context) : View(context) {
         for (row in 0..1 step 1) {
             val rowStep = 130F * row
             val r = RectF(startX, startY + rowStep, tableWidth, startY + tableHeigth + rowStep)
-            val tableState = if (((0..100).random() > 30))
+            val tableState = if (randomStream.read() % 100 > 30)
                 TableState.Available
             else
                 TableState.NotAvailable
@@ -142,7 +150,7 @@ class ClubMap(context: Context) : View(context) {
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if(isShowMode)
+        if (isShowMode)
             return false
         if (event?.action == 1) {
             val x = event.x
@@ -164,10 +172,9 @@ class ClubMap(context: Context) : View(context) {
                         onTableClickListener?.let { it(selectedTables) }
                     }
                 } else {
-                    if(isTheSelectedTable && table.state == TableState.NotAvailable ){
+                    if (isTheSelectedTable && table.state == TableState.NotAvailable) {
                         break
-                    }
-                    else if (isTheSelectedTable && table.state == TableState.Available) {
+                    } else if (isTheSelectedTable && table.state == TableState.Available) {
                         selectedTables.clear()
                         table.state = TableState.Selected
                         selectedTables.add(table)

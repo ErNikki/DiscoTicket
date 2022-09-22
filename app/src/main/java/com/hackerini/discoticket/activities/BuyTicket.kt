@@ -8,7 +8,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.*
@@ -95,6 +94,7 @@ class BuyTicket : AppCompatActivity() {
                         day.date.isAfter(LocalDate.now()) || day.date.isEqual(LocalDate.now())
                     if (day.date == container.selectedDate && isOpened && isFuture) {
                         selectedDate = day
+                        viewTable.isEnabled = true
                         if (amountOfTableTicket > 0 || amountOfSimpleTicket > 0)
                             payButton.isEnabled = true
 
@@ -119,6 +119,7 @@ class BuyTicket : AppCompatActivity() {
                         textView.background = null
                     } else {
                         textView.setTextColor(Color.BLACK)
+                        textView.setTypeface(null, Typeface.BOLD)
                         textView.background = null
                     }
                 } else {
@@ -167,11 +168,9 @@ class BuyTicket : AppCompatActivity() {
         }
 
         viewTable.setOnClickListener {
-            val club = Club()
-            club.name = "Discoteca prova"
-            club.address = "Via del corso, 43, Roma"
             val intent = Intent(this, SelectTable::class.java)
             intent.putExtra("club", club)
+            intent.putExtra("date", selectedDate!!.date.toString())
             if (this.amountOfTableTicket > 0) {
                 intent.putExtra("showMode", false)
                 intent.putExtra("simpleTicket", amountOfSimpleTicket)
@@ -215,7 +214,6 @@ class BuyTicket : AppCompatActivity() {
                     else
                         order.date = formatter.format(event!!.date)
                     order.club = club
-                    Log.d("CLUB", club?.id.toString())
                     val intent = Intent(applicationContext, Payment::class.java)
                     intent.putExtra("OrderPreview", order)
                     startActivity(intent)

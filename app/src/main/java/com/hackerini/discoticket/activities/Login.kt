@@ -3,11 +3,11 @@ package com.hackerini.discoticket.activities
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.hackerini.discoticket.MainActivity
@@ -96,9 +96,10 @@ class Login : AppCompatActivity() {
                 val hashedPassword = User.hashPassword(passwordTextEdit.text.toString())
                 val queryResult =
                     userDao.getUserByCredential(emailTextEdit.text.toString(), hashedPassword)
-                Log.d("RES", queryResult.toString())
                 if (queryResult.isNotEmpty()) {
                     //Success
+                    Toast.makeText(this, "Accesso effettuato con successo", Toast.LENGTH_LONG)
+                        .show()
                     val user = queryResult.first()
                     User.setUserLogged(this, user)
                     startActivity(Intent(this, MainActivity::class.java))

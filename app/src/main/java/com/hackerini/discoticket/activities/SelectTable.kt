@@ -50,7 +50,7 @@ class SelectTable : AppCompatActivity() {
         }
 
         val llMap = findViewById<LinearLayout>(R.id.SelectTableLinearLayoutMap)
-        val clubMap = ClubMap(this)
+        val clubMap = ClubMap(this, club, selectedDate!!)
         var selectedTables: List<Int>? = null
         clubMap.setOnTableClickListener { tables ->
             selectedTables = tables.map { table -> table.tableId }
