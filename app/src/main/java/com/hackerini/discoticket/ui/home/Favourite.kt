@@ -1,5 +1,6 @@
 package com.hackerini.discoticket.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
@@ -45,6 +47,23 @@ class Favourite : Fragment() {
         linearLayout = view.findViewById(R.id.FavoriteLinearLayout)
         emptyScreenWarning = view.findViewById(R.id.FavoriteClubEmptyWarning)
         loadContent()
+
+        val VALUE_KEY = "favoriteGesture"
+        val sharedPreferences =
+            requireContext().getSharedPreferences("DiscoTicket", Context.MODE_PRIVATE)
+        val hideDialog = sharedPreferences.getBoolean(VALUE_KEY, true)
+        if (hideDialog && fragmentList.isNotEmpty()) {
+            val dialog = MaterialAlertDialogBuilder(requireContext())
+            dialog.setTitle("Aiuto")
+            dialog.setMessage("Trascina gli elementi verso sinistra per eliminarli da preferiti")
+            dialog.setPositiveButton("Ho capito") { dialog, _ ->
+                sharedPreferences.edit().apply {
+                    putBoolean(VALUE_KEY, false)
+                }.apply()
+                dialog.dismiss()
+            }
+            dialog.create().show()
+        }
     }
 
     override fun onResume() {
