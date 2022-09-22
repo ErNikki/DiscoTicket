@@ -70,7 +70,7 @@ class SignUp : AppCompatActivity() {
     private fun showSuccessDialog() {
         val dialog = AlertDialog.Builder(this).create()
         dialog.setTitle("Registrazione completata")
-        dialog.setMessage("Registrazione avvenuta con successo\nOra puoi effettuare il login con il tuo nuovo account")
+        dialog.setMessage("Registrazione avvenuta con successo!\nOra puoi effettuare il login con il tuo nuovo account.")
         dialog.setCancelable(false)
         dialog.setButton(
             AlertDialog.BUTTON_POSITIVE,
@@ -116,15 +116,15 @@ class SignUp : AppCompatActivity() {
             hasError = true
         }
         if (password.text.toString() != passwordRepeat.text.toString()) {
-            passwordRepeat.error = "La password deve essere la stessa inserite prima"
+            passwordRepeat.error = "Le due password non coincidono"
             hasError = true
         }
         if (!EMAIL_ADDRESS_PATTERN.matcher(email.text.toString().trim()).matches()) {
-            email.error = "Indirizzo non valido"
+            email.error = "Email non valida"
             hasError = true
         }
         if (userDao.isUserExists(email.text.toString())) {
-            email.error = "Indirizzo già esistente"
+            email.error = "Email già esistente"
             hasError = true
         }
 
