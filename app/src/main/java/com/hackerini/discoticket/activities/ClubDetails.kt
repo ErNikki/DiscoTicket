@@ -89,19 +89,6 @@ class ClubDetails : AppCompatActivity() {
             tagLayout.addView(textview)
         }
 
-        //Review
-        if (club!!.reviews.isEmpty()) {
-            findViewById<FragmentContainerView>(R.id.clubDetailsFragmentContainerView).visibility =
-                View.GONE
-            findViewById<TextView>(R.id.clubDeatilsReviwerNoReview).visibility =
-                View.VISIBLE
-        } else {
-            supportFragmentManager.beginTransaction().add(
-                R.id.clubDetailsFragmentContainerView, ReviewElement.newInstance(
-                    club!!.reviews.first()
-                )
-            ).commit()
-        }
         findViewById<Button>(R.id.clubDetailsReadReviewsButton).setOnClickListener {
             val intent = Intent(applicationContext, AllReview::class.java)
             intent.putExtra("club", club)
@@ -137,6 +124,29 @@ class ClubDetails : AppCompatActivity() {
         } else {
             favouritesButton?.setImageResource(R.drawable.ic_baseline_favorite_off_24)
             favouriteText.text = "Aggiungi ai preferiti"
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val fragmentContainerView =
+            findViewById<FragmentContainerView>(R.id.clubDetailsFragmentContainerView)
+        fragmentContainerView.removeAllViews()
+        //Review
+        if (club!!.reviews.isEmpty()) {
+            fragmentContainerView.visibility =
+                View.GONE
+            findViewById<TextView>(R.id.clubDeatilsReviwerNoReview).visibility =
+                View.VISIBLE
+        } else {
+            supportFragmentManager.beginTransaction().add(
+                fragmentContainerView.id, ReviewElement.newInstance(
+                    club!!.getReview(this)
+                        .filter { r -> r.description.isNotBlank() }
+                        .sortedByDescending { r -> r.getLongTime() }
+                        .first()
+                )
+            ).commit()
         }
     }
 

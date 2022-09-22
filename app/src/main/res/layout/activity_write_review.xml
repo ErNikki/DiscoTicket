@@ -44,9 +44,10 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/customborder"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Name"
+        android:gravity="start|top"
+        android:hint="Scrivi qui la tua descrizione"
+        android:inputType="textMultiLine"
+        android:minHeight="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writeReviewDescriptionLabel" />

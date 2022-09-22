@@ -1,7 +1,6 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
-import com.hackerini.discoticket.room.RoomManager
 import java.lang.Math.abs
 import java.security.MessageDigest
 
@@ -46,30 +44,8 @@ class ReviewElement : Fragment() {
         val reviewContent = view.findViewById<TextView>(R.id.ReviewReviewText)
         val reviewRatingBar = view.findViewById<RatingBar>(R.id.clubDeatilsReviwerRatingBar)
 
-        var user=User()
-        var name=""
-        var surname=""
-
-        /*questo per distinguire le review che sono inserite dal json e quindi che
-        hanno utenti che non esistono realmente
-        da quelle di utenti registrati nel database
-        ho fatto cosi in caso eliminiamo i json o decidiciamo di cambiarli possiamo prendere
-        direttamente le cose dal db
-        */
-
-        if(review?.json == true){
-            val roomManager =  RoomManager(requireContext()).db.userDao()
-            user= roomManager.getUserById(review?.userCreatorId!!).first()
-            name=user.name
-            surname=user.surname
-        }
-
-        else{
-            user= review?.user!!
-            name= review?.user?.name.toString()
-            surname= review?.user?.surname.toString()
-        }
-
+        val name = review!!.user.name
+        val surname = review!!.user.surname
 
         reviewerName.text = name + " " + surname
         reviewDate.text = review?.date
@@ -85,7 +61,7 @@ class ReviewElement : Fragment() {
             .setTextSize(30)
             .toSquare()
             .toCircle()
-            .setBackgroundColor(getRandomColor(user!!))
+            .setBackgroundColor(getRandomColor(review!!.user))
             .build()
         reviewerImage.setImageDrawable(image)
     }

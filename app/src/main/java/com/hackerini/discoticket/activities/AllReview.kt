@@ -29,7 +29,7 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_all_review)
 
         val club = intent.getSerializableExtra("club") as Club
-        reviews = club.reviews.toList()
+        reviews = club.getReview(this).toList()
 
         val imageSize = 250
         Picasso.get().load(club.imgUrl).resize(imageSize, imageSize)

@@ -8,30 +8,22 @@ import java.util.*
 @Entity
 class Review(
     @PrimaryKey(autoGenerate = true) val reviewId: Int,
-    @ColumnInfo val userCreatorId : Int,
-    ) : Serializable {
+    @ColumnInfo val userCreatorId: Int,
+) : Serializable {
     constructor(userId: Int) : this(0, userId)
 
     //mi permette di creare una review vuota che viene però attribuita all'user -1 che non dovrebbe esistere
-    constructor() : this(0,-1)
+    constructor() : this(0, -1)
 
-    var rating : Double = 0.0
+    var rating: Double = 0.0
+    var clubId: Int = -1
 
-    /*
-    * viene usato sia in write review per distinguire la review fatta dall'app da
-    * quelle del json
-    * che in review element per prendere il nome direttamente dal db
-    * */
-
-    var json=false
-
-    var date= " "
+    var date = ""
 
     @Ignore
-    //serve perchè le recensioni vengono prese dal json
-    val user=User()
+    var user = User()
 
-    var description : String =" "
+    var description: String = ""
 
     @Ignore
     var images = arrayOf(
@@ -45,21 +37,38 @@ class Review(
     }
 }
 
+data class ReviewWithUser(
+    @Embedded val review: Review,
+    @Relation(
+        parentColumn = "userCreatorId",
+        entityColumn = "id"
+    )
+    val user: User
+) : Serializable
 
 data class UserWithReviews(
-    @Embedded val user : User,
+    @Embedded val user: User,
     @Relation(
         parentColumn = "id",
         entityColumn = "userCreatorId"
     )
-    val reviews : List<Review>
-    ):Serializable
+    val reviews: List<Review>
+) : Serializable
 
 
 @Dao
-interface ReviewDao{
+interface ReviewDao {
     @Query("SELECT * FROM 'Review' ")
     fun getAllReviews(): List<Review>
+
+    fun getAllReviewsByClub(clubId: Int): List<Review> {
+        val reviewWithUser = getAllReviewsWithUserByClub(clubId)
+        reviewWithUser.forEach { r -> r.review.user = r.user }
+        return reviewWithUser.map { r -> r.review }
+    }
+
+    @Query("SELECT * FROM 'Review' WHERE clubId=:clubId")
+    fun getAllReviewsWithUserByClub(clubId: Int): List<ReviewWithUser>
 
     @Transaction
     @Query("SELECT * FROM 'User' ")
@@ -67,11 +76,11 @@ interface ReviewDao{
 
     @Transaction
     @Query("SELECT * FROM 'User' Where id=:id LIMIT 1")
-    fun getAllReviewsOfUser(id : Int): List<UserWithReviews>
+    fun getAllReviewsOfUser(id: Int): List<UserWithReviews>
 
     @Insert
-    fun insert(review : Review)
+    fun insert(review: Review)
 
     @Delete
-    fun delete(review : Review)
+    fun delete(review: Review)
 }
