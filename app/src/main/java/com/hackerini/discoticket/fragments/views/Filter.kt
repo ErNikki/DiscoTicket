@@ -67,6 +67,7 @@ class Filter : DialogFragment(), CompoundButton.OnCheckedChangeListener,
 
         distanceRange.value =
             filterCriteria!!.maxDistance.toFloat().coerceIn(0F, distanceRange.valueTo)
+        distanceText.text = distanceRange.value.toInt().toString() + " Km"
 
         priceSlider.values = arrayListOf(
             filterCriteria!!.priceRange.first.toFloat().coerceAtLeast(0f),
