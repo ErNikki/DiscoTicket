@@ -54,6 +54,12 @@ class SignUp : AppCompatActivity() {
                 user.email = email.text.toString()
                 user.password = User.hashPassword(password.text.toString())
                 userDao.insert(user)
+                val editor = getSharedPreferences(
+                    "DiscoTicketPref",
+                    AppCompatActivity.MODE_PRIVATE
+                ).edit()
+                editor.remove("userId")
+                editor.apply()
                 showSuccessDialog()
 
             }
