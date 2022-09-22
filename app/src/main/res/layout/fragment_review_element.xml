@@ -16,71 +16,99 @@
         app:layout_constraintTop_toBottomOf="@+id/ReviewReview">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ReviewReviwerBlock"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <ImageView
-                android:id="@+id/ReviewReviewerImage"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/ReviewReviewerName"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ReviewReviwerBlock"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="TextView"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/ReviewReviewerImage"
-                app:layout_constraintTop_toTopOf="@+id/ReviewReviewerImage" />
-
-            <TextView
-                android:id="@+id/ReviewReviewDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/ReviewReviewerName"
-                app:layout_constraintTop_toBottomOf="@+id/ReviewReviewerName" />
-
-            <RatingBar
-                android:id="@+id/clubDeatilsReviwerRatingBar"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="28dp"
-                android:numStars="5"
-                android:scaleX="1.5"
-                android:scaleY="1.5"
-                app:layout_constraintBottom_toBottomOf="@+id/ReviewReviewerImage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ReviewReviewerImage"
-                app:layout_constraintVertical_bias="0.219" />
-
-            <TextView
-                android:id="@+id/ReviewReviewText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ReviewReviewerImage" />
+                app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/ReviewReviewerImage"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/ReviewReviewerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/ReviewReviewerImage"
+                    app:layout_constraintTop_toTopOf="@+id/ReviewReviewerImage" />
+
+                <TextView
+                    android:id="@+id/ReviewReviewDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/ReviewReviewerName"
+                    app:layout_constraintTop_toBottomOf="@+id/ReviewReviewerName" />
+
+                <RatingBar
+                    android:id="@+id/clubDeatilsReviwerRatingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="28dp"
+                    android:numStars="5"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ReviewDeleteButton" />
+
+                <ImageButton
+                    android:id="@+id/ReviewEditButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/ReviewDeleteButton"
+                    app:layout_constraintEnd_toStartOf="@+id/ReviewDeleteButton"
+                    app:layout_constraintTop_toTopOf="@+id/ReviewDeleteButton" />
+
+                <ImageButton
+                    android:id="@+id/ReviewDeleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_delete_24"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ReviewClubName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintStart_toStartOf="@+id/ReviewReviewerImage"
+                    app:layout_constraintTop_toBottomOf="@+id/ReviewReviewerImage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/ReviewReviewText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="TextView" />
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

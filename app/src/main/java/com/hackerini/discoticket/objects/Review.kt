@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 class Review(
-    @PrimaryKey(autoGenerate = true) val reviewId: Int,
+    @PrimaryKey(autoGenerate = true) var reviewId: Int,
     @ColumnInfo val userCreatorId: Int,
 ) : Serializable {
     constructor(userId: Int) : this(0, userId)
@@ -75,8 +75,15 @@ interface ReviewDao {
     fun getUsersReviews(): List<UserWithReviews>
 
     @Transaction
-    @Query("SELECT * FROM 'User' Where id=:id LIMIT 1")
+    @Query("SELECT * FROM 'User' Where id=:id")
     fun getAllReviewsOfUser(id: Int): List<UserWithReviews>
+
+    @Query("UPDATE 'Review' SET rating=:rating, description=:description WHERE reviewId=:reviewId")
+    fun editReviewWithFields(reviewId: Int, rating: Double, description: String)
+
+    fun editReview(review: Review) {
+        editReviewWithFields(review.reviewId, review.rating, review.description)
+    }
 
     @Insert
     fun insert(review: Review)

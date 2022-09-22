@@ -2,7 +2,6 @@ package com.hackerini.discoticket.objects
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.room.FavoriteClub
 import com.hackerini.discoticket.room.RoomManager
@@ -92,7 +91,6 @@ class Club : Serializable {
                 return arrayListOf<Club>()
             }
             return splittedId.filter { e -> e.isNotEmpty() }.mapNotNull { e ->
-                Log.d("ELEMENT", e)
                 val typeString = e.substring(0, 1)
                 val id = e.substring(1).toInt()
                 when (typeString) {

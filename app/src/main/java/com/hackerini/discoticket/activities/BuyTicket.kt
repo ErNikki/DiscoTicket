@@ -8,7 +8,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.*
@@ -215,7 +214,6 @@ class BuyTicket : AppCompatActivity() {
                     else
                         order.date = formatter.format(event!!.date)
                     order.club = club
-                    Log.d("CLUB", club?.id.toString())
                     val intent = Intent(applicationContext, Payment::class.java)
                     intent.putExtra("OrderPreview", order)
                     startActivity(intent)

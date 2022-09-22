@@ -22,12 +22,20 @@ class WriteReview : AppCompatActivity() {
         setContentView(R.layout.activity_write_review)
 
         val club = intent.getSerializableExtra("club") as Club
+        val originalReview = intent.getSerializableExtra("review") as Review?
+
         val reviewDao = RoomManager(this).db.reviewDao()
+        val userDao = RoomManager(this).db.userDao()
 
         val rating = findViewById<RatingBar>(R.id.writeReviewRatingBar)
         val description = findViewById<EditText>(R.id.writeReviewDescriptionText)
-        description.setText("")
         val addReviewButton = findViewById<Button>(R.id.writeReviewAddReviewButton)
+
+        if (originalReview != null) {
+            rating.rating = originalReview.rating.toFloat()
+            description.setText(originalReview.description)
+            addReviewButton.text = "Modifica"
+        }
 
         addReviewButton.setOnClickListener {
 
@@ -41,11 +49,29 @@ class WriteReview : AppCompatActivity() {
 
                 if (rating.rating != 0f) {
                     review.rating = rating.rating.toDouble()
-                    reviewDao.insert(review)
-
                     val builder = MaterialAlertDialogBuilder(context)
-                    builder.setTitle("Recensione Aggiunta")
-                    builder.setMessage("Grazie per aver lasciato una recensione" + "\n\n" + review.description)
+                    if (originalReview != null) {
+                        //Edit
+                        review.reviewId = originalReview.reviewId
+                        builder.setTitle("Recensione modificata")
+                        builder.setMessage("La tua recensione è stata aggiornata con successo")
+                        reviewDao.editReview(review)
+                    } else {
+                        //New review
+                        reviewDao.insert(review)
+                        userDao.incrementsPoints(
+                            resources.getInteger(R.integer.pointPerReview),
+                            User.getLoggedUser(this)!!.id
+                        )
+                        builder.setTitle("Recensione Aggiunta")
+                        builder.setMessage(
+                            "Grazie per aver lasciato una recensione!\nHai ottenuto ${
+                                resources.getInteger(
+                                    R.integer.pointPerReview
+                                )
+                            } punti che potrai usare per ottenere buoni sconto"
+                        )
+                    }
                     builder.setPositiveButton("Ok") { dialog, _ -> finish() }
                     builder.create().show()
 
@@ -56,8 +82,6 @@ class WriteReview : AppCompatActivity() {
                     builder.setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
                     builder.create().show()
                 }
-
-
             } else {
 
                 val builder = MaterialAlertDialogBuilder(context)

@@ -23,7 +23,6 @@ class DayViewContainer(view: View, calendarView: CalendarView) : ViewContainer(v
             if (day.owner == DayOwner.THIS_MONTH) {
                 // Keep a reference to any previous selection
                 // in case we overwrite it and need to reload it.
-                //Log.d("HERE",day.date.toString());
                 day.date.let { it1 ->
                     calendarView.notifyDateChanged(it1)
                     selectedDate=it1
