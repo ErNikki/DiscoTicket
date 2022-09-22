@@ -1,17 +1,21 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.avatarfirst.avatargenlib.AvatarGenerator
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
+import com.hackerini.discoticket.room.RoomManager
 import java.lang.Math.abs
 import java.security.MessageDigest
 
@@ -19,6 +23,7 @@ private const val ARG_PARAM1 = "param1"
 
 class ReviewElement : Fragment() {
     private var review: Review? = null
+    var onRefreshNeeded: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +48,13 @@ class ReviewElement : Fragment() {
         val reviewDate = view.findViewById<TextView>(R.id.ReviewReviewDate)
         val reviewContent = view.findViewById<TextView>(R.id.ReviewReviewText)
         val reviewRatingBar = view.findViewById<RatingBar>(R.id.clubDeatilsReviwerRatingBar)
+        val deleteButton = view.findViewById<ImageButton>(R.id.ReviewDeleteButton)
+        val editButton = view.findViewById<ImageButton>(R.id.ReviewEditButton)
 
         val name = review!!.user.name
         val surname = review!!.user.surname
 
+        Log.d("QUA", name + surname)
         reviewerName.text = name + " " + surname
         reviewDate.text = review?.date
         reviewContent.text = review?.description
@@ -64,6 +72,12 @@ class ReviewElement : Fragment() {
             .setBackgroundColor(getRandomColor(review!!.user))
             .build()
         reviewerImage.setImageDrawable(image)
+
+        if (User.isLogged(requireContext()) && review?.user?.id == User.getLoggedUser(requireContext())?.id) {
+            editButton.visibility = View.VISIBLE
+            deleteButton.visibility = View.VISIBLE
+            deleteButton.setOnClickListener { onDeleteClick() }
+        }
     }
 
     fun getRandomColor(user: User): Int {
@@ -77,6 +91,19 @@ class ReviewElement : Fragment() {
         val md = MessageDigest.getInstance("MD5")
         val number = md.digest((user.name + user.surname).toByteArray()).sum()
         return list[abs(number) % list.size].toInt()
+    }
+
+    fun onDeleteClick() {
+        val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
+        dialogBuilder.setTitle("Conferma eliminazione")
+        dialogBuilder.setMessage("Sei sicuro di volere eliminare la recensione")
+        dialogBuilder.setNegativeButton("Annulla") { dialog, _ -> dialog.dismiss() }
+        dialogBuilder.setPositiveButton("Conferma") { dialog, _ ->
+            RoomManager(requireContext()).db.reviewDao().delete(review!!)
+            dialog.dismiss()
+        }
+        dialogBuilder.setOnDismissListener { onRefreshNeeded?.invoke() }
+        dialogBuilder.create().show()
     }
 
     companion object {

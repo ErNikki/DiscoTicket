@@ -75,7 +75,7 @@ interface ReviewDao {
     fun getUsersReviews(): List<UserWithReviews>
 
     @Transaction
-    @Query("SELECT * FROM 'User' Where id=:id LIMIT 1")
+    @Query("SELECT * FROM 'User' Where id=:id")
     fun getAllReviewsOfUser(id: Int): List<UserWithReviews>
 
     @Insert
