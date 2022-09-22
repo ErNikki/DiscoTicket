@@ -1,16 +1,18 @@
 package com.hackerini.discoticket.fragments.elements
 
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.animation.doOnEnd
 import androidx.fragment.app.Fragment
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -40,7 +42,6 @@ class ReviewElement : Fragment() {
             review = it.getSerializable(ARG_PARAM1) as Review
             showClubName = it.getBoolean(ARG_PARAM2)
         }
-        Log.d("REVIEW", review?.clubId.toString())
         club =
             ObjectLoader.getClubs(requireContext()).firstOrNull { club ->
                 club.id == review?.clubId
@@ -128,10 +129,9 @@ class ReviewElement : Fragment() {
         dialogBuilder.setMessage("Sei sicuro di volere eliminare la recensione")
         dialogBuilder.setNegativeButton("Annulla") { dialog, _ -> dialog.dismiss() }
         dialogBuilder.setPositiveButton("Conferma") { dialog, _ ->
-            RoomManager(requireContext()).db.reviewDao().delete(review!!)
             dialog.dismiss()
+            hideAndDelete()
         }
-        dialogBuilder.setOnDismissListener { onRefreshNeeded?.invoke() }
         dialogBuilder.create().show()
     }
 
@@ -140,6 +140,21 @@ class ReviewElement : Fragment() {
         intent.putExtra("club", club)
         intent.putExtra("review", review!!)
         startActivity(intent)
+    }
+
+    private fun hideAndDelete() {
+        val valueAnimator = ValueAnimator.ofInt(requireView().height, 0)
+        valueAnimator.interpolator = DecelerateInterpolator()
+        valueAnimator.addUpdateListener { animation ->
+            requireView().layoutParams.height = animation.animatedValue as Int
+            requireView().requestLayout()
+        }
+        valueAnimator.duration = 300
+        valueAnimator.doOnEnd {
+            RoomManager(requireContext()).db.reviewDao().delete(review!!)
+            onRefreshNeeded?.invoke()
+        }
+        valueAnimator.start()
     }
 
     companion object {

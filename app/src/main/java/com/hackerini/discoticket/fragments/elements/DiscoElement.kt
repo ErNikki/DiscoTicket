@@ -6,7 +6,6 @@ import android.app.ActionBar
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.animation.DecelerateInterpolator
 import android.widget.*
@@ -184,7 +183,6 @@ class DiscoElement : Fragment(), GestureDetector.OnGestureListener {
     }
 
     override fun onLongPress(e: MotionEvent?) {
-        Log.d("LONMG", "LONMG")
     }
 
     override fun onFling(
