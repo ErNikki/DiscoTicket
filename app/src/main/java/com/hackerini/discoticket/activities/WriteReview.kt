@@ -23,6 +23,7 @@ class WriteReview : AppCompatActivity() {
 
         val club = intent.getSerializableExtra("club") as Club
         val reviewDao = RoomManager(this).db.reviewDao()
+        val userDao = RoomManager(this).db.userDao()
 
         val rating = findViewById<RatingBar>(R.id.writeReviewRatingBar)
         val description = findViewById<EditText>(R.id.writeReviewDescriptionText)
@@ -42,10 +43,21 @@ class WriteReview : AppCompatActivity() {
                 if (rating.rating != 0f) {
                     review.rating = rating.rating.toDouble()
                     reviewDao.insert(review)
+                    userDao.incrementsPoints(
+                        resources.getInteger(R.integer.pointPerReview),
+                        User.getLoggedUser(this)!!.id
+                    )
+
 
                     val builder = MaterialAlertDialogBuilder(context)
                     builder.setTitle("Recensione Aggiunta")
-                    builder.setMessage("Grazie per aver lasciato una recensione" + "\n\n" + review.description)
+                    builder.setMessage(
+                        "Grazie per aver lasciato una recensione!\nHai ottenuto ${
+                            resources.getInteger(
+                                R.integer.pointPerReview
+                            )
+                        } punti che potrai usare per ottenere buoni sconto"
+                    )
                     builder.setPositiveButton("Ok") { dialog, _ -> finish() }
                     builder.create().show()
 
