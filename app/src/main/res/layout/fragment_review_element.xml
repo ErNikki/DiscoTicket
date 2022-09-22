@@ -90,6 +90,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/ReviewClubName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintStart_toStartOf="@+id/ReviewReviewerImage"
+                    app:layout_constraintTop_toBottomOf="@+id/ReviewReviewerImage" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView

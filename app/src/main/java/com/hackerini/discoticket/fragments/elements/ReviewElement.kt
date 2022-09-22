@@ -1,7 +1,9 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,9 @@ import androidx.fragment.app.Fragment
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.activities.ClubDetails
 import com.hackerini.discoticket.activities.WriteReview
+import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
@@ -22,16 +26,26 @@ import java.lang.Math.abs
 import java.security.MessageDigest
 
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 class ReviewElement : Fragment() {
     private var review: Review? = null
+    private var showClubName = false
+    private var club: Club? = null
     var onRefreshNeeded: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             review = it.getSerializable(ARG_PARAM1) as Review
+            showClubName = it.getBoolean(ARG_PARAM2)
         }
+        Log.d("REVIEW", review?.clubId.toString())
+        club =
+            ObjectLoader.getClubs(requireContext()).firstOrNull { club ->
+                club.id == review?.clubId
+            }
+
     }
 
     override fun onCreateView(
@@ -52,9 +66,22 @@ class ReviewElement : Fragment() {
         val reviewRatingBar = view.findViewById<RatingBar>(R.id.clubDeatilsReviwerRatingBar)
         val deleteButton = view.findViewById<ImageButton>(R.id.ReviewDeleteButton)
         val editButton = view.findViewById<ImageButton>(R.id.ReviewEditButton)
+        val clubName = view.findViewById<TextView>(R.id.ReviewClubName)
 
         val name = review!!.user.name
         val surname = review!!.user.surname
+
+
+        if (showClubName && club != null) {
+            clubName.text = club!!.name
+            clubName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+            clubName.setOnClickListener {
+                val intent = Intent(requireContext(), ClubDetails::class.java)
+                intent.putExtra("club", club)
+                startActivity(intent)
+            }
+        } else
+            clubName.visibility = View.GONE
 
         reviewerName.text = name + " " + surname
         reviewDate.text = review?.date
@@ -110,8 +137,6 @@ class ReviewElement : Fragment() {
 
     fun onEditClick() {
         val intent = Intent(requireContext(), WriteReview::class.java)
-        val club =
-            ObjectLoader.getClubs(requireContext()).first { club -> club.id == review?.clubId }
         intent.putExtra("club", club)
         intent.putExtra("review", review!!)
         startActivity(intent)
@@ -119,10 +144,11 @@ class ReviewElement : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(review: Review) =
+        fun newInstance(review: Review, showClubName: Boolean = false) =
             ReviewElement().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, review)
+                    putBoolean(ARG_PARAM2, showClubName)
                 }
             }
     }

@@ -36,7 +36,7 @@ class EventDetails : AppCompatActivity() {
         val eventDescription = findViewById<TextView>(R.id.eventDeatilseventDescription)
         val tagLayout = findViewById<LinearLayout>(R.id.eventDetailsTagLayout)
 
-        clubName.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG)
+        clubName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         eventName.text = event.name
         address.text = event.club?.address
         eventDate.text = df.format(event.date)

@@ -44,13 +44,13 @@ class MyReviews : Fragment() {
             val dbUser = reviews.first().user
             reviews.first().reviews.forEach { e -> e.user = dbUser }
 
-            if (reviews.isEmpty()) {
+            if (reviews.firstOrNull()?.reviews?.isEmpty() != false) {
                 warningText.text = "Non ci sono recensioni per l'utente corrente"
             } else {
                 reviewsLinearLayout.removeAllViews()
                 val transaction = parentFragmentManager.beginTransaction()
                 reviews.first().reviews.forEach { r ->
-                    val fragment = ReviewElement.newInstance(r)
+                    val fragment = ReviewElement.newInstance(r, true)
                     fragment.onRefreshNeeded = { loadContent() }
                     transaction.add(reviewsLinearLayout.id, fragment)
                 }

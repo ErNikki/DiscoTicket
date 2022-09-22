@@ -23,42 +23,63 @@ enum class ReviewOrderCriteria {
 class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var reviews: List<Review>? = null
     var orderCriteria = ReviewOrderCriteria.MostRecent
+    lateinit var club: Club
+    private val IMAGE_SIZE = 250
+
+    private lateinit var ratingReviews: RatingReviews
+    private lateinit var clubImage: ImageView
+    private lateinit var clubName: TextView
+    private lateinit var allReviewAmount: TextView
+    private lateinit var allReviewAvg: TextView
+    private lateinit var locationSpinner: Spinner
+    private lateinit var allReviewRating: RatingBar
+
+    private val colors = intArrayOf(
+        Color.parseColor("#0e9d58"),
+        Color.parseColor("#bfd047"),
+        Color.parseColor("#ffc105"),
+        Color.parseColor("#ef7e14"),
+        Color.parseColor("#d36259")
+    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_review)
 
-        val club = intent.getSerializableExtra("club") as Club
+        club = intent.getSerializableExtra("club") as Club
         reviews = club.getReview(this).toList()
 
-        val imageSize = 250
-        Picasso.get().load(club.imgUrl).resize(imageSize, imageSize)
-            .into(findViewById<ImageView>(R.id.AllReviewImage))
-        findViewById<TextView>(R.id.AllReviewName).text = club.name
+        ratingReviews = findViewById(R.id.rating_reviews)
+        clubImage = findViewById(R.id.AllReviewImage)
+        clubName = findViewById(R.id.AllReviewName)
+        locationSpinner = findViewById(R.id.AllReviewOrderSpinner)
+        allReviewAmount = findViewById(R.id.AllReviewReviewAmount)
+        allReviewAvg = findViewById(R.id.AllReviewAvg)
+        allReviewRating = findViewById(R.id.AllReviewRating)
 
-        findViewById<TextView>(R.id.AllReviewReviewAmount).text = "(${reviews?.size} recensioni)"
-        val reviewAvg = reviews!!.sumOf { r -> r.rating } / reviews!!.size.toFloat()
-        findViewById<TextView>(R.id.AllReviewAvg).text = String.format("%.1f", reviewAvg)
-        findViewById<RatingBar>(R.id.AllReviewRating).rating = reviewAvg.toFloat()
+        Picasso.get().load(club.imgUrl).resize(IMAGE_SIZE, IMAGE_SIZE).into(clubImage)
+        clubName.text = club.name
 
-        val locationSpinner = findViewById<Spinner>(R.id.AllReviewOrderSpinner)
         val languages = resources.getStringArray(R.array.AllReviewOrderBy)
         val adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, languages)
         locationSpinner.adapter = adapter
         locationSpinner.onItemSelectedListener = this
 
+        loadContent()
+    }
 
-        val ratingReviews = findViewById<View>(R.id.rating_reviews) as RatingReviews
+    private fun loadContent() {
+        reviews = club.getReview(this).toList()
 
-        val colors = intArrayOf(
-            Color.parseColor("#0e9d58"),
-            Color.parseColor("#bfd047"),
-            Color.parseColor("#ffc105"),
-            Color.parseColor("#ef7e14"),
-            Color.parseColor("#d36259")
-        )
+        //Update amount and avg
+        allReviewAmount.text = "(${reviews?.size} recensioni)"
+        val reviewAvg = reviews!!.sumOf { r -> r.rating } / reviews!!.size.toFloat()
+        allReviewAvg.text = String.format("%.1f", reviewAvg)
+        allReviewRating.rating = reviewAvg.toFloat()
 
+        //Update chart
         val raters = intArrayOf(
             reviews!!.filter { r -> r.rating.toInt() == 5 }.size,
             reviews!!.filter { r -> r.rating.toInt() == 4 }.size,
@@ -66,13 +87,9 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             reviews!!.filter { r -> r.rating.toInt() == 2 }.size,
             reviews!!.filter { r -> r.rating.toInt() == 1 }.size,
         )
-
         ratingReviews.createRatingBars(1, BarLabels.STYPE1, colors, raters)
 
-        loadContent()
-    }
-
-    private fun loadContent() {
+        //Update list
         val orderedReviews = when (orderCriteria) {
             ReviewOrderCriteria.MostRecent -> reviews?.sortedByDescending { review -> review.getLongTime() }
             ReviewOrderCriteria.LastRecent -> reviews?.sortedBy { review -> review.getLongTime() }
@@ -83,7 +100,9 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         findViewById<LinearLayout>(R.id.AllReviewLinearLayout).removeAllViews()
         val transaction = supportFragmentManager.beginTransaction()
         orderedReviews?.forEach { review ->
-            transaction.add(R.id.AllReviewLinearLayout, ReviewElement.newInstance(review))
+            val fragmentElement = ReviewElement.newInstance(review)
+            fragmentElement.onRefreshNeeded = { loadContent() }
+            transaction.add(R.id.AllReviewLinearLayout, fragmentElement)
         }
         transaction.commit()
     }
@@ -94,5 +113,10 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadContent()
     }
 }
