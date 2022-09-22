@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/HomePageEventElementImage"
                 app:layout_constraintStart_toStartOf="@+id/HomePageEventElementImage"
@@ -45,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/HomePageEventElementName" />
 
@@ -53,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/HomePageEventElementImage"
                 app:layout_constraintTop_toBottomOf="@+id/HomePageEventDate" />
         </androidx.constraintlayout.widget.ConstraintLayout>
