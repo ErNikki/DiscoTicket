@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.Review
 import com.squareup.picasso.Picasso
 import java.io.Serializable
 
@@ -80,12 +81,12 @@ class DiscoElement : Fragment() {
         val labelLayout = view.findViewById<LinearLayout>(R.id.discoElementLabelsLayout)
 
         val reviews = club!!.reviews
-        val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
+        val average = reviews.sumOf { r:Review -> r.rating } / reviews.size.toFloat()
 
         discoName.setText(club?.name)
         discoAddress.setText(club?.address)
         //discoRating.rating = club?.rating!!
-        discoRating.rating = average
+        discoRating.rating = average.toFloat()
         //discoRatingAvg.setText(club?.rating.toString())
         discoRatingAvg.setText(String.format("%.1f", average))
         //discoRatingAmount.setText("(" + club?.reviewAmount.toString() + " Recensioni)")

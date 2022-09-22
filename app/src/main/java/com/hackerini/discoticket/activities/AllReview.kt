@@ -29,7 +29,7 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_all_review)
 
         val club = intent.getSerializableExtra("club") as Club
-        reviews = club.reviews.toList()
+        reviews = club.getReview(this).toList()
 
         val imageSize = 250
         Picasso.get().load(club.imgUrl).resize(imageSize, imageSize)
@@ -39,7 +39,7 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         findViewById<TextView>(R.id.AllReviewReviewAmount).text = "(${reviews?.size} recensioni)"
         val reviewAvg = reviews!!.sumOf { r -> r.rating } / reviews!!.size.toFloat()
         findViewById<TextView>(R.id.AllReviewAvg).text = String.format("%.1f", reviewAvg)
-        findViewById<RatingBar>(R.id.AllReviewRating).rating = reviewAvg
+        findViewById<RatingBar>(R.id.AllReviewRating).rating = reviewAvg.toFloat()
 
         val locationSpinner = findViewById<Spinner>(R.id.AllReviewOrderSpinner)
         val languages = resources.getStringArray(R.array.AllReviewOrderBy)
@@ -60,11 +60,11 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         )
 
         val raters = intArrayOf(
-            reviews!!.filter { r -> r.rating == 5 }.size,
-            reviews!!.filter { r -> r.rating == 4 }.size,
-            reviews!!.filter { r -> r.rating == 3 }.size,
-            reviews!!.filter { r -> r.rating == 2 }.size,
-            reviews!!.filter { r -> r.rating == 1 }.size,
+            reviews!!.filter { r -> r.rating.toInt() == 5 }.size,
+            reviews!!.filter { r -> r.rating.toInt() == 4 }.size,
+            reviews!!.filter { r -> r.rating.toInt() == 3 }.size,
+            reviews!!.filter { r -> r.rating.toInt() == 2 }.size,
+            reviews!!.filter { r -> r.rating.toInt() == 1 }.size,
         )
 
         ratingReviews.createRatingBars(1, BarLabels.STYPE1, colors, raters)

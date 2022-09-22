@@ -15,9 +15,8 @@ class Club : Serializable {
     var name: String = ""
     var address: String = ""
     var rating: Float = (10..50).random() / 10F
-    var reviewAmount = (10..100).random()
     var imgUrl: String = "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg"
-    var reviews = arrayOf(Review(), Review())
+    var reviews = arrayOf<Review>()
     var description =
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     var distanceFromYou = (5..100).random()
@@ -26,24 +25,8 @@ class Club : Serializable {
     var gpsCords: Array<Float> = arrayOf(0F, 0F)
     var locationType = ""
 
-    /*get() {
-        if (field.isBlank()) {
-            field = arrayOf("Aperto", "Chiuso", "Entrambi").random()
-        }
-        return field
-
-    }*/
     var musicGenres = arrayOf("")
 
-    /*get() {
-        if (field[0].isBlank()) {
-            val a = arrayOf("EDM", "Reggaeton", "Techno", "Rock")
-            a.shuffle()
-            field = a.take(2).toTypedArray()
-        }
-        return field
-
-    }*/
     var labels = arrayOf("")
         get() {
             return if (locationType != "Chiuso")
@@ -52,6 +35,13 @@ class Club : Serializable {
                 musicGenres
 
         }
+
+    fun getReview(context: Context): List<Review> {
+        val reviewsByClub =
+            RoomManager(context).db.reviewDao().getAllReviewsByClub(this.id)
+
+        return this.reviews.toList() + reviewsByClub
+    }
 
     fun isFavorite(context: Context): Boolean {
         val favDao = RoomManager(context).db.favoriteDao()

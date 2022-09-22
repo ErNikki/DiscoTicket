@@ -1,7 +1,6 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +44,10 @@ class ReviewElement : Fragment() {
         val reviewContent = view.findViewById<TextView>(R.id.ReviewReviewText)
         val reviewRatingBar = view.findViewById<RatingBar>(R.id.clubDeatilsReviwerRatingBar)
 
-        reviewerName.text = review?.user?.name + " " + review?.user?.surname
+        val name = review!!.user.name
+        val surname = review!!.user.surname
+
+        reviewerName.text = name + " " + surname
         reviewDate.text = review?.date
         reviewContent.text = review?.description
         reviewRatingBar.rating = review?.rating!!.toFloat()
@@ -54,7 +56,7 @@ class ReviewElement : Fragment() {
             reviewContent.visibility = View.GONE
 
         val image = AvatarGenerator.AvatarBuilder(requireContext())
-            .setLabel(review!!.user.name)
+            .setLabel(name!!)
             .setAvatarSize(100)
             .setTextSize(30)
             .toSquare()
