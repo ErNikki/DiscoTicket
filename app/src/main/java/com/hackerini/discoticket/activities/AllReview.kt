@@ -33,6 +33,7 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var allReviewAvg: TextView
     private lateinit var locationSpinner: Spinner
     private lateinit var allReviewRating: RatingBar
+    private lateinit var linearLayout: LinearLayout
 
     private val colors = intArrayOf(
         Color.parseColor("#0e9d58"),
@@ -57,6 +58,7 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         allReviewAmount = findViewById(R.id.AllReviewReviewAmount)
         allReviewAvg = findViewById(R.id.AllReviewAvg)
         allReviewRating = findViewById(R.id.AllReviewRating)
+        linearLayout = findViewById(R.id.AllReviewLinearLayout)
 
         Picasso.get().load(club.imgUrl).resize(IMAGE_SIZE, IMAGE_SIZE).into(clubImage)
         clubName.text = club.name
@@ -97,7 +99,6 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             ReviewOrderCriteria.WorstRating -> reviews?.sortedByDescending { review -> review.rating }
         }
 
-        findViewById<LinearLayout>(R.id.AllReviewLinearLayout).removeAllViews()
         val transaction = supportFragmentManager.beginTransaction()
         orderedReviews?.forEach { review ->
             val fragmentElement = ReviewElement.newInstance(review)
@@ -107,16 +108,26 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         transaction.commit()
     }
 
+    private var canCallLoadContent = false
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        orderCriteria = ReviewOrderCriteria.values()[position]
-        loadContent()
+        if (canCallLoadContent) {
+            orderCriteria = ReviewOrderCriteria.values()[position]
+            linearLayout.removeAllViews()
+            loadContent()
+        }
+        canCallLoadContent = true
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
+    var runOnResume = false
     override fun onResume() {
         super.onResume()
-        loadContent()
+        if (runOnResume) {
+            linearLayout.removeAllViews()
+            loadContent()
+        }
+        runOnResume = true
     }
 }

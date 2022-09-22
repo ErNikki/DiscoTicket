@@ -19,6 +19,7 @@ class ClubDetails : AppCompatActivity() {
 
     var club: Club? = null
     var favouritesButton: ImageButton? = null
+    lateinit var fragmentContainerView: FragmentContainerView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +40,8 @@ class ClubDetails : AppCompatActivity() {
         val tagLayout = findViewById<LinearLayout>(R.id.clubDetailsTagLayout)
         val price = findViewById<TextView>(R.id.clubDetailsPrice)
         val distance = findViewById<TextView>(R.id.clubDetailsDistance)
+        fragmentContainerView =
+            findViewById(R.id.clubDetailsFragmentContainerView)
 
         val reviews = club!!.reviews
         val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
@@ -129,8 +132,7 @@ class ClubDetails : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val fragmentContainerView =
-            findViewById<FragmentContainerView>(R.id.clubDetailsFragmentContainerView)
+
         fragmentContainerView.removeAllViews()
         //Review
         if (club!!.reviews.isEmpty()) {
@@ -139,15 +141,19 @@ class ClubDetails : AppCompatActivity() {
             findViewById<TextView>(R.id.clubDeatilsReviwerNoReview).visibility =
                 View.VISIBLE
         } else {
-            supportFragmentManager.beginTransaction().add(
-                fragmentContainerView.id, ReviewElement.newInstance(
-                    club!!.getReview(this)
-                        .filter { r -> r.description.isNotBlank() }
-                        .sortedByDescending { r -> r.getLongTime() }
-                        .first()
-                )
-            ).commit()
+            loadFirstReview()
         }
+    }
+
+    fun loadFirstReview() {
+        val fragment = ReviewElement.newInstance(
+            club!!.getReview(this)
+                .filter { r -> r.description.isNotBlank() }
+                .sortedByDescending { r -> r.getLongTime() }
+                .first()
+        )
+        fragment.onRefreshNeeded = { loadFirstReview() }
+        supportFragmentManager.beginTransaction().add(fragmentContainerView.id, fragment).commit()
     }
 
 }

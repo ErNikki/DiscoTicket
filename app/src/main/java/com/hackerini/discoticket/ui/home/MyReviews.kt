@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.User
+import com.hackerini.discoticket.objects.UserWithReviews
 import com.hackerini.discoticket.room.RoomManager
 
 class MyReviews : Fragment() {
@@ -36,22 +37,25 @@ class MyReviews : Fragment() {
         loadContent()
     }
 
-    fun loadContent() {
+    fun getReviews(): List<UserWithReviews>? {
         val reviewDao = RoomManager(requireContext()).db.reviewDao()
+        val user = User.getLoggedUser(requireContext())
+        if (user == null) return null
+        return reviewDao.getAllReviewsOfUser(user.id)
+    }
+
+    fun loadContent() {
+        checkWarningText()
         if (User.isLogged(requireContext())) {
-            val user = User.getLoggedUser(requireContext())
-            val reviews = reviewDao.getAllReviewsOfUser(user!!.id)
-            val dbUser = reviews.first().user
+            val reviews = getReviews()
+            val dbUser = reviews!!.first().user
             reviews.first().reviews.forEach { e -> e.user = dbUser }
 
-            if (reviews.firstOrNull()?.reviews?.isEmpty() != false) {
-                warningText.text = "Non ci sono recensioni per l'utente corrente"
-            } else {
-                reviewsLinearLayout.removeAllViews()
+            if (reviews.firstOrNull()?.reviews?.isNotEmpty() == true) {
                 val transaction = parentFragmentManager.beginTransaction()
                 reviews.first().reviews.forEach { r ->
                     val fragment = ReviewElement.newInstance(r, true)
-                    fragment.onRefreshNeeded = { loadContent() }
+                    fragment.onRefreshNeeded = { checkWarningText() }
                     transaction.add(reviewsLinearLayout.id, fragment)
                 }
                 transaction.commit()
@@ -65,8 +69,27 @@ class MyReviews : Fragment() {
             MyReviews()
     }
 
+    var runOnResume = false
     override fun onResume() {
         super.onResume()
-        loadContent()
+        if (runOnResume) {
+            reviewsLinearLayout.removeAllViews()
+            loadContent()
+        }
+        runOnResume = true
+    }
+
+    fun checkWarningText() {
+        val reviews = getReviews()
+        if (User.isLogged(requireContext()))
+            warningText.text = "Non ci sono recensioni per l'utente corrente"
+        else
+            warningText.text = "Devi effettuare l'accesso per visualizzare le tue recensioni"
+
+        if (reviews?.firstOrNull()?.reviews?.isEmpty() != false) {
+            warningText.visibility = View.VISIBLE
+        } else {
+            warningText.visibility = View.GONE
+        }
     }
 }
