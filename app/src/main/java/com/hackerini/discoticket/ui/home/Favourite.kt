@@ -12,12 +12,14 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ObjectLoader
+import java.util.*
 
 class Favourite : Fragment() {
 
     lateinit var emptyScreenWarning: TextView
     lateinit var linearLayout: LinearLayout
-    private var fragmentList: MutableList<DiscoElement> = mutableListOf()
+    private var fragmentList: List<DiscoElement> = LinkedList()
+    private var runOnResume = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,25 +44,22 @@ class Favourite : Fragment() {
 
         linearLayout = view.findViewById(R.id.FavoriteLinearLayout)
         emptyScreenWarning = view.findViewById(R.id.FavoriteClubEmptyWarning)
+        loadContent()
     }
 
     override fun onResume() {
         super.onResume()
-        linearLayout.removeAllViews()
-        loadContent()
+
+        //In the first run loadContent() must be called only from onViewCreated
+        if (runOnResume) {
+            linearLayout.removeAllViews()
+            loadContent()
+        }
+        runOnResume = true
     }
 
     private fun loadContent() {
-        val favClubs = RoomManager(requireContext()).db.favoriteDao().getAll()
-        val favClubsIds = favClubs.map { e -> e.id }
-        fragmentList = ObjectLoader.getClubs(requireContext())
-            .filter { club -> favClubsIds.contains(club.id) }
-            .map { club ->
-                DiscoElement.newInstance(club, true).apply {
-                    onRemoveElement = { c -> removeElement(this) }
-                }
-            }.toMutableList()
-
+        fragmentList = getFavoriteClubs()
         updateWarningTextStatus()
         if (fragmentList.isNotEmpty()) {
             val transaction = parentFragmentManager.beginTransaction()
@@ -69,6 +68,18 @@ class Favourite : Fragment() {
             }
             transaction.commit()
         }
+    }
+
+    private fun getFavoriteClubs(): List<DiscoElement> {
+        val favClubs = RoomManager(requireContext()).db.favoriteDao().getAll()
+        val favClubsIds = favClubs.map { e -> e.id }
+        return ObjectLoader.getClubs(requireContext())
+            .filter { club -> favClubsIds.contains(club.id) }
+            .map { club ->
+                DiscoElement.newInstance(club, true).apply {
+                    onRemoveElement = { c -> removeElement(this) }
+                }
+            }.toMutableList()
     }
 
     private fun removeElement(element: DiscoElement) {
