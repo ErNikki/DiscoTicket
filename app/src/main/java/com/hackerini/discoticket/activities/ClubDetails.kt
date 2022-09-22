@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentContainerView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.objects.User
 import com.squareup.picasso.Picasso
 
 class ClubDetails : AppCompatActivity() {
@@ -44,7 +45,7 @@ class ClubDetails : AppCompatActivity() {
 
         clubName.text = club!!.name
         address.text = club!!.address
-        ratingBar.rating = average
+        ratingBar.rating = average.toFloat()
         reviewsAvg.text = String.format("%.1f", average)
         totalReview.text = "(${reviews.size} recensioni)"
         clubDescription.text = club!!.description

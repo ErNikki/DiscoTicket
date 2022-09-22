@@ -1,5 +1,6 @@
 package com.hackerini.discoticket.objects
 
+import androidx.room.*
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,7 +39,7 @@ class Review(
         "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
     )
 
-    public fun getLongTime(): Long {
+    fun getLongTime(): Long {
         val localDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(this.date)
         return localDate.time
     }
