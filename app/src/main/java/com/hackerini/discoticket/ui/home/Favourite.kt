@@ -18,6 +18,9 @@ import java.util.*
 
 class Favourite : Fragment() {
 
+    //Set this variable to false to disable the delete gesture
+    private val ENABLE_GESTURE = true
+
     lateinit var emptyScreenWarning: TextView
     lateinit var linearLayout: LinearLayout
     private var fragmentList: List<DiscoElement> = LinkedList()
@@ -52,7 +55,7 @@ class Favourite : Fragment() {
         val sharedPreferences =
             requireContext().getSharedPreferences("DiscoTicket", Context.MODE_PRIVATE)
         val hideDialog = sharedPreferences.getBoolean(VALUE_KEY, true)
-        if (hideDialog && fragmentList.isNotEmpty()) {
+        if (hideDialog && fragmentList.isNotEmpty() && ENABLE_GESTURE) {
             val dialog = MaterialAlertDialogBuilder(requireContext())
             dialog.setTitle("Aiuto")
             dialog.setMessage("Trascina gli elementi verso sinistra per eliminarli da preferiti")
@@ -95,7 +98,7 @@ class Favourite : Fragment() {
         return ObjectLoader.getClubs(requireContext())
             .filter { club -> favClubsIds.contains(club.id) }
             .map { club ->
-                DiscoElement.newInstance(club, true).apply {
+                DiscoElement.newInstance(club, ENABLE_GESTURE).apply {
                     onRemoveElement = { c -> removeElement(this) }
                 }
             }.toMutableList()
