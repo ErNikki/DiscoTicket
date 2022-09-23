@@ -70,9 +70,21 @@ class Login : AppCompatActivity() {
                 Toast.makeText(this, "Logout avvenuto con successo", Toast.LENGTH_LONG).show()
             }
             deleteAccount.setOnClickListener {
-                User.deleteCurrentAccount(this)
-                User.logout(this)
-                startActivity(Intent(this, MainActivity::class.java))
+                val alertDialog = MaterialAlertDialogBuilder(this)
+                alertDialog.setTitle("Conferma elminazione account")
+                alertDialog.setMessage("Sei sicuro di volete eliminare il tuo account?\nL'operazione è irreversibile")
+                alertDialog.setPositiveButton("Conferma") { dialog, _ ->
+                    if (!User.isCurrentSocialAccount(this)) //Since social accounts are fake, the shouldn't be deleted
+                        User.deleteCurrentAccount(this)
+                    User.logout(this)
+                    startActivity(Intent(this, MainActivity::class.java))
+                    Toast.makeText(this, "Account eliminato con successo", Toast.LENGTH_LONG).show()
+                    dialog.dismiss()
+                }
+                alertDialog.setNegativeButton("Annulla") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                alertDialog.create().show()
             }
 
             loginLayout.visibility = View.GONE

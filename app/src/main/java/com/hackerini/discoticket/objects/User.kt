@@ -87,6 +87,13 @@ class User : Serializable {
             }
             return builder.create()
         }
+
+        fun isCurrentSocialAccount(context: Context): Boolean {
+            val current = getLoggedUser(context)
+            if (current == null) return false
+            //Because the social account have reserved id, from 1 to 3 (included)
+            return current.id <= 3
+        }
     }
 }
 
