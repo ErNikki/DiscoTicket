@@ -23,9 +23,9 @@
                     android:id="@+id/SignUpTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="64dp"
                     android:text="Registrazione"
-                    android:textSize="20dp"
+                    android:textSize="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +54,7 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:text="Cognome"
                     app:layout_constraintStart_toStartOf="@+id/SignUpSurname"
                     app:layout_constraintTop_toBottomOf="@+id/SignUpName" />
@@ -85,8 +85,8 @@
                     android:id="@+id/textView29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Indirizzo email"
+                    android:layout_marginTop="12dp"
+                    android:text="Indirizzo e-mail"
                     app:layout_constraintStart_toStartOf="@+id/SignUpEMail"
                     app:layout_constraintTop_toBottomOf="@+id/SignUpSurname" />
 
@@ -94,7 +94,7 @@
                     android:id="@+id/textView30"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:text="Password"
                     app:layout_constraintStart_toStartOf="@+id/SignUpPassword"
                     app:layout_constraintTop_toBottomOf="@+id/SignUpEMail" />
@@ -125,7 +125,7 @@
                     android:id="@+id/textView32"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:text="Ripeti password"
                     app:layout_constraintStart_toStartOf="@+id/SignUpPasswordRepeat"
                     app:layout_constraintTop_toBottomOf="@+id/SignUpPassword" />
@@ -134,7 +134,7 @@
                     android:id="@+id/SignUpButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:text="Registrati"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

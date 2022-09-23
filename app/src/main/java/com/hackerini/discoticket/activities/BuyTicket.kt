@@ -94,7 +94,7 @@ class BuyTicket : AppCompatActivity() {
         simpleSpannableString.setSpan(StyleSpan(Typeface.BOLD), 0, simpleSpannableString.length, 0)
         tableSpannableString.setSpan(StyleSpan(Typeface.BOLD), 0, simpleSpannableString.length, 0)
         var simplePrice = TextUtils.concat(simpleSpannableString, "/persona")
-        var tablePrice = TextUtils.concat(simpleSpannableString, "/persona")
+        var tablePrice = TextUtils.concat(tableSpannableString, "/persona")
         simpleTicketPrice.text = simplePrice
         tableTicketPrice.text = tablePrice
 

@@ -80,9 +80,10 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         //Question mark popup
         val questionMark = findViewById<ImageView>(R.id.paymentQuestionMark)
         questionMark.setOnClickListener {
-            val alert = AlertDialog.Builder(this).create()
-            alert.setMessage("Puoi selezionare uno sconto da applicare al tuo acquisto, se ne hai uno disponibile")
-            alert.show()                    //COME FACCIO A FAR SCRIVERE MANUALMENTE??
+            val builder = MaterialAlertDialogBuilder(this)
+            builder.setMessage("Puoi selezionare uno sconto da applicare al tuo acquisto, se ne hai uno disponibile")
+            builder.setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
+            builder.create().show()
         }
 
         //Write the total amount
