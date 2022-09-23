@@ -10,6 +10,8 @@ import android.graphics.drawable.GradientDrawable
 import android.location.LocationManager
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -246,13 +248,18 @@ private class MyInfoWindows(view: View, mapView: MapView?) : InfoWindow(view, ma
             val eventName = TextView(context)
             eventName.text = event.name
             eventName.textSize = 24.0F
+            eventName.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            eventName.setTextColor(ContextCompat.getColor(context, R.color.eventColorStrong))
             val clubName = TextView(context)
-            clubName.text = "Al " + event.club?.name
-            clubName.textSize = 14.0F
+            val spannableString = SpannableString("Presso " + event.club?.name)
+            spannableString.setSpan(ForegroundColorSpan(Color.rgb(98, 0, 238)), 7, spannableString.length, 0)
+            clubName.text = spannableString
+            clubName.textSize = 18.0F
+            clubName.textAlignment = View.TEXT_ALIGNMENT_CENTER
             val buttonEvent = MaterialButton(context)
             buttonEvent.text = "Info evento"
             val buttonClub = MaterialButton(context)
-            buttonClub.text = "Info club"
+            buttonClub.text = "Info discoteca"
             ll.addView(eventName)
             ll.addView(clubName)
             ll.addView(buttonEvent)
@@ -285,8 +292,10 @@ private class MyInfoWindows(view: View, mapView: MapView?) : InfoWindow(view, ma
             val title = TextView(context)
             title.text = club.name
             title.textSize = 24F
+            title.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            title.setTextColor(ContextCompat.getColor(context, R.color.purple_500))
             val button = MaterialButton(context)
-            button.text = "Info club"
+            button.text = "Info discoteca"
             ll.addView(title)
             ll.addView(button)
             ll.background = shape
