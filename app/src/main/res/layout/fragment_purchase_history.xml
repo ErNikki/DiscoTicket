@@ -19,6 +19,7 @@
                 android:id="@+id/PurchaseHystoryNoPurchaseWarning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
                 android:paddingTop="20dp"
                 android:text="Non hai effettuato ancora nessun acquisto o non hai effettuato l'accesso."
                 android:textAlignment="center"

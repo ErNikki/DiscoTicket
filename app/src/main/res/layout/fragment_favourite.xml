@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:paddingHorizontal="12dp"
             android:text="Non ci sono discoteche aggiunte ai tuoi preferiti."
             android:textAlignment="center"
             android:textSize="16sp"

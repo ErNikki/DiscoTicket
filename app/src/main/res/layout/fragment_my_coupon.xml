@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
+                android:paddingHorizontal="12dp"
                 android:paddingTop="20dp"
                 android:text="Accesso non effettuato, fai login per ottenere più informazioni."
                 android:textAlignment="center"
