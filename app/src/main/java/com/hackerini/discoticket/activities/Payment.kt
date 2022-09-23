@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.MainActivity
@@ -22,11 +24,22 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     var order: Order? = null
     private var coupons: List<Discount> = LinkedList()
+    private lateinit var creditCard: CardView
+    private lateinit var googlePay: CardView
+    private lateinit var payPal: CardView
+    var isPaymentSelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         order = intent.getSerializableExtra("OrderPreview") as Order
+        creditCard = findViewById(R.id.paymentCreditCard)
+        googlePay = findViewById(R.id.paymentGooglePay)
+        payPal = findViewById(R.id.paymentPayPal)
+
+        creditCard.setOnClickListener { onPaymentMethodClick(it) }
+        googlePay.setOnClickListener { onPaymentMethodClick(it) }
+        payPal.setOnClickListener { onPaymentMethodClick(it) }
 
         //Retrieve the items to purchase and populate the list
         val purchaseList = findViewById<LinearLayout>(R.id.paymentList)
@@ -80,6 +93,15 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         //Create alert on button press
         val button = findViewById<Button>(R.id.paymentButton)
         button.setOnClickListener {
+            if (!isPaymentSelected) {
+                val builder = MaterialAlertDialogBuilder(this)
+                builder.setCancelable(false)
+                builder.setTitle("Errore")
+                builder.setMessage("Seleziona un metodo di pagamento")
+                builder.setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
+                builder.create().show()
+                return@setOnClickListener
+            }
             val orderPreview = storeOrder()
 
             //Update points
@@ -226,5 +248,28 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    private fun onPaymentMethodClick(view: View) {
+        isPaymentSelected = true
+        when (view.id) {
+            payPal.id -> {
+                payPal.backgroundTintList = ContextCompat.getColorStateList(this, R.color.clubColor)
+                googlePay.backgroundTintList = null
+                creditCard.backgroundTintList = null
+            }
+            googlePay.id -> {
+                payPal.backgroundTintList = null
+                googlePay.backgroundTintList =
+                    ContextCompat.getColorStateList(this, R.color.clubColor)
+                creditCard.backgroundTintList = null
+            }
+            creditCard.id -> {
+                payPal.backgroundTintList = null
+                googlePay.backgroundTintList = null
+                creditCard.backgroundTintList =
+                    ContextCompat.getColorStateList(this, R.color.clubColor)
+            }
+        }
     }
 }

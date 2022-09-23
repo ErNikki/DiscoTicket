@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuanitySelector">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/quantitySelectorMinus"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/custom_btn_remove"
+            android:backgroundTint="#808080" />
+
+        <EditText
+            android:id="@+id/quantitySelectorText"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:minEms="1"
+            android:text="1"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/quantitySelectorPlus"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/custom_btn_add"
+            android:backgroundTint="#33DAFF" />
+    </LinearLayout>
+</FrameLayout>
