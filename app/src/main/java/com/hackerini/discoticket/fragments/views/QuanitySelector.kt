@@ -56,6 +56,10 @@ class QuanitySelector : Fragment(), TextWatcher {
         }
 
         editText.addTextChangedListener(this)
+        editText.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus && editText.text.isBlank())
+                editText.setText("0")
+        }
     }
 
     companion object {
