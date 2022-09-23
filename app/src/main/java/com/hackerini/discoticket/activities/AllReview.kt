@@ -16,8 +16,8 @@ import com.taufiqrahman.reviewratings.RatingReviews
 enum class ReviewOrderCriteria {
     MostRecent,
     LastRecent,
-    BestRating,
-    WorstRating
+    WorstRating,
+    BestRating
 }
 
 class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {

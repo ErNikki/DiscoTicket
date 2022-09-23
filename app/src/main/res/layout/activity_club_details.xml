@@ -37,7 +37,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     android:text="TextView"
-                    android:textSize="30sp"
+                    android:textColor="@color/purple_500"
+                    android:textSize="36sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage" />
@@ -47,10 +48,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="24dp"
                     android:text="TextView"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toStartOf="@+id/clubDeatilsAddToFavouritiesText"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailsClubName" />
@@ -61,7 +61,7 @@
                     android:layout_width="174dp"
                     android:layout_height="31dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="14dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailsAddress" />
 
@@ -71,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
                     android:text="TextView"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/clubDetailsAvg"
                     app:layout_constraintStart_toEndOf="@+id/clubDetailsAvg"
                     app:layout_constraintTop_toTopOf="@+id/clubDetailsAvg" />
@@ -80,10 +81,8 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.755"
-                    app:layout_constraintStart_toEndOf="@+id/clubDetailsClubName"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailClubImage"
                     app:srcCompat="@drawable/ic_baseline_favorite_24" />
 
@@ -91,6 +90,7 @@
                     android:id="@+id/clubDeatilsAddToFavouritiesText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-6dp"
                     android:layout_marginEnd="8dp"
                     android:text="Aggiungi ai preferiti"
                     app:layout_constraintEnd_toEndOf="@+id/clubDetailsFavouritesButton"
@@ -121,16 +121,30 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailsDrinkMenuButton" />
 
+                <ImageView
+                    android:id="@+id/space3"
+                    android:layout_width="0dp"
+                    android:layout_height="3px"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="#66D815"
+                    android:backgroundTint="@color/clubColorStrong"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsBuyTicketsButton" />
+
                 <TextView
                     android:id="@+id/clubDetailsReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="15dp"
                     android:text="Recensioni"
-                    android:textSize="20sp"
+                    android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsBuyTicketsButton" />
+                    app:layout_constraintTop_toBottomOf="@+id/space3" />
 
 
                 <androidx.fragment.app.FragmentContainerView
@@ -158,9 +172,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="18dp"
                     android:layout_marginEnd="8dp"
                     android:text="TextView"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clubDeatilsRatingBar" />
@@ -192,8 +207,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toStartOf="@+id/clubDetailsDrinkMenuButton"
                     app:layout_constraintStart_toStartOf="parent"
@@ -203,8 +218,9 @@
                     android:id="@+id/clubDetailsDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="11dp"
                     android:text="TextView"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/clubDeatilsClubDescription"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailsTagLayout" />
 
@@ -213,6 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TextView"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/clubDetailsTagLayout"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailsDistance" />
 
@@ -223,7 +240,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="2dp"
                     android:text="TextView"
-                    android:textSize="32sp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/clubDeatilsRatingBar"
                     app:layout_constraintStart_toEndOf="@+id/clubDeatilsRatingBar"
                     app:layout_constraintTop_toTopOf="@+id/clubDeatilsRatingBar" />

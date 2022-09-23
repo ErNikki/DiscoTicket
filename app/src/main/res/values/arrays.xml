@@ -11,17 +11,17 @@
     </string-array>
 
     <string-array name="orderBy">
-        <item>Risultati di ricerca</item>
-        <item>Nome A-Z</item>
-        <item>Nome Z-A</item>
-        <item>Distanza 0–9</item>
+        <item>Consigliati</item>
+        <item>Distanza</item>
+        <item>Prezzo crescente</item>
+        <item>Prezzo decrescente</item>
     </string-array>
 
     <string-array name="AllReviewOrderBy">
         <!-- Keep the same order of the enum ReviewOrderCriteria -->
-        <item>La più recente</item>
-        <item>La meno recente</item>
-        <item>Voto 0–9</item>
-        <item>Voto 9–0</item>
+        <item>Più recente</item>
+        <item>Meno recente</item>
+        <item>Valutazione più alta</item>
+        <item>Valutazione più bassa</item>
     </string-array>
 </resources>

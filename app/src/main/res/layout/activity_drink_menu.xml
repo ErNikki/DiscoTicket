@@ -29,7 +29,8 @@
                 android:padding="10sp"
                 android:text="Scegli in questa pagina quanti drink vuoi ordinare, dopodiché effettua il pagamento direttamente nell'app: verrà generato un codice QR da mostrare al barista, così ti darà i drink che hai ordinato!"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textColor="@color/purple_500"
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 

@@ -1,8 +1,10 @@
 package com.hackerini.discoticket.fragments.elements
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.text.set
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
@@ -53,7 +56,9 @@ class HomePageEventElement : Fragment() {
 
         if (hideDetails) {
             val df = SimpleDateFormat("dd/MM", Locale.getDefault())
-            eventDate.text = "il " + df.format(event?.date)
+            val boldSpannableString = SpannableString("il " + df.format(event?.date))
+            boldSpannableString.setSpan(StyleSpan(Typeface.BOLD), 3, 8, 0)
+            eventDate.text = boldSpannableString
 
             val mSpannableString = SpannableString("Luogo: " + event?.club?.name)
             mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)

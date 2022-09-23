@@ -21,8 +21,8 @@
 
             <ImageView
                 android:id="@+id/HomePageDiscoElementImage"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="115dp"
+                android:layout_height="115dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/HomePageDiscoElementImage"
                 app:layout_constraintStart_toStartOf="@+id/HomePageDiscoElementImage"

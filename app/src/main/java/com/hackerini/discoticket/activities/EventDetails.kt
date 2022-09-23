@@ -3,8 +3,11 @@ package com.hackerini.discoticket.activities
 import android.app.ActionBar
 import android.content.Intent
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -35,6 +38,11 @@ class EventDetails : AppCompatActivity() {
         val eventDate = findViewById<TextView>(R.id.eventDetailsDate)
         val eventDescription = findViewById<TextView>(R.id.eventDeatilseventDescription)
         val tagLayout = findViewById<LinearLayout>(R.id.eventDetailsTagLayout)
+        val price = findViewById<TextView>(R.id.eventDetailsPrice)
+        val distance = findViewById<TextView>(R.id.eventDetailsDistance)
+
+        val boldSpannableString = SpannableString("Prezzi a partire da " + String.format("%.2f", event.club?.simpleTicketPrice) + "€")
+        boldSpannableString.setSpan(StyleSpan(Typeface.BOLD), 19, boldSpannableString.length, 0)
 
         clubName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         eventName.text = event.name
@@ -42,6 +50,9 @@ class EventDetails : AppCompatActivity() {
         eventDate.text = df.format(event.date)
         clubName.text = event.club?.name
         eventDescription.text = event.description
+        price.text = boldSpannableString
+        distance.text = "Si trova a " + event.club?.distanceFromYou + "km da te"
+
         val imageSize = 250
         Picasso.get().load(event.imgUrl).resize(imageSize, imageSize).into(eventImage)
 

@@ -31,9 +31,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="2dp"
                     android:text="Club/Event Name"
-                    android:textSize="24sp"
+                    android:textColor="@color/purple_500"
+                    android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -51,7 +52,7 @@
                 <Space
                     android:id="@+id/space"
                     android:layout_width="0dp"
-                    android:layout_height="5dp"
+                    android:layout_height="0dp"
                     android:layout_marginTop="8dp"
                     android:backgroundTint="#000000"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Seleziona il giorno"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/BuyTicketClubAddress"
                     app:layout_constraintTop_toBottomOf="@+id/space" />
@@ -106,29 +108,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView36"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Giorni di chiusura:" />
-
-                        <TextView
-                            android:id="@+id/grigio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="4dp"
-                            android:layout_weight="1"
-                            android:text="grigio"
-                            android:textColor="@android:color/darker_gray" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
                             android:id="@+id/textView38"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -145,6 +124,28 @@
                             android:textColor="#000000" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView36"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Giorni di chiusura:" />
+
+                        <TextView
+                            android:id="@+id/grigio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="4dp"
+                            android:layout_weight="1"
+                            android:text="grigio" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <FrameLayout
@@ -159,7 +160,7 @@
 
                 </FrameLayout>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/BuyTicketCalendarCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -167,9 +168,13 @@
                     android:layout_marginEnd="8dp"
                     android:padding="8dp"
                     android:visibility="visible"
+                    app:cardBackgroundColor="@color/clubColor"
+                    app:cardElevation="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/BuyTicketCalendarLegend"
-                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarLegend">
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarLegend"
+                    app:strokeColor="@color/purple_500"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -191,13 +196,15 @@
                             android:id="@+id/BuyTicketCalendar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/clubColor"
+                            android:backgroundTint="@color/clubColor"
                             app:cv_dayViewResource="@layout/calendar_day_layout"
                             app:cv_monthHeaderResource="@layout/calendar_month_header_layout"
                             app:cv_orientation="horizontal"
                             app:cv_scrollMode="paged" />
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView1"
@@ -219,7 +226,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ingresso semplice"
-                            android:textSize="20sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -280,7 +287,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ingresso con tavolo"
-                            android:textSize="20sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />

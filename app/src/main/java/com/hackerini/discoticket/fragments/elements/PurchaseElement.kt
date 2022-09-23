@@ -55,7 +55,7 @@ class PurchaseElement : Fragment() {
         if (order?.includeTickets() == true) {
             title.text = "${order?.getTotalQuantity()} biglietti per ${club.name}"
             date.text =
-                "Per il ".plus(order?.order?.date?.split("-")?.reversed()?.joinToString("-"))
+                "Per il ".plus(order?.order?.date?.split("-")?.reversed()?.joinToString("/"))
             image.setImageResource(R.drawable.ic_ticket)
         } else {
             val calendar = Calendar.getInstance()

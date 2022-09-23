@@ -71,8 +71,8 @@ class Login : AppCompatActivity() {
             }
             deleteAccount.setOnClickListener {
                 val alertDialog = MaterialAlertDialogBuilder(this)
-                alertDialog.setTitle("Conferma elminazione account")
-                alertDialog.setMessage("Sei sicuro di volete eliminare il tuo account?\nL'operazione è irreversibile")
+                alertDialog.setTitle("Conferma eliminazione account")
+                alertDialog.setMessage("Sei sicuro di voler eliminare il tuo account?\nL'operazione è irreversibile!")
                 alertDialog.setPositiveButton("Conferma") { dialog, _ ->
                     if (!User.isCurrentSocialAccount(this)) //Since social accounts are fake, the shouldn't be deleted
                         User.deleteCurrentAccount(this)
@@ -162,7 +162,7 @@ class Login : AppCompatActivity() {
         if (loggedUser.isEmpty()) {
             val builder = MaterialAlertDialogBuilder(this)
             builder.setTitle("Errore")
-            builder.setMessage("Impossibire accede con questo account, creare un account utilizzando la proprio e-mail")
+            builder.setMessage("Impossibile accedere con questo account, creare un account utilizzando la propria e-mail")
             builder.setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
             builder.create().show()
         } else {

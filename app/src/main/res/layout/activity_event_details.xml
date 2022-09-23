@@ -38,7 +38,9 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
                     android:text="TextView"
-                    android:textSize="30sp"
+                    android:textColor="@color/eventColorStrong"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/eventDetaileventImage" />
@@ -48,9 +50,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
                     android:text="TextView"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/eventDetailseventName" />
 
@@ -82,20 +83,23 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="8dp"
                     android:text="TextView"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/eventDetailsDate" />
 
                 <LinearLayout
                     android:id="@+id/eventDetailsTagLayout"
-                    android:layout_width="178dp"
-                    android:layout_height="68dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
                     android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/eventDetailsDrinkMenuButton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/eventDeatilseventDescription"></LinearLayout>
 
@@ -105,6 +109,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="TextView"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/eventDetailsAddress"
                     app:layout_constraintTop_toBottomOf="@+id/eventDetailsAddress" />
 
@@ -113,8 +119,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="a: "
-                    android:textStyle="bold|italic"
+                    android:text="presso: "
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/eventDetailsDate"
                     app:layout_constraintStart_toEndOf="@+id/eventDetailsDate"
                     app:layout_constraintTop_toTopOf="@+id/eventDetailsDate" />
@@ -124,10 +130,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Button"
-                    android:textSize="16sp"
+                    android:textColor="@color/purple_500"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/kfflgkflkgf"
                     app:layout_constraintStart_toEndOf="@+id/kfflgkflkgf"
                     app:layout_constraintTop_toTopOf="@+id/kfflgkflkgf" />
+
+                <TextView
+                    android:id="@+id/eventDetailsDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/eventDeatilseventDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsTagLayout" />
+
+                <TextView
+                    android:id="@+id/eventDetailsPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/eventDetailsDistance"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsDistance" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

@@ -2,8 +2,11 @@ package com.hackerini.discoticket.fragments.elements
 
 import android.app.ActionBar
 import android.content.Intent
+import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,8 +84,10 @@ class EventElement : Fragment() {
 
         val df = SimpleDateFormat("dd/MM", Locale.getDefault())
         val eventDateLocationString = "Il " + df.format(event?.date) + " a " + event?.club?.name
+        val boldSpannableString = SpannableString(eventDateLocationString)
+        boldSpannableString.setSpan(StyleSpan(Typeface.BOLD), 3, 8, 0)
+        eventDateLocation.text = boldSpannableString
 
-        eventDateLocation.setText(eventDateLocationString)
         val imageSize = 250
         Picasso.get().load(event?.imgUrl).resize(imageSize, imageSize).into(image)
 

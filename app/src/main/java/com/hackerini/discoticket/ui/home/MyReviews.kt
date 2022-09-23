@@ -82,9 +82,9 @@ class MyReviews : Fragment() {
     fun checkWarningText() {
         val reviews = getReviews()
         if (User.isLogged(requireContext()))
-            warningText.text = "Non ci sono recensioni per l'utente corrente"
+            warningText.text = "Non ci sono recensioni per l'utente corrente."
         else
-            warningText.text = "Devi effettuare l'accesso per visualizzare le tue recensioni"
+            warningText.text = "Devi effettuare l'accesso per visualizzare le tue recensioni."
 
         if (reviews?.firstOrNull()?.reviews?.isEmpty() != false) {
             warningText.visibility = View.VISIBLE

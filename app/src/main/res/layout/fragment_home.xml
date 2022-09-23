@@ -25,7 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vicino a te"
-                    android:textSize="16sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
                     android:id="@+id/horizontalScrollView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/QrCodeMessage">
@@ -43,16 +43,18 @@
                         android:id="@+id/HomeNearYouLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal" />
+                        android:divider="@drawable/layout_divider"
+                        android:orientation="horizontal"
+                        android:showDividers="middle" />
                 </HorizontalScrollView>
 
                 <TextView
                     android:id="@+id/textView18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="36dp"
                     android:text="Prossimi eventi"
-                    android:textSize="16sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
@@ -61,7 +63,7 @@
                     android:id="@+id/horizontalScrollView2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView18">
@@ -70,16 +72,18 @@
                         android:id="@+id/HomeNextEventLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal" />
+                        android:divider="@drawable/layout_divider"
+                        android:orientation="horizontal"
+                        android:showDividers="middle" />
                 </HorizontalScrollView>
 
                 <TextView
                     android:id="@+id/rtrgfgf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Gli ultimi visti"
-                    android:textSize="16sp"
+                    android:layout_marginTop="36dp"
+                    android:text="Ultimi visualizzati"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2" />
@@ -87,7 +91,7 @@
                 <HorizontalScrollView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rtrgfgf">
@@ -96,7 +100,9 @@
                         android:id="@+id/HomeLastViewedLinearLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal" />
+                        android:divider="@drawable/layout_divider"
+                        android:orientation="horizontal"
+                        android:showDividers="middle" />
                 </HorizontalScrollView>
 
 

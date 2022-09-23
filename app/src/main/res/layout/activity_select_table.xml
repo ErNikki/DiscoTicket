@@ -28,8 +28,11 @@
                     android:id="@+id/SelectTableClubName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
                     android:text="Titolo"
-                    android:textSize="24sp"
+                    android:textColor="@color/purple_500"
+                    android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -43,7 +46,7 @@
                     android:text="Indirizzo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/SelectTableClubName"
                     app:layout_constraintTop_toBottomOf="@+id/SelectTableClubName" />
 
                 <Space
@@ -59,25 +62,28 @@
                     android:id="@+id/SelectTableActionTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="TextView"
-                    android:textSize="16sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/SelectTableClubAddress"
                     app:layout_constraintTop_toBottomOf="@+id/space2" />
 
                 <TextView
                     android:id="@+id/SelectTableExplain"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Il numero all'interno di ogni tavolo rappresenta il numero massimo di posti a sedere"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/SelectTableActionTitle"
                     app:layout_constraintTop_toBottomOf="@+id/SelectTableActionTitle" />
 
                 <LinearLayout
                     android:id="@+id/SelectTableLinearLayoutMap"
                     android:layout_width="match_parent"
                     android:layout_height="700px"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="18dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/SelectTableExplain">
@@ -88,6 +94,8 @@
                     android:id="@+id/SelectTableSuccessIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:scaleX="1.4"
+                    android:scaleY="1.4"
                     app:layout_constraintBottom_toBottomOf="@+id/SelectTableRemainRecapt"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/SelectTableActionRecapt"
@@ -97,7 +105,10 @@
                     android:id="@+id/SelectTableActionRecapt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="4dp"
                     android:text="TextView"
+                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/SelectTableSuccessIcon"
                     app:layout_constraintTop_toBottomOf="@+id/SelectTableLinearLayoutMap" />
@@ -107,6 +118,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="TextView"
+                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/SelectTableActionRecapt"
                     app:layout_constraintTop_toBottomOf="@+id/SelectTableActionRecapt" />
