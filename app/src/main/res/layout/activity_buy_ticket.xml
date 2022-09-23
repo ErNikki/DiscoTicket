@@ -226,24 +226,24 @@
 
                         <TextView
                             android:id="@+id/textView17"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Ingresso con un drink gratuito"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
                             app:layout_constraintStart_toStartOf="@+id/textView16"
                             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                         <LinearLayout
+                            android:id="@+id/linearLayout2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toEndOf="@+id/textView17"
-                            app:layout_constraintTop_toTopOf="@+id/textView16">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <androidx.fragment.app.FragmentContainerView
+                            <FrameLayout
                                 android:id="@+id/BuyTicketAmountSimpleTicket"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -287,24 +287,24 @@
 
                         <TextView
                             android:id="@+id/textView20"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="Ingresso con tavolo e consumazione"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
                             app:layout_constraintStart_toStartOf="@+id/textView19"
                             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
                         <LinearLayout
+                            android:id="@+id/linearLayout3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView20"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toEndOf="@+id/textView20"
-                            app:layout_constraintTop_toTopOf="@+id/textView19">
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <androidx.fragment.app.FragmentContainerView
+                            <FrameLayout
                                 android:id="@+id/BuyTicketAmountTableTicket"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

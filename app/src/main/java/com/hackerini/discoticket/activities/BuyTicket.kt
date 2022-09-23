@@ -14,7 +14,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.FragmentContainerView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.DayViewContainer
@@ -60,9 +59,9 @@ class BuyTicket : AppCompatActivity() {
         val payButton = findViewById<Button>(R.id.BuyTicketPayButton)
         val viewTable = findViewById<Button>(R.id.BuyTicketViewTableButton)
         val simpleTicketCounter =
-            findViewById<FragmentContainerView>(R.id.BuyTicketAmountSimpleTicket)
+            findViewById<FrameLayout>(R.id.BuyTicketAmountSimpleTicket)
         val tableTicketCounter =
-            findViewById<FragmentContainerView>(R.id.BuyTicketAmountTableTicket)
+            findViewById<FrameLayout>(R.id.BuyTicketAmountTableTicket)
 
         val simpleQuantitySelector = QuanitySelector.newInstance()
         val tableQuantitySelector = QuanitySelector.newInstance()
