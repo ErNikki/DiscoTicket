@@ -7,7 +7,10 @@ import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableString
+import android.text.TextUtils
 import android.text.TextWatcher
+import android.text.style.StyleSpan
 import android.util.TypedValue
 import android.view.View
 import android.widget.*
@@ -25,6 +28,7 @@ import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import java.lang.reflect.Type
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -61,8 +65,15 @@ class BuyTicket : AppCompatActivity() {
 
         clubName.text = club?.name
         clubAddress.text = club?.address
-        simpleTicketPrice.text = String.format("%.2f", club?.simpleTicketPrice) + "€/Persona"
-        tableTicketPrice.text = String.format("%.2f", club?.tableTicketPrice) + "€/Persona"
+
+        val simpleSpannableString = SpannableString(String.format("%.2f", club?.simpleTicketPrice) + "€")
+        val tableSpannableString = SpannableString(String.format("%.2f", club?.tableTicketPrice) + "€")
+        simpleSpannableString.setSpan(StyleSpan(Typeface.BOLD), 0, simpleSpannableString.length, 0)
+        tableSpannableString.setSpan(StyleSpan(Typeface.BOLD), 0, simpleSpannableString.length, 0)
+        var simplePrice = TextUtils.concat(simpleSpannableString, "/persona")
+        var tablePrice = TextUtils.concat(simpleSpannableString, "/persona")
+        simpleTicketPrice.text = simplePrice
+        tableTicketPrice.text = tablePrice
 
         val calendarView = findViewById<CalendarView>(R.id.BuyTicketCalendar)
         calendarView.dayBinder = object : DayBinder<DayViewContainer> {
@@ -279,7 +290,7 @@ class BuyTicket : AppCompatActivity() {
         val totalAmountView = findViewById<TextView>(R.id.BuyTicketTotalAmount)
         if (this.amountOfTableTicket > 0) {
             viewTable.visibility = View.GONE
-            payButton.text = "Seleziona tavolo"
+            payButton.text = "Seleziona tavoli"
         } else {
             viewTable.visibility = View.VISIBLE
             payButton.text = "Pagamento"
