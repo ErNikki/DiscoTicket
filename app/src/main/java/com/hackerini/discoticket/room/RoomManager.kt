@@ -7,5 +7,9 @@ class RoomManager(context: Context) {
     val db = Room.databaseBuilder(
         context,
         AppDatabase::class.java, "discoTicketDb"
-    ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
+    )
+        .createFromAsset("disco_ticket.db")
+        .allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
+        .build()
 }
