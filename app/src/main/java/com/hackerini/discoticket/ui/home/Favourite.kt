@@ -58,7 +58,7 @@ class Favourite : Fragment() {
         if (hideDialog && fragmentList.isNotEmpty() && ENABLE_GESTURE) {
             val dialog = MaterialAlertDialogBuilder(requireContext())
             dialog.setTitle("Aiuto")
-            dialog.setMessage("Trascina gli elementi verso sinistra per eliminarli da preferiti")
+            dialog.setMessage("Trascina gli elementi verso sinistra per eliminarli dai preferiti")
             dialog.setPositiveButton("Ho capito") { dialog, _ ->
                 sharedPreferences.edit().apply {
                     putBoolean(VALUE_KEY, false)
