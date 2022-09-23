@@ -23,10 +23,10 @@
                 android:id="@+id/LoginNotLoggedLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView7"
+                    android:id="@+id/LoginCardLoginWithApple"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -34,7 +34,7 @@
                     app:cardCornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView6">
+                    app:layout_constraintTop_toBottomOf="@+id/LoginCardLoginWithFacebook">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView24" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView4"
+                    android:id="@+id/LoginCardLoginWithGoogle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -213,7 +213,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView6"
+                    android:id="@+id/LoginCardLoginWithFacebook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -221,7 +221,7 @@
                     app:cardCornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView4">
+                    app:layout_constraintTop_toBottomOf="@+id/LoginCardLoginWithGoogle">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -259,6 +259,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/LoginLinearLayoutNoAccount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -266,7 +267,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView7">
+                    app:layout_constraintTop_toBottomOf="@+id/LoginCardLoginWithApple">
 
                     <TextView
                         android:id="@+id/textView28"

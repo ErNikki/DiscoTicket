@@ -184,7 +184,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView34">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView6"
+                        android:id="@+id/LoginCardLoginWithFacebook"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -192,7 +192,7 @@
                         app:cardCornerRadius="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cardView4">
+                        app:layout_constraintTop_toBottomOf="@+id/LoginCardLoginWithGoogle">
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -207,7 +207,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView7"
+                        android:id="@+id/LoginCardLoginWithApple"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -215,7 +215,7 @@
                         app:cardCornerRadius="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cardView6">
+                        app:layout_constraintTop_toBottomOf="@+id/LoginCardLoginWithFacebook">
 
                         <ImageView
                             android:id="@+id/imageView"
@@ -230,7 +230,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView4"
+                        android:id="@+id/LoginCardLoginWithGoogle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"

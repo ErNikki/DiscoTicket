@@ -64,9 +64,9 @@
                     android:clickable="true"
                     android:visibility="visible"
                     app:cardCornerRadius="5dp"
-                    app:layout_constraintEnd_toEndOf="@+id/cardView6"
-                    app:layout_constraintStart_toStartOf="@+id/cardView6"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView6">
+                    app:layout_constraintEnd_toEndOf="@+id/LoginCardLoginWithFacebook"
+                    app:layout_constraintStart_toStartOf="@+id/LoginCardLoginWithFacebook"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginCardLoginWithFacebook">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView6"
+                    android:id="@+id/LoginCardLoginWithFacebook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
