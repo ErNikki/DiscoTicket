@@ -6,17 +6,20 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentContainerView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.DayViewContainer
 import com.hackerini.discoticket.fragments.views.MonthViewContainer
+import com.hackerini.discoticket.fragments.views.QuanitySelector
 import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.utils.ObjectLoader
 import com.kizitonwose.calendarview.CalendarView
@@ -56,8 +59,27 @@ class BuyTicket : AppCompatActivity() {
         val tableTicketPrice = findViewById<TextView>(R.id.BuyTicketTableTicketPrice)
         val payButton = findViewById<Button>(R.id.BuyTicketPayButton)
         val viewTable = findViewById<Button>(R.id.BuyTicketViewTableButton)
-        val simpleTicketCounter = findViewById<EditText>(R.id.BuyTicketAmountSimpleTicket)
-        val tableTicketCounter = findViewById<EditText>(R.id.BuyTicketAmountTableTicket)
+        val simpleTicketCounter =
+            findViewById<FragmentContainerView>(R.id.BuyTicketAmountSimpleTicket)
+        val tableTicketCounter =
+            findViewById<FragmentContainerView>(R.id.BuyTicketAmountTableTicket)
+
+        val simpleQuantitySelector = QuanitySelector.newInstance()
+        val tableQuantitySelector = QuanitySelector.newInstance()
+        simpleQuantitySelector.onChangeListener = { s ->
+            amountOfSimpleTicket = s
+            updateCartTotal()
+        }
+        tableQuantitySelector.onChangeListener = { s ->
+            amountOfTableTicket = s
+            updateCartTotal()
+        }
+
+        supportFragmentManager
+            .beginTransaction()
+            .add(simpleTicketCounter.id, simpleQuantitySelector)
+            .add(tableTicketCounter.id, tableQuantitySelector)
+            .commit()
 
         clubName.text = club?.name
         clubAddress.text = club?.address
@@ -222,38 +244,6 @@ class BuyTicket : AppCompatActivity() {
                 User.generateNotLoggedAlertDialog(this).show()
             }
         }
-        simpleTicketCounter.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                amountOfSimpleTicket = s.toString().toIntOrNull() ?: 0
-                updateCartTotal()
-            }
-        })
-        tableTicketCounter.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                amountOfTableTicket = s.toString().toIntOrNull() ?: 0
-                updateCartTotal()
-            }
-        })
     }
 
     private fun isSameDate(date: Date, localDate: LocalDate): Boolean {

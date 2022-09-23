@@ -243,13 +243,11 @@
                             app:layout_constraintStart_toEndOf="@+id/textView17"
                             app:layout_constraintTop_toTopOf="@+id/textView16">
 
-                            <EditText
+                            <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/BuyTicketAmountSimpleTicket"
-                                android:layout_width="50dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:inputType="number"
-                                android:text="0" />
+                                android:layout_marginTop="16dp" />
 
                             <TextView
                                 android:id="@+id/BuyTicketSimpleTicketPrice"
@@ -306,13 +304,11 @@
                             app:layout_constraintStart_toEndOf="@+id/textView20"
                             app:layout_constraintTop_toTopOf="@+id/textView19">
 
-                            <EditText
+                            <androidx.fragment.app.FragmentContainerView
                                 android:id="@+id/BuyTicketAmountTableTicket"
-                                android:layout_width="50dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:inputType="number"
-                                android:text="0" />
+                                android:layout_marginTop="16dp" />
 
                             <TextView
                                 android:id="@+id/BuyTicketTableTicketPrice"
