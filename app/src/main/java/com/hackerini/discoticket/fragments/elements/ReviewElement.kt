@@ -126,7 +126,7 @@ class ReviewElement : Fragment() {
     fun onDeleteClick() {
         val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
         dialogBuilder.setTitle("Conferma eliminazione")
-        dialogBuilder.setMessage("Sei sicuro di volere eliminare la recensione")
+        dialogBuilder.setMessage("Sei sicuro di voler eliminare la recensione?")
         dialogBuilder.setNegativeButton("Annulla") { dialog, _ -> dialog.dismiss() }
         dialogBuilder.setPositiveButton("Conferma") { dialog, _ ->
             dialog.dismiss()
