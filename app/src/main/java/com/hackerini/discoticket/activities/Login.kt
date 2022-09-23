@@ -67,6 +67,7 @@ class Login : AppCompatActivity() {
             logoutButton.setOnClickListener {
                 User.logout(this)
                 startActivity(Intent(this, MainActivity::class.java))
+                Toast.makeText(this, "Logout avvenuto con successo", Toast.LENGTH_LONG).show()
             }
             deleteAccount.setOnClickListener {
                 User.deleteCurrentAccount(this)
