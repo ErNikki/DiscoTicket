@@ -2,8 +2,11 @@ package com.hackerini.discoticket.activities
 
 import android.app.ActionBar
 import android.content.Intent
+import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +48,8 @@ class ClubDetails : AppCompatActivity() {
 
         val reviews = club!!.reviews
         val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
+        val boldSpannableString = SpannableString("Prezzi a partire da " + String.format("%.2f", club!!.simpleTicketPrice) + "€")
+        boldSpannableString.setSpan(StyleSpan(Typeface.BOLD), 19, boldSpannableString.length, 0)
 
         clubName.text = club!!.name
         address.text = club!!.address
@@ -52,7 +57,7 @@ class ClubDetails : AppCompatActivity() {
         reviewsAvg.text = String.format("%.1f", average)
         totalReview.text = "(${reviews.size} recensioni)"
         clubDescription.text = club!!.description
-        price.text = "Prezzi a partire da " + String.format("%.2f", club!!.simpleTicketPrice) + "€"
+        price.text = boldSpannableString
         distance.text = "Si trova a " + club!!.distanceFromYou + "km da te"
 
         val imageSize = 250
