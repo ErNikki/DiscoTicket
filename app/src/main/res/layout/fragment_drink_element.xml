@@ -49,7 +49,7 @@
                 android:ellipsize="end"
                 android:text="TextView"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
+                app:layout_constraintEnd_toStartOf="@+id/drinkElementQuanitySelector"
                 app:layout_constraintStart_toEndOf="@+id/drinkElementDrinkIcon"
                 app:layout_constraintTop_toBottomOf="@+id/drinkElementDrinkName" />
 
@@ -61,52 +61,16 @@
                 android:text="TextView"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/drinkElementDrinkIcon"
-                app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
-                app:layout_constraintStart_toStartOf="@+id/relativeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+                app:layout_constraintEnd_toEndOf="@+id/drinkElementQuanitySelector"
+                app:layout_constraintStart_toStartOf="@+id/drinkElementQuanitySelector"
+                app:layout_constraintTop_toBottomOf="@+id/drinkElementQuanitySelector" />
 
-            <LinearLayout
-                android:id="@+id/relativeLayout"
+            <FrameLayout
+                android:id="@+id/drinkElementQuanitySelector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/drinkElementDrinkName">
-
-                <Button
-                    android:id="@+id/drinkElementDecreaseButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/custom_btn_remove"
-                    android:backgroundTint="#808080"
-                    tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-                <EditText
-                    android:id="@+id/drinkElementDrinkQuantity"
-                    android:layout_width="48dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:inputType="number"
-                    android:minHeight="48dp"
-                    android:minEms="1"
-                    android:text="1"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
-
-                <Button
-                    android:id="@+id/drinkElementIncreaseButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/custom_btn_add"
-                    android:backgroundTint="#33DAFF"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-            </LinearLayout>
+                app:layout_constraintTop_toTopOf="@+id/drinkElementDrinkName"></FrameLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
