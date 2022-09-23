@@ -58,7 +58,7 @@
                     android:id="@+id/eventDetailsDrinkMenuButton"
                     android:layout_width="142dp"
                     android:layout_height="48dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
                     android:text="Apri menù dei drink"
                     android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -92,11 +92,13 @@
 
                 <LinearLayout
                     android:id="@+id/eventDetailsTagLayout"
-                    android:layout_width="178dp"
-                    android:layout_height="68dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
                     android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/eventDetailsDrinkMenuButton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/eventDeatilseventDescription"></LinearLayout>
 
@@ -131,6 +133,25 @@
                     app:layout_constraintBottom_toBottomOf="@+id/kfflgkflkgf"
                     app:layout_constraintStart_toEndOf="@+id/kfflgkflkgf"
                     app:layout_constraintTop_toTopOf="@+id/kfflgkflkgf" />
+
+                <TextView
+                    android:id="@+id/eventDetailsDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/eventDeatilseventDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsTagLayout" />
+
+                <TextView
+                    android:id="@+id/eventDetailsPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/eventDetailsDistance"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsDistance" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
