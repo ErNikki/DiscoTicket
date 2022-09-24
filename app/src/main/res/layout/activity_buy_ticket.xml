@@ -48,13 +48,15 @@
                     app:layout_constraintStart_toStartOf="@+id/BuyTicketClubName"
                     app:layout_constraintTop_toBottomOf="@+id/BuyTicketClubName" />
 
-                <Space
-                    android:id="@+id/space"
+                <ImageView
+                    android:id="@+id/space5"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="3px"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="#000000"
+                    android:background="#66D815"
+                    android:backgroundTint="@color/clubColorStrong"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/BuyTicketClubAddress" />
 
@@ -62,11 +64,12 @@
                     android:id="@+id/BuyTicketCalendarAction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text="Seleziona il giorno"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/BuyTicketClubAddress"
-                    app:layout_constraintTop_toBottomOf="@+id/space" />
+                    app:layout_constraintTop_toBottomOf="@+id/space5" />
 
                 <LinearLayout
                     android:id="@+id/BuyTicketCalendarLegend"
@@ -205,15 +208,39 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
+                <ImageView
+                    android:id="@+id/space4"
+                    android:layout_width="0dp"
+                    android:layout_height="3px"
+                    android:layout_marginTop="12dp"
+                    android:background="#66D815"
+                    android:backgroundTint="@color/clubColorStrong"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarCard" />
+
+
+                <TextView
+                    android:id="@+id/textView37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Seleziona i biglietti"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/BuyTicketCalendarCard"
+                    app:layout_constraintTop_toTopOf="@+id/space4" />
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="2dp"
                     android:padding="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketEventCardLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/textView41">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -225,7 +252,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ingresso semplice"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -285,7 +312,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ingresso con tavolo"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -324,6 +351,15 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Acquista esattamente un biglietto per ogni persona che verrà con te in discoteca; puoi scegliere biglietti di diverso tipo in uno stesso acquisto"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView37"
+                    app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
