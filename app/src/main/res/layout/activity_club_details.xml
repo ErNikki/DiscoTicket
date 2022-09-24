@@ -58,10 +58,11 @@
                 <RatingBar
                     android:id="@+id/clubDeatilsRatingBar"
                     style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
-                    android:layout_width="174dp"
-                    android:layout_height="31dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="14dp"
+                    android:progressTint="@color/clubColorStrong"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailsAddress" />
 
