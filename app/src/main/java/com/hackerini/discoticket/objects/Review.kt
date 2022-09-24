@@ -85,6 +85,12 @@ interface ReviewDao {
         editReviewWithFields(review.reviewId, review.rating, review.description)
     }
 
+    @Query("SELECT * FROM 'Review' WHERE clubId=:clubId AND userCreatorId=:userId")
+    fun getReviewsByClubAndUser(userId: Int, clubId: Int): List<Review>
+
+    fun userHasReviewForThisClub(userId: Int, clubId: Int) =
+        getReviewsByClubAndUser(userId, clubId).isNotEmpty()
+
     @Insert
     fun insert(review: Review)
 

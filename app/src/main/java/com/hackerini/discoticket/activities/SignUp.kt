@@ -2,10 +2,13 @@ package com.hackerini.discoticket.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.objects.UserDao
@@ -30,6 +33,8 @@ class SignUp : AppCompatActivity() {
     lateinit var password: EditText
     lateinit var passwordRepeat: EditText
     lateinit var userDao: UserDao
+    lateinit var passwordLayout: TextInputLayout
+    lateinit var passwordRepeatLayout: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +43,16 @@ class SignUp : AppCompatActivity() {
         userDao = RoomManager(this).db.userDao()
 
 
-        name = findViewById<EditText>(R.id.SignUpName)
-        surname = findViewById<EditText>(R.id.SignUpSurname)
-        email = findViewById<EditText>(R.id.SignUpEMail)
-        password = findViewById<EditText>(R.id.SignUpPassword)
-        passwordRepeat = findViewById<EditText>(R.id.SignUpPasswordRepeat)
+        name = findViewById(R.id.SignUpName)
+        surname = findViewById(R.id.SignUpSurname)
+        email = findViewById(R.id.SignUpEMail)
+        password = findViewById(R.id.SignUpPassword)
+        passwordRepeat = findViewById(R.id.SignUpPasswordRepeat)
+        passwordLayout = findViewById(R.id.SignUpPasswordLayout)
+        passwordRepeatLayout = findViewById(R.id.SignUpPasswordRepeatLayout)
+        passwordLayout.endIconMode = TextInputLayout.END_ICON_NONE
+        passwordRepeatLayout.endIconMode = TextInputLayout.END_ICON_NONE
+
         val button = findViewById<Button>(R.id.SignUpButton)
 
         button.setOnClickListener {
@@ -64,6 +74,38 @@ class SignUp : AppCompatActivity() {
 
             }
         }
+
+        password.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s != null && s.isNotEmpty())
+                    passwordLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                else
+                    passwordLayout.endIconMode = TextInputLayout.END_ICON_NONE
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
+
+        passwordRepeat.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s != null && s.isNotEmpty())
+                    passwordRepeatLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                else
+                    passwordRepeatLayout.endIconMode = TextInputLayout.END_ICON_NONE
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
 
     }
 
@@ -116,6 +158,9 @@ class SignUp : AppCompatActivity() {
             hasError = true
         }
         if (password.text.toString() != passwordRepeat.text.toString()) {
+            //It must be called 2 times
+            passwordRepeatLayout.endIconMode = TextInputLayout.END_ICON_NONE
+            passwordRepeatLayout.endIconMode = TextInputLayout.END_ICON_NONE
             passwordRepeat.error = "Le due password non coincidono"
             hasError = true
         }

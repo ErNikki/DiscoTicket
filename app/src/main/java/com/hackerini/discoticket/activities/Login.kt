@@ -3,16 +3,19 @@ package com.hackerini.discoticket.activities
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.hackerini.discoticket.MainActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.User
@@ -23,12 +26,13 @@ import java.util.regex.Pattern
 import kotlin.concurrent.schedule
 
 
-class Login : AppCompatActivity() {
+class Login : AppCompatActivity(), TextWatcher {
 
     lateinit var loginWithGoogle: CardView
     lateinit var loginWithFacebook: CardView
     lateinit var loginWithApple: CardView
     lateinit var userDao: UserDao
+    private lateinit var passwordLayout: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +43,10 @@ class Login : AppCompatActivity() {
         val forgottenPassword = findViewById<TextView>(R.id.LoginForgottenPassword)
         val signUpTextView = findViewById<TextView>(R.id.LoginSignUp)
 
-        val emailTextEdit = findViewById<EditText>(R.id.LoginMailAddress)
-        val passwordTextEdit = findViewById<EditText>(R.id.LoginPassword)
+        val emailTextEdit = findViewById<TextInputEditText>(R.id.LoginMailAddress)
+        val passwordTextEdit = findViewById<TextInputEditText>(R.id.LoginPassword)
+        passwordLayout = findViewById(R.id.LoginPasswordLayout)
+        passwordLayout.endIconMode = TextInputLayout.END_ICON_NONE
 
         val loginLayout = findViewById<ConstraintLayout>(R.id.LoginNotLoggedLayout)
         val logoutLayout = findViewById<ConstraintLayout>(R.id.LoginLoggedLayout)
@@ -138,6 +144,8 @@ class Login : AppCompatActivity() {
             }
         }
 
+        passwordTextEdit.addTextChangedListener(this)
+
         signUpTextView.setOnClickListener {
             val intent = Intent(applicationContext, SignUp::class.java)
             startActivity(intent)
@@ -187,5 +195,18 @@ class Login : AppCompatActivity() {
             .show()
         User.setUserLogged(this, user)
         startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        if (s != null && s.isNotEmpty())
+            passwordLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+        else
+            passwordLayout.endIconMode = TextInputLayout.END_ICON_NONE
+    }
+
+    override fun afterTextChanged(s: Editable?) {
     }
 }

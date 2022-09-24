@@ -36,19 +36,32 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Nome"
-                    app:layout_constraintStart_toStartOf="@+id/SignUpName"
+                    app:layout_constraintStart_toStartOf="@+id/SignUpNameLayout"
                     app:layout_constraintTop_toBottomOf="@+id/SignUpTitle" />
 
-                <EditText
-                    android:id="@+id/SignUpName"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/SignUpNameLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Mario"
-                    android:inputType="textPersonName"
+                    android:minEms="12"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+                    <EditText
+                        android:id="@+id/SignUpName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Mario"
+                        android:inputType="textPersonName"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView14"
@@ -56,39 +69,67 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="Cognome"
-                    app:layout_constraintStart_toStartOf="@+id/SignUpSurname"
-                    app:layout_constraintTop_toBottomOf="@+id/SignUpName" />
+                    app:layout_constraintStart_toStartOf="@+id/SignUpSurnameLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/SignUpNameLayout" />
 
-                <EditText
-                    android:id="@+id/SignUpSurname"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/SignUpSurnameLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Rossi"
-                    android:inputType="textPersonName"
+                    android:minEms="12"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView14">
 
-                <EditText
-                    android:id="@+id/SignUpEMail"
+                    <EditText
+                        android:id="@+id/SignUpSurname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Rossi"
+                        android:inputType="textPersonName"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/SignUpEMailLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="mario@rossi.it"
-                    android:inputType="textEmailAddress"
+                    android:minEms="12"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView29" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView29">
+
+                    <EditText
+                        android:id="@+id/SignUpEMail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="mario@rossi.it"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:text="Indirizzo e-mail"
-                    app:layout_constraintStart_toStartOf="@+id/SignUpEMail"
-                    app:layout_constraintTop_toBottomOf="@+id/SignUpSurname" />
+                    app:layout_constraintStart_toStartOf="@+id/SignUpEMailLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/SignUpSurnameLayout" />
 
                 <TextView
                     android:id="@+id/textView30"
@@ -96,30 +137,58 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="Password"
-                    app:layout_constraintStart_toStartOf="@+id/SignUpPassword"
-                    app:layout_constraintTop_toBottomOf="@+id/SignUpEMail" />
+                    app:layout_constraintStart_toStartOf="@+id/SignUpPasswordLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/SignUpEMailLayout" />
 
-                <EditText
-                    android:id="@+id/SignUpPassword"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/SignUpPasswordLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Password"
-                    android:inputType="textPassword"
+                    android:minEms="12"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView30" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView30"
+                    app:passwordToggleEnabled="true">
 
-                <EditText
-                    android:id="@+id/SignUpPasswordRepeat"
+                    <EditText
+                        android:id="@+id/SignUpPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/SignUpPasswordRepeatLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Ripeti password"
-                    android:inputType="textPassword"
+                    android:minEms="12"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView32" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView32"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/SignUpPasswordRepeat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Ripeti password"
+                        android:inputType="textPassword"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView32"
@@ -127,8 +196,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="Ripeti password"
-                    app:layout_constraintStart_toStartOf="@+id/SignUpPasswordRepeat"
-                    app:layout_constraintTop_toBottomOf="@+id/SignUpPassword" />
+                    app:layout_constraintStart_toStartOf="@+id/SignUpPasswordRepeatLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/SignUpPasswordLayout" />
 
                 <Button
                     android:id="@+id/SignUpButton"
@@ -138,7 +207,7 @@
                     android:text="Registrati"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/SignUpPasswordRepeat" />
+                    app:layout_constraintTop_toBottomOf="@+id/SignUpPasswordRepeatLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

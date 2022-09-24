@@ -84,19 +84,29 @@
                     android:layout_marginTop="16dp"
                     android:text="Indirizzo e-mail"
                     android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="@+id/LoginMailAddress"
+                    app:layout_constraintStart_toStartOf="@+id/LoginMailAddressLayout"
                     app:layout_constraintTop_toBottomOf="@+id/textView55" />
 
-                <EditText
-                    android:id="@+id/LoginMailAddress"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/LoginMailAddressLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="esempio@prova.it"
-                    android:inputType="textEmailAddress"
+                    android:minEms="12"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/LoginMailAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="esempio@prova.it"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView21"
@@ -105,19 +115,31 @@
                     android:layout_marginTop="16dp"
                     android:text="Password"
                     android:textColor="@color/black"
-                    app:layout_constraintStart_toStartOf="@+id/LoginMailAddress"
-                    app:layout_constraintTop_toBottomOf="@+id/LoginMailAddress" />
+                    app:layout_constraintStart_toStartOf="@+id/LoginMailAddressLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginMailAddressLayout" />
 
-                <EditText
-                    android:id="@+id/LoginPassword"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/LoginPasswordLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Password"
-                    android:inputType="textPassword"
+
+                    android:minEms="12"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView21"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/LoginPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:paddingStart="8dp"
+                        android:paddingTop="8dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/LoginForgottenPassword"
@@ -298,7 +320,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LoginPassword" />
+                    app:layout_constraintTop_toBottomOf="@+id/LoginPasswordLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

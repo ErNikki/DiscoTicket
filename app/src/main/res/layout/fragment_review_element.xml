@@ -66,6 +66,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="28dp"
                     android:numStars="5"
+                    android:progressTint="@color/clubColorStrong"
                     android:scaleX="1.5"
                     android:scaleY="1.5"
                     app:layout_constraintEnd_toEndOf="parent"

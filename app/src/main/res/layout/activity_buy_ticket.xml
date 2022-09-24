@@ -253,8 +253,7 @@
                             <FrameLayout
                                 android:id="@+id/BuyTicketAmountSimpleTicket"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp" />
+                                android:layout_height="wrap_content" />
 
                             <TextView
                                 android:id="@+id/BuyTicketSimpleTicketPrice"
@@ -314,8 +313,7 @@
                             <FrameLayout
                                 android:id="@+id/BuyTicketAmountTableTicket"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp" />
+                                android:layout_height="wrap_content" />
 
                             <TextView
                                 android:id="@+id/BuyTicketTableTicketPrice"

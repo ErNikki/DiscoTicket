@@ -12,10 +12,12 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentContainerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.User
+import com.hackerini.discoticket.room.RoomManager
 import com.squareup.picasso.Picasso
 
 class ClubDetails : AppCompatActivity() {
@@ -23,6 +25,7 @@ class ClubDetails : AppCompatActivity() {
     var club: Club? = null
     var favouritesButton: ImageButton? = null
     lateinit var fragmentContainerView: FragmentContainerView
+    private lateinit var writeReviewButton: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,10 +48,17 @@ class ClubDetails : AppCompatActivity() {
         val distance = findViewById<TextView>(R.id.clubDetailsDistance)
         fragmentContainerView =
             findViewById(R.id.clubDetailsFragmentContainerView)
+        writeReviewButton = findViewById(R.id.clubDetailsWriteReviewButton)
+
 
         val reviews = club!!.reviews
         val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
-        val boldSpannableString = SpannableString("Prezzi a partire da " + String.format("%.2f", club!!.simpleTicketPrice) + "€")
+        val boldSpannableString = SpannableString(
+            "Prezzi a partire da " + String.format(
+                "%.2f",
+                club!!.simpleTicketPrice
+            ) + "€"
+        )
         boldSpannableString.setSpan(StyleSpan(Typeface.BOLD), 19, boldSpannableString.length, 0)
 
         clubName.text = club!!.name
@@ -103,8 +113,17 @@ class ClubDetails : AppCompatActivity() {
             startActivity(intent)
         }
 
-        findViewById<Button>(R.id.clubDetailsWriteReviewButton).setOnClickListener {
-            if (User.isLogged(this)) {
+        writeReviewButton.setOnClickListener {
+            if (userHasAReviewForThisClub()) {
+                val dialog = MaterialAlertDialogBuilder(this)
+                dialog.setTitle("Recensione già esistente")
+                dialog.setMessage(
+                    "Hai già scritto una recensione per questa discoteca.\n" +
+                            "Vai nella schermata \"Le mie recensioni\" per modificarla"
+                )
+                dialog.setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
+                dialog.create().show()
+            } else if (User.isLogged(this)) {
                 val intent = Intent(applicationContext, WriteReview::class.java)
                 intent.putExtra("club", club)
                 startActivity(intent)
@@ -159,6 +178,14 @@ class ClubDetails : AppCompatActivity() {
         )
         fragment.onRefreshNeeded = { loadFirstReview() }
         supportFragmentManager.beginTransaction().add(fragmentContainerView.id, fragment).commit()
+    }
+
+    private fun userHasAReviewForThisClub(): Boolean {
+        val reviewDao = RoomManager(this).db.reviewDao()
+        val user = User.getLoggedUser(this)
+        return if (user != null)
+            reviewDao.userHasReviewForThisClub(user.id, club!!.id)
+        else false
     }
 
 }
