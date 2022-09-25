@@ -3,12 +3,13 @@ package com.hackerini.discoticket.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RatingBar
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
@@ -30,6 +31,9 @@ class WriteReview : AppCompatActivity() {
         val rating = findViewById<RatingBar>(R.id.writeReviewRatingBar)
         val description = findViewById<EditText>(R.id.writeReviewDescriptionText)
         val addReviewButton = findViewById<Button>(R.id.writeReviewAddReviewButton)
+
+        val explanation = findViewById<TextView>(R.id.writeReviewExplanation)
+        explanation.text = "Pubblicando una recensione otterrai " + resources.getInteger(R.integer.pointPerReview) + " punti"
 
         if (originalReview != null) {
             rating.rating = originalReview.rating.toFloat()
@@ -56,28 +60,48 @@ class WriteReview : AppCompatActivity() {
                         builder.setTitle("Recensione modificata")
                         builder.setMessage("La tua recensione è stata aggiornata con successo")
                         reviewDao.editReview(review)
+                        builder.setPositiveButton("Ok") { dialog, _ -> finish() }
                     } else {
                         //New review
-                        reviewDao.insert(review)
-                        userDao.incrementsPoints(
-                            resources.getInteger(R.integer.pointPerReview),
-                            User.getLoggedUser(this)!!.id
-                        )
-                        builder.setTitle("Recensione Aggiunta")
-                        builder.setMessage(
-                            "Grazie per aver lasciato una recensione!\nHai ottenuto ${
-                                resources.getInteger(
-                                    R.integer.pointPerReview
-                                )
-                            } punti che potrai usare per ottenere buoni sconto"
-                        )
+                        builder.setTitle("Conferma pubblicazione")
+                        builder.setMessage("Sei sicuro di voler pubblicare questa recensione?")
+
+                        /*val frameLayout = FrameLayout(this)
+                        frameLayout.id = View.generateViewId()
+                        builder.setView(frameLayout)
+
+                        val myReview = club.getReview(this).toList().sortedByDescending { review -> review.getLongTime() }
+                        val transaction = supportFragmentManager.beginTransaction()
+                        val fragmentElement = ReviewElement.newInstance(myReview.first())
+                        //fragmentElement.onRefreshNeeded = { loadContent() }
+                        transaction.add(frameLayout.id, fragmentElement)
+                        transaction.commit()*/
+
+                        builder.setNegativeButton("No") { dialog, _ -> null }
+                        builder.setPositiveButton("Sì") { dialog, _ ->
+                            reviewDao.insert(review)
+                            userDao.incrementsPoints(
+                                resources.getInteger(R.integer.pointPerReview),
+                                User.getLoggedUser(this)!!.id
+                            )
+                            dialog.dismiss()
+
+                            var builder2 = MaterialAlertDialogBuilder(context)
+                            builder2.setTitle("Recensione aggiunta")
+                            builder2.setMessage(
+                                "Grazie per aver lasciato una recensione!\nHai ottenuto ${
+                                    resources.getInteger(R.integer.pointPerReview)
+                                } punti che potrai usare per ottenere buoni sconto"
+                            )
+                            builder2.setPositiveButton("Ok") { dialog, _ -> finish() }
+                            builder2.create().show()
+                        }
                     }
-                    builder.setPositiveButton("Ok") { dialog, _ -> finish() }
                     builder.create().show()
 
                 } else {
                     val builder = MaterialAlertDialogBuilder(context)
-                    builder.setTitle("Attenzione la recensione non contiene una valutazione")
+                    builder.setTitle("Attenzione: la recensione non contiene una valutazione")
                     builder.setMessage("Per lasciare una recensione devi aggiungere una valutazione")
                     builder.setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
                     builder.create().show()
