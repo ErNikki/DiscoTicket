@@ -1,7 +1,11 @@
 package com.hackerini.discoticket.fragments.elements
 
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.TextUtils
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +69,9 @@ class DrinkElement : Fragment() {
         name = drink?.name.toString()
         drinkName.text = name
 
-        priceText.text = String.format("%.2f", drink!!.price).plus("€/Drink")
+        val spannableString = SpannableString(String.format("%.2f", drink!!.price) + "€")
+        spannableString.setSpan(StyleSpan(Typeface.BOLD), 0, spannableString.length, 0)
+        priceText.text = TextUtils.concat(spannableString, "/drink")
 
         ingredients.text = ""
         val builder = StringBuilder()

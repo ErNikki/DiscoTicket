@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmReview">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/ConfirmReviewTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Sei sicuro di voler pubblicare questa recensione?"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/ConfirmReviewFrameLayout"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/ConfirmReviewFrameLayout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ConfirmReviewTextView">
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/ConfirmReviewOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Si"
+            app:layout_constraintEnd_toEndOf="@+id/ConfirmReviewFrameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/ConfirmReviewFrameLayout" />
+
+        <Button
+            android:id="@+id/ConfirmReviewCancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="No"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/ConfirmReviewOk"
+            app:layout_constraintEnd_toStartOf="@+id/ConfirmReviewOk"
+            app:layout_constraintTop_toTopOf="@+id/ConfirmReviewOk" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
