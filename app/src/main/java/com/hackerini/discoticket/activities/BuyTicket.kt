@@ -6,10 +6,8 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.text.Editable
 import android.text.SpannableString
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.text.style.StyleSpan
 import android.util.TypedValue
 import android.view.View
@@ -32,7 +30,6 @@ import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
-import java.lang.reflect.Type
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -177,7 +174,11 @@ class BuyTicket : AppCompatActivity() {
             findViewById<CardView>(R.id.BuyTicketCalendarCard).visibility = View.GONE
         }
 
-        val currentMonth = YearMonth.now()
+        var nextClickableDay = LocalDate.now()
+        while (!isDayClickable(nextClickableDay))
+            nextClickableDay = nextClickableDay.plusDays(1)
+
+        val currentMonth = YearMonth.of(nextClickableDay.year, nextClickableDay.monthValue)
         val firstMonth = currentMonth.minusMonths(10)
         val lastMonth = currentMonth.plusMonths(10)
         val firstDayOfWeek = daysOfWeekFromLocale()
@@ -273,6 +274,15 @@ class BuyTicket : AppCompatActivity() {
             transaction.commit()
             eventLayout.visibility = View.VISIBLE
         }
+    }
+
+    private fun isDayClickable(date: LocalDate): Boolean {
+        val isThereEvent =
+            ObjectLoader.getEvents(this).any { event -> isSameDate(event.date, date) }
+        val isOpened = date.dayOfWeek.ordinal == 5 || isThereEvent
+        val isFuture =
+            date.isAfter(LocalDate.now()) || date.isEqual(LocalDate.now())
+        return (isThereEvent || isOpened) && isFuture
     }
 
     fun updateCartTotal() {
