@@ -145,8 +145,6 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                         textView.setTypeface(null, Typeface.BOLD)
                         textView.setTextColor(Color.RED)
                         textView.background = null
-                    } else if (day.date == LocalDate.now()) {
-                        textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
                     } else if (!isOpened || !isFuture) {
                         textView.setTextColor(Color.GRAY)
                         textView.background = null
@@ -155,6 +153,8 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                         textView.setTypeface(null, Typeface.BOLD)
                         textView.background = null
                     }
+                    if (day.date == LocalDate.now())
+                        textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
                 } else {
                     textView.setTextColor(Color.LTGRAY)
                 }
