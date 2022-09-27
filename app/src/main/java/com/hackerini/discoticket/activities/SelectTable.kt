@@ -81,12 +81,11 @@ class SelectTable : AppCompatActivity() {
         if (isShowMode) {
             payButton.visibility = View.GONE
             actionTitle.visibility = View.GONE
-            findViewById<TextView>(R.id.SelectTableExplain).visibility = View.GONE
             actionRecapTextView.visibility = View.GONE
             remainderOfSeatsTextView.visibility = View.GONE
             successIconImageView.visibility = View.GONE
-            clubMap.isShowMode = isShowMode
         }
+        clubMap.isShowMode = isShowMode
 
         payButton.setOnClickListener {
             if (User.isLogged(this)) {
