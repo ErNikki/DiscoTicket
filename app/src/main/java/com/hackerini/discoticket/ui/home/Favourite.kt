@@ -1,6 +1,5 @@
 package com.hackerini.discoticket.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
@@ -51,6 +49,8 @@ class Favourite : Fragment() {
         emptyScreenWarning = view.findViewById(R.id.FavoriteClubEmptyWarning)
         loadContent()
 
+        /*
+        Alert shown that explain the use of gesture, not needed for now
         val VALUE_KEY = "favoriteGesture"
         val sharedPreferences =
             requireContext().getSharedPreferences("DiscoTicket", Context.MODE_PRIVATE)
@@ -67,6 +67,7 @@ class Favourite : Fragment() {
             }
             dialog.create().show()
         }
+         */
     }
 
     override fun onResume() {

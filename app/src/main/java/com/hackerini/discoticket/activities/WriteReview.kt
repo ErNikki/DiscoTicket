@@ -47,8 +47,7 @@ class WriteReview : AppCompatActivity() {
 
             val context: Context = this
             if (User.isLogged(this)) {
-
-                val review = Review(User.getLoggedUser(this)?.id!!)
+                val review = Review(User.getLoggedUser(this)!!)
                 review.description = description.text.toString()
                 review.date = SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(Date())
                 review.clubId = club.id

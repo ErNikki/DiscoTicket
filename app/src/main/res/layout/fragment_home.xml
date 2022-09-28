@@ -24,7 +24,7 @@
                     android:id="@+id/QrCodeMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vicino a te"
+                    android:text="Discoteche vicino a te"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"

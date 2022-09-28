@@ -34,7 +34,7 @@ class User : Serializable {
 
         fun setUserLogged(context: Context, user: User) {
             val sharedPreferences = context.getSharedPreferences(
-                "DiscoTicketPref",
+                "DiscoTicket",
                 AppCompatActivity.MODE_PRIVATE
             )
             val editor = sharedPreferences.edit()
@@ -44,7 +44,7 @@ class User : Serializable {
 
         fun logout(context: Context) {
             val sharedPreferences = context.getSharedPreferences(
-                "DiscoTicketPref",
+                "DiscoTicket",
                 AppCompatActivity.MODE_PRIVATE
             )
             val editor = sharedPreferences.edit()
@@ -54,7 +54,7 @@ class User : Serializable {
 
         fun getLoggedUser(context: Context): User? {
             val sharedPreferences = context.getSharedPreferences(
-                "DiscoTicketPref",
+                "DiscoTicket",
                 AppCompatActivity.MODE_PRIVATE
             )
             val userId = sharedPreferences.getInt("userId", -1)

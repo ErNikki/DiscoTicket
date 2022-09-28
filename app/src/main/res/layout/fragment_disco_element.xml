@@ -43,6 +43,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <ImageButton
+                    android:id="@+id/discoElementDeleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_delete_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/discoElementImage"
                     android:layout_width="wrap_content"
@@ -85,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="4dp"
+                    android:progressTint="@color/clubColorStrong"
                     android:scaleX="1.3"
                     android:scaleY="1.3"
                     app:layout_constraintStart_toStartOf="@+id/discoElementAddress"

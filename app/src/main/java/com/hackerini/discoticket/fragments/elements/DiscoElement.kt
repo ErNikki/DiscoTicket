@@ -3,6 +3,7 @@ package com.hackerini.discoticket.fragments.elements
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.ActionBar
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -15,6 +16,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
 import com.hackerini.discoticket.objects.Club
@@ -32,20 +34,23 @@ class DiscoElement : Fragment(), GestureDetector.OnGestureListener {
     private lateinit var card: CardView
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var removeButton: ImageButton
+    private lateinit var topRightRemoveButton: ImageButton
     private var cardIsAnimating = false
     var onRemoveElement: ((Club) -> Unit)? = null
     private var originalCardHeigth = -1
     var isHide: Boolean = false
+    private var elementDeletable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var elementDeletable = false
         arguments?.let {
             club = it.getSerializable(ARG_PARAM1) as Club
             elementDeletable = it.getBoolean(ARG_PARAM2)
         }
-        if (elementDeletable)
-            gestureDetector = GestureDetectorCompat(requireContext(), this)
+        if (elementDeletable) {
+            //Enable this to enable the gesture to remove the element
+            //gestureDetector = GestureDetectorCompat(requireContext(), this)
+        }
     }
 
     override fun onCreateView(
@@ -57,6 +62,8 @@ class DiscoElement : Fragment(), GestureDetector.OnGestureListener {
     }
 
     companion object {
+        public val KEY_DELETABLE_SHARED_PREFERENCES = "deletableByX"
+
         @JvmStatic
         fun newInstance(param1: Serializable, elementDeletable: Boolean = false) =
             DiscoElement().apply {
@@ -72,6 +79,7 @@ class DiscoElement : Fragment(), GestureDetector.OnGestureListener {
         card = view.findViewById(R.id.DiscoElementCard)
         removeButton = view.findViewById(R.id.DiscoElementRemoveIcon)
         constraintLayout = view.findViewById(R.id.DiscoElementLayout)
+        topRightRemoveButton = view.findViewById(R.id.discoElementDeleteButton)
         val discoName = view.findViewById<TextView>(R.id.discoElementName)
         val discoAddress = view.findViewById<TextView>(R.id.discoElementAddress)
         val discoRating = view.findViewById<RatingBar>(R.id.discoElementRating)
@@ -137,6 +145,24 @@ class DiscoElement : Fragment(), GestureDetector.OnGestureListener {
 
         removeButton.setOnClickListener {
             onRemoveElement?.invoke(club!!)
+        }
+
+        val sharedPref = requireContext().getSharedPreferences("DiscoTicket", Context.MODE_PRIVATE)
+        if (elementDeletable && sharedPref.getBoolean(KEY_DELETABLE_SHARED_PREFERENCES, false)) {
+            topRightRemoveButton.visibility = View.VISIBLE
+            topRightRemoveButton.setOnClickListener {
+                val alert = MaterialAlertDialogBuilder(requireContext())
+                alert.setTitle("Conferma eliminazione")
+                alert.setMessage("Sei sicuro di eliminare ${club!!.name} dai preferiti?")
+                alert.setPositiveButton("Si") { dialog, _ ->
+                    onRemoveElement?.invoke(club!!)
+                    dialog.dismiss()
+                }
+                alert.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                alert.create().show()
+            }
+        } else {
+            topRightRemoveButton.visibility = View.GONE
         }
     }
 

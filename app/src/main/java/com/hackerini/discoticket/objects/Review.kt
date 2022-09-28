@@ -11,6 +11,9 @@ class Review(
     @ColumnInfo val userCreatorId: Int,
 ) : Serializable {
     constructor(userId: Int) : this(0, userId)
+    constructor(user: User) : this(0, user.id) {
+        this.user = user
+    }
 
     //mi permette di creare una review vuota che viene però attribuita all'user -1 che non dovrebbe esistere
     constructor() : this(0, -1)
