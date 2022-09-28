@@ -3,26 +3,21 @@ package com.hackerini.discoticket.activities
 import android.app.ActionBar
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.text.Editable
 import android.text.SpannableString
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.text.style.StyleSpan
 import android.util.TypedValue
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.DayViewContainer
-import com.hackerini.discoticket.fragments.views.MonthViewContainer
 import com.hackerini.discoticket.fragments.views.QuanitySelector
 import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.utils.ObjectLoader
@@ -32,7 +27,7 @@ import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
-import java.lang.reflect.Type
+import com.kizitonwose.calendarview.ui.ViewContainer
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -42,13 +37,14 @@ import java.time.format.TextStyle
 import java.time.temporal.WeekFields
 import java.util.*
 
-class BuyTicket : AppCompatActivity() {
+class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
 
     private var selectedDate: CalendarDay? = null
     private var amountOfSimpleTicket = 0
     private var amountOfTableTicket = 0
     private var club: Club? = null
     private var event: Event? = null
+    private lateinit var calendarView: CalendarView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,8 +85,10 @@ class BuyTicket : AppCompatActivity() {
         clubName.text = club?.name
         clubAddress.text = club?.address
 
-        val simpleSpannableString = SpannableString(String.format("%.2f", club?.simpleTicketPrice) + "€")
-        val tableSpannableString = SpannableString(String.format("%.2f", club?.tableTicketPrice) + "€")
+        val simpleSpannableString =
+            SpannableString(String.format("%.2f", club?.simpleTicketPrice) + "€")
+        val tableSpannableString =
+            SpannableString(String.format("%.2f", club?.tableTicketPrice) + "€")
         simpleSpannableString.setSpan(StyleSpan(Typeface.BOLD), 0, simpleSpannableString.length, 0)
         tableSpannableString.setSpan(StyleSpan(Typeface.BOLD), 0, simpleSpannableString.length, 0)
         var simplePrice = TextUtils.concat(simpleSpannableString, "/persona")
@@ -98,7 +96,7 @@ class BuyTicket : AppCompatActivity() {
         simpleTicketPrice.text = simplePrice
         tableTicketPrice.text = tablePrice
 
-        val calendarView = findViewById<CalendarView>(R.id.BuyTicketCalendar)
+        calendarView = findViewById(R.id.BuyTicketCalendar)
         calendarView.dayBinder = object : DayBinder<DayViewContainer> {
 
             // Called only when a new container is needed.
@@ -119,7 +117,6 @@ class BuyTicket : AppCompatActivity() {
                 val shape = GradientDrawable()
                 shape.cornerRadius = 20F
                 shape.setColor(Color.LTGRAY)
-
 
                 if (day.owner == DayOwner.THIS_MONTH) {
                     val isThereEvent = events.any { event -> isSameDate(event.date, day.date) }
@@ -156,20 +153,15 @@ class BuyTicket : AppCompatActivity() {
                         textView.setTypeface(null, Typeface.BOLD)
                         textView.background = null
                     }
+                    if (day.date == LocalDate.now())
+                        textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
                 } else {
                     textView.setTextColor(Color.LTGRAY)
                 }
             }
         }
 
-        calendarView.monthHeaderBinder = object : MonthHeaderFooterBinder<MonthViewContainer> {
-            override fun create(view: View) = MonthViewContainer(view)
-            override fun bind(container: MonthViewContainer, month: CalendarMonth) {
-                container.textView.text =
-                    month.yearMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
-                        .replaceFirstChar(Char::uppercase) + " " + month.year
-            }
-        }
+        calendarView.monthHeaderBinder = this
 
         if (event != null) {
             findViewById<TextView>(R.id.BuyTicketCalendarAction).visibility = View.GONE
@@ -177,7 +169,11 @@ class BuyTicket : AppCompatActivity() {
             findViewById<CardView>(R.id.BuyTicketCalendarCard).visibility = View.GONE
         }
 
-        val currentMonth = YearMonth.now()
+        var nextClickableDay = LocalDate.now()
+        while (!isDayClickable(nextClickableDay))
+            nextClickableDay = nextClickableDay.plusDays(1)
+
+        val currentMonth = YearMonth.of(nextClickableDay.year, nextClickableDay.monthValue)
         val firstMonth = currentMonth.minusMonths(10)
         val lastMonth = currentMonth.plusMonths(10)
         val firstDayOfWeek = daysOfWeekFromLocale()
@@ -275,6 +271,15 @@ class BuyTicket : AppCompatActivity() {
         }
     }
 
+    private fun isDayClickable(date: LocalDate): Boolean {
+        val isThereEvent =
+            ObjectLoader.getEvents(this).any { event -> isSameDate(event.date, date) }
+        val isOpened = date.dayOfWeek.ordinal == 5 || isThereEvent
+        val isFuture =
+            date.isAfter(LocalDate.now()) || date.isEqual(LocalDate.now())
+        return (isThereEvent || isOpened) && isFuture
+    }
+
     fun updateCartTotal() {
         val payButton = findViewById<Button>(R.id.BuyTicketPayButton)
         val viewTable = findViewById<Button>(R.id.BuyTicketViewTableButton)
@@ -307,6 +312,29 @@ class BuyTicket : AppCompatActivity() {
             return rhs + lhs
         }
         return daysOfWeek
+    }
+
+    override fun bind(container: ViewContainer, month: CalendarMonth) {
+        container.view.findViewById<TextView>(R.id.CalendarHeaderText).text =
+            month.yearMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
+                .replaceFirstChar(Char::uppercase) + " " + month.year
+    }
+
+    override fun create(view: View): ViewContainer {
+        val nextMonthButton = view.findViewById<ImageButton>(R.id.CalenderNextMonthButton)
+        val prevMonthButton = view.findViewById<ImageButton>(R.id.CalenderPreviousMonthButton)
+
+        prevMonthButton?.setOnClickListener {
+            calendarView.findLastVisibleMonth()?.yearMonth?.let {
+                calendarView.smoothScrollToMonth(it.minusMonths(1))
+            }
+        }
+        nextMonthButton?.setOnClickListener {
+            calendarView.findLastVisibleMonth()?.yearMonth?.let {
+                calendarView.smoothScrollToMonth(it.plusMonths(1))
+            }
+        }
+        return ViewContainer(view)
     }
 
 }

@@ -1,8 +1,49 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/headerTextView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:textSize="26sp"
-    tools:text="October 2019" />
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/CalenderPreviousMonthButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15"
+        android:background="@android:color/transparent"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/CalendarHeaderText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/CalendarHeaderText"
+        app:srcCompat="@drawable/ic_baseline_chevron_left_24" />
+
+    <TextView
+        android:id="@+id/CalendarHeaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/CalenderNextMonthButton"
+        app:layout_constraintStart_toEndOf="@+id/CalenderPreviousMonthButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="October 2019" />
+
+    <ImageButton
+        android:id="@+id/CalenderNextMonthButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15"
+        android:background="@android:color/transparent"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/CalendarHeaderText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/CalendarHeaderText"
+        app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
+</LinearLayout>
+
+
+
+
