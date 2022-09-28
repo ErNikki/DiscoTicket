@@ -1,5 +1,6 @@
 package com.hackerini.discoticket.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.CouponElement
+import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.objects.Discount
 import com.hackerini.discoticket.objects.TypeOfDiscount
 import com.hackerini.discoticket.objects.User
@@ -191,6 +193,29 @@ class MyCoupon : Fragment() {
             manualCodeEditText.text.clear()
             toogleManualCardView()
             updateValues()
+        } else if (insertedCode.contains("showx")) {
+            val sharedPreferences =
+                requireContext().getSharedPreferences("DiscoTicket", Context.MODE_PRIVATE)
+            val oldValue =
+                sharedPreferences.getBoolean(DiscoElement.KEY_DELETABLE_SHARED_PREFERENCES, false)
+            val newValue = !oldValue
+            sharedPreferences.edit().apply {
+                putBoolean(DiscoElement.KEY_DELETABLE_SHARED_PREFERENCES, newValue)
+                apply()
+            }
+            var confirmMessage = "Tasto eliminazione "
+            if (newValue)
+                confirmMessage = confirmMessage.plus("aggiunto ai preferiti")
+            else
+                confirmMessage = confirmMessage.plus("eliminato dai preferiti")
+
+            Toast.makeText(
+                requireContext(),
+                confirmMessage,
+                Toast.LENGTH_LONG
+            ).show()
+            enterManualWrongMessage.visibility = View.GONE
+            manualCodeEditText.text.clear()
         } else {
             enterManualWrongMessage.visibility = View.VISIBLE
         }

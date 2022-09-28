@@ -77,7 +77,7 @@ class Club : Serializable {
 
         fun getLastSeen(context: Context): List<Any> {
             val sharedPreferences = context.getSharedPreferences(
-                "DiscoTicketPref",
+                "DiscoTicket",
                 AppCompatActivity.MODE_PRIVATE
             )
             val clubs = ObjectLoader.getClubs(context)
@@ -103,7 +103,7 @@ class Club : Serializable {
         fun addToLastSeen(context: Context, id: Int, objectType: KClass<*>) {
 
             val sharedPreferences = context.getSharedPreferences(
-                "DiscoTicketPref",
+                "DiscoTicket",
                 AppCompatActivity.MODE_PRIVATE
             )
             val type = when (objectType) {
