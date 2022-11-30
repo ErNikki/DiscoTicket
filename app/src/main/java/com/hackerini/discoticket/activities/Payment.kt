@@ -115,7 +115,10 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val builder = MaterialAlertDialogBuilder(this)
             builder.setCancelable(false)
             builder.setTitle("L'acquisto è andato a buon fine!")
-            builder.setMessage("Complementi! Hai guadagnato ${earnedPoints} punti che potrai usare per ottenere sconti")
+            builder.setMessage(
+                "Complementi! Hai guadagnato ${earnedPoints} punti che potrai usare per ottenere sconti.\n\n" +
+                        "Puoi trovare il QR Code successivamente nella sezione \"Cronologia acquisti\" nel menù laterale."
+            )
             builder.setNegativeButton(
                 "Torna alla\nhomepage"
             ) { dialog, _ -> dialog.dismiss() }
