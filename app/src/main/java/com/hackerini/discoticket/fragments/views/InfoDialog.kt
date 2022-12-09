@@ -9,10 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import java.math.BigInteger
 import java.security.MessageDigest
 
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class InfoDialog(val title: String, val description: String, val context: Context) {
     private val checkbox = CheckBox(context)
     private val linearLayout = LinearLayout(context)
