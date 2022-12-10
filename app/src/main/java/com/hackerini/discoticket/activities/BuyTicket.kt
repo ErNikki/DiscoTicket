@@ -256,7 +256,7 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
 
         val dialog = InfoDialog(
             "Come acquistare",
-            "Seleziona il giorno e la quantità dei biglietti che vuoi acquistare," +
+            "Seleziona il giorno e la quantità per la tipologia di biglietti che vuoi acquistare," +
                     " una volta terminato il pagamento verrà generato un codice QR che ti consentirà di entrare all'evento.",
             this
         )
