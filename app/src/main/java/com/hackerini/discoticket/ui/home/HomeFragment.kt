@@ -46,7 +46,10 @@ class HomeFragment : Fragment() {
         var transaction = parentFragmentManager.beginTransaction()
         clubs.sortBy { club -> club.distanceFromYou }
         clubs.take(5).forEach { club ->
-            transaction.add(R.id.HomeNearYouLinearLayout, HomePageDiscoElement.newInstance(club))
+            transaction.add(
+                R.id.HomeNearYouLinearLayout,
+                HomePageDiscoElement.newInstance(club, true)
+            )
         }
 
         val events = ObjectLoader.getEvents(requireContext())
