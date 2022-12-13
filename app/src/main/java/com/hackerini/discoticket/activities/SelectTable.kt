@@ -33,6 +33,7 @@ class SelectTable : AppCompatActivity() {
         val actionRecapTextView = findViewById<TextView>(R.id.SelectTableActionRecapt)
         val successIconImageView = findViewById<ImageView>(R.id.SelectTableSuccessIcon)
         val payButton = findViewById<Button>(R.id.SelectTablePayButton)
+        val explainView = findViewById<TextView>(R.id.SelectTableViewExplain)
 
         payButton.isEnabled = false
         titleTextView.text = club.name
@@ -84,6 +85,9 @@ class SelectTable : AppCompatActivity() {
             actionRecapTextView.visibility = View.GONE
             remainderOfSeatsTextView.visibility = View.GONE
             successIconImageView.visibility = View.GONE
+            explainView.visibility = View.VISIBLE
+        } else {
+            explainView.visibility = View.GONE
         }
         clubMap.isShowMode = isShowMode
 
