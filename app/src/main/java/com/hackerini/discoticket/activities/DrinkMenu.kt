@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DrinkElement
+import com.hackerini.discoticket.fragments.views.InfoDialog
 import com.hackerini.discoticket.objects.*
 
 class DrinkMenu : AppCompatActivity() {
@@ -38,6 +39,15 @@ class DrinkMenu : AppCompatActivity() {
             transaction.add(layout.id, e)
         }
         transaction.commit()
+
+        val dialog = InfoDialog(
+            "Come acquistare",
+            "Scegli in questa pagina quanti drink vuoi ordinare, dopodiché effettua il pagamento direttamente nell'app: verrà generato un codice QR da mostrare al barista, così ti darà i drink che hai ordinato!",
+            this
+        )
+        if (dialog.shouldBeOpened())
+            dialog.show()
+
 
 
         checkoutButton.setOnClickListener {

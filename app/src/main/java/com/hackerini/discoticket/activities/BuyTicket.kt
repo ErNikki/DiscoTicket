@@ -18,6 +18,7 @@ import androidx.cardview.widget.CardView
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.DayViewContainer
+import com.hackerini.discoticket.fragments.views.InfoDialog
 import com.hackerini.discoticket.fragments.views.QuanitySelector
 import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.utils.ObjectLoader
@@ -252,6 +253,15 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                 User.generateNotLoggedAlertDialog(this).show()
             }
         }
+
+        val dialog = InfoDialog(
+            "Come acquistare",
+            "Seleziona il giorno e la quantità per la tipologia di biglietti che vuoi acquistare," +
+                    " una volta terminato il pagamento verrà generato un codice QR che ti consentirà di entrare all'evento.",
+            this
+        )
+        if (dialog.shouldBeOpened())
+            dialog.show()
     }
 
     private fun isSameDate(date: Date, localDate: LocalDate): Boolean {
