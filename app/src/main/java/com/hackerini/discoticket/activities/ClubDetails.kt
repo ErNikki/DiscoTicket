@@ -54,7 +54,7 @@ class ClubDetails : AppCompatActivity() {
         val reviews = club!!.reviews
         val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
         val boldSpannableString = SpannableString(
-            "Prezzi a partire da " + String.format(
+            "Ingresso semplice a " + String.format(
                 "%.2f",
                 club!!.simpleTicketPrice
             ) + "€"

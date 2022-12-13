@@ -30,19 +30,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView34"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:gravity="center"
-                    android:text="(Dalla più vicina)"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/QrCodeMessage"
-                    app:layout_constraintStart_toEndOf="@+id/QrCodeMessage"
-                    app:layout_constraintTop_toTopOf="@+id/QrCodeMessage"
-                    app:layout_constraintVertical_bias="0.65" />
-
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView"
                     android:layout_width="0dp"
