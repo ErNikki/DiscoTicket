@@ -154,7 +154,7 @@
                     android:id="@+id/BuyTicketEventCardLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:layout_marginTop="8dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -212,13 +212,13 @@
                     android:id="@+id/space4"
                     android:layout_width="0dp"
                     android:layout_height="3px"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
                     android:background="#66D815"
                     android:backgroundTint="@color/clubColorStrong"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketCalendarCard" />
+                    app:layout_constraintTop_toBottomOf="@+id/BuyTicketEventCardLayout" />
 
 
                 <TextView
