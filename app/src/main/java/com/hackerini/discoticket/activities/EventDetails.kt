@@ -41,7 +41,12 @@ class EventDetails : AppCompatActivity() {
         val price = findViewById<TextView>(R.id.eventDetailsPrice)
         val distance = findViewById<TextView>(R.id.eventDetailsDistance)
 
-        val boldSpannableString = SpannableString("Prezzi a partire da " + String.format("%.2f", event.club?.simpleTicketPrice) + "€")
+        val boldSpannableString = SpannableString(
+            "Ingresso semplice a " + String.format(
+                "%.2f",
+                event.club?.simpleTicketPrice
+            ) + "€"
+        )
         boldSpannableString.setSpan(StyleSpan(Typeface.BOLD), 19, boldSpannableString.length, 0)
 
         clubName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
