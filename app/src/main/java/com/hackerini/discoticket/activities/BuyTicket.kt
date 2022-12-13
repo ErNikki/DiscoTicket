@@ -116,20 +116,25 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                 textView.visibility = View.VISIBLE
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PT, 12F)
 
-                val shape = GradientDrawable()
-                shape.cornerRadius = 20F
-                shape.setColor(Color.LTGRAY)
+                val selectedShape = GradientDrawable()
+                selectedShape.cornerRadius = 20F
+                selectedShape.setColor(Color.rgb(160, 160, 220))
                 val typedValue = TypedValue()
                 theme.resolveAttribute(
                     androidx.transition.R.attr.colorPrimary, typedValue, true
                 )
-                
+
+                val currentDayShape = GradientDrawable()
+                currentDayShape.cornerRadius = 20F
+                currentDayShape.setColor(Color.rgb(110, 130, 255))
+
                 //Change these variable to change the calendar colors
                 val openedDayColor =
                     ContextCompat.getColor(this@BuyTicket, typedValue.resourceId)
                 val eventDayColor = Color.RED
                 val closedDayColor = Color.GRAY
                 val selectedDayTextColor = openedDayColor
+                val currentDayColor = Color.BLACK
 
                 if (day.owner == DayOwner.THIS_MONTH) {
                     val isThereEvent = events.any { event -> isSameDate(event.date, day.date) }
@@ -146,8 +151,12 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                         lastHighlighted?.background = null
 
                         textView.setTypeface(null, Typeface.BOLD)
-                        textView.setTextColor(selectedDayTextColor)
-                        textView.background = shape
+                        if (isThereEvent) { //Is it an event?
+                            textView.setTextColor(eventDayColor)
+                        } else {
+                            textView.setTextColor(selectedDayTextColor)
+                        }
+                        textView.background = selectedShape
                         textView.tag = isThereEvent
                         lastHighlighted = textView
                         if (isThereEvent)
@@ -168,6 +177,8 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                     }
                     if (day.date == LocalDate.now()) { //Highlight the current day
                         textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                        textView.background = currentDayShape
+                        textView.setTextColor(currentDayColor)
                     }
                 } else {
                     textView.setTextColor(Color.LTGRAY)
