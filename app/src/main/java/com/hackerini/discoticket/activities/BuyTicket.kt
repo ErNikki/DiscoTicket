@@ -123,8 +123,13 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                 theme.resolveAttribute(
                     androidx.transition.R.attr.colorPrimary, typedValue, true
                 )
-                val primaryColor =
+                
+                //Change these variable to change the calendar colors
+                val openedDayColor =
                     ContextCompat.getColor(this@BuyTicket, typedValue.resourceId)
+                val eventDayColor = Color.RED
+                val closedDayColor = Color.GRAY
+                val selectedDayTextColor = openedDayColor
 
                 if (day.owner == DayOwner.THIS_MONTH) {
                     val isThereEvent = events.any { event -> isSameDate(event.date, day.date) }
@@ -137,11 +142,11 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                         if (amountOfTableTicket > 0 || amountOfSimpleTicket > 0)
                             payButton.isEnabled = true
 
-                        lastHighlighted?.setTextColor(if (lastHighlighted?.tag == true) Color.RED else primaryColor)
+                        lastHighlighted?.setTextColor(if (lastHighlighted?.tag == true) eventDayColor else openedDayColor)
                         lastHighlighted?.background = null
 
                         textView.setTypeface(null, Typeface.BOLD)
-                        textView.setTextColor(Color.WHITE)
+                        textView.setTextColor(selectedDayTextColor)
                         textView.background = shape
                         textView.tag = isThereEvent
                         lastHighlighted = textView
@@ -149,20 +154,21 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                             showEvent(events.first { event -> isSameDate(event.date, day.date) })
                         else
                             showEvent(null)
-                    } else if (isThereEvent) {
+                    } else if (isThereEvent) { //Event days
                         textView.setTypeface(null, Typeface.BOLD)
-                        textView.setTextColor(Color.RED)
+                        textView.setTextColor(eventDayColor)
                         textView.background = null
-                    } else if (!isOpened || !isFuture) {
-                        textView.setTextColor(Color.GRAY)
+                    } else if (!isOpened || !isFuture) { //Closed days
+                        textView.setTextColor(closedDayColor)
                         textView.background = null
-                    } else {
-                        textView.setTextColor(primaryColor)
+                    } else { //Opened days, the violet days
+                        textView.setTextColor(openedDayColor)
                         textView.setTypeface(null, Typeface.BOLD)
                         textView.background = null
                     }
-                    if (day.date == LocalDate.now())
+                    if (day.date == LocalDate.now()) { //Highlight the current day
                         textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                    }
                 } else {
                     textView.setTextColor(Color.LTGRAY)
                 }
