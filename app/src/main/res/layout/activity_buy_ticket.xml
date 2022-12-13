@@ -91,7 +91,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Eventi:" />
+                            android:text="Eventi:"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/textView35"
@@ -114,7 +115,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Giorni di apertura:" />
+                            android:text="Giorni di apertura:"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/textView39"
@@ -137,7 +139,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Giorni di chiusura:" />
+                            android:text="Giorni di chiusura:"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/grigio"
