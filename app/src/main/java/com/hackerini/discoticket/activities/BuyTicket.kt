@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.DayViewContainer
@@ -118,6 +119,12 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                 val shape = GradientDrawable()
                 shape.cornerRadius = 20F
                 shape.setColor(Color.LTGRAY)
+                val typedValue = TypedValue()
+                theme.resolveAttribute(
+                    androidx.transition.R.attr.colorPrimary, typedValue, true
+                )
+                val primaryColor =
+                    ContextCompat.getColor(this@BuyTicket, typedValue.resourceId)
 
                 if (day.owner == DayOwner.THIS_MONTH) {
                     val isThereEvent = events.any { event -> isSameDate(event.date, day.date) }
@@ -130,7 +137,7 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                         if (amountOfTableTicket > 0 || amountOfSimpleTicket > 0)
                             payButton.isEnabled = true
 
-                        lastHighlighted?.setTextColor(if (lastHighlighted?.tag == true) Color.RED else Color.BLACK)
+                        lastHighlighted?.setTextColor(if (lastHighlighted?.tag == true) Color.RED else primaryColor)
                         lastHighlighted?.background = null
 
                         textView.setTypeface(null, Typeface.BOLD)
@@ -150,7 +157,7 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                         textView.setTextColor(Color.GRAY)
                         textView.background = null
                     } else {
-                        textView.setTextColor(Color.BLACK)
+                        textView.setTextColor(primaryColor)
                         textView.setTypeface(null, Typeface.BOLD)
                         textView.background = null
                     }
