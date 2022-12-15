@@ -162,7 +162,7 @@ class ClubDetails : AppCompatActivity() {
             .sortedBy { event -> event.date }
         if (events.isEmpty()) {
             val text = TextView(this)
-            text.text = "Non ci sono prossimi eventi in questa discoteca"
+            text.text = "Non ci sono eventi in programma per questa discoteca"
             text.setPadding(0, 0, 0, 8)
             eventsLayout.addView(text)
         } else {
