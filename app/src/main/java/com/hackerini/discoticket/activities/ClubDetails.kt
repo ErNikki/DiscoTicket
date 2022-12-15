@@ -157,7 +157,9 @@ class ClubDetails : AppCompatActivity() {
             }
         }
 
-        val events = ObjectLoader.getEvents(this).filter { event -> event.clubId == this.club?.id }
+        val events = ObjectLoader.getEvents(this)
+            .filter { event -> event.clubId == this.club?.id }
+            .sortedBy { event -> event.date }
         if (events.isEmpty()) {
             val text = TextView(this)
             text.text = "Non ci sono prossimi eventi in questa discoteca"
