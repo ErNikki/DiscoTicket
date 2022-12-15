@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
+import com.hackerini.discoticket.fragments.elements.ElementToShow
 import com.hackerini.discoticket.fragments.elements.HomePageDiscoElement
 import com.hackerini.discoticket.fragments.elements.HomePageEventElement
 import com.hackerini.discoticket.objects.Club
@@ -53,13 +54,14 @@ class HomeFragment : Fragment() {
         }
 
         val events = ObjectLoader.getEvents(requireContext())
+        val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
         events.filter { event -> event.date.after(Date()) }
             .sortedBy { event -> event.date.time }
             .take(5)
             .forEach { event ->
                 transaction.add(
                     R.id.HomeNextEventLinearLayout,
-                    HomePageEventElement.newInstance(event, true)
+                    HomePageEventElement.newInstance(event, elementToShow)
                 )
             }
 
@@ -83,11 +85,13 @@ class HomeFragment : Fragment() {
                         R.id.HomeLastViewedLinearLayout,
                         HomePageDiscoElement.newInstance(item)
                     )
-                else if (item is Event)
+                else if (item is Event) {
+                    val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
                     transaction.add(
                         R.id.HomeLastViewedLinearLayout,
-                        HomePageEventElement.newInstance(item, false)
+                        HomePageEventElement.newInstance(item, elementToShow)
                     )
+                }
             }
         transaction.commit()
     }

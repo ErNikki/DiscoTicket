@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.text.set
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
@@ -25,15 +24,22 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "hideDetails"
 
+class ElementToShow {
+    companion object {
+        val Date = 1.shl(1)
+        val Location = 1.shl(2)
+    }
+}
+
 class HomePageEventElement : Fragment() {
     private var event: Event? = null
-    private var hideDetails: Boolean = false
+    private var elementsToShow: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             event = it.getSerializable(ARG_PARAM1) as Event
-            hideDetails = it.getBoolean(ARG_PARAM2)
+            elementsToShow = it.getInt(ARG_PARAM2)
         }
     }
 
@@ -54,12 +60,15 @@ class HomePageEventElement : Fragment() {
         val discoName = view.findViewById<TextView>(R.id.HomePageEventLocation)
         val eventDate = view.findViewById<TextView>(R.id.HomePageEventDate)
 
-        if (hideDetails) {
+        if (elementsToShow.and(ElementToShow.Date) != 0) {
             val df = SimpleDateFormat("dd/MM", Locale.getDefault())
             val boldSpannableString = SpannableString("il " + df.format(event?.date))
             boldSpannableString.setSpan(StyleSpan(Typeface.BOLD), 3, 8, 0)
             eventDate.text = boldSpannableString
-
+        } else {
+            eventDate.visibility = View.GONE
+        }
+        if (elementsToShow.and(ElementToShow.Location) != 0) {
             val mSpannableString = SpannableString("Luogo: " + event?.club?.name)
             mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)
             discoName.text = mSpannableString
@@ -71,7 +80,6 @@ class HomePageEventElement : Fragment() {
             }
         } else {
             discoName.visibility = View.GONE
-            eventDate.visibility = View.GONE
         }
         view.findViewById<CardView>(R.id.HomePageEventCard).setOnClickListener {
             val intent = Intent(requireContext(), EventDetails::class.java)
@@ -83,11 +91,14 @@ class HomePageEventElement : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(event: Event, hideDetails: Boolean = false) =
+        fun newInstance(
+            event: Event,
+            elementsToShow: Int = ElementToShow.Date.or(ElementToShow.Location)
+        ) =
             HomePageEventElement().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, event)
-                    putBoolean(ARG_PARAM2, hideDetails)
+                    putInt(ARG_PARAM2, elementsToShow)
                 }
             }
     }

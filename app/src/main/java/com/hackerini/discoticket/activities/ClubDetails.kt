@@ -14,10 +14,13 @@ import androidx.core.view.setPadding
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.fragments.elements.ElementToShow
+import com.hackerini.discoticket.fragments.elements.HomePageEventElement
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.ObjectLoader
 import com.squareup.picasso.Picasso
 
 class ClubDetails : AppCompatActivity() {
@@ -46,6 +49,9 @@ class ClubDetails : AppCompatActivity() {
         val tagLayout = findViewById<LinearLayout>(R.id.clubDetailsTagLayout)
         val price = findViewById<TextView>(R.id.clubDetailsPrice)
         val distance = findViewById<TextView>(R.id.clubDetailsDistance)
+        val showEventsButton = findViewById<ImageButton>(R.id.ClubDetailsShowEvents)
+        val eventsLayout = findViewById<LinearLayout>(R.id.ClubDetailsEventsLayout)
+
         fragmentContainerView =
             findViewById(R.id.clubDetailsFragmentContainerView)
         writeReviewButton = findViewById(R.id.clubDetailsWriteReviewButton)
@@ -139,6 +145,33 @@ class ClubDetails : AppCompatActivity() {
             } else
                 club?.addToFavorite(this)
             updateButtonStatus()
+        }
+
+        showEventsButton.setOnClickListener {
+            if (eventsLayout.visibility == View.VISIBLE) {
+                showEventsButton.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
+                eventsLayout.visibility = View.GONE
+            } else {
+                showEventsButton.setImageResource(R.drawable.ic_baseline_arrow_drop_up_24)
+                eventsLayout.visibility = View.VISIBLE
+            }
+        }
+
+        val events = ObjectLoader.getEvents(this).filter { event -> event.clubId == this.club?.id }
+        if (events.isEmpty()) {
+            val text = TextView(this)
+            text.text = "Non ci sono prossimi eventi in questa discoteca"
+            text.setPadding(0, 0, 0, 8)
+            eventsLayout.addView(text)
+        } else {
+            val transaction = supportFragmentManager.beginTransaction()
+            for (event in events) {
+                transaction.add(
+                    eventsLayout.id,
+                    HomePageEventElement.newInstance(event, ElementToShow.Date)
+                )
+            }
+            transaction.commit()
         }
     }
 

@@ -136,16 +136,79 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clubDetailsBuyTicketsButton" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/space3">
+
+                    <TextView
+                        android:id="@+id/textView34"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Prossimi eventi"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/ClubDetailsShowEvents"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <HorizontalScrollView
+                    android:id="@+id/ClubDetailsEventsScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+                    <LinearLayout
+                        android:id="@+id/ClubDetailsEventsLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:animateLayoutChanges="true"
+                        android:divider="@drawable/layout_divider"
+                        android:orientation="horizontal"
+                        android:showDividers="middle"
+                        android:visibility="gone" />
+                </HorizontalScrollView>
+
+                <ImageView
+                    android:id="@+id/space"
+                    android:layout_width="0dp"
+                    android:layout_height="3px"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="#66D815"
+                    android:backgroundTint="@color/clubColorStrong"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ClubDetailsEventsScrollView" />
+
                 <TextView
                     android:id="@+id/clubDetailsReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="15dp"
                     android:text="Recensioni"
                     android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/space3" />
+                    app:layout_constraintTop_toBottomOf="@+id/ClubDetailsEventsScrollView" />
 
 
                 <androidx.fragment.app.FragmentContainerView
@@ -154,7 +217,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsReview" />
+                    app:layout_constraintTop_toBottomOf="@+id/clubDetailsReview"
+                    tools:layout="@layout/fragment_review_element" />
 
 
                 <TextView
