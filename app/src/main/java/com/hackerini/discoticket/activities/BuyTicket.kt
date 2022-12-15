@@ -3,7 +3,6 @@ package com.hackerini.discoticket.activities
 import android.app.ActionBar
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -124,17 +123,17 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                     androidx.transition.R.attr.colorPrimary, typedValue, true
                 )
 
-                val currentDayShape = GradientDrawable()
-                currentDayShape.cornerRadius = 20F
-                currentDayShape.setColor(Color.rgb(110, 130, 255))
-
                 //Change these variable to change the calendar colors
                 val openedDayColor =
                     ContextCompat.getColor(this@BuyTicket, typedValue.resourceId)
                 val eventDayColor = Color.RED
-                val closedDayColor = Color.GRAY
+                val closedDayColor = Color.rgb(180, 180, 180)
                 val selectedDayTextColor = openedDayColor
                 val currentDayColor = Color.BLACK
+
+                val currentDayShape = GradientDrawable()
+                currentDayShape.cornerRadius = 150F
+                currentDayShape.setStroke(9, openedDayColor)
 
                 if (day.owner == DayOwner.THIS_MONTH) {
                     val isThereEvent = events.any { event -> isSameDate(event.date, day.date) }
@@ -176,12 +175,13 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                         textView.background = null
                     }
                     if (day.date == LocalDate.now()) { //Highlight the current day
-                        textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                        //textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
                         textView.background = currentDayShape
-                        textView.setTextColor(currentDayColor)
+                        textView.setTextColor(closedDayColor)
                     }
-                } else {
+                } else { //Giorni furoi dal mese
                     textView.setTextColor(Color.LTGRAY)
+                    textView.visibility = View.INVISIBLE
                 }
             }
         }
