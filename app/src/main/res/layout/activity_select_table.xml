@@ -123,6 +123,15 @@
                     app:layout_constraintStart_toStartOf="@+id/SelectTableActionRecapt"
                     app:layout_constraintTop_toBottomOf="@+id/SelectTableActionRecapt" />
 
+                <TextView
+                    android:id="@+id/SelectTableViewExplain"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="In questa schermata puoi solamente visualizzare i tavoli disponibili nella discoteca, per prenotarlo uno seleziona il numero di ingressi con tavolo nella schermata precedente e procedi con la prenotazione"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SelectTableRemainRecapt" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
