@@ -140,6 +140,7 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                     val isOpened = day.date.dayOfWeek.ordinal == 5 || isThereEvent
                     val isFuture =
                         day.date.isAfter(LocalDate.now()) || day.date.isEqual(LocalDate.now())
+
                     if (day.date == container.selectedDate && isOpened && isFuture) {
                         selectedDate = day
                         viewTable.isEnabled = true
@@ -148,6 +149,9 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
 
                         lastHighlighted?.setTextColor(if (lastHighlighted?.tag == true) eventDayColor else openedDayColor)
                         lastHighlighted?.background = null
+                        if (lastHighlighted?.text == LocalDate.now().dayOfMonth.toString()) {
+                            lastHighlighted?.background = currentDayShape
+                        }
 
                         textView.setTypeface(null, Typeface.BOLD)
                         if (isThereEvent) { //Is it an event?
@@ -175,12 +179,14 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
                         textView.background = null
                     }
                     if (day.date == LocalDate.now()) { //Highlight the current day
-                        //textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                        if (lastHighlighted == textView) {
+                            currentDayShape.setColor(Color.rgb(160, 160, 220))
+                        } else {
+                            currentDayShape.setStroke(9, openedDayColor)
+                        }
                         textView.background = currentDayShape
-                        textView.setTextColor(closedDayColor)
                     }
                 } else { //Giorni furoi dal mese
-                    textView.setTextColor(Color.LTGRAY)
                     textView.visibility = View.INVISIBLE
                 }
             }
