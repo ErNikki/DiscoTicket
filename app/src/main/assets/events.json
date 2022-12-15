@@ -54,5 +54,16 @@
       "Elettronica"
     ],
     "name": "May Day"
+  },
+  {
+    "id": 6,
+    "clubId": 2,
+    "date": "Feb 20, 2023 10:30:00 PM",
+    "description": "Finalmente arriva il tanto atteso veglione di carnevale al Monkey Club, con coriandoli, premi per le migliori maschere e tanto divertimento",
+    "imgUrl": "https://img.pikbest.com/origin/05/97/93/25FpIkbEsTExX.jpg!bwr800",
+    "musicGenres": [
+      "Elettronica"
+    ],
+    "name": "Carnival Party"
   }
 ]
