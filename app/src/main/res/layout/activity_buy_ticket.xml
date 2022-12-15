@@ -91,7 +91,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Eventi:" />
+                            android:text="Eventi:"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/textView35"
@@ -114,7 +115,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Giorni di apertura:" />
+                            android:text="Giorni di apertura:"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/textView39"
@@ -122,8 +124,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="4dp"
                             android:layout_weight="1"
-                            android:text="nero"
-                            android:textColor="#000000" />
+                            android:text="viola"
+                            android:textColor="@color/design_default_color_primary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -137,7 +139,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Giorni di chiusura:" />
+                            android:text="Giorni di chiusura:"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/grigio"
@@ -209,7 +212,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <ImageView
-                    android:id="@+id/space4"
+                    android:id="@+id/BuyTicketSpacer"
                     android:layout_width="0dp"
                     android:layout_height="3px"
                     android:layout_marginTop="8dp"
@@ -225,12 +228,13 @@
                     android:id="@+id/textView37"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     android:text="Seleziona i biglietti"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/BuyTicketCalendarCard"
-                    app:layout_constraintTop_toTopOf="@+id/space4" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/BuyTicketSpacer" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView1"
