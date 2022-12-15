@@ -192,6 +192,7 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
             findViewById<TextView>(R.id.BuyTicketCalendarAction).visibility = View.GONE
             findViewById<LinearLayout>(R.id.BuyTicketCalendarLegend).visibility = View.GONE
             findViewById<CardView>(R.id.BuyTicketCalendarCard).visibility = View.GONE
+            findViewById<ImageView>(R.id.BuyTicketSpacer).visibility = View.GONE
         }
 
         var nextClickableDay = LocalDate.now()
