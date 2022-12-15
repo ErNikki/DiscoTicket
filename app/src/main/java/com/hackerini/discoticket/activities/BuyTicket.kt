@@ -199,6 +199,7 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
             findViewById<LinearLayout>(R.id.BuyTicketCalendarLegend).visibility = View.GONE
             findViewById<CardView>(R.id.BuyTicketCalendarCard).visibility = View.GONE
             findViewById<ImageView>(R.id.BuyTicketSpacer).visibility = View.GONE
+            viewTable.isEnabled = true
         }
 
         var nextClickableDay = LocalDate.now()
@@ -232,7 +233,11 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
         viewTable.setOnClickListener {
             val intent = Intent(this, SelectTable::class.java)
             intent.putExtra("club", club)
-            intent.putExtra("date", selectedDate!!.date.toString())
+            if (event != null) {
+                intent.putExtra("date", event!!.date.toString())
+            } else {
+                intent.putExtra("date", selectedDate!!.date.toString())
+            }
             if (this.amountOfTableTicket > 0) {
                 intent.putExtra("showMode", false)
                 intent.putExtra("simpleTicket", amountOfSimpleTicket)
