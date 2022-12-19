@@ -16,7 +16,7 @@ and users are sure there is place for them in the disco. We also implemented a c
 more functionalities we’ll see in detail later.
 
 ### Authors
-- Nicolas Benko ([Linkedin](https://www.linkedin.com/in/nicolas-benko-3a2778190/))
-- Stefano Bonetti ([Linkedin]())
-- Luca Giovannesi ([Linkedin](https://www.linkedin.com/in/luca-giovannesi-48680519b/))
+- Nicolas Benko
+- Stefano Bonetti
+- Luca Giovannesi
 
