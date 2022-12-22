@@ -15,6 +15,9 @@ to buy tickets for clubs and events in advance; this way, tickets are easy to pu
 and users are sure there is place for them in the disco. We also implemented a couple  
 more functionalities we’ll see in detail later.
 
+## Documentation
+You can find a detailed report of the project [here](https://github.com/ErNikki/DiscoTicket/files/10288466/HCI-1.pdf)
+
 ### Authors
 - Nicolas Benko
 - Stefano Bonetti
