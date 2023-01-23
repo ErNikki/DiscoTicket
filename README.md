@@ -16,7 +16,8 @@ and users are sure there is place for them in the disco. We also implemented a c
 more functionalities we’ll see in detail later.
 
 ## Documentation
-You can find a detailed report of the project [here](https://github.com/ErNikki/DiscoTicket/files/10288466/HCI-1.pdf)
+- Detailed report of the project [here](https://github.com/ErNikki/DiscoTicket/files/10483016/Report.pdf)
+- Slides used for the presentation [here](https://github.com/ErNikki/DiscoTicket/files/10483047/Human.Computer.Interaction.pdf)
 
 ### Authors
 - Nicolas Benko
