@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.views.QuanitySelector
 import com.hackerini.discoticket.objects.Drink
+import com.squareup.picasso.Picasso
 import java.io.Serializable
 
 private const val ARG_PARAM1 = "param1"
@@ -87,8 +88,7 @@ class DrinkElement : Fragment() {
             onQuantityChange?.invoke()
         }
 
-        val inputStream = requireActivity().assets.open("drink_images/" + drink?.imagePath)
-        val d = Drawable.createFromStream(inputStream, null)
-        drinkImage.setImageDrawable(d)
+        val imageSize = 250
+        Picasso.get().load(drink?.imagePath).resize(imageSize, imageSize).into(drinkImage)
     }
 }

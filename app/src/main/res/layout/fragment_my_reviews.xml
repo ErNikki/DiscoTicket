@@ -20,6 +20,7 @@
             android:text="Non ci sono recensioni per l'utente corrente o non hai ancora effettuato l'accesso"
             android:textAlignment="center"
             android:textSize="16sp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

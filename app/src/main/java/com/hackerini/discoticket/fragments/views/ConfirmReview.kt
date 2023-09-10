@@ -47,6 +47,10 @@ class ConfirmReview : DialogFragment() {
         okButton.setOnClickListener { onConfirmAction?.invoke(review!!) }
     }
 
+    fun getReviewId(): Int? {
+        return review?.id
+    }
+
     companion object {
         @JvmStatic
         fun newInstance(review: Review) =

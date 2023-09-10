@@ -1,14 +1,25 @@
 package com.hackerini.discoticket.objects
 
+import android.graphics.Bitmap
+import android.util.Log
 import androidx.room.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.parameters
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
-@Entity
+
 class Review(
-    @PrimaryKey(autoGenerate = true) var reviewId: Int,
-    @ColumnInfo val userCreatorId: Int,
+    var reviewId: Int,
+    val userCreatorId: Int,
+
 ) : Serializable {
     constructor(userId: Int) : this(0, userId)
     constructor(user: User) : this(0, user.id) {
@@ -23,12 +34,14 @@ class Review(
 
     var date = ""
 
-    @Ignore
     var user = User()
 
     var description: String = ""
 
-    @Ignore
+    var id=-1
+
+    var aux:Array<Bitmap> = arrayOf()
+
     var images = arrayOf(
         "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
         "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
@@ -38,65 +51,19 @@ class Review(
         val localDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(this.date)
         return localDate.time
     }
+
+
+    companion object{
+
+
+
+        fun getUserReviews(user:User){
+
+        }
+        fun getUserReviewByClubId(){
+
+        }
+    }
 }
 
-data class ReviewWithUser(
-    @Embedded val review: Review,
-    @Relation(
-        parentColumn = "userCreatorId",
-        entityColumn = "id"
-    )
-    val user: User
-) : Serializable
 
-data class UserWithReviews(
-    @Embedded val user: User,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "userCreatorId"
-    )
-    val reviews: List<Review>
-) : Serializable
-
-
-@Dao
-interface ReviewDao {
-    @Query("SELECT * FROM 'Review' ")
-    fun getAllReviews(): List<Review>
-
-    fun getAllReviewsByClub(clubId: Int): List<Review> {
-        val reviewWithUser = getAllReviewsWithUserByClub(clubId)
-        reviewWithUser.forEach { r -> r.review.user = r.user }
-        return reviewWithUser.map { r -> r.review }
-    }
-
-    @Query("SELECT * FROM 'Review' WHERE clubId=:clubId")
-    fun getAllReviewsWithUserByClub(clubId: Int): List<ReviewWithUser>
-
-    @Transaction
-    @Query("SELECT * FROM 'User' ")
-    fun getUsersReviews(): List<UserWithReviews>
-
-    @Transaction
-    @Query("SELECT * FROM 'User' Where id=:id")
-    fun getAllReviewsOfUser(id: Int): List<UserWithReviews>
-
-    @Query("UPDATE 'Review' SET rating=:rating, description=:description WHERE reviewId=:reviewId")
-    fun editReviewWithFields(reviewId: Int, rating: Double, description: String)
-
-    fun editReview(review: Review) {
-        editReviewWithFields(review.reviewId, review.rating, review.description)
-    }
-
-    @Query("SELECT * FROM 'Review' WHERE clubId=:clubId AND userCreatorId=:userId")
-    fun getReviewsByClubAndUser(userId: Int, clubId: Int): List<Review>
-
-    fun userHasReviewForThisClub(userId: Int, clubId: Int) =
-        getReviewsByClubAndUser(userId, clubId).isNotEmpty()
-
-    @Insert
-    fun insert(review: Review)
-
-    @Delete
-    fun delete(review: Review)
-}

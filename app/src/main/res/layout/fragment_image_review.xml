@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.elements.ImageReviewElement">
+
+    <ImageView
+        android:id="@+id/fragmentImageReviewImage"
+        android:layout_width="134dp"
+        android:layout_height="126dp"
+        android:background="@null"
+        app:srcCompat="@android:mipmap/sym_def_app_icon" />
+
+    <ImageButton
+        android:id="@+id/fragmentImageReviewDeleteButton"
+        android:layout_width="46dp"
+        android:layout_height="38dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+</FrameLayout>

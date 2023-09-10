@@ -9,6 +9,10 @@ apply from: 'secrets.gradle'
 android {
     compileSdk 32
 
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.hackerini.discoticket"
         minSdk 26
@@ -65,7 +69,18 @@ dependencies {
             }
     implementation 'com.github.amoskorir:avatarimagegenerator:1.5.0'
     implementation 'org.osmdroid:osmdroid-android:6.1.13'
+    implementation "io.ktor:ktor-client-core:2.3.3"
+    implementation "io.ktor:ktor-client-okhttp:2.3.3"
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.3")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.3")
+    implementation( 'com.google.android.gms:play-services-location:21.0.0')
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+
+
 }
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '7.3.3'

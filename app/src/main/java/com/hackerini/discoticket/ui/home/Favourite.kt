@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.ObjectLoader
 import java.util.*
 
@@ -96,7 +97,7 @@ class Favourite : Fragment() {
     private fun getFavoriteClubs(): List<DiscoElement> {
         val favClubs = RoomManager(requireContext()).db.favoriteDao().getAll()
         val favClubsIds = favClubs.map { e -> e.id }
-        return ObjectLoader.getClubs(requireContext())
+        return ClubsManager.getClubs()
             .filter { club -> favClubsIds.contains(club.id) }
             .map { club ->
                 DiscoElement.newInstance(club, ENABLE_GESTURE).apply {

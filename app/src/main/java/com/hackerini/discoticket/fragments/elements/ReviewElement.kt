@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.core.animation.doOnEnd
 import androidx.fragment.app.Fragment
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.reflect.TypeToken
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
 import com.hackerini.discoticket.activities.WriteReview
@@ -24,15 +26,28 @@ import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ObjectLoader
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.parameters
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import java.lang.Math.abs
 import java.security.MessageDigest
+import com.google.gson.Gson
+import com.hackerini.discoticket.utils.ClubsManager
+import com.hackerini.discoticket.utils.ReviewsManager
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM3 = "param3"
 
 class ReviewElement : Fragment() {
     private var review: Review? = null
     private var showClubName = false
+    private var isUserLogged = false
     private var club: Club? = null
     var onRefreshNeeded: (() -> Unit)? = null
 
@@ -41,11 +56,15 @@ class ReviewElement : Fragment() {
         arguments?.let {
             review = it.getSerializable(ARG_PARAM1) as Review
             showClubName = it.getBoolean(ARG_PARAM2)
+            isUserLogged = it.getBoolean(ARG_PARAM3)
         }
+
         club =
-            ObjectLoader.getClubs(requireContext()).firstOrNull { club ->
+            ClubsManager.getClubs().firstOrNull { club ->
                 club.id == review?.clubId
             }
+
+
 
     }
 
@@ -102,7 +121,7 @@ class ReviewElement : Fragment() {
             .build()
         reviewerImage.setImageDrawable(image)
 
-        if (User.isLogged(requireContext()) && review?.user?.id == User.getLoggedUser(requireContext())?.id) {
+        if (isUserLogged && review?.user?.id == User.getLoggedUser(requireContext())?.id) {
             editButton.visibility = View.VISIBLE
             deleteButton.visibility = View.VISIBLE
             editButton.setOnClickListener { onEditClick() }
@@ -143,6 +162,7 @@ class ReviewElement : Fragment() {
     }
 
     private fun hideAndDelete() {
+
         val valueAnimator = ValueAnimator.ofInt(requireView().height, 0)
         valueAnimator.interpolator = DecelerateInterpolator()
         valueAnimator.addUpdateListener { animation ->
@@ -151,7 +171,7 @@ class ReviewElement : Fragment() {
         }
         valueAnimator.duration = 300
         valueAnimator.doOnEnd {
-            RoomManager(requireContext()).db.reviewDao().delete(review!!)
+            ReviewsManager.delete(review!!)
             onRefreshNeeded?.invoke()
         }
         valueAnimator.start()
@@ -159,11 +179,12 @@ class ReviewElement : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(review: Review, showClubName: Boolean = false) =
+        fun newInstance(review: Review, showClubName: Boolean = false, isUserLogged: Boolean =  false) =
             ReviewElement().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, review)
                     putBoolean(ARG_PARAM2, showClubName)
+                    putBoolean(ARG_PARAM3, isUserLogged)
                 }
             }
     }

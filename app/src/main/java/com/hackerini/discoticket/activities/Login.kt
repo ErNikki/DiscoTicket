@@ -1,10 +1,12 @@
 package com.hackerini.discoticket.activities
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -21,6 +23,22 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.objects.UserDao
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.CookieManager
+import com.hackerini.discoticket.utils.UserManager
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.cookies.ConstantCookiesStorage
+import io.ktor.client.plugins.cookies.HttpCookies
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.Cookie
+import io.ktor.http.parameters
+import io.ktor.http.setCookie
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.concurrent.schedule
@@ -42,6 +60,7 @@ class Login : AppCompatActivity(), TextWatcher {
         val loginButton = findViewById<Button>(R.id.LoginLoginButton)
         val forgottenPassword = findViewById<TextView>(R.id.LoginForgottenPassword)
         val signUpTextView = findViewById<TextView>(R.id.LoginSignUp)
+        val reSendConfEmail = findViewById<TextView>(R.id.loginReSendConfEmail)
 
         val emailTextEdit = findViewById<TextInputEditText>(R.id.LoginMailAddress)
         val passwordTextEdit = findViewById<TextInputEditText>(R.id.LoginPassword)
@@ -131,16 +150,21 @@ class Login : AppCompatActivity(), TextWatcher {
             }
 
             if (!hasError) {
-                //Form validated
-                val hashedPassword = User.hashPassword(passwordTextEdit.text.toString())
-                val queryResult =
-                    userDao.getUserByCredential(emailTextEdit.text.toString(), hashedPassword)
-                if (queryResult.isNotEmpty()) {
-                    //Success
-                    actionsAfterLogin(queryResult.first())
-                } else {
+
+                val (result,message) = UserManager.login(emailTextEdit.text.toString(), passwordTextEdit.text.toString())
+                if (result) {
+                    actionsAfterLogin(UserManager.getUser())
+
+                }
+                else{
+                    showErrorDialog(message)
                     errorMessage.visibility = View.VISIBLE
                 }
+
+
+
+
+
             }
         }
 
@@ -148,6 +172,14 @@ class Login : AppCompatActivity(), TextWatcher {
 
         signUpTextView.setOnClickListener {
             val intent = Intent(applicationContext, SignUp::class.java)
+            startActivity(intent)
+        }
+        forgottenPassword.setOnClickListener {
+            val intent = Intent(applicationContext, ForgotPassword::class.java)
+            startActivity(intent)
+        }
+        reSendConfEmail.setOnClickListener {
+            val intent = Intent(applicationContext, ReSendConfirmationEmail::class.java)
             startActivity(intent)
         }
     }
@@ -208,5 +240,19 @@ class Login : AppCompatActivity(), TextWatcher {
     }
 
     override fun afterTextChanged(s: Editable?) {
+    }
+
+    private fun showErrorDialog(message : String ){
+        val dialog = AlertDialog.Builder(this).create()
+        dialog.setTitle("Errore")
+        dialog.setMessage("C'è stato un problema con la registrazione: \n" + message)
+        dialog.setCancelable(false)
+        dialog.setButton(
+            AlertDialog.BUTTON_POSITIVE,
+            "Login"
+        ) { d, _ ->
+            d.dismiss()
+        }
+        dialog.show()
     }
 }

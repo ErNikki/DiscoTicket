@@ -1,46 +1,47 @@
 package com.hackerini.discoticket.objects
 
-import androidx.room.*
 import java.io.Serializable
 import java.util.*
 
-@Entity(tableName = "Order")
 data class Order(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "createdAt") val createdAt: Long,
-    @ColumnInfo(name = "userId") val userId: Int,
+    val createdAt: Long
 ) : Serializable {
-    constructor() : this(0, Calendar.getInstance().time.time, 1)
+    constructor() : this(Calendar.getInstance().time.time)
+    val id: Int = 0
 
-    @ColumnInfo(name = "date")
+    var userId: Int = 0
+
     var date: String = ""
 
-    @ColumnInfo(name = "table")
     var tableIds: String = ""
 
-    @ColumnInfo(name = "clubId")
     var clubId: Int = -1
 
-    @ColumnInfo(name = "discount")
     var discount: Float = 0F
 
-    @Ignore
     var tableIdsList: List<Int> = ArrayList()
 
-    @Ignore
     val drinks = ArrayList<OrderItem>()
 
-    @Ignore
     val tickets = ArrayList<OrderItem>()
 
-    @Ignore
     var club: Club? = null
 
-    @Ignore
     var appliedDiscount: Discount? = null
 
     fun getAllElements(): List<OrderItem> {
         return drinks + tickets
+    }
+
+    fun getNumberOfItems():Int{
+        var amount = 0
+        drinks.forEach { item ->
+            amount += item.quantity
+        }
+        tickets.forEach { item ->
+            amount += item.quantity
+        }
+        return amount
     }
 
     //Return the total amount of the order
@@ -55,6 +56,10 @@ data class Order(
         return amount
     }
 
+    fun includeTickets(): Boolean {
+        return tickets.isNotEmpty()
+    }
+
     //Call it before the storage
     fun prepare() {
         clubId = this.club?.id!!
@@ -66,46 +71,6 @@ data class Order(
     }
 }
 
-data class OrderWithOrderItem(
-    @Embedded val order: Order,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "orderId"
-    )
-    val items: List<OrderItem>
-) : Serializable {
-    fun getTotalAmount(): Float {
-        return items.map { e -> e.quantity * e.unitaryPrice }.sum() - order.discount
-    }
 
-    fun includeTickets(): Boolean {
-        return items.any { item -> item.type == ItemType.Ticket }
-    }
 
-    fun getTotalQuantity(): Int {
-        return items.sumOf { item -> item.quantity }
-    }
-}
 
-@Dao
-interface OrderDao {
-    @Query("SELECT * FROM `Order`")
-    fun getAll(): List<Order>
-
-    @Transaction
-    @Query("SELECT * FROM `Order` order by createdAt DESC")
-    fun getAllOrderWithOrderItem(): List<OrderWithOrderItem>
-
-    @Transaction
-    @Query("SELECT * FROM `Order` WHERE id=:id LIMIT 1")
-    fun getOrderWithOrderItem(id: Int): OrderWithOrderItem
-
-    @Query("SELECT id FROM `Order` order by id DESC LIMIT 1")
-    fun getLastId(): Int
-
-    @Insert
-    fun insert(order: Order)
-
-    @Delete
-    fun delete(order: Order)
-}

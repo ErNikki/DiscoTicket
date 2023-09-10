@@ -7,14 +7,15 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.hackerini.discoticket.MainActivity
 import com.hackerini.discoticket.R
-import com.hackerini.discoticket.objects.OrderWithOrderItem
+import com.hackerini.discoticket.objects.Order
+
 
 class QRdrinks : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_drinks)
 
-        val orderPreview = intent.getSerializableExtra("order") as OrderWithOrderItem?
+        val orderPreview = intent.getSerializableExtra("order") as Order?
         val message = findViewById<TextView>(R.id.QrCodeMessage)
 
         if (orderPreview?.includeTickets() == true) {

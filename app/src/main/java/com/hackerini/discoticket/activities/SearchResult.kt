@@ -14,6 +14,8 @@ import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.fragments.elements.EventElement
 import com.hackerini.discoticket.fragments.views.Filter
 import com.hackerini.discoticket.objects.*
+import com.hackerini.discoticket.utils.ClubsManager
+import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.ObjectLoader
 import java.util.*
 
@@ -82,8 +84,8 @@ class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, Te
     }
 
     private fun loadContent() {
-        val clubList = ObjectLoader.getClubs(applicationContext)
-        val events = ObjectLoader.getEvents(applicationContext)
+        val clubList = ClubsManager.getClubs()
+        val events = EventsManager.getEvents()
 
         val fragments = supportFragmentManager.fragments
         val ft = supportFragmentManager.beginTransaction()

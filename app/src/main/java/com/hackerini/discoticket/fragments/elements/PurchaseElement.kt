@@ -2,6 +2,7 @@ package com.hackerini.discoticket.fragments.elements
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,8 @@ import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
 import com.hackerini.discoticket.activities.QRdrinks
-import com.hackerini.discoticket.objects.OrderWithOrderItem
+import com.hackerini.discoticket.objects.Order
+import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.ObjectLoader
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,12 +22,12 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 
 class PurchaseElement : Fragment() {
-    private var order: OrderWithOrderItem? = null
+    private var order: Order? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            order = it.getSerializable(ARG_PARAM1) as OrderWithOrderItem
+            order = it.getSerializable(ARG_PARAM1) as Order
         }
     }
 
@@ -47,23 +49,21 @@ class PurchaseElement : Fragment() {
         val openQR = view.findViewById<Button>(R.id.PurchaseElementOpenQR)
         val openClub = view.findViewById<Button>(R.id.PurchaseElementInfo)
 
-        val clubs = ObjectLoader.getClubs(requireContext())
-        val club = clubs.first { e -> e.id == order?.order?.clubId }
+        val clubs = ClubsManager.getClubs()
+        val club = clubs.first { e -> e.id == order?.clubId }
 
         amount.text = String.format("%.2f", order?.getTotalAmount()).plus("€")
-
         if (order?.includeTickets() == true) {
-            title.text = "${order?.getTotalQuantity()} biglietti per ${club.name}"
+            title.text = "${order?.getNumberOfItems()} biglietti per ${club.name}"
             date.text =
-                "Per il ".plus(order?.order?.date?.split("-")?.reversed()?.joinToString("/"))
+                "Per il ".plus(order?.date?.split("-")?.reversed()?.joinToString("/"))
             image.setImageResource(R.drawable.ic_ticket)
         } else {
             val calendar = Calendar.getInstance()
-            calendar.timeInMillis = order!!.order.createdAt
+            calendar.timeInMillis = order!!.createdAt
             val dataFormatter = SimpleDateFormat("dd/MM/yyyy")
             date.text = dataFormatter.format(calendar.time)
-
-            title.text = "${order?.getTotalQuantity()} drink al ${club.name}"
+            title.text = "${order?.getNumberOfItems()} drink al ${club.name}"
 
         }
 
@@ -82,7 +82,7 @@ class PurchaseElement : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(order: OrderWithOrderItem) =
+        fun newInstance(order: Order) =
             PurchaseElement().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, order)

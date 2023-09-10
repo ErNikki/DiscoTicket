@@ -11,6 +11,7 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DrinkElement
 import com.hackerini.discoticket.fragments.views.InfoDialog
 import com.hackerini.discoticket.objects.*
+import com.hackerini.discoticket.utils.UserManager
 
 class DrinkMenu : AppCompatActivity() {
     private lateinit var fragments: List<DrinkElement>
@@ -52,8 +53,10 @@ class DrinkMenu : AppCompatActivity() {
 
         checkoutButton.setOnClickListener {
             if (User.isLogged(this)) {
+                //val user=UserManager.getUser()
                 val order = Order()
                 order.club = club
+                //order.userId=user.id
                 fragments.forEach { e ->
                     if (e.quantity > 0) {
                         val orderItem = OrderItem(

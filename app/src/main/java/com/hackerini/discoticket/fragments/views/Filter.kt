@@ -11,6 +11,7 @@ import com.google.android.material.slider.Slider
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.FilterCriteria
 import com.hackerini.discoticket.objects.LocationType
+import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.ObjectLoader
 
 private const val ARG_PARAM1 = "param1"
@@ -83,7 +84,7 @@ class Filter : DialogFragment(), CompoundButton.OnCheckedChangeListener,
                 Pair(slider.values.first().toInt(), slider.values[1].toInt())
         }
 
-        val genres = ObjectLoader.getClubs(requireContext()).map { c -> c.musicGenres }
+        val genres = ClubsManager.getClubs().map { c -> c.musicGenres }
             .reduce { acc, strings -> acc + strings }.toSet()
         genres.forEach {
             val checkbox = CheckBox(requireContext())

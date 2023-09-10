@@ -21,6 +21,7 @@ import com.hackerini.discoticket.fragments.views.DayViewContainer
 import com.hackerini.discoticket.fragments.views.InfoDialog
 import com.hackerini.discoticket.fragments.views.QuanitySelector
 import com.hackerini.discoticket.objects.*
+import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.ObjectLoader
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -53,7 +54,7 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
 
         club = intent.getSerializableExtra("club") as Club
         event = intent.getSerializableExtra("event") as Event?
-        val events = ObjectLoader.getEvents(this).filter { event -> event.club?.id == club?.id }
+        val events = EventsManager.getEvents().filter { event -> event.club?.id == club?.id }
 
         val clubName = findViewById<TextView>(R.id.BuyTicketClubName)
         val clubAddress = findViewById<TextView>(R.id.BuyTicketClubAddress)
@@ -234,7 +235,8 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
             val intent = Intent(this, SelectTable::class.java)
             intent.putExtra("club", club)
             if (event != null) {
-                intent.putExtra("date", event!!.date.toString())
+                var formatter = SimpleDateFormat("yyyy-MM-dd")
+                intent.putExtra("date", formatter.format(event!!.date).toString())
             } else {
                 intent.putExtra("date", selectedDate!!.date.toString())
             }
@@ -319,7 +321,7 @@ class BuyTicket : AppCompatActivity(), MonthHeaderFooterBinder<ViewContainer> {
 
     private fun isDayClickable(date: LocalDate): Boolean {
         val isThereEvent =
-            ObjectLoader.getEvents(this).any { event -> isSameDate(event.date, date) }
+            EventsManager.getEvents().any { event -> isSameDate(event.date, date) }
         val isOpened = date.dayOfWeek.ordinal == 5 || isThereEvent
         val isFuture =
             date.isAfter(LocalDate.now()) || date.isEqual(LocalDate.now())

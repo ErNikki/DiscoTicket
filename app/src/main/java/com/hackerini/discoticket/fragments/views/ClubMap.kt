@@ -8,6 +8,7 @@ import android.graphics.RectF
 import android.view.MotionEvent
 import android.view.View
 import com.hackerini.discoticket.objects.Club
+import com.hackerini.discoticket.utils.OrderManager
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.*
@@ -32,6 +33,8 @@ class ClubMap(context: Context, club: Club, date: String) : View(context) {
 
     private val tables = LinkedList<Table>()
     private var tableId = 1
+    private var notAvaibleTables = OrderManager.getTablesIds(club,date)
+
     private var canvas: Canvas? = null
     private var onTableClickListener: ((List<Table>) -> Unit)? = null
     private val selectedTables = LinkedList<Table>()
@@ -109,10 +112,14 @@ class ClubMap(context: Context, club: Club, date: String) : View(context) {
         for (col in 0..4 step 1) {
             val colStep = 200F * col
             val r = RectF(startX + colStep, startY, tableWidth + colStep, startY + tableHeigth)
+            /*
             val tableState = if (randomStream.read() % 100 > 30)
                 TableState.Available
             else
                 TableState.NotAvailable
+
+             */
+            val tableState=TableState.Available
             val table = Table(tableId, r, tableState, 8)
             tables.add(table)
             tableId++
@@ -123,10 +130,14 @@ class ClubMap(context: Context, club: Club, date: String) : View(context) {
         for (row in 0..1 step 1) {
             val rowStep = 130F * row
             val r = RectF(startX, startY + rowStep, tableWidth, startY + tableHeigth + rowStep)
+            /*
             val tableState = if (randomStream.read() % 100 > 30)
                 TableState.Available
             else
-                TableState.NotAvailable
+                TableState.
+
+             */
+            val tableState=TableState.Available
             val table = Table(tableId, r, tableState, 8)
             tables.add(table)
             tableId++
@@ -134,6 +145,9 @@ class ClubMap(context: Context, club: Club, date: String) : View(context) {
     }
 
     private fun drawTable(table: Table) {
+        if (notAvaibleTables.contains(table.tableId)){
+            table.state=TableState.NotAvailable
+        }
         fillPaint.color = when (table.state) {
             TableState.Available -> Color.GREEN
             TableState.NotAvailable -> Color.RED

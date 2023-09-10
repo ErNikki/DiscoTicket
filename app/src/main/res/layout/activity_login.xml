@@ -168,11 +168,11 @@
                     android:id="@+id/textView24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="32dp"
                     android:text="Oppure"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LoginLinearLayoutNoAccount" />
+                    app:layout_constraintTop_toBottomOf="@+id/loginReSendConfEmail" />
 
                 <ImageView
                     android:id="@+id/space3"
@@ -321,6 +321,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/LoginPasswordLayout" />
+
+                <TextView
+                    android:id="@+id/loginReSendConfEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Richiedi nuova mail per conferma account"
+                    android:textColor="@color/purple_500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LoginLinearLayoutNoAccount" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

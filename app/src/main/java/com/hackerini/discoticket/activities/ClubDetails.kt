@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.ObjectLoader
 import com.squareup.picasso.Picasso
 
@@ -157,7 +159,7 @@ class ClubDetails : AppCompatActivity() {
             }
         }
 
-        val events = ObjectLoader.getEvents(this)
+        val events = EventsManager.getEvents()
             .filter { event -> event.clubId == this.club?.id }
             .sortedBy { event -> event.date }
         if (events.isEmpty()) {
@@ -205,22 +207,26 @@ class ClubDetails : AppCompatActivity() {
     }
 
     fun loadFirstReview() {
-        val fragment = ReviewElement.newInstance(
-            club!!.getReview(this)
-                .filter { r -> r.description.isNotBlank() }
-                .sortedByDescending { r -> r.getLongTime() }
-                .first()
-        )
+        val flag=User.isLogged(this)
+        val review=club!!.getReview(this)
+            .filter { r -> r.description.isNotBlank() }
+            .sortedByDescending { r -> r.getLongTime() }
+            .first()
+        val fragment = ReviewElement.newInstance(review, false, flag)
         fragment.onRefreshNeeded = { loadFirstReview() }
         supportFragmentManager.beginTransaction().add(fragmentContainerView.id, fragment).commit()
     }
 
     private fun userHasAReviewForThisClub(): Boolean {
+        /*
         val reviewDao = RoomManager(this).db.reviewDao()
         val user = User.getLoggedUser(this)
         return if (user != null)
             reviewDao.userHasReviewForThisClub(user.id, club!!.id)
         else false
+
+         */
+        return false
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
@@ -13,6 +14,15 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.objects.UserDao
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.UserManager
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.parameters
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import java.util.regex.Pattern
 
 class SignUp : AppCompatActivity() {
@@ -57,20 +67,35 @@ class SignUp : AppCompatActivity() {
 
         button.setOnClickListener {
             val error = hasError()
+            //Log.d("okok","ihi")
             if (!error) {
-                val user = User()
-                user.name = name.text.toString()
-                user.surname = surname.text.toString()
-                user.email = email.text.toString()
-                user.password = User.hashPassword(password.text.toString())
-                userDao.insert(user)
+                //val user = User()
+                val name = name.text.toString()
+                val surname = surname.text.toString()
+                val email = email.text.toString()
+                val password = password.text.toString()
+
+
+                //userDao.insert(user)
+
+                val (result,message)=UserManager.signUp(email,email,password,name,surname)
+                /*
                 val editor = getSharedPreferences(
                     "DiscoTicket",
-                    AppCompatActivity.MODE_PRIVATE
+                    MODE_PRIVATE
                 ).edit()
                 editor.remove("userId")
                 editor.apply()
-                showSuccessDialog()
+                */
+                if (result) {
+                    showSuccessDialog()
+                }
+                else{
+                    showErrorDialog(message)
+                }
+
+
+
 
             }
         }
@@ -112,7 +137,7 @@ class SignUp : AppCompatActivity() {
     private fun showSuccessDialog() {
         val dialog = AlertDialog.Builder(this).create()
         dialog.setTitle("Registrazione completata")
-        dialog.setMessage("Registrazione avvenuta con successo!\nOra puoi effettuare il login con il tuo nuovo account.")
+        dialog.setMessage("Registrazione avvenuta con successo!\nPrima di accedere devi confermare l'account dal link che ti abbiamo inviato sull'email.")
         dialog.setCancelable(false)
         dialog.setButton(
             AlertDialog.BUTTON_POSITIVE,
@@ -120,6 +145,20 @@ class SignUp : AppCompatActivity() {
         ) { d, _ ->
             d.dismiss()
             startActivity(Intent(this, Login::class.java))
+        }
+        dialog.show()
+    }
+
+    private fun showErrorDialog(message : String ){
+        val dialog = AlertDialog.Builder(this).create()
+        dialog.setTitle("Errore")
+        dialog.setMessage("C'è stato un problema con la registrazione: \n" + message)
+        dialog.setCancelable(false)
+        dialog.setButton(
+            AlertDialog.BUTTON_POSITIVE,
+            "Login"
+        ) { d, _ ->
+            d.dismiss()
         }
         dialog.show()
     }
@@ -168,10 +207,11 @@ class SignUp : AppCompatActivity() {
             email.error = "Email non valida"
             hasError = true
         }
+        /*
         if (userDao.isUserExists(email.text.toString())) {
             email.error = "Email già esistente"
             hasError = true
-        }
+        }*/
 
 
         return hasError

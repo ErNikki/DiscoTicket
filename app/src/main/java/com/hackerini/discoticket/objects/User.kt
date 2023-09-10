@@ -2,12 +2,27 @@ package com.hackerini.discoticket.objects
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.activities.Login
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.CookieManager
+import com.hackerini.discoticket.utils.UserManager
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.cookies.ConstantCookiesStorage
+import io.ktor.client.plugins.cookies.HttpCookies
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.Cookie
+import io.ktor.http.parameters
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import java.io.Serializable
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
@@ -26,6 +41,8 @@ class User : Serializable {
 
     companion object {
 
+        //usata solo nei social
+        //inutile
         fun hashPassword(password: String): String {
             val md = MessageDigest.getInstance("SHA-256")
             val hash = md.digest(password.toByteArray(StandardCharsets.UTF_8))
@@ -43,6 +60,7 @@ class User : Serializable {
         }
 
         fun logout(context: Context) {
+            UserManager.logout()
             val sharedPreferences = context.getSharedPreferences(
                 "DiscoTicket",
                 AppCompatActivity.MODE_PRIVATE
@@ -50,6 +68,7 @@ class User : Serializable {
             val editor = sharedPreferences.edit()
             editor.remove("userId")
             editor.apply()
+
         }
 
         fun getLoggedUser(context: Context): User? {
@@ -60,11 +79,14 @@ class User : Serializable {
             val userId = sharedPreferences.getInt("userId", -1)
             return if (userId == -1) null
             else {
-                val userDao = RoomManager(context).db.userDao()
-                userDao.getUserById(userId).firstOrNull()
+
+                //val userDao = RoomManager(context).db.userDao()
+                //userDao.getUserById(userId).firstOrNull()
+                return UserManager.getUser()
             }
         }
 
+        //da implementare!
         fun deleteCurrentAccount(context: Context) {
             val user = getLoggedUser(context)
             user?.let {
@@ -73,7 +95,10 @@ class User : Serializable {
             }
         }
 
-        fun isLogged(context: Context): Boolean = getLoggedUser(context) != null
+        fun isLogged(context: Context) : Boolean{
+            return UserManager.isUserLogged()
+        }
+
 
         fun generateNotLoggedAlertDialog(context: Context): AlertDialog {
             val builder = MaterialAlertDialogBuilder(context)
@@ -108,15 +133,20 @@ data class UserWithDiscount(
 
 @Dao
 interface UserDao {
+    //inutile
     @Query("SELECT * FROM user")
     fun getAll(): List<User>
 
+    //usata da if user exist, usata a sua volta nel login
+    //inutile
     @Query("SELECT * FROM user WHERE email=:mail LIMIT 1")
     fun getUserByMail(mail: String): List<User>
 
+    //usata nell'accesso ai socialclub
     @Query("SELECT * FROM user WHERE email=:mail and password=:password LIMIT 1")
     fun getUserByCredential(mail: String, password: String): List<User>
 
+    //inutile
     @Query("SELECT * FROM user WHERE id=:id LIMIT 1")
     fun getUserById(id: Int): List<User>
 
@@ -130,13 +160,16 @@ interface UserDao {
     @Query("UPDATE user SET points=points+:points WHERE id=:id")
     fun incrementsPoints(points: Int, id: Int)
 
+    //inutile
     fun isUserExists(mail: String): Boolean {
         return getUserByMail(mail).isNotEmpty()
     }
 
+    //inutile
     @Insert
     fun insert(user: User)
 
+    //da fare
     @Delete
     fun delete(user: User)
 }

@@ -2,10 +2,23 @@ package com.hackerini.discoticket.objects
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hackerini.discoticket.room.FavoriteClub
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.ClubsManager
+import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.ObjectLoader
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.parameters
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
 import java.io.Serializable
 import kotlin.reflect.KClass
 
@@ -35,12 +48,13 @@ class Club : Serializable {
 
         }
 
-    fun getReview(context: Context): List<Review> {
-        val reviewsByClub =
-            RoomManager(context).db.reviewDao().getAllReviewsByClub(this.id)
+    fun getReview(context: Context): List<Review>{
+        reviews=ClubsManager.downloadReviewByClub(this)
+        return reviews.toList()
+        }
 
-        return this.reviews.toList() + reviewsByClub
-    }
+
+
 
     fun isFavorite(context: Context): Boolean {
         val favDao = RoomManager(context).db.favoriteDao()
@@ -59,7 +73,7 @@ class Club : Serializable {
 
 
     fun getClubDrinks(context: Context): Array<Drink> {
-        return ObjectLoader.getDrinks(context, this)
+        return ClubsManager.downloadDrinks(this)
     }
 
     companion object {
@@ -80,8 +94,8 @@ class Club : Serializable {
                 "DiscoTicket",
                 AppCompatActivity.MODE_PRIVATE
             )
-            val clubs = ObjectLoader.getClubs(context)
-            val events = ObjectLoader.getEvents(context)
+            val clubs = ClubsManager.getClubs()
+            val events = EventsManager.getEvents()
             val clubIdsString = sharedPreferences.getString("lastSeenClub", "") ?: ""
             val splittedId = clubIdsString.split(",")
             if (splittedId.any { e -> e.matches("[0-9]+".toRegex()) }) {

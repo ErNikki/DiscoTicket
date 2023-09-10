@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.objects
 
 import androidx.room.*
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.io.Serializable
 
 enum class ItemType {
@@ -8,14 +9,13 @@ enum class ItemType {
     Drink
 }
 
-@Entity(tableName = "OrderItem")
 class OrderItem(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "quantity") val quantity: Int,
-    @ColumnInfo(name = "unitaryPrice") val unitaryPrice: Float,
-    @ColumnInfo(name = "type") var type: ItemType,
-    @ColumnInfo(name = "orderId") var orderId: Int,
+    val id: Int,
+    val name: String,
+    val quantity: Int,
+    val unitaryPrice: Float,
+    var type: ItemType,
+    var orderId: Int,
 ) : Serializable {
 
     constructor(name: String, quantity: Int, unitaryPrice: Float) : this(
@@ -44,16 +44,4 @@ class OrderItem(
     override fun toString(): String {
         return name + " x" + quantity.toString() + " at " + unitaryPrice.toString()
     }
-}
-
-@Dao
-interface OrderItemDao {
-    @Query("SELECT * FROM OrderItem")
-    fun getAll(): List<OrderItem>
-
-    @Insert
-    fun insert(orderItem: OrderItem)
-
-    @Delete
-    fun delete(orderItem: OrderItem)
 }

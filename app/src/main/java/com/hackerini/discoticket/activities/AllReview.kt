@@ -9,6 +9,7 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
+import com.hackerini.discoticket.objects.User
 import com.squareup.picasso.Picasso
 import com.taufiqrahman.reviewratings.BarLabels
 import com.taufiqrahman.reviewratings.RatingReviews
@@ -100,8 +101,9 @@ class AllReview : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
 
         val transaction = supportFragmentManager.beginTransaction()
+        val isUserLoggedFlag = User.isLogged(this)
         orderedReviews?.forEach { review ->
-            val fragmentElement = ReviewElement.newInstance(review)
+            val fragmentElement = ReviewElement.newInstance(review, false, isUserLoggedFlag)
             fragmentElement.onRefreshNeeded = { loadContent() }
             transaction.add(R.id.AllReviewLinearLayout, fragmentElement)
         }

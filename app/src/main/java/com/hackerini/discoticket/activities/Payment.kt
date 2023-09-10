@@ -17,6 +17,8 @@ import com.hackerini.discoticket.MainActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.OrderManager
+import com.hackerini.discoticket.utils.UserManager
 import java.lang.Float.min
 import java.util.*
 
@@ -33,6 +35,8 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         order = intent.getSerializableExtra("OrderPreview") as Order
+        //ho deciso inserire qui id dell'user
+        order!!.userId=UserManager.getUser().id
         creditCard = findViewById(R.id.paymentCreditCard)
         googlePay = findViewById(R.id.paymentGooglePay)
         payPal = findViewById(R.id.paymentPayPal)
@@ -55,6 +59,7 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
 
         if (User.isLogged(this)) {
+            /*
             val userId = User.getLoggedUser(this)!!.id
             coupons = RoomManager(this).db.userDao().getUserDiscount(userId).first().items
             val mutableList = coupons.toMutableList()
@@ -63,6 +68,8 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 Discount("Non utilizzare nessuno sconto", 0F, TypeOfDiscount.Nothing)
             )
             coupons = mutableList.toList()
+
+             */
         }
 
         //Create dropdown menu for discounts
@@ -103,22 +110,31 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 builder.create().show()
                 return@setOnClickListener
             }
-            val orderPreview = storeOrder()
 
+            //val orderPreview = storeOrder()
+            val success=storeOrder()
             //Update points
+            /*
             val userDao = RoomManager(this).db.userDao()
             val earnedPoints =
                 (ResourcesCompat.getFloat(resources, R.dimen.euroToPoint)
                         * orderPreview.getTotalAmount()).toInt()
             userDao.incrementsPoints(earnedPoints, User.getLoggedUser(this)!!.id)
-
+            */
             val builder = MaterialAlertDialogBuilder(this)
             builder.setCancelable(false)
-            builder.setTitle("L'acquisto è andato a buon fine!")
+            if(success) {
+                builder.setTitle("L'acquisto è andato a buon fine!")
+            }
+            else{
+                builder.setTitle("L'acquisto non è andato a buon fine!")
+            }
+            /*
             builder.setMessage(
                 "Complementi! Hai guadagnato ${earnedPoints} punti che potrai usare per ottenere sconti.\n\n" +
                         "Puoi trovare il QR Code successivamente nella sezione \"Cronologia acquisti\" nel menù laterale."
             )
+             */
             builder.setNegativeButton(
                 "Torna alla\nhomepage"
             ) { dialog, _ -> dialog.dismiss() }
@@ -145,13 +161,17 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
             buttonPositive.setOnClickListener {
                 val intent = Intent(this, QRdrinks::class.java)         //Show QR
-                intent.putExtra("order", orderPreview)
+                intent.putExtra("order", order)
                 startActivity(intent)
             }
         }
     }
 
-    private fun storeOrder(): OrderWithOrderItem {
+    private fun storeOrder(): //OrderWithOrderItem//
+       Boolean  {
+        val success=OrderManager.insertOrder(order!!)
+        return  success
+        /*
         val roomManager = RoomManager(this)
         val dao = roomManager.db.orderDao()
         val itemDao = roomManager.db.orderItemDao()
@@ -173,6 +193,8 @@ class Payment : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
         order?.appliedDiscount?.let { discountDao.delete(it) }
         return dao.getOrderWithOrderItem(lastId)
+
+         */
     }
 
     //Function for adding a border to the list box and to the elements of the list

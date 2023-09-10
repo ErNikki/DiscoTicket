@@ -30,6 +30,8 @@ import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.ElementToShow
 import com.hackerini.discoticket.objects.Event
 import com.hackerini.discoticket.objects.FilterCriteria
+import com.hackerini.discoticket.utils.ClubsManager
+import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.ObjectLoader
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -87,7 +89,7 @@ class SearchByMap : AppCompatActivity() {
             requestPermissionsIfNecessary(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))
             return
         }
-        val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
         if (location != null) {
             val mapController = map?.controller
             mapController?.setZoom(11.5)
@@ -129,14 +131,14 @@ class SearchByMap : AppCompatActivity() {
         val elements = LinkedList<Any>()
 
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.EVENTS) {
-            for (e in ObjectLoader.getEvents(applicationContext)) {
+            for (e in EventsManager.getEvents()) {
                 elements.add(e)
                 addedClubIds.add(e.clubId)
             }
         }
 
         if (elementToShow == ElementToShow.ALL || elementToShow == ElementToShow.CLUBS) {
-            for (e in ObjectLoader.getClubs(applicationContext)) {
+            for (e in ClubsManager.getClubs()) {
                 if (!addedClubIds.contains(e.id)) {
                     elements.add(e)
                 }

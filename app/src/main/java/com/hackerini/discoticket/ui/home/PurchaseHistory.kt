@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.PurchaseElement
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.OrderManager
+import com.hackerini.discoticket.utils.UserManager
 
 class PurchaseHistory : Fragment() {
 
@@ -28,16 +31,23 @@ class PurchaseHistory : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val orderDao = RoomManager(requireContext()).db.orderDao()
-        val orders = orderDao.getAllOrderWithOrderItem()
-        if (orders.isNotEmpty() && User.isLogged(requireContext())) {
-            view.findViewById<TextView>(R.id.PurchaseHystoryNoPurchaseWarning).visibility =
-                View.GONE
-            val transaction = parentFragmentManager.beginTransaction()
-            orders.forEach { a ->
-                transaction.add(R.id.PurchaseHistoryLinearLayout, PurchaseElement.newInstance(a))
+        //val orderDao = RoomManager(requireContext()).db.orderDao()
+        //val orders = orderDao.getAllOrderWithOrderItem()
+        if (User.isLogged(requireContext())) {
+            val orders=OrderManager.getOrders(UserManager.getUser())
+            //Log.d("purchaseHisoty",orders.first().toString())
+            if(orders.isNotEmpty()) {
+                view.findViewById<TextView>(R.id.PurchaseHystoryNoPurchaseWarning).visibility =
+                    View.GONE
+                val transaction = parentFragmentManager.beginTransaction()
+                orders.forEach { a ->
+                    transaction.add(
+                        R.id.PurchaseHistoryLinearLayout,
+                        PurchaseElement.newInstance(a)
+                    )
+                }
+                transaction.commit()
             }
-            transaction.commit()
         }
     }
 
