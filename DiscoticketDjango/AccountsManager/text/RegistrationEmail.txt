@@ -1,0 +1,13 @@
+Welcome to DiscoTicket {username}!
+
+If You are the creator of this account 
+on www.DiscoTicket.com pls click on the link below to join in the Disco Ticket community!
+
+
+{link}
+
+
+Otherwise do not give so much importance to this email,
+the message will self-destruct in 3 seconds.
+
+The team of DiscoTicket :)

@@ -1,0 +1,1802 @@
+[
+  {
+    "address": "Roma, Via del Vascello 11",
+    "id": 1,
+    "description": "Una location spaziosa, la migliore musica e drink di alta qualità: tutto questo lo potete trovare al Club '901. Con i nostri frequenti eventi siamo pronti ad accogliervi e farvi ballare tutta la notte non-stop!",
+    "distanceFromYou": 13,
+    "imgUrl": "https://gsud.cdn-immedia.net/2022/07/discoteca-5-625x350-1658693316.jpg",
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Elettronica",
+      "Reggaeton"
+    ],
+    "gpsCords": [
+      41.886771,
+      12.459447
+    ],
+    "name": "Club '901",
+    "reviews": [
+      {
+        "date": "11/09/2022",
+        "description": "Ottimi drink e ottima musica, peccato per il servizio un po' lento, ma vi consiglio davvero di andarci",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Francesca",
+          "surname": "D'Antonio"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "Locale pulito e curato, mi sono divertita",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Barbara",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "03/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Nicholas",
+          "surname": "Camilli"
+        }
+      },
+      {
+        "date": "02/09/2022",
+        "description": "Clamoroso.",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Federico",
+          "surname": "Cimini"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Emanuele",
+          "surname": "Rizzo"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      },
+      {
+        "date": "19/08/2022",
+        "description": "I drink sono annacquati",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Mario",
+          "surname": "Leopardi"
+        }
+      },
+      {
+        "date": "13/08/2022",
+        "description": "E' stata una serata incredibile, questi ragazzi sanno veramente organizzare degli eventi come si deve!!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Laura",
+          "surname": "Fiorelli"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giulio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "31/07/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Valerio",
+          "surname": "Ferrante"
+        }
+      }
+    ],
+    "simpleTicketPrice": 20.0,
+    "tableTicketPrice": 42.0
+  },
+
+  {
+    "address": "Roma, Via Gian Giacomo Porro 18",
+    "id": 2,
+    "description": "Benvenuti al Monkey Club!\nSe vi piace la vita in discoteca ma volete spezzare la routine e ascoltare della musica diversa da solito... questo è il posto giusto! Venite a ballare al ritmo di rock a tutto volume, e scatenatevi come solo voi sapete fare!",
+    "distanceFromYou": 23,
+    "imgUrl": "https://hips.hearstapps.com/gioit.h-cdn.co/assets/16/09/768x578/gallery-1456948763-discoteca-e1439826574579.png?resize=480:*",
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Rock"
+    ],
+    "gpsCords": [
+      41.92923781456024,
+      12.489402379276749
+    ],
+    "name": "Monkey Club",
+    "reviews": [
+      {
+        "date": "09/09/2022",
+        "description": "Niente male, sono un appassionato di musica elettronica ma non sono rimasto deluso. Sono andato in questa discoteca per pura curiosità e mi sono divertito, la selezione di musica è inaspettatamente buona e 'ballabile', e il DJ sa veramente intrattenere!",
+        "images": [
+          "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
+          "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "08/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "01/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Claudia",
+          "surname": "Regoli"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "È stata una serata divertente",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "26/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Angelica",
+          "surname": "Fazio"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Lorenzo",
+          "surname": "Romano"
+        }
+      },
+      {
+        "date": "22/08/2022",
+        "description": "Io e le mie amiche ci siamo divertite molto, prima o poi ci torneremo! I camerieri sono super gentili e non vediamo l'ora di partecipare a qualche serata con evento, sarà sicuramente divertente",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Claudia",
+          "surname": "D'Angelilli"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Giulio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "David",
+          "surname": "Bianchi"
+        }
+      },
+      {
+        "date": "10/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Stefano",
+          "surname": "Garcia"
+        }
+      }
+    ],
+    "simpleTicketPrice": 18.5,
+    "tableTicketPrice": 45.0
+  },
+
+  {
+    "address": "Roma, Via di S. Giovanni in Laterano 154",
+    "id": 3,
+    "description": "Al Vertigo troverete arredamenti mozzafiato e un'ampia area all'aperto in cui potrete ballare e divertirvi in tutta libertà. Non perdetevi l'emozione di scatenarvi col nostro fantastico DJ e un personale altamente qualificato!",
+    "distanceFromYou": 8,
+    "imgUrl": "https://www.discotechemilano.it/wp-content/uploads/2021/04/discoteche-all-aperto2.jpg",
+    "gpsCords": [
+      41.88853537867636,
+      12.49944080569197
+    ],
+    "locationType": "Entrambi",
+    "musicGenres": [
+      "Techno",
+      "Elettronica"
+    ],
+    "name": "Vertigo",
+    "reviews": [
+      {
+        "date": "10/09/2022",
+        "description": "La discoteca è davvero carina e molto particolare. I prezzi sono leggermente alti, ma considerando la qualità che ho trovato non posso decisamente lamentarmi.",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Sara",
+          "surname": "Arcuri"
+        }
+      },
+      {
+        "date": "10/09/2022",
+        "description": "Bellissimo posto!!!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Karim",
+          "surname": "Merrino"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Valentino",
+          "surname": "Battaglioni"
+        }
+      },
+      {
+        "date": "02/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Barbara",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Giulia",
+          "surname": "Trotta"
+        }
+      },
+      {
+        "date": "24/08/2022",
+        "description": "E' veramente costoso",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Stefano",
+          "surname": "Garcia"
+        }
+      },
+      {
+        "date": "21/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Luigi",
+          "surname": "Napolitano"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "Non sono stata male, ma il luogo è scomodo da raggiungere e lo staff non è stato gentilissimo. Devo però riconoscere la qualità della location e dei drink.",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Angelica",
+          "surname": "Fazio"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Lorenzo",
+          "surname": "Romano"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Carla",
+          "surname": "Barone"
+        }
+      },
+      {
+        "date": "11/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Daniela",
+          "surname": "Leone"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "Bellissimo! Questa è una delle discoteche più particolari e belle che abbia mai visto, sono stato proprio bene",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Riccardo",
+          "surname": "Mosca"
+        }
+      }
+    ],
+    "simpleTicketPrice": 32.0,
+    "tableTicketPrice": 75.0
+  },
+
+  {
+    "address": "Roma, Via Ambrogio Contarini 11",
+    "id": 4,
+    "description": "L'Hollywood è il luogo ideale se avete voglia di divertirvi, ballare tutta la notte e conoscere nuove persone ma senza rinunciare al piacere dell'aria aperta. Siamo certi che la nostra ampia location all'aperto e i nostri squisiti drink vi delizieranno.",
+    "distanceFromYou": 40,
+    "imgUrl": "https://www.affarimiei.biz/wp-content/uploads/2017/07/aprire-una-discoteca.jpg",
+    "gpsCords": [
+      41.875384794269436,
+      12.489646627853247
+    ],
+    "locationType": "All'aperto",
+    "musicGenres": [
+      "Reggaeton"
+    ],
+    "name": "Hollywood",
+    "reviews": [
+      {
+        "date": "10/09/2022",
+        "description": "La musica non era niente di che, però per una volta è stato carino provare una discoteca completamente all'aperto.",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "03/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "David",
+          "surname": "Bianchi"
+        }
+      },
+      {
+        "date": "01/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Claudia",
+          "surname": "D'Angelilli"
+        }
+      },
+      {
+        "date": "27/08/2022",
+        "description": "Mi dispiace ma non mi sono divertito, sono stato servito lentamente e faceva pure freddo...",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Luigi",
+          "surname": "Napolitano"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Sara",
+          "surname": "Arcuri"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "E' stata una serata ottima, sono rimasto a ballare fino a tardi e mi sono divertito. Prezzi onesti.",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Nicholas",
+          "surname": "Camilli"
+        }
+      },
+      {
+        "date": "24/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Valentino",
+          "surname": "Battaglioni"
+        }
+      },
+      {
+        "date": "23/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Mario",
+          "surname": "Leopardi"
+        }
+      },
+      {
+        "date": "19/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Laura",
+          "surname": "Fiorelli"
+        }
+      },
+      {
+        "date": "15/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "11/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Emanuele",
+          "surname": "Rizzo"
+        }
+      },
+      {
+        "date": "04/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      }
+    ],
+    "simpleTicketPrice": 14.9,
+    "tableTicketPrice": 39.9
+  },
+
+  {
+    "address": "Roma, Via di S. Elena 6",
+    "id": 5,
+    "description": "Disco Rome è il miglior luogo di ritrovo per i giovani! Decine e decine di persone non vedono l'ora di incontrarvi, fare la vostra conoscenza e ballare con voi, mentre i membri del nostro staff faranno del loro meglio per viziarvi!\nE voi cosa state aspettando?",
+    "distanceFromYou": 49,
+    "imgUrl": "https://images.agi.it/pictures/agi/agi/2022/02/12/060720124-3f6c6902-8870-4697-aff6-43dc3e5b106c.jpeg",
+    "gpsCords": [
+      41.89397833883503,
+      12.476643923091892
+    ],
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Reggaeton",
+      "Elettronica"
+    ],
+    "name": "Disco Rome",
+    "reviews": [
+      {
+        "date": "11/09/2022",
+        "description": "Mi sono trovato bene, lo staff è gentile e ho conosciuto delle persone simpatiche.",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Riccardo",
+          "surname": "Mosca"
+        }
+      },
+      {
+        "date": "05/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "01/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Valerio",
+          "surname": "Ferrante"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Claudia",
+          "surname": "Regoli"
+        }
+      },
+      {
+        "date": "30/08/2022",
+        "description": "Sono andata con degli amici e torneremo sicuramente!!!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Karim",
+          "surname": "Merrino"
+        }
+      },
+      {
+        "date": "22/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "La musica non era male e il clima era piuttosto amichevole, però il locale è molto anonimo.",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Federico",
+          "surname": "Cimini"
+        }
+      },
+      {
+        "date": "18/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giulia",
+          "surname": "Trotta"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Daniela",
+          "surname": "Leone"
+        }
+      }
+    ],
+    "simpleTicketPrice": 40.0,
+    "tableTicketPrice": 65.0
+  },
+
+  {
+    "address": "Roma, Via Papiria 78",
+    "id": 6,
+    "description": "The Bridge, il luogo dove scatenarsi come pazzi ed essere puramente se stessi senza paura. Vi accoglieremo con calore e non vediamo l'ora di vedervi partecipare ai nostri folli eventi: benvenuti a una discoteca assolutamente infernale!",
+    "distanceFromYou": 26,
+    "imgUrl": "https://citynews-milanotoday.stgy.ovh/~media/horizontal-mid/7690430458408/discoteca-5.jpg",
+    "gpsCords": [
+      41.863572,
+      12.560874
+    ],
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Techno"
+    ],
+    "name": "The Bridge",
+    "reviews": [
+      {
+        "date": "13/09/2022",
+        "description": "Non mi sono mai scatenato così tanto, ero totalmente trasportato dalla musica. Bella la discoteca e il DJ è davvero matto (in senso buono!). Straconsigliata!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "12/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "Io e i miei amici ci siamo divertiti",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "04/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "25/08/2022",
+        "description": "E' STATO INCREDIBILE!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "Veramente troppo caotico per me, mi sono sentito disorientato per tutto il tempo e costa tanto.",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "Non so quando questi ragazzi organizzeranno un nuovo evento, ma dovete assolutamente andarci. L'evento di Ferragosto è stato fantastico",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "Niente male, la gente si è divertita molto e si sono tutti lasciati trasportare. Forse la musica è un po' alta.",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Franca",
+          "surname": "Capoccetti"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      },{
+        "date": "02/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Nicholas",
+          "surname": "Camilli"
+        }
+      }
+    ],
+    "simpleTicketPrice": 34.0,
+    "tableTicketPrice": 64.0
+  },
+
+  {
+    "address": "Roma, Via Riccardo Zandonai 44",
+    "id": 7,
+    "description": "Tanti eventi, ospiti da tutta Italia, interni alla moda e innovativi, elaborati giochi di luce e fumo: Disco Glam vi offrirà tutto ciò, per delle serate indimenticabili e di qualità!",
+    "distanceFromYou": 35,
+    "imgUrl": "https://static.fanpage.it/wp-content/uploads/sites/29/2020/08/discoteca-sesto-senso-brescia.jpg",
+    "gpsCords": [
+      41.948487,
+      12.458154
+    ],
+    "locationType": "Entrambi",
+    "musicGenres": [
+      "Elettronica",
+      "Reggaeton"
+    ],
+    "name": "Disco Glam",
+    "reviews": [
+      {
+        "date": "16/09/2022",
+        "description": "L'evento organizzato per Ferragosto non è stato male, ma considerando che c'era un DJ famoso a suonare mi sarei aspettata un po' di più; alla fine è stata una serata normale come tante altre, peccato. Comunque vi consiglio di andarci e provare voi stessi.",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Franca",
+          "surname": "Capoccetti"
+        }
+      },
+      {
+        "date": "15/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Stefano",
+          "surname": "Garcia"
+        }
+      },
+      {
+        "date": "10/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Lorenzo",
+          "surname": "Romano"
+        }
+      },
+      {
+        "date": "05/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Karim",
+          "surname": "Merrino"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "In questa discoteca hanno davvero tanta fantasia nell'organizzare serate; anche i drink erano particolarmente buoni.",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Francesca",
+          "surname": "D'Antonio"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Carla",
+          "surname": "Barone"
+        }
+      },
+      {
+        "date": "30/08/2022",
+        "description": "Non solo per qualche motivo stavano per non farci entrare, ma ci sono anche stati dei malfunzionamenti durante la serata. Non ci siamo.",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "David",
+          "surname": "Bianchi"
+        }
+      },
+      {
+        "date": "24/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Valentino",
+          "surname": "Battaglioni"
+        }
+      },
+      {
+        "date": "19/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Angelica",
+          "surname": "Fazio"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "Molto divertente, ho ballato fino a tardi e conosciuto delle belle persone.",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giulia",
+          "surname": "Trotta"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "13/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Riccardo",
+          "surname": "Mosca"
+        }
+      },
+      {
+        "date": "13/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      },
+      {
+        "date": "11/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "09/08/2022",
+        "description": "Gli interni sono decisamente particolari e originali, ma anche la sezione all'aperto mi è piaciuta. Credo che ci tornerò, peccato per i prezzi un po' altini ma ne capisco il perché.",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "07/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Stella",
+          "surname": "Esposito"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Luigi",
+          "surname": "Napolitano"
+        }
+      },
+      {
+        "date": "01/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Laura",
+          "surname": "Fiorelli"
+        }
+      },
+      {
+        "date": "30/07/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Daniela",
+          "surname": "Leone"
+        }
+      },
+      {
+        "date": "27/07/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Mario",
+          "surname": "Leopardi"
+        }
+      }
+    ],
+    "simpleTicketPrice": 50.0,
+    "tableTicketPrice": 89.0
+  },
+
+  {
+    "address": "Fiumicino (RM), Lungomare della Salute 103",
+    "id": 8,
+    "description": "Solo al Marea potrete godervi una vera estate indimenticabile! Questa discoteca sulla spiaggia è il luogo perfetto per ballare in una location informale e amichevole, con la compagnia del mare a due passi!\nAl Marea troverete drink super rinfrescanti perfetti per l'estate e un'ottima selezione di musica. Pronti per ballare sulla sabbia?",
+    "distanceFromYou": 70,
+    "imgUrl": "https://www.lignanosabbiadoro.com/assets/web/images/discoteca-kursaal-lignano.jpg",
+    "gpsCords": [
+      41.761906,
+      12.225555
+    ],
+    "locationType": "All'aperto",
+    "musicGenres": [
+      "Reggaeton",
+      "Techno"
+    ],
+    "name": "Marea",
+    "reviews": [
+      {
+        "date": "05/09/2022",
+        "description": "La serata è stata ok, niente di speciale. La location è carina e accogliente ma un po' piccola.",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "02/09/2022",
+        "description": "Che bello ballare in spiaggia!! Spero di tornarci presto con tutti i miei amici, è forse il locale migliori di tutta Fiumicino!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Marco",
+          "surname": "Bacca"
+        }
+      },
+      {
+        "date": "01/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giulio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "24/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Federico",
+          "surname": "Cimini"
+        }
+      },
+      {
+        "date": "23/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Barbara",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Alessandra",
+          "surname": "Fisher"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Maria Sole",
+          "surname": "Bradde"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "La musica scelta dal DJ è molto particolare, ne sono rimasto piacevolmente sorpreso. Nel complesso è un posto carino, consigliato.",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Valerio",
+          "surname": "Ferrante"
+        }
+      },
+      {
+        "date": "16/08/2022",
+        "description": "Mi sa che i drink sono annacquati",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Emanuele",
+          "surname": "Rizzo"
+        }
+      },
+      {
+        "date": "15/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Claudia",
+          "surname": "Regoli"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Sandro",
+          "surname": "Panatta"
+        }
+      },
+      {
+        "date": "07/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Francesca",
+          "surname": "D'Antonio"
+        }
+      }
+    ],
+    "simpleTicketPrice": 9.9,
+    "tableTicketPrice": 25.0
+  },
+
+  {
+    "address": "Roma, Via Giuseppe Rovani 22",
+    "id": 9,
+    "description": "Il divertimento è assicurato all'EDM Pop Club! In questo ospitale locale si trova la migliore musica elettronica di Roma, accompagnata da prezzi modici e buonissimi drink. Vi aspettiamo per ballare insieme fino a notte tarda!",
+    "distanceFromYou": 53,
+    "imgUrl": "https://www.larena.it/image/policy:1.9555490:1659608408/La+violenza+%25C3%25A8+avvenuta+fuori+da+una+discoteca+di+Gabicce.jpg?f=default&w=1024&$p$f$w=4f44181",
+    "gpsCords": [
+      41.946085,
+      12.549263
+    ],
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Elettronica"
+    ],
+    "name": "EDM Pop Club",
+    "reviews": [
+      {
+        "date": "13/09/2022",
+        "description": "Se siete appassionati di musica elettronica e ascoltate anche qualcosa più di nicchia, allora vi consiglio di provare questa discoteca, ne rimarrete soddisfatti",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Luca",
+          "surname": "De Gregorio"
+        }
+      },
+      {
+        "date": "12/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Franca",
+          "surname": "Capoccetti"
+        }
+      },
+      {
+        "date": "09/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Giacomo",
+          "surname": "Sciarra"
+        }
+      },
+      {
+        "date": "04/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Fabio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "Mi aspettavo qualcosa di più, locali e drink sono normali ma il barman è stato un po' burbero",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Nicholas",
+          "surname": "Camilli"
+        }
+      },
+      {
+        "date": "28/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Carla",
+          "surname": "Barone"
+        }
+      },
+      {
+        "date": "26/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Claudia",
+          "surname": "D'Angelilli"
+        }
+      },
+      {
+        "date": "23/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Stefano",
+          "surname": "Garcia"
+        }
+      },
+      {
+        "date": "22/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Pauline",
+          "surname": "Guidi"
+        }
+      },
+      {
+        "date": "19/08/2022",
+        "description": "Il posto è abbastanza carino, l'evento speciale organizzato in discoteca per Ferragosto è stato divertente; ve la consiglio anche per la scelta di musica particolare, i brani sono piuttosto inusuali.",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Sara",
+          "surname": "Arcuri"
+        }
+      },
+      {
+        "date": "18/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Francesco",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Fabiola",
+          "surname": "D'Ettore"
+        }
+      },
+      {
+        "date": "14/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 1,
+        "user": {
+          "name": "Valentino",
+          "surname": "Battaglioni"
+        }
+      },
+      {
+        "date": "11/08/2022",
+        "description": "Si potrebbe fare un pochino di meglio con i drink, ma sono stata abbastanza bene.",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Alessia",
+          "surname": "Bonino"
+        }
+      },
+      {
+        "date": "08/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Marco",
+          "surname": "Gatti"
+        }
+      },
+      {
+        "date": "08/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Daniela",
+          "surname": "Leone"
+        }
+      },
+      {
+        "date": "05/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Mario",
+          "surname": "Leopardi"
+        }
+      }
+    ],
+    "simpleTicketPrice": 17.0,
+    "tableTicketPrice": 40.0
+  },
+
+  {
+    "address": "Guidonia Montecelio (RM), Via Pantano 12",
+    "id": 10,
+    "description": "Red Night non vede l'ora di accogliervi!\nAnche la più grande discoteca di Guidonia sbarca su Disco-Ticket, e noi non aspettiamo altro che veniate a trovarci. Il solito luogo, il solito gentilisso staff e il solito divertimento tutta la notte vi attendono!",
+    "distanceFromYou": 64,
+    "imgUrl": "https://www.supersud.it/wp-content/uploads/2020/05/Discoteca.jpg",
+    "gpsCords": [
+      41.987000,
+      12.717655
+    ],
+    "locationType": "Chiuso",
+    "musicGenres": [
+      "Reggaeton",
+      "Rock"
+    ],
+    "name": "Red Night",
+    "reviews": [
+      {
+        "date": "11/09/2022",
+        "description": "Sono super soddisfatto, non pensavo Guidonia ospitasse una discoteca simile!!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Riccardo",
+          "surname": "Mosca"
+        }
+      },
+      {
+        "date": "10/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Laura",
+          "surname": "Fiorelli"
+        }
+      },
+      {
+        "date": "03/09/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Angelica",
+          "surname": "Fazio"
+        }
+      },
+      {
+        "date": "01/09/2022",
+        "description": "Faccio i complimenti ai proprietari della discoteca, è veramente grande e spaziosa. Il prezzo del biglietto è un po' alto, però i miei amici si sono divertiti tutti quanti",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Giulia",
+          "surname": "Trotta"
+        }
+      },
+      {
+        "date": "31/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 3,
+        "user": {
+          "name": "Luigi",
+          "surname": "Napolitano"
+        }
+      },
+      {
+        "date": "27/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "David",
+          "surname": "Bianchi"
+        }
+      },
+      {
+        "date": "26/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Giorgia",
+          "surname": "Giovanni"
+        }
+      },
+      {
+        "date": "22/08/2022",
+        "description": "Tutto in questa discoteca è di alta qualità, se siete di Guidonia e dintorni non avete motivo di non andarci!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Lorenzo",
+          "surname": "Romano"
+        }
+      },
+      {
+        "date": "20/08/2022",
+        "description": "LOCALE PAZZESCO!",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Barbara",
+          "surname": "Rossi"
+        }
+      },
+      {
+        "date": "17/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Karim",
+          "surname": "Merrino"
+        }
+      },
+      {
+        "date": "15/08/2022",
+        "description": "Mi è sembrata una discoteca come tante altre, solo che ha dei prezzi esorbitanti",
+        "images": [
+        ],
+        "rating": 2,
+        "user": {
+          "name": "Federico",
+          "surname": "Cimini"
+        }
+      },
+      {
+        "date": "13/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Giulio",
+          "surname": "Nobile"
+        }
+      },
+      {
+        "date": "12/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 4,
+        "user": {
+          "name": "Valerio",
+          "surname": "Ferrante"
+        }
+      },
+      {
+        "date": "10/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Claudia",
+          "surname": "Regoli"
+        }
+      },
+      {
+        "date": "07/08/2022",
+        "description": "",
+        "images": [
+        ],
+        "rating": 5,
+        "user": {
+          "name": "Claudia",
+          "surname": "D'Angelilli"
+        }
+      }
+    ],
+    "simpleTicketPrice": 29.0,
+    "tableTicketPrice": 66.0
+  }
+]

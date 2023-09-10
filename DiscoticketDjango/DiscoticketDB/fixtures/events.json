@@ -1,0 +1,87 @@
+[
+    {
+        "model": "DiscoticketDB.Events",
+        "pk": 1,
+        "fields": {
+            "club": 7,
+            "date": "2023-11-01 23:00:00",
+            "description": "La stagione estiva volge al termine, ma noi rimaniamo qui ad accogliervi! Come ogni anno diamo il benvenuto all'autunno con il Presidium, la festa pi\u00c3\u00b9 spettacolare della citt\u00c3\u00a0: due famosi DJ vi delizieranno con un mix di musica unico, con fuochi d'artificio alla fine!",
+            "imgUrl": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/grand-opening-event-club-bar-disco-party-ad-design-template-ee7e062b37aaa286789fc2ca1ec89db9_screen.jpg",
+            "MusicGenres": [
+                "Reggaeton"
+            ],
+            "name": "Presidium"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Events",
+        "pk": 2,
+        "fields": {
+            "club": 2,
+            "date": "2023-11-10 22:00:00",
+            "description": "Venerd\u00c3\u00ac 10 marzo dalle 22 fino a tutta la notte: non dimenticatevi di questa data!\nIl Monkey Club si rinnova: nuovi arredamenti e nuovi buonissimi drink. Per l'occasione vi faremo sentire un po' di musica diversa da ci\u00c3\u00b2 che vi proponiamo solitamente, per festeggiare le novit\u00c3\u00a0 che vi aspettano al prossimo anno. Vi attende anche una sorpresa a fine serata, non mancate!",
+            "imgUrl": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/instagram-music-night-event-ad-template-design-2f7c0d70be23110ad6d594f87431017b_screen.jpg?ts=1568652421",
+            "MusicGenres": [
+                "Elettronica"
+            ],
+            "name": "Nature beat"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Events",
+        "pk": 3,
+        "fields": {
+            "club": 5,
+            "date": "2023-12-30 22:30:00",
+            "description": "Anche quest'anno il Disco Rome \u00c3\u00a8 il luogo perfetto per festeggiare l'inizio del nuovo anno accademico!\nStudenti universitari, un altro impegnativo semestre sta cominciando, ma ci\u00c3\u00b2 non significa che non possiate iniziare ad affrontarlo con leggerezza e festeggiando! La discoteca pi\u00c3\u00b9 accogliente di Roma vi invita venerd\u00c3\u00ac 30 settembre a ballare tutta la notte e conoscere tanti altri studiosi come voi, a buon auspicio per la vostra carriera universitaria.",
+            "imgUrl": "https://thumbs.dreamstime.com/b/photo-portrait-nice-couple-dancing-together-student-party-wearing-stylish-bright-formal-clothes-photo-portrait-nice-201091829.jpg",
+            "MusicGenres": [
+                "Elettronica",
+                "Techno"
+            ],
+            "name": "Student party"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Events",
+        "pk": 4,
+        "fields": {
+            "club": 8,
+            "date": "2023-11-22 22:30:00",
+            "description": "La nostra discoteca sul mare \u00c3\u00a8 pronta a farvi scatenare: il 22 ottobre serata Rock all'insegna del divertimento! Vi promettiamo una notte indimenticabile a tema chitarra, basso e batteria sulla sabbia!",
+            "imgUrl": "https://us.123rf.com/450wm/onyxprj/onyxprj1708/onyxprj170800433/84890075-vector-chitarra-rock-retr%C3%B2-e-microfono-music-club-logo-vettoriale.jpg",
+            "MusicGenres": [
+                "Rock"
+            ],
+            "name": "Rock concert"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Events",
+        "pk": 5,
+        "fields": {
+            "club": 2,
+            "date": "2023-10-01 19:30:00",
+            "description": "Festeggiamo insieme il prima maggio con un aperitivo visto mare e ottima musica in sottofondo!",
+            "imgUrl": "https://www.thefamilyheart.com/wp-content/uploads/2022/05/genealogy-blog-party-may-day-vertical-lo-683x1024.jpg",
+            "MusicGenres": [
+                "Elettronica"
+            ],
+            "name": "May Day"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Events",
+        "pk": 6,
+        "fields": {
+            "club": 2,
+            "date": "2023-10-20 22:30:00",
+            "description": "Finalmente arriva il tanto atteso veglione di carnevale al Monkey Club, con coriandoli, premi per le migliori maschere e tanto divertimento",
+            "imgUrl": "https://img.pikbest.com/origin/05/97/93/25FpIkbEsTExX.jpg!bwr800",
+            "MusicGenres": [
+                "Elettronica"
+            ],
+            "name": "Carnival Party"
+        }
+    }
+]
