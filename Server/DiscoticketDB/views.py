@@ -7,6 +7,7 @@ from .models.events import Events
 from .models.drinks import Drinks
 from .models.order import Order
 from .models.orderItem import OrderItem
+from .models.imagesReview import ImagesReview
 from django.http import JsonResponse
 import json
 from django.core.serializers.json import DjangoJSONEncoder
@@ -114,11 +115,22 @@ def reviewsSerializeByClub(club_id):
     
 
 def reviewSerialize(review):
+    #check for images "http://"+settings.SERVER_DOMAIN+review.images.
+    img=[]
+    for i in review.imagesreview_set.filter().exclude(image=None).all():
+        img.append("http://"+settings.SERVER_DOMAIN+i.image.url)
+    """
+    if review.imagesreview_set:
+        img=[]
+        img.append("http://"+settings.SERVER_DOMAIN+review.images.url)
+    else:
+        img=[]
+    """
     data={}
     data["id"]=review.id
     data["date"]=review.date.strftime('%d/%m/%Y') 
     data["description"]=review.description
-    data["images"]=[]
+    data["images"]=img
     data["rating"]=review.rating
     data["user"]=userSerialize(review.user)
     data["clubId"]=review.club.id
@@ -262,9 +274,8 @@ def decodeDesignImage(data):
 
 def insertReviewRequest2(request):
     if request.method=='POST':
-        o=json.loads(request.body)
-        
         try:
+            o=json.loads(request.body)
             date=datetime.datetime.strptime(o["date"], '%d/%m/%Y').strftime('%Y-%m-%d') 
             review = Reviews.objects.create(
                 user=User.objects.get(id=o["userId"]),
@@ -274,20 +285,18 @@ def insertReviewRequest2(request):
                 rating =o["rating"],
                 #images=imgs[0]
             )
+            review.save()
             
-            imgs=[]
             index=0
-            
             for codedImage in o["images"]:
+                imageReview=ImagesReview.objects.create(review=review)
                 token="review_"+str(review.id)+"_"+str(index)+".jpg"
                 decodedImage=base64.b64decode(codedImage)
                 file=ContentFile(decodedImage,token)
-                review.images.save(token, file, save=True)
-                #imgs.append(file)
-                #index+=1
-                
-            #review.images=imgs   
-            review.save()
+                imageReview.image.save(token, file, save=True)
+                imageReview.save()
+                index+=1
+            
             created = review.id
             
             if not Reviews.objects.filter(id=created).exists():
@@ -337,7 +346,6 @@ def deleteReviewRequest(request):
             response_data["message"]=dict(form.errors.items())
             return HttpResponse(json.dumps(response_data), content_type="application/json")
 
-
 def editReviewRequest(request):
     if request.method=='POST':
         form=editReviewForm(request.POST)
@@ -364,6 +372,48 @@ def editReviewRequest(request):
             response_data["success"]=False
             response_data["message"]=dict(form.errors.items())
             return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+def editReviewRequest2(request):
+    
+    try:
+        o=json.loads(request.body)
+        review=Reviews.objects.filter(id=o["id"])
+        if review.exists():
+            review=review.first()
+            
+            for i in review.imagesreview_set.all():
+                i.delete()
+                
+            index=0
+            for codedImage in o["images"]:
+                imageReview=ImagesReview.objects.create(review=review)
+                token="review_"+str(review.id)+"_"+str(index)+".jpg"
+                decodedImage=base64.b64decode(codedImage)
+                file=ContentFile(decodedImage,token)
+                imageReview.image.save(token, file, save=True)
+                imageReview.save()
+                index+=1
+                
+            review.description=o["description"]
+            review.rating=o["rating"]
+            review.save()
+            
+            response_data={}
+            response_data["success"]=True
+            response_data["message"]="recensione modificata correttamente!"
+        else:
+            response_data={}
+            response_data["success"]=False
+            response_data["message"]="recensione non presente!"
+            
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+    
+    except Exception as e:
+        logger.info(e)
+        response_data={}
+        response_data["success"]=False
+        response_data["message"]="errore"
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
         
 
 def insertOrder(request):

@@ -12,6 +12,7 @@ urlpatterns = [
    path("insertReview",views.insertReviewRequest),
    path("deleteReview",views.deleteReviewRequest),
    path("editReview",views.editReviewRequest),
+   path("editReview2",views.editReviewRequest2),
    path("insertOrder",views.insertOrder),
    path("getOrdersByUserId",views.getOrdersByUserId),
    path("getTableIds",views.getTableIds),

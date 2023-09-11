@@ -11,4 +11,3 @@ class Reviews(models.Model):
     date=models.DateField()
     description=models.TextField(blank=True, null=True)
     rating=models.FloatField()
-    images=models.ImageField(upload_to = 'images/reviews',blank=True, null=True)
