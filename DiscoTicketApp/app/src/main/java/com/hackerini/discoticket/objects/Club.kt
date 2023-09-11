@@ -11,6 +11,7 @@ import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.ObjectLoader
+import com.hackerini.discoticket.utils.ReviewsManager
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.submitForm
@@ -49,7 +50,7 @@ class Club : Serializable {
         }
 
     fun getReview(context: Context): List<Review>{
-        reviews=ClubsManager.downloadReviewByClub(this)
+        reviews=ReviewsManager.downloadReviewByClub(this)
         return reviews.toList()
         }
 

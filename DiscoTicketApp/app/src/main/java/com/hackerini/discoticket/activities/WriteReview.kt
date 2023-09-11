@@ -1,7 +1,6 @@
 package com.hackerini.discoticket.activities
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -11,6 +10,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
@@ -19,14 +20,11 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.internal.ContextUtils.getActivity
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.ImageReviewElement
 import com.hackerini.discoticket.fragments.views.ConfirmReview
@@ -35,8 +33,12 @@ import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ReviewsManager
+import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import java.io.File
-import java.security.AccessController.getContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -73,6 +75,37 @@ class WriteReview : AppCompatActivity() {
             rating.rating = originalReview.rating.toFloat()
             description.setText(originalReview.description)
             addReviewButton.text = "Modifica"
+
+            CoroutineScope(Dispatchers.Default).launch {
+                // do some long running operation or something
+                originalReview.images.forEach { i ->
+                    images.add(Picasso.get().load(i).get())
+                }
+                val transaction = supportFragmentManager.beginTransaction()
+                images.forEach { i ->
+                    val fragment = ImageReviewElement.newInstance(images.indexOf(i))
+                    fragment.getBitmap = ::getBitmap
+                    fragment.deleteBitmap = ::deleteImageBitmap
+                    transaction.add(R.id.writeReviewFotoLayout, fragment)
+                }
+                transaction.commit()
+            }
+
+            /*
+            images= originalReview.aux.toMutableList()
+
+            val transaction = supportFragmentManager.beginTransaction()
+            images.forEach {
+                i->
+                val fragment = ImageReviewElement.newInstance(images.indexOf(i))
+                fragment.getBitmap=::getBitmap
+                fragment.deleteBitmap=::deleteImageBitmap
+                transaction.add(R.id.writeReviewFotoLayout, fragment)
+            }
+            transaction.commit()
+
+             */
+
         }
 
         askPermissions(this)
@@ -118,7 +151,7 @@ class WriteReview : AppCompatActivity() {
             }
             else{
 
-                if(images.size<1) {
+                if(images.size<2) {
                     openCamera()
                 }
                 else{
@@ -150,7 +183,7 @@ class WriteReview : AppCompatActivity() {
                     review.rating = rating.rating.toDouble()
                     if (originalReview != null) {
                         //Edit
-                        val result = ReviewsManager.editReview(review)
+                        val result = ReviewsManager.editReview2(review)
                         if (result) {
                             val builder = MaterialAlertDialogBuilder(context)
                             //review.reviewId = originalReview.reviewId

@@ -6,8 +6,10 @@ import android.util.Base64
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
+import com.squareup.picasso.Picasso
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -26,6 +28,7 @@ import kotlinx.serialization.json.jsonObject
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+import java.util.zip.ZipEntry
 
 
 object ReviewsManager {
@@ -151,6 +154,40 @@ object ReviewsManager {
 
         }
 
+    fun editReview2(review: Review):Boolean=
+        runBlocking {
+
+            val client = HttpClient() {
+                install(ContentNegotiation) {
+                    json(Json {
+                        prettyPrint = true
+                        isLenient = true
+                    })
+                }
+            }
+            val j= JSONObject()
+            j.put("id", review.id)
+            j.put("description", review.description)
+            j.put("rating", review.rating)
+
+            val img = JSONArray()
+            review.aux.forEach {
+                    i->
+                img.put(encodeTobase64(i))
+            }
+            j.put("images",img)
+
+            val response: HttpResponse = client.post("http://192.168.1.177:8080/DiscoticketDB/editReview2") {
+                contentType(ContentType.Application.Json)
+                setBody(j.toString())
+            }
+            client.close()
+            val jsonObj = Json.parseToJsonElement(response.body())
+                .jsonObject
+                .toMap()
+            jsonObj.get("success")?.toString().equals("true")
+        }
+
     fun downloadReviewsByUserId(user: User):Array<Review> =
         runBlocking {
             val gson = Gson()
@@ -165,6 +202,39 @@ object ReviewsManager {
             client.close()
             val listPersonType = object : TypeToken<Array<Review>>() {}.type
             val reviewsArray : Array<Review> = gson.fromJson(response.body() as String, listPersonType)
+            /*
+            for (review in reviewsArray) {
+                review.images.forEach {
+                        i->
+                    review.aux.plus(Picasso.get().load(i).get())
+                }
+            }*/
+            reviewsArray
+        }
+    fun downloadReviewByClub(club: Club): Array<Review> =
+    //val reviewsByClub =
+        //    RoomManager(context).db.reviewDao().getAllReviewsByClub(this.id)
+
+        runBlocking {
+            val gson = Gson()
+            val client = HttpClient()
+
+            val response: HttpResponse = client.submitForm(
+                url = "http://192.168.1.177:8080/DiscoticketDB/getReviewsByClubId",
+                formParameters = parameters {
+                    append("id", club.id.toString())
+                }
+            )
+            client.close()
+            val listPersonType = object : TypeToken<Array<Review>>() {}.type
+            val reviewsArray : Array<Review> = gson.fromJson(response.body() as String, listPersonType)
+            /*
+            for (review in reviewsArray) {
+                review.images.forEach {
+                    i->
+                    review.aux.plus(Picasso.get().load(i).get())
+                }
+            }*/
             reviewsArray
         }
 

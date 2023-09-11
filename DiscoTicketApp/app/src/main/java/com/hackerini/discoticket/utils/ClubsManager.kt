@@ -67,25 +67,7 @@ object ClubsManager {
         return clubs
     }
 
-    fun downloadReviewByClub(club: Club): Array<Review> =
-    //val reviewsByClub =
-        //    RoomManager(context).db.reviewDao().getAllReviewsByClub(this.id)
 
-        runBlocking {
-            val gson = Gson()
-            val client = HttpClient()
-
-            val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/DiscoticketDB/getReviewsByClubId",
-                formParameters = parameters {
-                    append("id", club.id.toString())
-                }
-            )
-            client.close()
-            val listPersonType = object : TypeToken<Array<Review>>() {}.type
-            val reviewsArray : Array<Review> = gson.fromJson(response.body() as String, listPersonType)
-            reviewsArray
-        }
 
     fun computeDistance(location: Location?){
         if(location==null){
