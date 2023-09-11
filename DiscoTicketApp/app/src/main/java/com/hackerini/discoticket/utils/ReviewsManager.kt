@@ -39,7 +39,7 @@ object ReviewsManager {
             }
 
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/DiscoticketDB/insertReview",
+                url = CookieManager.url+"DiscoticketDB/insertReview",
                 formParameters = parameters {
                     append("userId", review.user.id.toString())
                     append("clubId", review.clubId.toString())
@@ -87,7 +87,7 @@ object ReviewsManager {
             }
             j.put("images",img)
 
-            val response: HttpResponse = client.post("http://192.168.1.177:8080/DiscoticketDB/insertReview2") {
+            val response: HttpResponse = client.post(CookieManager.url+"DiscoticketDB/insertReview2") {
                 contentType(ContentType.Application.Json)
                 setBody(j.toString())
             }
@@ -116,7 +116,7 @@ object ReviewsManager {
         runBlocking {
             val client = HttpClient()
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/DiscoticketDB/deleteReview",
+                url = CookieManager.url+"DiscoticketDB/deleteReview",
                 formParameters = parameters {
                     append("id", review.id.toString())
                 }
@@ -135,7 +135,7 @@ object ReviewsManager {
             Log.d("onEdit",review.description.toString())
             val client = HttpClient()
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/DiscoticketDB/editReview",
+                url = CookieManager.url+"DiscoticketDB/editReview",
                 formParameters = parameters {
                     append("id", review.id.toString())
                     append("description", review.description)
@@ -177,7 +177,7 @@ object ReviewsManager {
             }
             j.put("images",img)
 
-            val response: HttpResponse = client.post("http://192.168.1.177:8080/DiscoticketDB/editReview2") {
+            val response: HttpResponse = client.post(CookieManager.url+"DiscoticketDB/editReview2") {
                 contentType(ContentType.Application.Json)
                 setBody(j.toString())
             }
@@ -194,7 +194,7 @@ object ReviewsManager {
             val client = HttpClient()
 
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/DiscoticketDB/getReviewsByUserId",
+                url = CookieManager.url+"DiscoticketDB/getReviewsByUserId",
                 formParameters = parameters {
                     append("id", user.id.toString())
                 }
@@ -220,7 +220,7 @@ object ReviewsManager {
             val client = HttpClient()
 
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/DiscoticketDB/getReviewsByClubId",
+                url = CookieManager.url+"DiscoticketDB/getReviewsByClubId",
                 formParameters = parameters {
                     append("id", club.id.toString())
                 }

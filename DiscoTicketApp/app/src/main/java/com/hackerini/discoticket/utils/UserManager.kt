@@ -32,7 +32,7 @@ object UserManager {
         runBlocking{
             val client = HttpClient()
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/AccountsManager/registration",
+                url = CookieManager.url+"AccountsManager/registration",
                 formParameters = parameters {
                     append("username", email)
                     append("email", email)
@@ -65,7 +65,7 @@ object UserManager {
                 install(HttpCookies)
             }
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/AccountsManager/login",
+                url = CookieManager.url+"AccountsManager/login",
                 formParameters = parameters {
                     append("username", username)
                     append("password", password)
@@ -113,7 +113,7 @@ object UserManager {
                 }
             }
             val response: HttpResponse =
-                client.get("http://192.168.1.177:8080/AccountsManager/logout")
+                client.get(CookieManager.url+"AccountsManager/logout")
             client.close()
 
         }

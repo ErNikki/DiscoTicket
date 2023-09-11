@@ -18,7 +18,7 @@ object EventsManager {
         runBlocking {
             val gson = Gson()
             val client = HttpClient()
-            val response: HttpResponse = client.get("http://192.168.1.177:8080/DiscoticketDB/getEvents")
+            val response: HttpResponse = client.get(CookieManager.url+"DiscoticketDB/getEvents")
             client.close()
             val listPersonType = object : TypeToken<Array<Event>>() {}.type
             val a_events: Array<Event> = gson.fromJson(response.body() as String, listPersonType)

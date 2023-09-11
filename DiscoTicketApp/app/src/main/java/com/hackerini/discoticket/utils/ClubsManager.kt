@@ -25,7 +25,7 @@ object ClubsManager {
             val gson = Gson()
             //val jsonFileString = getJsonDataFromAsset(context, "clubs.json")
             val client = HttpClient ()
-            val response: HttpResponse = client.get("http://192.168.1.177:8080/DiscoticketDB/getClubs")
+            val response: HttpResponse = client.get(CookieManager.url+"DiscoticketDB/getClubs")
             client.close()
             val listPersonType = object : TypeToken<Array<Club>>() {}.type
             clubs = gson.fromJson(response.body() as String, listPersonType)
@@ -37,7 +37,7 @@ object ClubsManager {
         val gson = Gson()
         val client = HttpClient()
         val response: HttpResponse = client.submitForm(
-            url = "http://192.168.1.177:8080/DiscoticketDB/getClubById",
+            url = CookieManager.url+"DiscoticketDB/getClubById",
             formParameters = parameters {
                 //append("id", review?.clubId.toString())
                 append("id", id.toString())
@@ -53,7 +53,7 @@ object ClubsManager {
     fun downloadDrinks(club: Club) : Array<Drink> = runBlocking {
             val gson = Gson()
             val client = HttpClient()
-            val response: HttpResponse = client.get("http://192.168.1.177:8080/DiscoticketDB/getDrinks")
+            val response: HttpResponse = client.get(CookieManager.url+"DiscoticketDB/getDrinks")
             client.close()
             val listPersonType = object : TypeToken<Array<Drink>>() {}.type
             val list = gson.fromJson(response.body() as String, listPersonType) as Array<Drink>

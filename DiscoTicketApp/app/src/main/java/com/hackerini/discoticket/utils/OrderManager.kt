@@ -62,7 +62,7 @@ object OrderManager {
                 }
             }
 
-            val response: HttpResponse = client.post("http://192.168.1.177:8080/DiscoticketDB/insertOrder") {
+            val response: HttpResponse = client.post(CookieManager.url+"DiscoticketDB/insertOrder") {
                 contentType(ContentType.Application.Json)
                 setBody(j.toString())
             }
@@ -86,7 +86,7 @@ object OrderManager {
             val client = HttpClient()
 
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/DiscoticketDB/getOrdersByUserId",
+                url = CookieManager.url+"DiscoticketDB/getOrdersByUserId",
                 formParameters = parameters {
                     append("id", user.id.toString())
                 }
@@ -103,7 +103,7 @@ object OrderManager {
             val client = HttpClient()
 
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/DiscoticketDB/getTableIds",
+                url = CookieManager.url+"DiscoticketDB/getTableIds",
                 formParameters = parameters {
                     append("id", club.id.toString())
                     append("date",date)
