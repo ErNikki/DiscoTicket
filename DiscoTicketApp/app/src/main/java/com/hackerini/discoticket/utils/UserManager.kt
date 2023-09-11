@@ -109,7 +109,7 @@ object UserManager {
             val client = HttpClient {
                 install(HttpCookies) {
                     storage =
-                        ConstantCookiesStorage(Cookie(name = cookie.name, value = cookie.value, domain="192.168.1.177"))
+                        ConstantCookiesStorage(Cookie(name = cookie.name, value = cookie.value, domain=CookieManager.domain))
                 }
             }
             val response: HttpResponse =
@@ -131,7 +131,7 @@ object UserManager {
         runBlocking {
             val client = HttpClient()
             val response: HttpResponse = client.submitForm(
-                url = "http://192.168.1.177:8080/AccountsManager/getLoggedUser",
+                url = CookieManager.url+"AccountsManager/getLoggedUser",
                 formParameters = parameters {
                     append("id", userId.toString())
                 }
@@ -165,10 +165,10 @@ object UserManager {
             val cookie= CookieManager.getCookie()
             val client = HttpClient{
                 install(HttpCookies){
-                    storage = ConstantCookiesStorage(Cookie(name=cookie.name, value = cookie.value, domain = "192.168.1.177"))
+                    storage = ConstantCookiesStorage(Cookie(name=cookie.name, value = cookie.value, domain = CookieManager.domain))
                 }
             }
-            val response: HttpResponse = client.get("http://192.168.1.177:8080/AccountsManager/isSessionActive")
+            val response: HttpResponse = client.get(CookieManager.url+"AccountsManager/isSessionActive")
             val jsonObj = Json.parseToJsonElement(response.body())
                 .jsonObject
                 .toMap()
