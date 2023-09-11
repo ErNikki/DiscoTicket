@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.hackerini.discoticket"
-        minSdk 26
+        minSdk 31
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -76,6 +76,8 @@ dependencies {
     implementation( 'com.google.android.gms:play-services-location:21.0.0')
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
 
 
 

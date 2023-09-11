@@ -14,8 +14,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.getSystemService
 
@@ -81,13 +83,34 @@ class HomeFragment : Fragment(){
 
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-            /*
-            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY,null).addOnSuccessListener {
-                    location : Location? -> locationByGps=location
-            }
-            Log.d("GPS","entrato")
-            */
 
+            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY,null)
+                .addOnSuccessListener { location : Location? ->
+                // Got last known location. In some rare situations this can be null.
+                CoroutineScope(Dispatchers.Main).launch {
+
+                    location?.let { MyLocation.setLocation(it) }
+                    ClubsManager.computeDistance(location)
+
+                    view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                        ?.removeAllViews()
+                    var transaction = parentFragmentManager.beginTransaction()
+                    clubs.sortBy { club -> club.distanceFromYou }
+                    clubs.take(5).forEach { club ->
+                        transaction.add(
+                            R.id.HomeNearYouLinearLayout,
+                            HomePageDiscoElement.newInstance(club, true)
+                        )
+                    }
+                    transaction.commit()
+
+                }
+
+            }
+
+            Log.d("GPS","entrato")
+
+/*
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location : Location? ->
                     // Got last known location. In some rare situations this can be null.
@@ -107,9 +130,10 @@ class HomeFragment : Fragment(){
                             )
                         }
                         transaction.commit()
+
                     }
 
-                }
+                }*/
 
 
 
@@ -136,6 +160,9 @@ class HomeFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         lastViewedLL = view.findViewById(R.id.HomeLastViewedLinearLayout)
 
+        val layout=view.findViewById<ConstraintLayout>(R.id.FragmentHomeConstraintLayout)
+        val progressbar=view.findViewById<ProgressBar>(R.id.FragmentHomProgressBar)
+
         var transaction = parentFragmentManager.beginTransaction()
         clubs.sortBy { club -> club.distanceFromYou }
         clubs.take(5).forEach { club ->
@@ -158,6 +185,8 @@ class HomeFragment : Fragment(){
             }
 
         transaction.commit()
+        layout.visibility=View.VISIBLE
+        progressbar.visibility=View.GONE
     }
 
     override fun onDestroyView() {
