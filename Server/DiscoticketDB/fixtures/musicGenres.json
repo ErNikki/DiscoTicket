@@ -1,0 +1,47 @@
+[
+    {
+        "model": "DiscoticketDB.musicGenres",
+        "fields": {
+            "type": "Elettronica"
+        }
+
+    },
+    
+    {
+        "model": "DiscoticketDB.musicGenres",
+        "fields": {
+            "type": "Reggaeton"
+        }
+
+    },
+    
+    {
+        "model": "DiscoticketDB.musicGenres",
+        "fields": {
+            "type": "All'aperto"
+        }
+
+    },
+    {
+        "model": "DiscoticketDB.musicGenres",
+        "fields": {
+            "type": "Techno"
+        }
+
+    },
+    {
+        "model": "DiscoticketDB.musicGenres",
+        "fields": {
+            "type": "Rock"
+        }
+
+    },
+    {
+        "model": "DiscoticketDB.musicGenres",
+        "fields": {
+            "type": "Free entry"
+        }
+
+    }
+
+]

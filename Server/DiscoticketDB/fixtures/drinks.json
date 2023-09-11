@@ -1,0 +1,125 @@
+[
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 1,
+        "fields": {
+            "name": "Negroni",
+            "ingredients": [
+                "Gin",
+                "Campari",
+                "Vermouth",
+                "fetta di arancia"
+            ],
+            "imgUrl": "images/drinks/negroni.jpg"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 2,
+        "fields": {
+            "name": "Spritz",
+            "ingredients": [
+                "Aperol",
+                "Prosecco",
+                "soda",
+                "fetta di arancia"
+            ],
+            "imgUrl": "images/drinks/spritz.png"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 3,
+        "fields": {
+            "name": "Mojito",
+            "ingredients": [
+                "Rum ",
+                "foglie di menta",
+                "lime",
+                "zucchero",
+                "soda"
+            ],
+            "imgUrl": "images/drinks/mojito.jpg"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 4,
+        "fields": {
+            "name": "London Mule",
+            "ingredients": [
+                "Gin",
+                "succo di lime",
+                "ginger beer",
+                "fetta di lime"
+            ],
+            "imgUrl": "images/drinks/london-mule.jpg"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 5,
+        "fields": {
+            "name": "White Russian",
+            "ingredients": [
+                "Vodka",
+                "liquore al caff\u00c3\u00a8",
+                "panna fresca liquida"
+            ],
+            "imgUrl": "images/drinks/white-russian.jpg"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 6,
+        "fields": {
+            "name": "Whisky sour",
+            "ingredients": [
+                "Bourbon whiskey",
+                "succo di limone",
+                "sciroppo di zucchero"
+            ],
+            "imgUrl": "images/drinks/whisky-sour.jpg"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 7,
+        "fields": {
+            "name": "Gin Lemon",
+            "ingredients": [
+                "Gin",
+                "limonata",
+                "fetta di limone"
+            ],
+            "imgUrl": "images/drinks/gin-lemon.jpg"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 8,
+        "fields": {
+            "name": "Gin Tonic",
+            "ingredients": [
+                "Gin",
+                "acqua tonica",
+                "fetta di limone"
+            ],
+            "imgUrl": "images/drinks/gin-tonic.jpg"
+        }
+    },
+    {
+        "model": "DiscoticketDB.Drinks",
+        "pk": 9,
+        "fields": {
+            "name": "Margharita",
+            "ingredients": [
+                "Tequila",
+                "succo di lime",
+                "Triple sec",
+                "sale fino"
+            ],
+            "imgUrl": "images/drinks/margarita.jpg"
+        }
+    }
+]

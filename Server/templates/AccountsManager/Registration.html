@@ -1,0 +1,67 @@
+<!--
+<form id = 'registration' action={%url 'registration' %} method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form }}
+	<br>
+	<input type="submit" value="Register" class = "submit">
+</form>
+-->
+<html>
+  <head>
+    <style>
+      .label {
+        display: inline-block;
+        width: 200px;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Registration</h1>
+    <form id = 'registration' action={%url 'registration'%} method="post" enctype="multipart/form-data" onSubmit="return checkPassword(this)">
+    <div class="form-group">
+      <label class="label">Name: </label>
+      <input type="Name" id="name" name="name" required />
+    </div>
+    <div class="form-group">
+      <label class="label">Surname: </label>
+      <input type="Surname" id="surname" name="surname" required />
+    </div>
+		<div class="form-group">
+			<label class="label">Email: </label>
+			<input type="email" id="email" name="email" required />
+		</div>
+		<div class="form-group">
+			<label class="label">Username: </label>
+			<input type="username" id="username" name="username" required />
+		</div>
+		<div class="form-group">
+			<label class="label">Password: </label>
+			<input type="password" id="password" name="password" required />
+		</div>
+		<div class="form-group">
+			<label class="label">Confirm Password: </label>
+			<input type="password" id="confirmPassword" required />
+		</div>
+		<div><input type="submit" value="Submit" /></div>
+		
+    </form>
+
+    <script>
+      function checkPassword(form) {
+        const password = form.password.value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password != confirmPassword) {
+          alert("Error! Password did not match.");
+          return false;
+        } else {
+          alert("Password Match. Congratulations!");
+          return true;
+        }
+      }
+    </script>
+  </body>
+</html>
