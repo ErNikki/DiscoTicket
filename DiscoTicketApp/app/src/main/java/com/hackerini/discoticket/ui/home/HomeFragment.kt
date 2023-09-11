@@ -22,6 +22,8 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.OnSuccessListener
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
@@ -32,14 +34,18 @@ import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Event
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.EventsManager
+import com.hackerini.discoticket.utils.MyLocation
 import com.hackerini.discoticket.utils.ObjectLoader
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class HomeFragment : Fragment(){
 
     private var _binding: FragmentHomeBinding? = null
     private var currentLocation: Location? = null
-    //private lateinit var locationManager: LocationManager
+    private lateinit var locationManager: LocationManager
 
 
     // This property is only valid between onCreateView and
@@ -47,6 +53,7 @@ class HomeFragment : Fragment(){
     private val binding get() = _binding!!
     private lateinit var clubs: Array<Club>
     private lateinit var lastViewedLL: LinearLayout
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(
@@ -58,10 +65,8 @@ class HomeFragment : Fragment(){
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         askLocationPermissions()
-        //var latitude:Double=0.0
-        //var longitude:Double=0.0
 
-        var locationByGps: Location? = null
+
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -70,61 +75,57 @@ class HomeFragment : Fragment(){
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ){
-            var locationManager: LocationManager =
+            locationManager=
                 requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-            val gpsLocationListener: LocationListener = object : LocationListener {
-                override fun onLocationChanged(location: Location) {
-                    locationByGps = location
+
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+            /*
+            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY,null).addOnSuccessListener {
+                    location : Location? -> locationByGps=location
+            }
+            Log.d("GPS","entrato")
+            */
+
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location : Location? ->
+                    // Got last known location. In some rare situations this can be null.
+                    CoroutineScope(Dispatchers.Main).launch {
+
+                        location?.let { MyLocation.setLocation(it) }
+                        ClubsManager.computeDistance(location)
+
+                        view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                            ?.removeAllViews()
+                        var transaction = parentFragmentManager.beginTransaction()
+                        clubs.sortBy { club -> club.distanceFromYou }
+                        clubs.take(5).forEach { club ->
+                            transaction.add(
+                                R.id.HomeNearYouLinearLayout,
+                                HomePageDiscoElement.newInstance(club, true)
+                            )
+                        }
+                        transaction.commit()
+                    }
+
                 }
 
-                override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
-                override fun onProviderEnabled(provider: String) {}
-                override fun onProviderDisabled(provider: String) {}
-            }
 
-            val hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-            if (hasGps) {
-                locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    5000,
-                    0F,
-                    gpsLocationListener
-                )
-            }
-            val lastKnownLocationByGps =
-                locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            lastKnownLocationByGps?.let {
-                locationByGps = lastKnownLocationByGps
-            }
-            //latitude = locationByGps?.latitude!!
-            //longitude = locationByGps?.longitude!!
 
         }
         else{
+
             val alertDialogBuilder = AlertDialog.Builder(requireActivity())
             alertDialogBuilder.setMessage("Per far funzionare l'app è necessario attivare i permessi del gps!!")
             alertDialogBuilder.show()
-            /*
-            var locationManager: LocationManager =
-                requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            val lastKnownLocationByGps =
-                locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-            lastKnownLocationByGps?.let {
-                locationByGps = lastKnownLocationByGps
-            }*/
-            //latitude = locationByGps?.latitude!!
-            //longitude = locationByGps?.longitude!!
-
-            //Log.d("coords",latitude.toString())
-            //Log.d("coords",longitude.toString())
 
         }
+
         ClubsManager.downloadClubs()
         EventsManager.downloadEvents()
-        ClubsManager.computeDistance(locationByGps)
-        //locationByGps?.let { ClubsManager.computeDistance(it) }
+        //ClubsManager.computeDistance(locationByGps)
+
         clubs = ClubsManager.getClubs()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -197,18 +198,35 @@ class HomeFragment : Fragment(){
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
+            val locationPermissionRequest = registerForActivityResult(
+                ActivityResultContracts.RequestMultiplePermissions()
+            ) { permissions ->
+                when {
+                    permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                        // Precise location access granted.
 
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ),
-                1
-            );
+                    }
+                    permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                        // Only approximate location access granted.
+
+                    } else -> {
+                    // No location access granted.
+
+                }
+                }
+            }
+            locationPermissionRequest.launch(arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION))
+
         }
 
 
+
+    }
+
+    companion object{
+        var locationByGps: Location? = null
     }
 
 

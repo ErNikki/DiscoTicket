@@ -71,6 +71,7 @@ object ClubsManager {
 
     fun computeDistance(location: Location?){
         if(location==null){
+            Log.d("GPS","non funzionante")
             return
         }
         clubs.forEach {

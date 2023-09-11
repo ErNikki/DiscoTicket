@@ -32,6 +32,7 @@ import com.hackerini.discoticket.objects.Event
 import com.hackerini.discoticket.objects.FilterCriteria
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.EventsManager
+import com.hackerini.discoticket.utils.MyLocation
 import com.hackerini.discoticket.utils.ObjectLoader
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -76,7 +77,7 @@ class SearchByMap : AppCompatActivity() {
 
             )
         )
-
+        /*
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -90,6 +91,9 @@ class SearchByMap : AppCompatActivity() {
             return
         }
         val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+         */
+        val location=MyLocation.getLocation()
         if (location != null) {
             val mapController = map?.controller
             mapController?.setZoom(11.5)
