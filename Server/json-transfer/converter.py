@@ -55,7 +55,6 @@ for club in input_data_clubs:
         rFields["club"]=club["id"]
         rFields["date"]=datetime.datetime.strptime(review["date"], '%d/%m/%Y').strftime('%Y-%m-%d') 
         rFields["description"]=review["description"]
-        rFields["images"]=[]
         rFields["rating"]=review["rating"]
         rFields["user"]=random.randint(min_users,max_users)
         ratingCount+=review["rating"]
