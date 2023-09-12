@@ -21,6 +21,8 @@ import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
+import com.hackerini.discoticket.activities.Payment
+import com.hackerini.discoticket.activities.ShowImage
 import com.hackerini.discoticket.activities.WriteReview
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
@@ -85,7 +87,34 @@ class ReviewElement : Fragment() {
 
 
         CoroutineScope(Dispatchers.Default).launch {
+
             // do some long running operation or something
+            var images2: MutableList<Pair<Bitmap,String>> = mutableListOf<Pair<Bitmap,String>>()
+            review?.images?.forEach { i ->
+                images2.add(Pair(Picasso.get().load(i).get(),i))
+            }
+
+            requireActivity().runOnUiThread(Runnable {
+                // UI Updates
+                images2.forEach { pair ->
+                    var (im,path)=pair
+                    var imageView = ImageView(requireActivity())
+                    imageView.setAdjustViewBounds(true)
+                    //imageView.scaleType=ImageView.ScaleType.FIT_XY
+                    imageView.scaleType=ImageView.ScaleType.CENTER_CROP
+
+                    var resized =
+                        Bitmap.createScaledBitmap(im, 360, 540, true)
+                    imageView.setImageBitmap(resized)
+                    imageView.setOnClickListener{
+                        val intent = Intent(requireContext().applicationContext, ShowImage::class.java)
+                        intent.putExtra("image", path)
+                        startActivity(intent)
+                    }
+                    imageLayout.addView(imageView)
+                }
+            })
+            /*
             var images :MutableList<Bitmap> = mutableListOf<Bitmap>()
             review?.images?.forEach { i ->
                 images.add(Picasso.get().load(i).get())
@@ -102,17 +131,14 @@ class ReviewElement : Fragment() {
                     var resized =
                         Bitmap.createScaledBitmap(i, 360, 540, true)
                     imageView.setImageBitmap(resized)
+                    imageView.setOnClickListener{
+                        val intent = Intent(requireContext().applicationContext, ShowImage::class.java)
+                        intent.putExtra("image", i)
+                        startActivity(intent)
+                    }
                     imageLayout.addView(imageView)
                 }
-            })
-
-                //image_view.layoutParams.LayoutParams.MATCH_PARENT,
-                //    LayoutParams.WRAP_CONTENT))
-                //image_view.getLayoutParams().height = 5
-                //image_view.getLayoutParams().width = 5
-                //image_view.requestLayout()
-
-
+            })*/
 
         }
 
