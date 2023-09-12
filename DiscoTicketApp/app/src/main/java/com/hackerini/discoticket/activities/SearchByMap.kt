@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.location.LocationManager
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.text.SpannableString
@@ -33,7 +32,6 @@ import com.hackerini.discoticket.objects.FilterCriteria
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.MyLocation
-import com.hackerini.discoticket.utils.ObjectLoader
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint

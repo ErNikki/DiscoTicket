@@ -12,7 +12,6 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.objects.FilterCriteria
 import com.hackerini.discoticket.objects.LocationType
 import com.hackerini.discoticket.utils.ClubsManager
-import com.hackerini.discoticket.utils.ObjectLoader
 
 private const val ARG_PARAM1 = "param1"
 

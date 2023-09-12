@@ -2,24 +2,12 @@ package com.hackerini.discoticket.objects
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.hackerini.discoticket.room.FavoriteClub
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.EventsManager
-import com.hackerini.discoticket.utils.ObjectLoader
 import com.hackerini.discoticket.utils.ReviewsManager
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.forms.submitForm
-import io.ktor.client.statement.HttpResponse
-import io.ktor.http.parameters
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.jsonObject
 import java.io.Serializable
 import kotlin.reflect.KClass
 

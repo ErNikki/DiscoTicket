@@ -6,27 +6,22 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
-import com.google.android.gms.tasks.OnSuccessListener
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.databinding.FragmentHomeBinding
 import com.hackerini.discoticket.fragments.elements.ElementToShow
@@ -37,7 +32,6 @@ import com.hackerini.discoticket.objects.Event
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.MyLocation
-import com.hackerini.discoticket.utils.ObjectLoader
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -216,6 +210,11 @@ class HomeFragment : Fragment(){
         transaction.commit()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //Clear the Activity's bundle of the subsidiary fragments' bundles.
+        outState.clear()
+    }
 
     private fun askLocationPermissions(){
         if (ActivityCompat.checkSelfPermission(

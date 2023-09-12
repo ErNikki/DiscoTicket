@@ -22,7 +22,6 @@ import com.hackerini.discoticket.fragments.views.InfoDialog
 import com.hackerini.discoticket.fragments.views.QuanitySelector
 import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.utils.EventsManager
-import com.hackerini.discoticket.utils.ObjectLoader
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth

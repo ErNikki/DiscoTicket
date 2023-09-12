@@ -16,7 +16,6 @@ import com.hackerini.discoticket.fragments.views.Filter
 import com.hackerini.discoticket.objects.*
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.EventsManager
-import com.hackerini.discoticket.utils.ObjectLoader
 import java.util.*
 
 class SearchResult : AppCompatActivity(), AdapterView.OnItemSelectedListener, TextWatcher {

@@ -23,7 +23,6 @@ object ClubsManager {
 
         runBlocking {
             val gson = Gson()
-            //val jsonFileString = getJsonDataFromAsset(context, "clubs.json")
             val client = HttpClient ()
             val response: HttpResponse = client.get(CookieManager.url+"DiscoticketDB/getClubs")
             client.close()

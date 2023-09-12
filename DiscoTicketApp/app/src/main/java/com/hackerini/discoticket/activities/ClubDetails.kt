@@ -7,7 +7,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.StyleSpan
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +19,7 @@ import com.hackerini.discoticket.fragments.elements.HomePageEventElement
 import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.User
-import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.EventsManager
-import com.hackerini.discoticket.utils.ObjectLoader
 import com.squareup.picasso.Picasso
 
 class ClubDetails : AppCompatActivity() {
@@ -204,6 +201,11 @@ class ClubDetails : AppCompatActivity() {
         } else {
             loadFirstReview()
         }
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //Clear the Activity's bundle of the subsidiary fragments' bundles.
+        outState.clear()
     }
 
     fun loadFirstReview() {

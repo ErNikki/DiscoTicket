@@ -2,7 +2,6 @@ package com.hackerini.discoticket.fragments.elements
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.hackerini.discoticket.activities.ClubDetails
 import com.hackerini.discoticket.activities.QRdrinks
 import com.hackerini.discoticket.objects.Order
 import com.hackerini.discoticket.utils.ClubsManager
-import com.hackerini.discoticket.utils.ObjectLoader
 import java.text.SimpleDateFormat
 import java.util.*
 

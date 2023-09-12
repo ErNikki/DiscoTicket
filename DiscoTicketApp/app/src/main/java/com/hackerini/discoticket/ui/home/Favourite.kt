@@ -12,7 +12,6 @@ import com.hackerini.discoticket.R
 import com.hackerini.discoticket.fragments.elements.DiscoElement
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ClubsManager
-import com.hackerini.discoticket.utils.ObjectLoader
 import java.util.*
 
 class Favourite : Fragment() {
