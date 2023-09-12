@@ -10,8 +10,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
-import android.os.Handler
-import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
@@ -32,11 +30,11 @@ import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
+import com.hackerini.discoticket.utils.ExifUtil
 import com.hackerini.discoticket.utils.ReviewsManager
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
@@ -324,11 +322,11 @@ class WriteReview : AppCompatActivity() {
 
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            Log.d("pathToPhoto3",currentPhotoPath)
-            if (result.resultCode == Activity.RESULT_OK) {
-                Log.d("pathToPhoto1",currentPhotoPath)
 
-                images.add(BitmapFactory.decodeFile(currentPhotoPath))
+            if (result.resultCode == Activity.RESULT_OK) {
+                val myBitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                val orientedBitmap = ExifUtil.rotateBitmap(currentPhotoPath,myBitmap)
+                images.add(orientedBitmap)
                 /*
                 if (result?.data != null) {
                     //bitmap = result.data?.extras?.get("data") as? Bitmap
