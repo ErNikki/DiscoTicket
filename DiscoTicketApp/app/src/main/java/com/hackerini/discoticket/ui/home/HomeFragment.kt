@@ -108,7 +108,6 @@ class HomeFragment : Fragment(){
 
             }
 
-            Log.d("GPS","entrato")
 
 /*
             fusedLocationClient.lastLocation

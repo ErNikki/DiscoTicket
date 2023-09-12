@@ -2,6 +2,7 @@ package com.hackerini.discoticket.fragments.elements
 
 import android.animation.ValueAnimator
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
@@ -11,34 +12,27 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.animation.doOnEnd
 import androidx.fragment.app.Fragment
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.gson.reflect.TypeToken
 import com.hackerini.discoticket.R
 import com.hackerini.discoticket.activities.ClubDetails
 import com.hackerini.discoticket.activities.WriteReview
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Review
 import com.hackerini.discoticket.objects.User
-import com.hackerini.discoticket.room.RoomManager
-import com.hackerini.discoticket.utils.ObjectLoader
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.forms.submitForm
-import io.ktor.client.statement.HttpResponse
-import io.ktor.http.parameters
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.jsonObject
-import java.lang.Math.abs
-import java.security.MessageDigest
-import com.google.gson.Gson
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.ReviewsManager
+import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Math.abs
+import java.security.MessageDigest
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -87,6 +81,40 @@ class ReviewElement : Fragment() {
         val deleteButton = view.findViewById<ImageButton>(R.id.ReviewDeleteButton)
         val editButton = view.findViewById<ImageButton>(R.id.ReviewEditButton)
         val clubName = view.findViewById<TextView>(R.id.ReviewClubName)
+        var imageLayout= view.findViewById<LinearLayout>(R.id.ReviewElementImageLayout)
+
+
+        CoroutineScope(Dispatchers.Default).launch {
+            // do some long running operation or something
+            var images :MutableList<Bitmap> = mutableListOf<Bitmap>()
+            review?.images?.forEach { i ->
+                images.add(Picasso.get().load(i).get())
+            }
+
+
+            requireActivity().runOnUiThread(Runnable {
+                // UI Updates
+                images.forEach { i ->
+                    var imageView = ImageView(requireActivity())
+                    imageView.setAdjustViewBounds(true)
+                    //imageView.scaleType=ImageView.ScaleType.FIT_XY
+                    imageView.scaleType=ImageView.ScaleType.CENTER_CROP
+                    var resized =
+                        Bitmap.createScaledBitmap(i, 360, 540, true)
+                    imageView.setImageBitmap(resized)
+                    imageLayout.addView(imageView)
+                }
+            })
+
+                //image_view.layoutParams.LayoutParams.MATCH_PARENT,
+                //    LayoutParams.WRAP_CONTENT))
+                //image_view.getLayoutParams().height = 5
+                //image_view.getLayoutParams().width = 5
+                //image_view.requestLayout()
+
+
+
+        }
 
         val name = review!!.user.name
         val surname = review!!.user.surname

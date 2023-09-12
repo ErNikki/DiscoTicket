@@ -112,6 +112,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="TextView" />
+
+            <LinearLayout
+                android:id="@+id/ReviewElementImageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:accessibilityHeading="false"
+                android:alwaysDrawnWithCache="false"
+                android:animateLayoutChanges="false"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
