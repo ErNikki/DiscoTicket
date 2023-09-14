@@ -7,10 +7,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.location.LocationManager
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -32,6 +34,9 @@ import com.hackerini.discoticket.objects.FilterCriteria
 import com.hackerini.discoticket.utils.ClubsManager
 import com.hackerini.discoticket.utils.EventsManager
 import com.hackerini.discoticket.utils.MyLocation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -44,7 +49,7 @@ import java.util.*
 class SearchByMap : AppCompatActivity() {
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 1
     private var map: MapView? = null
-    private var filterCriteria = FilterCriteria()
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,39 +99,49 @@ class SearchByMap : AppCompatActivity() {
         val location=MyLocation.getLocation()
         if (location != null) {
             val mapController = map?.controller
-            mapController?.setZoom(11.5)
+            mapController?.setZoom(12)
             val startPoint = GeoPoint(location.latitude, location.longitude)
             mapController?.setCenter(startPoint)
         }
 
+        var filterCriteria = FilterCriteria()
         val discoChip = findViewById<Chip>(R.id.searchResultMapClubChip)
         val eventChip = findViewById<Chip>(R.id.searchResultMapEventChip)
         discoChip.setOnCheckedChangeListener { _, _ ->
-            filterCriteria.elementToShow =
-                getElementToShow(discoChip.isChecked, eventChip.isChecked)
-            loadContent()
+            CoroutineScope(Dispatchers.Default).launch {
+                filterCriteria.elementToShow =
+                    getElementToShow(discoChip.isChecked, eventChip.isChecked)
+                loadContent(filterCriteria)
+            }
+        }
+        eventChip.setOnClickListener{
+            Log.d("chip",eventChip.isChecked.toString())
         }
         eventChip.setOnCheckedChangeListener { _, _ ->
-            filterCriteria.elementToShow =
-                getElementToShow(discoChip.isChecked, eventChip.isChecked)
-            loadContent()
+            CoroutineScope(Dispatchers.Default).launch {
+                filterCriteria.elementToShow =
+                    getElementToShow(discoChip.isChecked, eventChip.isChecked)
+                loadContent(filterCriteria)
+            }
         }
         findViewById<Button>(R.id.SearchResultMapFilterButton).setOnClickListener {
-            //Instead to pass the String ciao, you will pass and object with the current search criteria
-            val filterFragment = Filter.newInstance(filterCriteria)
-            filterFragment.onOkClicked = { a ->
-                this.filterCriteria = a
-                loadContent()
+
+            CoroutineScope(Dispatchers.Default).launch {
+                //Instead to pass the String ciao, you will pass and object with the current search criteria
+                val filterFragment = Filter.newInstance(filterCriteria)
+                filterFragment.onOkClicked = { a ->
+                    loadContent(a)
+                }
+                filterFragment.show(supportFragmentManager, "prova")
             }
-            filterFragment.show(supportFragmentManager, "prova")
         }
         filterCriteria.elementToShow = ElementToShow.ALL
-        loadContent()
+        loadContent(filterCriteria)
 
     }
 
 
-    private fun loadContent() {
+    private fun loadContent(filterCriteria: FilterCriteria) {
         map?.overlays?.clear()
         val addedClubIds = LinkedList<Int>()
         val elementToShow = filterCriteria.elementToShow

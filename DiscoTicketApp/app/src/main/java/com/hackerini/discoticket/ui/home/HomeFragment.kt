@@ -62,6 +62,22 @@ class HomeFragment : Fragment(){
 
         askLocationPermissions()
 
+        ClubsManager.downloadClubs()
+        EventsManager.downloadEvents()
+        //ClubsManager.computeDistance(locationByGps)
+
+        clubs = ClubsManager.getClubs()
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lastViewedLL = view.findViewById(R.id.HomeLastViewedLinearLayout)
+
+        val layout=view.findViewById<ConstraintLayout>(R.id.FragmentHomeConstraintLayout)
+        val progressbar=view.findViewById<ProgressBar>(R.id.FragmentHomProgressBar)
 
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
@@ -80,90 +96,46 @@ class HomeFragment : Fragment(){
 
             fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY,null)
                 .addOnSuccessListener { location : Location? ->
-                // Got last known location. In some rare situations this can be null.
-                CoroutineScope(Dispatchers.Main).launch {
-
-                    location?.let { MyLocation.setLocation(it) }
-                    ClubsManager.computeDistance(location)
-
-                    view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
-                        ?.removeAllViews()
-                    var transaction = parentFragmentManager.beginTransaction()
-                    clubs.sortBy { club -> club.distanceFromYou }
-                    clubs.take(5).forEach { club ->
-                        transaction.add(
-                            R.id.HomeNearYouLinearLayout,
-                            HomePageDiscoElement.newInstance(club, true)
-                        )
-                    }
-                    transaction.commit()
-
-                }
-
-            }
-
-
-/*
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location : Location? ->
                     // Got last known location. In some rare situations this can be null.
-                    CoroutineScope(Dispatchers.Main).launch {
+                    CoroutineScope(Dispatchers.Default).launch {
 
                         location?.let { MyLocation.setLocation(it) }
                         ClubsManager.computeDistance(location)
 
-                        view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
-                            ?.removeAllViews()
-                        var transaction = parentFragmentManager.beginTransaction()
-                        clubs.sortBy { club -> club.distanceFromYou }
-                        clubs.take(5).forEach { club ->
-                            transaction.add(
-                                R.id.HomeNearYouLinearLayout,
-                                HomePageDiscoElement.newInstance(club, true)
-                            )
-                        }
-                        transaction.commit()
-
+                            requireActivity().runOnUiThread {
+                                view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                                    ?.removeAllViews()
+                                var transaction = parentFragmentManager.beginTransaction()
+                                clubs.sortBy { club -> club.distanceFromYou }
+                                clubs.take(5).forEach { club ->
+                                    transaction.add(
+                                        R.id.HomeNearYouLinearLayout,
+                                        HomePageDiscoElement.newInstance(club, true)
+                                    )
+                                }
+                                transaction.commit()
+                            }
                     }
 
-                }*/
-
-
+                }
 
         }
         else{
 
-            val alertDialogBuilder = AlertDialog.Builder(requireActivity())
-            alertDialogBuilder.setMessage("Per far funzionare l'app è necessario attivare i permessi del gps!!")
-            alertDialogBuilder.show()
-
+            var transaction = parentFragmentManager.beginTransaction()
+            clubs.sortBy { club -> club.distanceFromYou }
+            clubs.take(5).forEach { club ->
+                transaction.add(
+                    R.id.HomeNearYouLinearLayout,
+                    HomePageDiscoElement.newInstance(club, true)
+                )
+            }
+            transaction.commit()
         }
 
-        ClubsManager.downloadClubs()
-        EventsManager.downloadEvents()
-        //ClubsManager.computeDistance(locationByGps)
-
-        clubs = ClubsManager.getClubs()
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        lastViewedLL = view.findViewById(R.id.HomeLastViewedLinearLayout)
-
-        val layout=view.findViewById<ConstraintLayout>(R.id.FragmentHomeConstraintLayout)
-        val progressbar=view.findViewById<ProgressBar>(R.id.FragmentHomProgressBar)
 
         var transaction = parentFragmentManager.beginTransaction()
-        clubs.sortBy { club -> club.distanceFromYou }
-        clubs.take(5).forEach { club ->
-            transaction.add(
-                R.id.HomeNearYouLinearLayout,
-                HomePageDiscoElement.newInstance(club, true)
-            )
-        }
+
 
         val events = EventsManager.getEvents()
         val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
@@ -230,16 +202,80 @@ class HomeFragment : Fragment(){
             ) { permissions ->
                 when {
                     permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                        // Precise location access granted.
+                        locationManager=
+                            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+
+                        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+
+                        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY,null)
+                            .addOnSuccessListener { location : Location? ->
+                                // Got last known location. In some rare situations this can be null.
+                                CoroutineScope(Dispatchers.Default).launch {
+
+                                    location?.let { MyLocation.setLocation(it) }
+                                    ClubsManager.computeDistance(location)
+
+
+                                    requireActivity().runOnUiThread {
+                                        view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                                            ?.removeAllViews()
+                                        var transaction = parentFragmentManager.beginTransaction()
+                                        clubs.sortBy { club -> club.distanceFromYou }
+                                        clubs.take(5).forEach { club ->
+                                            transaction.add(
+                                                R.id.HomeNearYouLinearLayout,
+                                                HomePageDiscoElement.newInstance(club, true)
+                                            )
+                                        }
+                                        transaction.commit()
+                                    }
+                                }
+
+                            }
 
                     }
                     permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                        // Only approximate location access granted.
+                        locationManager=
+                            requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+
+                        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+
+                        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY,null)
+                            .addOnSuccessListener { location : Location? ->
+                                // Got last known location. In some rare situations this can be null.
+                                CoroutineScope(Dispatchers.Default).launch {
+
+                                    location?.let { MyLocation.setLocation(it) }
+                                    ClubsManager.computeDistance(location)
+
+
+                                    requireActivity().runOnUiThread {
+                                        view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                                            ?.removeAllViews()
+                                        var transaction = parentFragmentManager.beginTransaction()
+                                        clubs.sortBy { club -> club.distanceFromYou }
+                                        clubs.take(5).forEach { club ->
+                                            transaction.add(
+                                                R.id.HomeNearYouLinearLayout,
+                                                HomePageDiscoElement.newInstance(club, true)
+                                            )
+                                        }
+                                        transaction.commit()
+                                    }
+                                }
+
+                            }
 
                     } else -> {
-                    // No location access granted.
+                        val alertDialogBuilder = AlertDialog.Builder(requireActivity())
+                        alertDialogBuilder.setMessage("Per far funzionare l'app è necessario attivare i permessi del gps!!")
+                        alertDialogBuilder.show()
 
-                }
+                    }
                 }
             }
             locationPermissionRequest.launch(arrayOf(
