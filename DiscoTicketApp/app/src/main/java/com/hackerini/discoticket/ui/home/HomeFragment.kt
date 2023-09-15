@@ -114,12 +114,12 @@ class HomeFragment : Fragment(){
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        /*
+
         super.onSaveInstanceState(outState)
         //Clear the Activity's bundle of the subsidiary fragments' bundles.
         outState.clear()
 
-         */
+
     }
 
     private fun askLocationPermissions(){
