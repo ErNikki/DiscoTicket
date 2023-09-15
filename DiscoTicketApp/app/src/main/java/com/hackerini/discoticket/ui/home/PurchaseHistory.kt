@@ -62,6 +62,10 @@ class PurchaseHistory : Fragment() {
                         transaction.commit()
 
                     }
+                    else{
+                        scrollView.visibility=View.VISIBLE
+                        progressBar.visibility=View.GONE
+                    }
                 }
             }
             else{
