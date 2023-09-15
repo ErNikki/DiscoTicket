@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
@@ -15,10 +17,15 @@ import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.ReviewsManager
 import com.hackerini.discoticket.utils.UserManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyReviews : Fragment() {
     lateinit var warningText: TextView
     lateinit var reviewsLinearLayout: LinearLayout
+    lateinit var scrollView :ScrollView
+    lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +43,10 @@ class MyReviews : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         warningText = view.findViewById(R.id.MyReviewEmptyWarning)
-
         reviewsLinearLayout = view.findViewById(R.id.MyReviewLinearLayout)
+        scrollView=view.findViewById(R.id.MyReviewsScrollView)
+        progressBar=view.findViewById(R.id.MyReviewsprogressBar)
+
         loadContent()
     }
 
@@ -45,21 +54,26 @@ class MyReviews : Fragment() {
 
     fun loadContent() {
 
-        checkWarningText()
-        if (User.isLogged(requireContext())) {
-            val user = UserManager.getUser()
-            val reviews = ReviewsManager.downloadReviewsByUserId(user).toList()
-            //val dbUser = reviews!!.first().user
-            //reviews.first().reviews.forEach { e -> e.user = dbUser }
-            //if (reviews.isNotEmpty() == true) {
-            val transaction = parentFragmentManager.beginTransaction()
-            reviews.forEach { r ->
-                val fragment = ReviewElement.newInstance(r, true, true)
-                fragment.onRefreshNeeded = { checkWarningText() }
-                transaction.add(reviewsLinearLayout.id, fragment)
+
+
+        CoroutineScope(Dispatchers.Default).launch {
+            checkWarningText()
+            if (User.isLogged(requireContext())) {
+                val user = UserManager.getUser()
+                val reviews = ReviewsManager.downloadReviewsByUserId(user).toList()
+                requireActivity().runOnUiThread {
+                    val transaction = parentFragmentManager.beginTransaction()
+                    reviews.forEach { r ->
+                        val fragment = ReviewElement.newInstance(r, true, true)
+                        fragment.onRefreshNeeded = { checkWarningText() }
+                        transaction.add(reviewsLinearLayout.id, fragment)
+                    }
+                    progressBar.visibility=View.GONE
+                    scrollView.visibility=View.VISIBLE
+                    transaction.commit()
+                }
+
             }
-            transaction.commit()
-            //}
         }
     }
 
@@ -84,17 +98,29 @@ class MyReviews : Fragment() {
         var reviews = listOf<Review>()
 
         if (User.isLogged(requireContext())) {
-            val user = UserManager.getUser()
-            reviews = ReviewsManager.downloadReviewsByUserId(user).toList()
-            warningText.text = "Non ci sono recensioni per l'utente corrente."
+            requireActivity().runOnUiThread {
+                val user = UserManager.getUser()
+                reviews = ReviewsManager.downloadReviewsByUserId(user).toList()
+                warningText.text = "Non ci sono recensioni per l'utente corrente."
+            }
+
         }
         else
-            warningText.text = "Devi effettuare l'accesso per visualizzare le tue recensioni."
+            requireActivity().runOnUiThread {
+                warningText.text = "Devi effettuare l'accesso per visualizzare le tue recensioni."
+            }
 
-        if (reviews.isEmpty()) {
-            warningText.visibility = View.VISIBLE
-        } else {
-            warningText.visibility = View.GONE
+        requireActivity().runOnUiThread {
+            if (reviews.isEmpty()) {
+
+                warningText.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+
+            } else {
+
+                warningText.visibility = View.GONE
+
+            }
         }
 
     }

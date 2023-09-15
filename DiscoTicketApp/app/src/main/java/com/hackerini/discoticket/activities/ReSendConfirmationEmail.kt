@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.utils.CookieManager
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.submitForm
@@ -42,7 +43,7 @@ class ReSendConfirmationEmail : AppCompatActivity() {
                 runBlocking {
                     val client = HttpClient()
                     val response: HttpResponse = client.submitForm(
-                        url = "http://192.168.1.177:8080/AccountsManager/ReSendConfirmationEmail",
+                        url = CookieManager.url+"AccountsManager/ReSendConfirmationEmail",
                         formParameters = parameters {
                             append("email", email.text.toString())
 

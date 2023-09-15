@@ -1,29 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PurchaseHistory">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/PurchaseHistoryLinearLayout"
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/PurchaseHistoryProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/PurchaseHystoryNoPurchaseWarning"
+        <ScrollView
+            android:id="@+id/PurchaseHistoryScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/PurchaseHistoryLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="12dp"
-                android:paddingTop="20dp"
-                android:text="Non hai effettuato ancora nessun acquisto o non hai effettuato l'accesso."
-                android:textAlignment="center"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </ScrollView>
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/PurchaseHystoryNoPurchaseWarning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="12dp"
+                    android:paddingTop="20dp"
+                    android:text="Non hai effettuato ancora nessun acquisto o non hai effettuato l'accesso."
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

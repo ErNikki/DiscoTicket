@@ -50,6 +50,8 @@ class HomeFragment : Fragment(){
     private lateinit var clubs: Array<Club>
     private lateinit var lastViewedLL: LinearLayout
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var layout : ConstraintLayout
+    private lateinit var progressbar: ProgressBar
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(
@@ -62,11 +64,6 @@ class HomeFragment : Fragment(){
 
         askLocationPermissions()
 
-        ClubsManager.downloadClubs()
-        EventsManager.downloadEvents()
-        //ClubsManager.computeDistance(locationByGps)
-
-        clubs = ClubsManager.getClubs()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
@@ -76,82 +73,14 @@ class HomeFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         lastViewedLL = view.findViewById(R.id.HomeLastViewedLinearLayout)
 
-        val layout=view.findViewById<ConstraintLayout>(R.id.FragmentHomeConstraintLayout)
-        val progressbar=view.findViewById<ProgressBar>(R.id.FragmentHomProgressBar)
+        layout=view.findViewById<ConstraintLayout>(R.id.FragmentHomeConstraintLayout)
+        progressbar=view.findViewById<ProgressBar>(R.id.FragmentHomProgressBar)
 
-        if (ActivityCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ){
-            locationManager=
-                requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
-
-            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY,null)
-                .addOnSuccessListener { location : Location? ->
-                    // Got last known location. In some rare situations this can be null.
-                    CoroutineScope(Dispatchers.Default).launch {
-
-                        location?.let { MyLocation.setLocation(it) }
-                        ClubsManager.computeDistance(location)
-
-                            requireActivity().runOnUiThread {
-                                view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
-                                    ?.removeAllViews()
-                                var transaction = parentFragmentManager.beginTransaction()
-                                clubs.sortBy { club -> club.distanceFromYou }
-                                clubs.take(5).forEach { club ->
-                                    transaction.add(
-                                        R.id.HomeNearYouLinearLayout,
-                                        HomePageDiscoElement.newInstance(club, true)
-                                    )
-                                }
-                                transaction.commit()
-                            }
-                    }
-
-                }
-
-        }
-        else{
-
-            var transaction = parentFragmentManager.beginTransaction()
-            clubs.sortBy { club -> club.distanceFromYou }
-            clubs.take(5).forEach { club ->
-                transaction.add(
-                    R.id.HomeNearYouLinearLayout,
-                    HomePageDiscoElement.newInstance(club, true)
-                )
-            }
-            transaction.commit()
+        CoroutineScope(Dispatchers.Default).launch {
+            UpdateObjectsAndComputeDistance()
         }
 
 
-        var transaction = parentFragmentManager.beginTransaction()
-
-
-        val events = EventsManager.getEvents()
-        val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
-        events.filter { event -> event.date.after(Date()) }
-            .sortedBy { event -> event.date.time }
-            .take(5)
-            .forEach { event ->
-                transaction.add(
-                    R.id.HomeNextEventLinearLayout,
-                    HomePageEventElement.newInstance(event, elementToShow)
-                )
-            }
-
-        transaction.commit()
-        layout.visibility=View.VISIBLE
-        progressbar.visibility=View.GONE
     }
 
     override fun onDestroyView() {
@@ -164,28 +93,33 @@ class HomeFragment : Fragment(){
         lastViewedLL.removeAllViews()
         var transaction = parentFragmentManager.beginTransaction()
 
-        Club.getLastSeen(requireContext())
-            .forEach { item ->
-                if (item is Club)
-                    transaction.add(
-                        R.id.HomeLastViewedLinearLayout,
-                        HomePageDiscoElement.newInstance(item)
-                    )
-                else if (item is Event) {
-                    val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
-                    transaction.add(
-                        R.id.HomeLastViewedLinearLayout,
-                        HomePageEventElement.newInstance(item, elementToShow)
-                    )
+        if (ClubsManager.getClubs().isNotEmpty()) {
+            Club.getLastSeen(requireContext())
+                .forEach { item ->
+                    if (item is Club)
+                        transaction.add(
+                            R.id.HomeLastViewedLinearLayout,
+                            HomePageDiscoElement.newInstance(item)
+                        )
+                    else if (item is Event) {
+                        val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
+                        transaction.add(
+                            R.id.HomeLastViewedLinearLayout,
+                            HomePageEventElement.newInstance(item, elementToShow)
+                        )
+                    }
                 }
-            }
-        transaction.commit()
+            transaction.commit()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        /*
         super.onSaveInstanceState(outState)
         //Clear the Activity's bundle of the subsidiary fragments' bundles.
         outState.clear()
+
+         */
     }
 
     private fun askLocationPermissions(){
@@ -286,6 +220,105 @@ class HomeFragment : Fragment(){
 
 
 
+    }
+
+    private fun UpdateObjectsAndComputeDistance(){
+
+        ClubsManager.downloadClubs()
+        EventsManager.downloadEvents()
+
+        clubs = ClubsManager.getClubs()
+        if (ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ){
+            locationManager=
+                requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+
+            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY,null)
+                .addOnSuccessListener { location : Location? ->
+                    // Got last known location. In some rare situations this can be null.
+                    CoroutineScope(Dispatchers.Default).launch {
+
+                        location?.let { MyLocation.setLocation(it) }
+                        ClubsManager.computeDistance(location)
+
+                        requireActivity().runOnUiThread {
+                            view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                                ?.removeAllViews()
+                            var transaction = parentFragmentManager.beginTransaction()
+                            clubs.sortBy { club -> club.distanceFromYou }
+                            clubs.take(5).forEach { club ->
+                                transaction.add(
+                                    R.id.HomeNearYouLinearLayout,
+                                    HomePageDiscoElement.newInstance(club, true)
+                                )
+                            }
+                            transaction.commit()
+                        }
+                    }
+
+                }
+
+        }
+        else{
+            requireActivity().runOnUiThread {
+                var transaction = parentFragmentManager.beginTransaction()
+                clubs.sortBy { club -> club.distanceFromYou }
+                clubs.take(5).forEach { club ->
+                    transaction.add(
+                        R.id.HomeNearYouLinearLayout,
+                        HomePageDiscoElement.newInstance(club, true)
+                    )
+                }
+                transaction.commit()
+            }
+        }
+
+        requireActivity().runOnUiThread {
+            var transaction = parentFragmentManager.beginTransaction()
+
+            val events = EventsManager.getEvents()
+            val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
+            events.filter { event -> event.date.after(Date()) }
+                .sortedBy { event -> event.date.time }
+                .take(5)
+                .forEach { event ->
+                    transaction.add(
+                        R.id.HomeNextEventLinearLayout,
+                        HomePageEventElement.newInstance(event, elementToShow)
+                    )
+                }
+
+            Club.getLastSeen(requireContext())
+                .forEach { item ->
+                    if (item is Club)
+                        transaction.add(
+                            R.id.HomeLastViewedLinearLayout,
+                            HomePageDiscoElement.newInstance(item)
+                        )
+                    else if (item is Event) {
+                        val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
+                        transaction.add(
+                            R.id.HomeLastViewedLinearLayout,
+                            HomePageEventElement.newInstance(item, elementToShow)
+                        )
+                    }
+                }
+
+            layout.visibility=View.VISIBLE
+            progressbar.visibility=View.GONE
+
+            transaction.commit()
+        }
     }
 
     companion object{

@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.hackerini.discoticket.R
@@ -13,9 +15,14 @@ import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.room.RoomManager
 import com.hackerini.discoticket.utils.OrderManager
 import com.hackerini.discoticket.utils.UserManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PurchaseHistory : Fragment() {
 
+    lateinit var scrollView: ScrollView
+    lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -26,29 +33,45 @@ class PurchaseHistory : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_purchase_history, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressBar = view.findViewById(R.id.PurchaseHistoryProgressBar)
+        scrollView= view.findViewById(R.id.PurchaseHistoryScrollView)
 
-        //val orderDao = RoomManager(requireContext()).db.orderDao()
-        //val orders = orderDao.getAllOrderWithOrderItem()
-        if (User.isLogged(requireContext())) {
-            val orders=OrderManager.getOrders(UserManager.getUser())
-            //Log.d("purchaseHisoty",orders.first().toString())
-            if(orders.isNotEmpty()) {
-                view.findViewById<TextView>(R.id.PurchaseHystoryNoPurchaseWarning).visibility =
-                    View.GONE
-                val transaction = parentFragmentManager.beginTransaction()
-                orders.forEach { a ->
-                    transaction.add(
-                        R.id.PurchaseHistoryLinearLayout,
-                        PurchaseElement.newInstance(a)
-                    )
+        CoroutineScope(Dispatchers.Default).launch {
+            if (User.isLogged(requireContext())) {
+                val orders=OrderManager.getOrders(UserManager.getUser())
+
+                requireActivity().runOnUiThread {
+
+                    if (orders.isNotEmpty()) {
+                        view.findViewById<TextView>(R.id.PurchaseHystoryNoPurchaseWarning).visibility =
+                            View.GONE
+                        val transaction = parentFragmentManager.beginTransaction()
+                        orders.forEach { a ->
+                            transaction.add(
+                                R.id.PurchaseHistoryLinearLayout,
+                                PurchaseElement.newInstance(a)
+                            )
+                        }
+                        scrollView.visibility=View.VISIBLE
+                        progressBar.visibility=View.GONE
+                        transaction.commit()
+
+                    }
                 }
-                transaction.commit()
+            }
+            else{
+                requireActivity().runOnUiThread {
+                    scrollView.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
+                }
             }
         }
+
     }
 
     companion object {

@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.activities
 
 import android.app.ActionBar
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
@@ -21,6 +22,9 @@ import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.User
 import com.hackerini.discoticket.utils.EventsManager
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ClubDetails : AppCompatActivity() {
 
@@ -199,7 +203,7 @@ class ClubDetails : AppCompatActivity() {
             findViewById<TextView>(R.id.clubDeatilsReviwerNoReview).visibility =
                 View.VISIBLE
         } else {
-            loadFirstReview()
+            loadFirstReview(this)
         }
     }
     override fun onSaveInstanceState(outState: Bundle) {
@@ -208,15 +212,22 @@ class ClubDetails : AppCompatActivity() {
         outState.clear()
     }
 
-    fun loadFirstReview() {
-        val flag=User.isLogged(this)
-        val review=club!!.getReview(this)
-            .filter { r -> r.description.isNotBlank() }
-            .sortedByDescending { r -> r.getLongTime() }
-            .first()
-        val fragment = ReviewElement.newInstance(review, false, flag)
-        fragment.onRefreshNeeded = { loadFirstReview() }
-        supportFragmentManager.beginTransaction().add(fragmentContainerView.id, fragment).commit()
+    fun loadFirstReview(context: Context) {
+        CoroutineScope(Dispatchers.Default).launch {
+
+            val flag = User.isLogged(context)
+            val review = club!!.getReview(context)
+                .filter { r -> r.description.isNotBlank() }
+                .sortedByDescending { r -> r.getLongTime() }
+                .first()
+            val fragment = ReviewElement.newInstance(review, false, flag)
+            fragment.onRefreshNeeded = { loadFirstReview(context) }
+            runOnUiThread {
+                supportFragmentManager.beginTransaction().add(fragmentContainerView.id, fragment)
+                    .commit()
+            }
+        }
+
     }
 
     private fun userHasAReviewForThisClub(): Boolean {

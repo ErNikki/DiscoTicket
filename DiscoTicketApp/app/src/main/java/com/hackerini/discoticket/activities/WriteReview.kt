@@ -79,30 +79,17 @@ class WriteReview : AppCompatActivity() {
                 originalReview.images.forEach { i ->
                     images.add(Picasso.get().load(i).get())
                 }
-                val transaction = supportFragmentManager.beginTransaction()
-                images.forEach { i ->
-                    val fragment = ImageReviewElement.newInstance(images.indexOf(i))
-                    fragment.getBitmap = ::getBitmap
-                    fragment.deleteBitmap = ::deleteImageBitmap
-                    transaction.add(R.id.writeReviewFotoLayout, fragment)
+                runOnUiThread {
+                    val transaction = supportFragmentManager.beginTransaction()
+                    images.forEach { i ->
+                        val fragment = ImageReviewElement.newInstance(images.indexOf(i))
+                        fragment.getBitmap = ::getBitmap
+                        fragment.deleteBitmap = ::deleteImageBitmap
+                        transaction.add(R.id.writeReviewFotoLayout, fragment)
+                    }
+                    transaction.commit()
                 }
-                transaction.commit()
             }
-
-            /*
-            images= originalReview.aux.toMutableList()
-
-            val transaction = supportFragmentManager.beginTransaction()
-            images.forEach {
-                i->
-                val fragment = ImageReviewElement.newInstance(images.indexOf(i))
-                fragment.getBitmap=::getBitmap
-                fragment.deleteBitmap=::deleteImageBitmap
-                transaction.add(R.id.writeReviewFotoLayout, fragment)
-            }
-            transaction.commit()
-
-             */
 
         }
 
