@@ -42,10 +42,7 @@ class Review(
 
     var aux:Array<Bitmap> = arrayOf()
 
-    var images = arrayOf(
-        "https://www.corriere.it/methode_image/2020/08/24/Interni/Foto%20Interni%20-%20Trattate/disco-kpWG-U32002117676772MeH-656x492@Corriere-Web-Sezioni.jpg",
-        "https://lastnight.it/wp-content/uploads/2017/03/tavolo-discoteca-big-1.jpg"
-    )
+    var images = arrayOf<String>()
 
     fun getLongTime(): Long {
         val localDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(this.date)
