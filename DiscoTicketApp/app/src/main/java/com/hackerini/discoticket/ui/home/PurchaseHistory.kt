@@ -18,6 +18,7 @@ import com.hackerini.discoticket.utils.UserManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 class PurchaseHistory : Fragment() {
 
@@ -45,33 +46,43 @@ class PurchaseHistory : Fragment() {
             if (User.isLogged(requireContext())) {
                 val orders=OrderManager.getOrders(UserManager.getUser())
 
-                requireActivity().runOnUiThread {
+                if(isAdded) {
+                    requireActivity().runOnUiThread {
 
-                    if (orders.isNotEmpty()) {
-                        view.findViewById<TextView>(R.id.PurchaseHystoryNoPurchaseWarning).visibility =
-                            View.GONE
-                        val transaction = parentFragmentManager.beginTransaction()
-                        orders.forEach { a ->
-                            transaction.add(
-                                R.id.PurchaseHistoryLinearLayout,
-                                PurchaseElement.newInstance(a)
-                            )
+                        if (orders.isNotEmpty()) {
+                            view.findViewById<TextView>(R.id.PurchaseHystoryNoPurchaseWarning).visibility =
+                                View.GONE
+                            //if (isAdded) {
+                                val transaction = parentFragmentManager.beginTransaction()
+                                orders.forEach { a ->
+                                    transaction.add(
+                                        R.id.PurchaseHistoryLinearLayout,
+                                        PurchaseElement.newInstance(a)
+                                    )
+                                }
+                                scrollView.visibility = View.VISIBLE
+                                progressBar.visibility = View.GONE
+                                transaction.commit()
+                            //}
+
+                        } else {
+                            //if (isAdded) {
+                                scrollView.visibility = View.VISIBLE
+                                progressBar.visibility = View.GONE
+                            //}
                         }
-                        scrollView.visibility=View.VISIBLE
-                        progressBar.visibility=View.GONE
-                        transaction.commit()
-
-                    }
-                    else{
-                        scrollView.visibility=View.VISIBLE
-                        progressBar.visibility=View.GONE
                     }
                 }
+
             }
             else{
-                requireActivity().runOnUiThread {
-                    scrollView.visibility = View.VISIBLE
-                    progressBar.visibility = View.GONE
+                if(isAdded) {
+                    requireActivity().runOnUiThread {
+                        //if (isAdded) {
+                            scrollView.visibility = View.VISIBLE
+                            progressBar.visibility = View.GONE
+                        //}
+                    }
                 }
             }
         }

@@ -151,20 +151,25 @@ class HomeFragment : Fragment(){
                                     location?.let { MyLocation.setLocation(it) }
                                     ClubsManager.computeDistance(location)
 
+                                    if(isAdded) {
+                                        requireActivity().runOnUiThread {
 
-                                    requireActivity().runOnUiThread {
-                                        view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
-                                            ?.removeAllViews()
-                                        var transaction = parentFragmentManager.beginTransaction()
-                                        clubs.sortBy { club -> club.distanceFromYou }
-                                        clubs.take(5).forEach { club ->
-                                            transaction.add(
-                                                R.id.HomeNearYouLinearLayout,
-                                                HomePageDiscoElement.newInstance(club, true)
-                                            )
+                                            view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                                                ?.removeAllViews()
+                                            var transaction =
+                                                parentFragmentManager.beginTransaction()
+                                            clubs.sortBy { club -> club.distanceFromYou }
+                                            clubs.take(5).forEach { club ->
+                                                transaction.add(
+                                                    R.id.HomeNearYouLinearLayout,
+                                                    HomePageDiscoElement.newInstance(club, true)
+                                                )
+                                            }
+                                            transaction.commit()
+
                                         }
-                                        transaction.commit()
                                     }
+
                                 }
 
                             }
@@ -187,18 +192,23 @@ class HomeFragment : Fragment(){
                                     ClubsManager.computeDistance(location)
 
 
-                                    requireActivity().runOnUiThread {
-                                        view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
-                                            ?.removeAllViews()
-                                        var transaction = parentFragmentManager.beginTransaction()
-                                        clubs.sortBy { club -> club.distanceFromYou }
-                                        clubs.take(5).forEach { club ->
-                                            transaction.add(
-                                                R.id.HomeNearYouLinearLayout,
-                                                HomePageDiscoElement.newInstance(club, true)
-                                            )
+                                    if(isAdded) {
+                                        requireActivity().runOnUiThread {
+
+                                            view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                                                ?.removeAllViews()
+                                            var transaction =
+                                                parentFragmentManager.beginTransaction()
+                                            clubs.sortBy { club -> club.distanceFromYou }
+                                            clubs.take(5).forEach { club ->
+                                                transaction.add(
+                                                    R.id.HomeNearYouLinearLayout,
+                                                    HomePageDiscoElement.newInstance(club, true)
+                                                )
+                                            }
+                                            transaction.commit()
+
                                         }
-                                        transaction.commit()
                                     }
                                 }
 
@@ -251,18 +261,22 @@ class HomeFragment : Fragment(){
                         location?.let { MyLocation.setLocation(it) }
                         ClubsManager.computeDistance(location)
 
-                        requireActivity().runOnUiThread {
-                            view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
-                                ?.removeAllViews()
-                            var transaction = parentFragmentManager.beginTransaction()
-                            clubs.sortBy { club -> club.distanceFromYou }
-                            clubs.take(5).forEach { club ->
-                                transaction.add(
-                                    R.id.HomeNearYouLinearLayout,
-                                    HomePageDiscoElement.newInstance(club, true)
-                                )
+                        if(isAdded) {
+                            requireActivity().runOnUiThread {
+
+                                view?.findViewById<LinearLayout>(R.id.HomeNearYouLinearLayout)
+                                    ?.removeAllViews()
+                                var transaction = parentFragmentManager.beginTransaction()
+                                clubs.sortBy { club -> club.distanceFromYou }
+                                clubs.take(5).forEach { club ->
+                                    transaction.add(
+                                        R.id.HomeNearYouLinearLayout,
+                                        HomePageDiscoElement.newInstance(club, true)
+                                    )
+                                }
+                                transaction.commit()
+
                             }
-                            transaction.commit()
                         }
                     }
 
@@ -270,54 +284,62 @@ class HomeFragment : Fragment(){
 
         }
         else{
-            requireActivity().runOnUiThread {
-                var transaction = parentFragmentManager.beginTransaction()
-                clubs.sortBy { club -> club.distanceFromYou }
-                clubs.take(5).forEach { club ->
-                    transaction.add(
-                        R.id.HomeNearYouLinearLayout,
-                        HomePageDiscoElement.newInstance(club, true)
-                    )
+            if(isAdded) {
+                requireActivity().runOnUiThread {
+
+                    var transaction = parentFragmentManager.beginTransaction()
+                    clubs.sortBy { club -> club.distanceFromYou }
+                    clubs.take(5).forEach { club ->
+                        transaction.add(
+                            R.id.HomeNearYouLinearLayout,
+                            HomePageDiscoElement.newInstance(club, true)
+                        )
+                    }
+                    transaction.commit()
+
                 }
-                transaction.commit()
             }
         }
 
-        requireActivity().runOnUiThread {
-            var transaction = parentFragmentManager.beginTransaction()
+        if(isAdded) {
+            requireActivity().runOnUiThread {
 
-            val events = EventsManager.getEvents()
-            val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
-            events.filter { event -> event.date.after(Date()) }
-                .sortedBy { event -> event.date.time }
-                .take(5)
-                .forEach { event ->
-                    transaction.add(
-                        R.id.HomeNextEventLinearLayout,
-                        HomePageEventElement.newInstance(event, elementToShow)
-                    )
-                }
+                var transaction = parentFragmentManager.beginTransaction()
 
-            Club.getLastSeen(requireContext())
-                .forEach { item ->
-                    if (item is Club)
+                val events = EventsManager.getEvents()
+                val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
+                events.filter { event -> event.date.after(Date()) }
+                    .sortedBy { event -> event.date.time }
+                    .take(5)
+                    .forEach { event ->
                         transaction.add(
-                            R.id.HomeLastViewedLinearLayout,
-                            HomePageDiscoElement.newInstance(item)
-                        )
-                    else if (item is Event) {
-                        val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
-                        transaction.add(
-                            R.id.HomeLastViewedLinearLayout,
-                            HomePageEventElement.newInstance(item, elementToShow)
+                            R.id.HomeNextEventLinearLayout,
+                            HomePageEventElement.newInstance(event, elementToShow)
                         )
                     }
-                }
 
-            layout.visibility=View.VISIBLE
-            progressbar.visibility=View.GONE
+                Club.getLastSeen(requireContext())
+                    .forEach { item ->
+                        if (item is Club)
+                            transaction.add(
+                                R.id.HomeLastViewedLinearLayout,
+                                HomePageDiscoElement.newInstance(item)
+                            )
+                        else if (item is Event) {
+                            val elementToShow = ElementToShow.Date.or(ElementToShow.Location)
+                            transaction.add(
+                                R.id.HomeLastViewedLinearLayout,
+                                HomePageEventElement.newInstance(item, elementToShow)
+                            )
+                        }
+                    }
 
-            transaction.commit()
+                layout.visibility = View.VISIBLE
+                progressbar.visibility = View.GONE
+
+                transaction.commit()
+
+            }
         }
     }
 

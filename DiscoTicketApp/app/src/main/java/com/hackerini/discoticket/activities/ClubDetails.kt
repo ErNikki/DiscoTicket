@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.activities
 
 import android.app.ActionBar
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
@@ -203,29 +204,43 @@ class ClubDetails : AppCompatActivity() {
             findViewById<TextView>(R.id.clubDeatilsReviwerNoReview).visibility =
                 View.VISIBLE
         } else {
-            loadFirstReview(this)
+            loadFirstReview(this,this)
         }
     }
+    /*
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //Clear the Activity's bundle of the subsidiary fragments' bundles.
         outState.clear()
-    }
+    }*/
 
-    fun loadFirstReview(context: Context) {
+    fun loadFirstReview(activity: Activity,context:Context) {
+
         CoroutineScope(Dispatchers.Default).launch {
 
-            val flag = User.isLogged(context)
-            val review = club!!.getReview(context)
-                .filter { r -> r.description.isNotBlank() }
-                .sortedByDescending { r -> r.getLongTime() }
-                .first()
-            val fragment = ReviewElement.newInstance(review, false, flag)
-            fragment.onRefreshNeeded = { loadFirstReview(context) }
-            runOnUiThread {
-                supportFragmentManager.beginTransaction().add(fragmentContainerView.id, fragment)
-                    .commit()
+            try {
+
+
+                val flag = User.isLogged(context)
+                val review = club!!.getReview(context)
+                    .filter { r -> r.description.isNotBlank() }
+                    .sortedByDescending { r -> r.getLongTime() }
+                    .first()
+                val fragment = ReviewElement.newInstance(review, false, flag)
+                fragment.onRefreshNeeded = { loadFirstReview(activity,context) }
+                runOnUiThread {
+                    if (! activity.isDestroyed) {
+                        supportFragmentManager.beginTransaction()
+                            .add(fragmentContainerView.id, fragment)
+                            .commit()
+                    }
+                }
             }
+            finally {
+
+            }
+
+
         }
 
     }

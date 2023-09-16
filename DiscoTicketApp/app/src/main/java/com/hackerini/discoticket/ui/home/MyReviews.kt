@@ -61,16 +61,20 @@ class MyReviews : Fragment() {
             if (User.isLogged(requireContext())) {
                 val user = UserManager.getUser()
                 val reviews = ReviewsManager.downloadReviewsByUserId(user).toList()
-                requireActivity().runOnUiThread {
-                    val transaction = parentFragmentManager.beginTransaction()
-                    reviews.forEach { r ->
-                        val fragment = ReviewElement.newInstance(r, true, true)
-                        fragment.onRefreshNeeded = { checkWarningText() }
-                        transaction.add(reviewsLinearLayout.id, fragment)
+                if(isAdded) {
+                    requireActivity().runOnUiThread {
+
+                        val transaction = parentFragmentManager.beginTransaction()
+                        reviews.forEach { r ->
+                            val fragment = ReviewElement.newInstance(r, true, true)
+                            fragment.onRefreshNeeded = { checkWarningText() }
+                            transaction.add(reviewsLinearLayout.id, fragment)
+                        }
+                        progressBar.visibility = View.GONE
+                        scrollView.visibility = View.VISIBLE
+                        transaction.commit()
+
                     }
-                    progressBar.visibility=View.GONE
-                    scrollView.visibility=View.VISIBLE
-                    transaction.commit()
                 }
 
             }
@@ -98,28 +102,35 @@ class MyReviews : Fragment() {
         var reviews = listOf<Review>()
 
         if (User.isLogged(requireContext())) {
-            requireActivity().runOnUiThread {
-                val user = UserManager.getUser()
-                reviews = ReviewsManager.downloadReviewsByUserId(user).toList()
-                warningText.text = "Non ci sono recensioni per l'utente corrente."
+            if(isAdded) {
+                requireActivity().runOnUiThread {
+                    val user = UserManager.getUser()
+                    reviews = ReviewsManager.downloadReviewsByUserId(user).toList()
+                    warningText.text = "Non ci sono recensioni per l'utente corrente."
+                }
             }
 
         }
         else
-            requireActivity().runOnUiThread {
-                warningText.text = "Devi effettuare l'accesso per visualizzare le tue recensioni."
+            if(isAdded) {
+                requireActivity().runOnUiThread {
+                    warningText.text =
+                        "Devi effettuare l'accesso per visualizzare le tue recensioni."
+                }
             }
 
-        requireActivity().runOnUiThread {
-            if (reviews.isEmpty()) {
+        if(isAdded) {
+            requireActivity().runOnUiThread {
+                if (reviews.isEmpty()) {
 
-                warningText.visibility = View.VISIBLE
-                progressBar.visibility = View.GONE
+                    warningText.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
 
-            } else {
+                } else {
 
-                warningText.visibility = View.GONE
+                    warningText.visibility = View.GONE
 
+                }
             }
         }
 

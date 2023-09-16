@@ -47,6 +47,7 @@ class WriteReview : AppCompatActivity() {
     var images :MutableList<Bitmap> = mutableListOf<Bitmap>()
     var bitmap: Bitmap? =null
     lateinit var photoLayout: LinearLayout
+    val activity: Activity=this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,14 +81,16 @@ class WriteReview : AppCompatActivity() {
                     images.add(Picasso.get().load(i).get())
                 }
                 runOnUiThread {
-                    val transaction = supportFragmentManager.beginTransaction()
-                    images.forEach { i ->
-                        val fragment = ImageReviewElement.newInstance(images.indexOf(i))
-                        fragment.getBitmap = ::getBitmap
-                        fragment.deleteBitmap = ::deleteImageBitmap
-                        transaction.add(R.id.writeReviewFotoLayout, fragment)
+                    if (!activity.isDestroyed) {
+                        val transaction = supportFragmentManager.beginTransaction()
+                        images.forEach { i ->
+                            val fragment = ImageReviewElement.newInstance(images.indexOf(i))
+                            fragment.getBitmap = ::getBitmap
+                            fragment.deleteBitmap = ::deleteImageBitmap
+                            transaction.add(R.id.writeReviewFotoLayout, fragment)
+                        }
+                        transaction.commit()
                     }
-                    transaction.commit()
                 }
             }
 
