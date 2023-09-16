@@ -131,8 +131,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-SERVER_DOMAIN = '192.168.1.177:8080'
-REAL_SERVER_DOMAIN_ = '192.168.1.177:8080'
+SERVER_DOMAIN = 'https://7a28-2001-b07-6469-389f-994d-dbd7-5422-8acf.ngrok-free.app'
+REAL_SERVER_DOMAIN_ = 'https://7a28-2001-b07-6469-389f-994d-dbd7-5422-8acf.ngrok-free.app'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp-mail.outlook.com'
