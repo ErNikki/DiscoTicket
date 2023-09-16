@@ -338,7 +338,7 @@ class HomeFragment : Fragment(){
                 layout.visibility = View.VISIBLE
                 progressbar.visibility = View.GONE
 
-                transaction.commit()
+                transaction.commitAllowingStateLoss()
 
             }
         }
