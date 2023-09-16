@@ -61,8 +61,9 @@ class ClubDetails : AppCompatActivity() {
         writeReviewButton = findViewById(R.id.clubDetailsWriteReviewButton)
 
 
-        val reviews = club!!.reviews
-        val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
+        //val reviews = club!!.reviews
+        //val average = reviews.sumOf { r -> r.rating } / reviews.size.toFloat()
+        val average=club!!.rating
         val boldSpannableString = SpannableString(
             "Ingresso semplice a " + String.format(
                 "%.2f",
@@ -75,7 +76,8 @@ class ClubDetails : AppCompatActivity() {
         address.text = club!!.address
         ratingBar.rating = average.toFloat()
         reviewsAvg.text = String.format("%.1f", average)
-        totalReview.text = "(${reviews.size} recensioni)"
+        //totalReview.text = "(${reviews.size} recensioni)"
+        totalReview.visibility=View.GONE
         clubDescription.text = club!!.description
         price.text = boldSpannableString
         distance.text = "Si trova a " + club!!.distanceFromYou + "km da te"
@@ -198,7 +200,7 @@ class ClubDetails : AppCompatActivity() {
 
         fragmentContainerView.removeAllViews()
         //Review
-        if (club!!.reviews.isEmpty()) {
+        if (! club!!.hasReviews()) {
             fragmentContainerView.visibility =
                 View.GONE
             findViewById<TextView>(R.id.clubDeatilsReviwerNoReview).visibility =

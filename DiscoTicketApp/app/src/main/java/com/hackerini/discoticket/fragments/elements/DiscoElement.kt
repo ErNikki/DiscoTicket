@@ -88,17 +88,17 @@ class DiscoElement : Fragment(), GestureDetector.OnGestureListener {
         val discoRatingAmount = view.findViewById<TextView>(R.id.discoElementReviewAmount)
         val labelLayout = view.findViewById<LinearLayout>(R.id.discoElementLabelsLayout)
 
-        val reviews = club!!.reviews
-        val average = reviews.sumOf { r: Review -> r.rating } / reviews.size.toFloat()
-
+        //val reviews = club!!.reviews
+        //val average = reviews.sumOf { r: Review -> r.rating } / reviews.size.toFloat()
+        val average=club!!.rating
         discoName.text = club?.name
         discoAddress.text = club?.address
-        //discoRating.rating = club?.rating!!
+
         discoRating.rating = average.toFloat()
-        //discoRatingAvg.setText(club?.rating.toString())
+
         discoRatingAvg.text = String.format("%.1f", average)
-        //discoRatingAmount.setText("(" + club?.reviewAmount.toString() + " Recensioni)")
-        discoRatingAmount.text = "(${reviews.size} recensioni)"
+
+        //discoRatingAmount.text = "(${reviews.size} recensioni)"
 
         val imageSize = 250
         Picasso.get().load(club?.imgUrl).resize(imageSize, imageSize).into(image)

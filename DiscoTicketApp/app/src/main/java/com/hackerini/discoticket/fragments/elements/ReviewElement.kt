@@ -94,6 +94,7 @@ class ReviewElement : Fragment() {
                 images2.add(Pair(Picasso.get().load(i).get(),i))
             }
 
+            if(isAdded){
             requireActivity().runOnUiThread(Runnable {
                 // UI Updates
                 images2.forEach { pair ->
@@ -114,6 +115,7 @@ class ReviewElement : Fragment() {
                     imageLayout.addView(imageView)
                 }
             })
+            }
             /*
             var images :MutableList<Bitmap> = mutableListOf<Bitmap>()
             review?.images?.forEach { i ->

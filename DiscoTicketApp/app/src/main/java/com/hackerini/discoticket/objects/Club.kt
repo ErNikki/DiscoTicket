@@ -17,7 +17,8 @@ class Club : Serializable {
     var address: String = ""
     var rating: Float = 0F
     var imgUrl: String = "https://img.freepik.com/free-vector/disco-ball-background_1284-5130.jpg"
-    var reviews = arrayOf<Review>()
+    //var reviews = arrayOf<Review>()
+    //var numberOfReviews:Int = 0
     var description =""
     var distanceFromYou = 0
     var simpleTicketPrice = 0F
@@ -37,12 +38,15 @@ class Club : Serializable {
         }
 
     fun getReview(context: Context): List<Review>{
-        reviews=ReviewsManager.downloadReviewByClub(this)
-        return reviews.toList()
+        return ReviewsManager.downloadReviewByClub(this).toList()
+
         }
 
 
-
+    //DA IMPLEMENTARE
+    fun hasReviews():Boolean{
+        return true
+    }
 
     fun isFavorite(context: Context): Boolean {
         val favDao = RoomManager(context).db.favoriteDao()

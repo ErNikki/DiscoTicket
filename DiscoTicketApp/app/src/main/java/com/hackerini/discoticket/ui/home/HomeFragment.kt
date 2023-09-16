@@ -113,6 +113,7 @@ class HomeFragment : Fragment(){
         }
     }
 
+    /*
     override fun onSaveInstanceState(outState: Bundle) {
 
         super.onSaveInstanceState(outState)
@@ -120,7 +121,7 @@ class HomeFragment : Fragment(){
         outState.clear()
 
 
-    }
+    }*/
 
     private fun askLocationPermissions(){
         if (ActivityCompat.checkSelfPermission(
