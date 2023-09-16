@@ -209,12 +209,12 @@ class ClubDetails : AppCompatActivity() {
             loadFirstReview(this,this)
         }
     }
-    /*
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //Clear the Activity's bundle of the subsidiary fragments' bundles.
         outState.clear()
-    }*/
+    }
 
     fun loadFirstReview(activity: Activity,context:Context) {
 
@@ -234,7 +234,7 @@ class ClubDetails : AppCompatActivity() {
                     if (! activity.isDestroyed) {
                         supportFragmentManager.beginTransaction()
                             .add(fragmentContainerView.id, fragment)
-                            .commit()
+                            .commitAllowingStateLoss()
                     }
                 }
             }
