@@ -46,7 +46,7 @@ def drinkSerialize(drink):
     data["name"]=drink.name
     data["ingredients"]=drink.ingredients
     #controlla nell'app se ci sta ancora la stringa
-    data["imagePath"]="http://"+settings.SERVER_DOMAIN+drink.imgUrl.url
+    data["imagePath"]=settings.SERVER_DOMAIN+drink.imgUrl.url
     return data
     
 def eventsSerialize():
@@ -90,7 +90,7 @@ def clubSerialize(club):
     data["rating"]=club.rating
     data["musicGenres"]= musicGenresSerializeByClubId(club.id)
     data["gpsCords"]= gpsCoordsSerialize(club.id)
-    data["reviews"]=reviewsSerializeByClub(club.id)
+    #data["reviews"]=reviewsSerializeByClub(club.id)
     return data
 
 def reviewsSerializeByUser(user_id):
@@ -115,14 +115,14 @@ def reviewsSerializeByClub(club_id):
     
 
 def reviewSerialize(review):
-    #check for images "http://"+settings.SERVER_DOMAIN+review.images.
+    #check for images settings.SERVER_DOMAIN+review.images.
     img=[]
     for i in review.imagesreview_set.filter().exclude(image=None).all():
-        img.append("http://"+settings.SERVER_DOMAIN+i.image.url)
+        img.append(settings.SERVER_DOMAIN+i.image.url)
     """
     if review.imagesreview_set:
         img=[]
-        img.append("http://"+settings.SERVER_DOMAIN+review.images.url)
+        img.append(settings.SERVER_DOMAIN+review.images.url)
     else:
         img=[]
     """
@@ -286,7 +286,7 @@ def insertReviewRequest2(request):
                 #images=imgs[0]
             )
             review.save()
-            
+                        
             index=0
             for codedImage in o["images"]:
                 imageReview=ImagesReview.objects.create(review=review)
@@ -305,6 +305,17 @@ def insertReviewRequest2(request):
                 response_data["id"]=-1
                 response_data["message"]="c'è stato un errore con l'inserimento"
             else:
+                
+                #Ricomputo l'average
+                club=Clubs.objects.get(id=o["clubId"])
+                avg=0.0
+                counter=0
+                for review in club.reviews_set.all():
+                    avg+=review.rating
+                    counter+=1
+                club.rating=avg/counter
+                club.save()
+                    
                 response_data={}
                 response_data["success"]=True
                 response_data["id"]=created
@@ -397,6 +408,16 @@ def editReviewRequest2(request):
             review.description=o["description"]
             review.rating=o["rating"]
             review.save()
+            
+            #Ricomputo l'average
+            club=review.club
+            avg=0.0
+            counter=0
+            for review in club.reviews_set.all():
+                avg+=review.rating
+                counter+=1
+            club.rating=avg/counter
+            club.save()
             
             response_data={}
             response_data["success"]=True
