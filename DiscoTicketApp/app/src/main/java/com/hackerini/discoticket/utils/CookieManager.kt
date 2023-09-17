@@ -4,8 +4,8 @@ import io.ktor.http.Cookie
 
 object CookieManager {
     private var cookie : Cookie = Cookie(name="sessionid",value="")
-    var url:String="https://303d-2001-b07-6469-389f-994d-dbd7-5422-8acf.ngrok-free.app/"
-    var domain:String="303d-2001-b07-6469-389f-994d-dbd7-5422-8acf.ngrok-free.app"
+    var url:String="https://1824-2001-b07-6469-389f-38f6-8a45-2d2d-3c70.ngrok-free.app/"
+    var domain:String="1824-2001-b07-6469-389f-38f6-8a45-2d2d-3c70.ngrok-free.app"
 
     fun setCookie(cookie : Cookie){
         this.cookie=cookie

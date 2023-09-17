@@ -126,6 +126,7 @@ class MyCoupon : Fragment() {
         convertButton.isEnabled =
             user.points > resources.getInteger(R.integer.pointToEuroThreshold)
 
+        /*
         //Fill linear layout with all discounts
         val userWithDiscount =
             RoomManager(requireContext()).db.userDao().getUserDiscount(user.id).first()
@@ -137,6 +138,8 @@ class MyCoupon : Fragment() {
             transaction.add(linearLayout.id, fragment)
         }
         transaction.commit()
+
+         */
     }
 
     fun toogleConvertCardView() {

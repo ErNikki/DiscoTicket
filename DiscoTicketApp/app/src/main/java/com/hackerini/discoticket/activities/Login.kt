@@ -185,20 +185,15 @@ class Login : AppCompatActivity(), TextWatcher {
     }
 
     private fun onSocialLoginClick(view: View) {
-        val hashedPassword = User.hashPassword("password")
+        //val hashedPassword = User.hashPassword("password")
         val loggedUser =
             when (view.id) {
-                loginWithGoogle.id -> userDao.getUserByCredential(
-                    "utente@google.com",
-                    hashedPassword
-                )
-                loginWithFacebook.id -> userDao.getUserByCredential(
-                    "utente@facebook.com",
-                    hashedPassword
-                )
-                loginWithApple.id -> userDao.getUserByCredential("utente@apple.com", hashedPassword)
-                else -> listOf()
+                loginWithGoogle.id->{}
+                loginWithFacebook.id ->{}
+                loginWithApple.id -> {}
+                else -> {}
             }
+        /*
         if (loggedUser.isEmpty()) {
             val builder = MaterialAlertDialogBuilder(this)
             builder.setTitle("Errore")
@@ -218,7 +213,8 @@ class Login : AppCompatActivity(), TextWatcher {
                     actionsAfterLogin(loggedUser.first())
                 }
             }
-        }
+        }*/
+
 
     }
 
