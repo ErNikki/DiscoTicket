@@ -12,4 +12,5 @@
     <color name="eventAltColor">#FFD4A7</color>
     <color name="clubColorStrong">#4F5CFF</color>
     <color name="eventColorStrong">#FFAC55</color>
+    <color name="location">#E52800</color>
 </resources>
