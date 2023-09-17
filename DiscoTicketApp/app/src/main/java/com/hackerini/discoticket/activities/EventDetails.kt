@@ -1,6 +1,7 @@
 package com.hackerini.discoticket.activities
 
 import android.app.ActionBar
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -8,6 +9,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -16,13 +18,20 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import com.hackerini.discoticket.R
+import com.hackerini.discoticket.fragments.elements.ReviewElement
 import com.hackerini.discoticket.objects.Club
 import com.hackerini.discoticket.objects.Event
+import com.hackerini.discoticket.objects.User
+import com.hackerini.discoticket.utils.MeteoManager
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 class EventDetails : AppCompatActivity() {
+    val activity:Activity=this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
@@ -30,6 +39,24 @@ class EventDetails : AppCompatActivity() {
         val event = intent.getSerializableExtra("event") as Event
         Club.addToLastSeen(this, event.id, Event::class)
         val df = SimpleDateFormat("dd/MM/YYYY", Locale.getDefault())
+
+        CoroutineScope(Dispatchers.Default).launch {
+
+            try {
+                var (predizione,temperatura)=MeteoManager.downloadMeteo(event)
+
+                runOnUiThread {
+                    if (! activity.isDestroyed) {
+                        //cambia l'interfaccia qui
+                    }
+                }
+            }
+            finally {
+
+            }
+
+
+        }
 
         val eventImage = findViewById<ImageView>(R.id.eventDetaileventImage)
         val eventName = findViewById<TextView>(R.id.eventDetailseventName)
