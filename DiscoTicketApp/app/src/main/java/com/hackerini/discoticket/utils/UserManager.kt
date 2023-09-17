@@ -114,9 +114,6 @@ object UserManager {
                     storage = ConstantCookiesStorage(Cookie(name=cookie.name, value = cookie.value, domain = CookieManager.domain))
                 }
             }
-
-            Log.d("deleteAcc",user.email)
-            Log.d("deleteAcc",user.password)
             val response: HttpResponse = client.submitForm(
                 url = CookieManager.url+"AccountsManager/deleteAccount",
                 formParameters = parameters {
