@@ -99,12 +99,17 @@ class Login : AppCompatActivity(), TextWatcher {
                 alertDialog.setTitle("Conferma eliminazione account")
                 alertDialog.setMessage("Sei sicuro di voler eliminare il tuo account?\nL'operazione è irreversibile!")
                 alertDialog.setPositiveButton("Conferma") { dialog, _ ->
-                    if (!User.isCurrentSocialAccount(this)) //Since social accounts are fake, the shouldn't be deleted
-                        User.deleteCurrentAccount(this)
-                    User.logout(this)
-                    startActivity(Intent(this, MainActivity::class.java))
-                    Toast.makeText(this, "Account eliminato con successo", Toast.LENGTH_LONG).show()
-                    dialog.dismiss()
+                    if(User.deleteCurrentAccount(this)){
+                        startActivity(Intent(this, MainActivity::class.java))
+                        Toast.makeText(this, "Account eliminato con successo", Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+                    }
+                    else{
+                        Toast.makeText(this, "Non siamo riusciti ad eliminare l'account", Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+                    }
+                    //User.logout(this)
+
                 }
                 alertDialog.setNegativeButton("Annulla") { dialog, _ ->
                     dialog.dismiss()

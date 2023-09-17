@@ -87,12 +87,17 @@ class User : Serializable {
         }
 
         //da implementare!
-        fun deleteCurrentAccount(context: Context) {
-            val user = getLoggedUser(context)
-            user?.let {
-                val userDao = RoomManager(context).db.userDao()
-                userDao.delete(it)
-            }
+        fun deleteCurrentAccount(context: Context):Boolean {
+            val user = UserManager.getUser()
+            val flag=UserManager.deleteAccount(user)
+            val sharedPreferences = context.getSharedPreferences(
+                "DiscoTicket",
+                AppCompatActivity.MODE_PRIVATE
+            )
+            val editor = sharedPreferences.edit()
+            editor.remove("userId")
+            editor.apply()
+            return flag
         }
 
         fun isLogged(context: Context) : Boolean{

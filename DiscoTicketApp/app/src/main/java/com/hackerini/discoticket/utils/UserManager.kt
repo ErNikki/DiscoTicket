@@ -1,5 +1,6 @@
 package com.hackerini.discoticket.utils
 
+import android.util.Log
 import android.view.View
 import com.hackerini.discoticket.activities.ForgotPassword
 import com.hackerini.discoticket.activities.ReSendConfirmationEmail
@@ -89,6 +90,8 @@ object UserManager {
                 user.name=name
                 user.id=id
                 user.surname=surname
+                user.password=password
+                user.email=username
                 Pair(true,"")
 
             }
@@ -100,6 +103,33 @@ object UserManager {
 
 
 
+        }
+
+    fun deleteAccount(user: User):Boolean =
+
+        runBlocking {
+            val cookie= CookieManager.getCookie()
+            val client = HttpClient{
+                install(HttpCookies){
+                    storage = ConstantCookiesStorage(Cookie(name=cookie.name, value = cookie.value, domain = CookieManager.domain))
+                }
+            }
+
+            Log.d("deleteAcc",user.email)
+            Log.d("deleteAcc",user.password)
+            val response: HttpResponse = client.submitForm(
+                url = CookieManager.url+"AccountsManager/deleteAccount",
+                formParameters = parameters {
+                    append("username", user.email)
+                    append("password", user.password)
+
+                }
+            )
+            val jsonObj = Json.parseToJsonElement(response.body())
+                .jsonObject
+                .toMap()
+
+            jsonObj.get("success")?.toString().equals("true")
         }
 
     fun logout(){
