@@ -394,29 +394,39 @@ def logOut(request):
 
 @login_required
 def deleteAccountRequest(request):
-    if request.method == 'POST':
-        form = DeleteAccountForm(request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(request, username=username, password=password, backend='django.contrib.auth.backends.ModelBackend')
-            if user is not None:
-                
-                user.delete()
-                response_data = {}
-                response_data['success'] = True
-                response_data['message'] = "Account deleted"
-                response_data['result_id'] = '200'
+    response_data = {}
+    try:
+        if request.method == 'POST':
+            form = DeleteAccountForm(request.POST)
+            if form.is_valid():
+                username = request.POST['username']
+                password = request.POST['password']
+                user = authenticate(request, username=username, password=password, backend='django.contrib.auth.backends.ModelBackend')
+                if user is not None:
+                    user.delete()
+                    response_data['success'] = True
+                    response_data['message'] = "Account deleted"
+                    response_data['result_id'] = '200'
+                else:
+                    response_data['success'] = False
+                    response_data['message'] = "Account not deleted"
+                    
                 return HttpResponse(json.dumps(response_data), content_type="application/json")
+            else:
+                response_data['success'] = False
+                response_data['message'] = "Account not deleted"
+                return HttpResponse(json.dumps(response_data), content_type="application/json")
+                
+        elif request.method == 'GET':
+            form = DeleteAccountForm()
             
-            return errors_response.permission_denied(request,None)
-            
-            
-    elif request.method == 'GET':
-        form = DeleteAccountForm()
-        
-    return render(request, 'AccountsManager/DeleteAccount.html', {'form': form})
-
+        return render(request, 'AccountsManager/DeleteAccount.html', {'form': form})
+    
+    except Exception as e:
+        response_data['success'] = False
+        response_data['message'] = "Account not deleted"
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+    
 @login_required
 def changePassword(request):
     if request.method == 'POST':
