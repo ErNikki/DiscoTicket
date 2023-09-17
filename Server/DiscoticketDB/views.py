@@ -83,7 +83,7 @@ def clubSerialize(club):
     data["name"]=club.name
     data["address"]=club.address
     data["description"]=club.description
-    data["imgUrl"]=club.imgUrl
+    data["imgUrl"]=settings.SERVER_DOMAIN+club.image.url
     data["locationType"]=club.locationType
     data["simpleTicketPrice"]=club.simpleTicketPrice
     data["tableTicketPrice"]=club.tableTicketPrice
@@ -118,6 +118,7 @@ def reviewSerialize(review):
     #check for images settings.SERVER_DOMAIN+review.images.
     img=[]
     for i in review.imagesreview_set.filter().exclude(image=None).all():
+        #image url ha gia lo / all'inizio
         img.append(settings.SERVER_DOMAIN+i.image.url)
     """
     if review.imagesreview_set:

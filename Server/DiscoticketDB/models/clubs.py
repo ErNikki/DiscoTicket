@@ -7,7 +7,7 @@ class Clubs(models.Model):
     name=models.CharField(max_length=15, unique=True, blank = False, null = False)
     address=models.CharField(max_length=200, unique=True, blank = False, null = False)
     rating=models.FloatField(blank = False, null = False)
-    imgUrl=models.URLField(max_length=300)
+    image=models.ImageField(upload_to = 'images/clubs',blank=True, null=True)
     description=models.TextField()
     locationType=models.CharField()
     simpleTicketPrice=models.DecimalField(max_digits=6,decimal_places=2)
