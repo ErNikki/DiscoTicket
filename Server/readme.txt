@@ -1,3 +1,15 @@
+#INITIALIZE LOCAL SERVER
+you need a postgres server installed 
+you have to modify se settings file in /DiscotickerDjango/setting.py and write you server information and also the ip of your server
+after this make a try on the terminal open inside server >> python .\manage.py runserver "youIp:PORT"
+
+python .\manage.py makemigrations AccountsManager
+python .\manage.py makemigration DiscoticketDB
+python .\manage.py migrate
+
+execute the files called
+loadUser.sh
+loadDB.sh
 
 #installed package
 Pillow (for images)
