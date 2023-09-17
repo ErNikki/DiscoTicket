@@ -61,7 +61,7 @@
             android:checked="true"
             android:text="Discoteche"
             android:textColor="@color/black"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:chipStrokeColor="@color/clubColorStrong"
             app:chipStrokeWidth="3dp" />
 
@@ -73,7 +73,7 @@
             android:checked="true"
             android:text="Eventi"
             android:textColor="@color/black"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:chipStrokeColor="@color/eventColorStrong"
             app:chipStrokeWidth="3dp" />
 

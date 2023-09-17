@@ -155,6 +155,33 @@
                     app:layout_constraintStart_toStartOf="@+id/eventDetailsDistance"
                     app:layout_constraintTop_toBottomOf="@+id/eventDetailsDistance" />
 
+                <TextView
+                    android:id="@+id/eventDetailsWeather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Clima previsto:"
+                    app:layout_constraintStart_toStartOf="@+id/eventDetailsPrice"
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsPrice" />
+
+                <TextView
+                    android:id="@+id/eventDetailsForecast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventDetailsWeather"
+                    app:layout_constraintStart_toEndOf="@+id/eventDetailsWeather" />
+
+                <TextView
+                    android:id="@+id/eventDetailsTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventDetailsForecast"
+                    app:layout_constraintStart_toEndOf="@+id/eventDetailsForecast" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

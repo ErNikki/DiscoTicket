@@ -33,7 +33,7 @@ object MeteoManager {
 
     fun downloadMeteo(event:Event): Pair<String,Float> =
         runBlocking {
-            val dateFormatter: DateTimeFormatter =  DateTimeFormatter.ofPattern("MM/dd/yyyy")
+            val dateFormatter: DateTimeFormatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy")
             val nowDate=LocalDate.now()
             val text=nowDate.format(dateFormatter)
             val parsedDate=LocalDate.parse(text,dateFormatter)

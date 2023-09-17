@@ -40,6 +40,9 @@ class EventDetails : AppCompatActivity() {
         Club.addToLastSeen(this, event.id, Event::class)
         val df = SimpleDateFormat("dd/MM/YYYY", Locale.getDefault())
 
+        val forecast = findViewById<TextView>(R.id.eventDetailsForecast)
+        val temperature = findViewById<TextView>(R.id.eventDetailsTemperature)
+
         CoroutineScope(Dispatchers.Default).launch {
 
             try {
@@ -47,7 +50,8 @@ class EventDetails : AppCompatActivity() {
 
                 runOnUiThread {
                     if (! activity.isDestroyed) {
-                        //cambia l'interfaccia qui
+                        forecast.text = predizione
+                        temperature.text = String.format("%.2f", (temperatura  -  273.15)) + " °C"
                     }
                 }
             }
