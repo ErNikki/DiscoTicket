@@ -166,6 +166,23 @@ class SearchByMap : AppCompatActivity() {
             ContextCompat.getDrawable(this, R.drawable.map_pin_icon_event)
         val drawableClub =
             ContextCompat.getDrawable(this, R.drawable.map_pin_icon_club)
+        val drawablePosition =
+            ContextCompat.getDrawable(this, R.drawable.map_pin_icon_location)
+
+        val location=MyLocation.getLocation()
+        if (location != null) {
+            val marker = Marker(map)
+            marker.position = GeoPoint(
+                location.latitude,
+                location.longitude
+            )
+            //Log.d("location", location.latitude.toString() + " " + location.longitude.toString())
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+            //marker.title = "title"
+            marker.icon = drawablePosition
+            //marker.infoWindow = MyInfoWindows.create(this, item, map)
+            map?.overlays?.add(marker)
+        }
 
         filterCriteria.filter(elements).forEach { item ->
 
